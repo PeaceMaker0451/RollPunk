@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://8o3f30pds40l"]
+
+[ext_resource type="Texture2D" uid="uid://b86fx5ev3h7qw" path="res://Sprites/logo.png" id="1_4doqs"]
+[ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="1_8jv37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0o0xl"]
+size = Vector2(100, 100)
+
+[node name="GameSceneTemplate" type="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(191, 246)
+scale = Vector2(-19.7243, 8.99902)
+texture = ExtResource("1_8jv37")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(410, 326)
+scale = Vector2(2.85714, 1.76316)
+texture = ExtResource("1_4doqs")
+
+[node name="RigidBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(-1194, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_0o0xl")

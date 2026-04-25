@@ -1,0 +1,43 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.4.0">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Scripts\AccessPolicies\**" />
+    <Compile Remove="Scripts\AccessPolicy\**" />
+    <Compile Remove="Scripts\BootLoader\**" />
+    <Compile Remove="Scripts\CommandsSystem\**" />
+    <Compile Remove="Scripts\Debug\**" />
+    <Compile Remove="Scripts\Fields\**" />
+    <Compile Remove="Scripts\HierarchyFields\**" />
+    <Compile Remove="Scripts\Modding\**" />
+    <Compile Remove="Scripts\Players\**" />
+    <Compile Remove="Scripts\Rules\**" />
+    <Compile Remove="Scripts\Entities\**" />
+    <Compile Remove="Scripts\Tests\**" />
+    <EmbeddedResource Remove="Scripts\AccessPolicies\**" />
+    <EmbeddedResource Remove="Scripts\AccessPolicy\**" />
+    <EmbeddedResource Remove="Scripts\BootLoader\**" />
+    <EmbeddedResource Remove="Scripts\CommandsSystem\**" />
+    <EmbeddedResource Remove="Scripts\Debug\**" />
+    <EmbeddedResource Remove="Scripts\Fields\**" />
+    <EmbeddedResource Remove="Scripts\HierarchyFields\**" />
+    <EmbeddedResource Remove="Scripts\Modding\**" />
+    <EmbeddedResource Remove="Scripts\Players\**" />
+    <EmbeddedResource Remove="Scripts\Rules\**" />
+    <EmbeddedResource Remove="Scripts\Entities\**" />
+    <EmbeddedResource Remove="Scripts\Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="3.16.0" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="3.16.0" />
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Scripts\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="Scripts\Entities\Entities.csproj" />
+    <ProjectReference Include="Scripts\Fields\Fields.csproj" />
+    <ProjectReference Include="Scripts\HierarchyFields\HierarchyFields.csproj" />
+  </ItemGroup>
+</Project>

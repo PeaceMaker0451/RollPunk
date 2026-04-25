@@ -1,0 +1,13 @@
+E:\Projs\Git\RollPunk\SerializableObject\bin\Debug\net8.0\SerializableObject.deps.json
+E:\Projs\Git\RollPunk\SerializableObject\bin\Debug\net8.0\SerializableObject.dll
+E:\Projs\Git\RollPunk\SerializableObject\bin\Debug\net8.0\SerializableObject.pdb
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.csproj.AssemblyReference.cache
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.AssemblyInfoInputs.cache
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.AssemblyInfo.cs
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.csproj.CoreCompileInputs.cache
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.sourcelink.json
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.dll
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\refint\SerializableObject.dll
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\SerializableObject.pdb
+E:\Projs\Git\RollPunk\SerializableObject\obj\Debug\net8.0\ref\SerializableObject.dll

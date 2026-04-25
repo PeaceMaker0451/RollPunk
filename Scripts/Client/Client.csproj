@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>RollPunk.Client</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodotSharp" Version="4.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="..\CommandsSystem\CommandsSystem.csproj" />
+    <ProjectReference Include="..\Debug\Debug.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Fields\Fields.csproj" />
+    <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Modding\Modding.csproj" />
+    <ProjectReference Include="..\Players\Players.csproj" />
+    <ProjectReference Include="..\Rules\Rules.csproj" />
+    <ProjectReference Include="..\Tests\Tests.csproj" />
+    <ProjectReference Include="..\UIFields\UIFields.csproj" />
+    <ProjectReference Include="..\UI\UI.csproj" />
+  </ItemGroup>
+
+</Project>

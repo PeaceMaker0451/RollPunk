@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "5PL0JsuN7bU=",
+  "success": true,
+  "projectFilePath": "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nikit\\.nuget\\packages\\godotsharp\\4.4.0\\godotsharp.4.4.0.nupkg.sha512",
+    "C:\\Users\\nikit\\.nuget\\packages\\moonsharp\\2.0.0\\moonsharp.2.0.0.nupkg.sha512",
+    "C:\\Users\\nikit\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

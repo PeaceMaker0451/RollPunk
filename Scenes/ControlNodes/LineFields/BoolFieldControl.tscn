@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://btejjxhcoel0"]
+
+[ext_resource type="Script" uid="uid://8njyjpf05bx1" path="res://Scripts/UIFields/FieldControls/LineFields/BoolFieldControl.cs" id="1_0mgx7"]
+
+[node name="BoolFieldControl" type="MarginContainer" node_paths=PackedStringArray("_checkerButton")]
+offset_right = 71.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_0mgx7")
+_checkerButton = NodePath("LineEdit")
+
+[node name="LineEdit" type="CheckBox" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Name"

@@ -1,0 +1,8 @@
+{
+    "Lua.runtime.version": "Lua 5.4",
+    "Lua.workspace.library": [
+        "${workspaceFolder}"
+    ],
+
+    "Lua.diagnostics.globals": ["FieldConstructorAPI", "RollPunkAPI", "ModHookerAPI"]
+}

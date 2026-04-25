@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://isfp545b6xom"]
+
+[ext_resource type="Script" uid="uid://dlekosgpw1e7t" path="res://RollPunk/ClientSide/ClientRoot.cs" id="1_a8soq"]
+[ext_resource type="Texture2D" uid="uid://glrdfrllj8vu" path="res://Sprites/Без имени-2.png" id="2_53tsb"]
+[ext_resource type="Script" uid="uid://bhnxawyp0loc5" path="res://Scripts/TurnsManager.cs" id="4_qqagg"]
+[ext_resource type="Script" uid="uid://dh4rru5lvuqu3" path="res://Scripts/RollsManager.cs" id="5_6e6jb"]
+
+[node name="Program" type="Node" node_paths=PackedStringArray("_background", "_hContainer")]
+script = ExtResource("1_a8soq")
+_background = NodePath("Background")
+_hContainer = NodePath("Background/TextureRect/CenterContainer/HBoxContainer")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+self_modulate = Color(0.396889, 0.396889, 0.396889, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_53tsb")
+stretch_mode = 1
+
+[node name="CenterContainer" type="MarginContainer" parent="Background/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 130
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 130
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/TextureRect/CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TurnsManager" type="Node" parent="."]
+script = ExtResource("4_qqagg")
+
+[node name="RollsManager" type="Node" parent="."]
+script = ExtResource("5_6e6jb")

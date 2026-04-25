@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1yn131qgh2wk"]
+
+[ext_resource type="Script" uid="uid://dl6tadyxehyuj" path="res://Server/ServerMain.cs" id="1_72tmn"]
+[ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="2_ccelo"]
+
+[node name="RollPunkServer" type="Node"]
+script = ExtResource("1_72tmn")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -306.904
+offset_top = -181.0
+offset_right = 306.904
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ccelo")
+expand_mode = 3
+stretch_mode = 5

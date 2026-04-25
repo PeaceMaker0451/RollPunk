@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://o3lgx51o6mqu"]
+
+[ext_resource type="Theme" uid="uid://cmfekbsaafc2c" path="res://Style/tab_button.tres" id="1_iuh35"]
+
+[node name="TabButton" type="Button"]
+custom_minimum_size = Vector2(75, 0)
+offset_right = 75.0
+offset_bottom = 18.0
+theme = ExtResource("1_iuh35")
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+action_mode = 0
+text = "ButtonText"

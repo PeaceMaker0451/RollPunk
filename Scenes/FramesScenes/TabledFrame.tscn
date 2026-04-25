@@ -1,0 +1,249 @@
+[gd_scene load_steps=19 format=3 uid="uid://ckl8tgtqd00q0"]
+
+[ext_resource type="Script" uid="uid://2a70ne6vkwx1" path="res://Scripts/UI/Frames/TabedFrame.cs" id="1_nldtk"]
+[ext_resource type="Script" uid="uid://btud6o8s06n0n" path="res://Scripts/UI/Draggable.cs" id="2_o34wn"]
+[ext_resource type="Texture2D" uid="uid://bhojwx3vngq1u" path="res://Sprites/cross.png" id="3_h6mf2"]
+[ext_resource type="Script" uid="uid://wetprpt8oi65" path="res://Scripts/UI/QuitButton.cs" id="4_sia1s"]
+[ext_resource type="Texture2D" uid="uid://c3fgmsepow0kj" path="res://Sprites/HideTab.png" id="5_n0c1n"]
+[ext_resource type="Script" uid="uid://dbc2gwptpf5cq" path="res://Scripts/UI/MinimizingButton.cs" id="6_h1r7n"]
+[ext_resource type="Theme" uid="uid://biap20igfxrus" path="res://Style/RollPunkMainTheme.tres" id="7_vl3ho"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_islej"]
+bg_color = Color(1, 0.19, 0.19, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ug1o"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oeuo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rpbeq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_killa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_74lkm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rgoil"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4kny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbq6o"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.19, 0.19, 1)
+border_color = Color(1, 0.188235, 0.188235, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma15t"]
+content_margin_left = 4.0
+bg_color = Color(1, 0.192157, 0.192157, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qahhj"]
+bg_color = Color(1, 0.19, 0.19, 0.164706)
+
+[node name="SizeableTabledFrame" type="Control" node_paths=PackedStringArray("tabButtonsContainer", "_title", "_contentPanel", "_closeButton", "_minimizeButton")]
+clip_contents = true
+custom_minimum_size = Vector2(550, 270)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 550.0
+offset_bottom = 270.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_nldtk")
+tabButtonsContainer = NodePath("FrameBase/UpperPanel/HBoxContainer/Tabs")
+defaultTabButtonScene = "res://Scenes/Other/tab_button.tscn"
+_title = NodePath("FrameBase/UpperPanel/HBoxContainer/Title")
+_contentPanel = NodePath("FrameBase/ContentPanel")
+_closeButton = NodePath("FrameBase/UpperPanel/HBoxContainer/QuitButton")
+_minimizeButton = NodePath("FrameBase/UpperPanel/HBoxContainer/MinimizeButton")
+resizeBorderThickness = 4
+resizeCornerSize = 8
+
+[node name="FrameBase" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_islej")
+
+[node name="ContentPanel" type="PanelContainer" parent="FrameBase"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 38.0
+offset_right = -4.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ug1o")
+
+[node name="UpperPanel" type="Panel" parent="FrameBase"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+script = ExtResource("2_o34wn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FrameBase/UpperPanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -17.0
+offset_right = -7.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+alignment = 2
+
+[node name="Tabs" type="HBoxContainer" parent="FrameBase/UpperPanel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25.46)
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("7_vl3ho")
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="FrameBase/UpperPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_1oeuo")
+text = "Title"
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="MinimizeButton" type="Button" parent="FrameBase/UpperPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 4
+theme_override_constants/icon_max_width = 20
+theme_override_icons/icon = ExtResource("5_n0c1n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_74lkm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_rgoil")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_t4kny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
+script = ExtResource("6_h1r7n")
+
+[node name="QuitButton" type="Button" parent="FrameBase/UpperPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 4
+theme_override_constants/icon_max_width = 20
+theme_override_icons/icon = ExtResource("3_h6mf2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_74lkm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_rgoil")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_t4kny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
+script = ExtResource("4_sia1s")
+
+[node name="ColorRect" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BottomText2" type="RichTextLabel" parent="FrameBase/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_vl3ho")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma15t")
+text = "ROLLPUNK_FAKE_COPYRIGHT"
+scroll_active = false
+
+[node name="Panel" type="Panel" parent="FrameBase"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qahhj")
+
+[node name="RightSizeGrabber" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RightCornerSizeGrabber" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LeftSizeGrabber" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = -4.0
+grow_vertical = 2
+
+[node name="LeftCornerSizeGrabber" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_right = 4.0
+grow_vertical = 0
+
+[node name="BottomSizeGrabber" type="Control" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -4.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 0

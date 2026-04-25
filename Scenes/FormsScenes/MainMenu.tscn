@@ -1,0 +1,345 @@
+[gd_scene load_steps=5 format=3 uid="uid://88lp7ntqxq0t"]
+
+[ext_resource type="Script" uid="uid://hlu3jpvjuyxt" path="res://Scripts/Client/Forms/MainMenu/MainMenu.cs" id="1_v0jhx"]
+[ext_resource type="Script" uid="uid://56cxr40p3sm0" path="res://Scripts/Client/Forms/MainMenu/MainSubMenu.cs" id="3_2aawn"]
+[ext_resource type="PackedScene" uid="uid://coxmfns81m0gj" path="res://Scenes/Other/rollpunkLogo.tscn" id="4_slnmx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whksc"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 0.19, 0.19, 1)
+
+[node name="MainForm" type="Control" node_paths=PackedStringArray("_mainMenu")]
+custom_minimum_size = Vector2(933, 529)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 933.0
+offset_bottom = 529.0
+script = ExtResource("1_v0jhx")
+_mainMenu = NodePath("ColorRect/Menus/MainMenu")
+Title = "Главное меню"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+
+[node name="RightPart" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 467.0
+offset_top = 30.0
+offset_right = -20.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/RightPart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/RightPart/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/RightPart"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 101.0
+offset_top = -14.5
+offset_right = -101.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menus" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 15.0
+offset_right = 432.0
+offset_bottom = -56.0
+grow_vertical = 2
+
+[node name="EnterSession" type="Control" parent="ColorRect/Menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Menus/EnterSession"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+
+[node name="LoginLabel" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
+text = "Войти в сессию"
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
+custom_minimum_size = Vector2(118.485, 66.89)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label2" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control2"]
+layout_mode = 1
+offset_right = 105.0
+offset_bottom = 29.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "ID Сессии"
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "00AAAA"
+
+[node name="Control" type="Control" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
+custom_minimum_size = Vector2(118.485, 66.89)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label2" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control"]
+layout_mode = 1
+offset_right = 105.0
+offset_bottom = 29.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "ID Игрока"
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "00AAAA"
+
+[node name="Button8" type="Button" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Присоедениться к сессии"
+
+[node name="BackButton" type="Button" parent="ColorRect/Menus/EnterSession"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Назад"
+
+[node name="CreateSession" type="Control" parent="ColorRect/Menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Menus/CreateSession"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+
+[node name="LoginLabel" type="Label" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
+text = "Создать Сессию"
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "Информация о сессии"
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button8" type="Button" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Создать сессию и присоедениться как мастер"
+
+[node name="BackButton" type="Button" parent="ColorRect/Menus/CreateSession"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Назад"
+
+[node name="MainMenu" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_createSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton", "_exitButton")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_2aawn")
+_createSessionButton = NodePath("ButtonsList/CreateSessionButton")
+_exitSessionButton = NodePath("ButtonsList/LeaveSessionButton")
+_settingsButton = NodePath("ButtonsList/SettingsButton")
+_modManagerButton = NodePath("ButtonsList/ModManagerButton")
+_exitButton = NodePath("ButtonsList/ExitButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Menus/MainMenu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme_override_constants/margin_left = -80
+theme_override_constants/margin_top = -15
+theme_override_constants/margin_right = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/Menus/MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Rollpunk" parent="ColorRect/Menus/MainMenu/MarginContainer/CenterContainer" instance=ExtResource("4_slnmx")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ButtonsList" type="VBoxContainer" parent="ColorRect/Menus/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+layout_mode = 2
+
+[node name="EnterSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Присоедениться к сессии"
+
+[node name="CreateSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Создать сессию"
+
+[node name="PlayerListButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Редактор персонажа"
+
+[node name="LeaveSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Покинуть сессию"
+
+[node name="SettingsButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Настройки"
+
+[node name="ModManagerButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Менеджер модов"
+
+[node name="AboutButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "О RollPunk'е"
+
+[node name="ExitButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Выйти"
+
+[node name="Control" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Error" type="LineEdit" parent="ColorRect/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_uneditable_color = Color(0.960784, 0, 0.105882, 1)
+theme_override_colors/font_color = Color(0.959731, 0, 0.104922, 1)
+text = "Текст возможной ошибки"
+alignment = 1
+editable = false
+flat = true

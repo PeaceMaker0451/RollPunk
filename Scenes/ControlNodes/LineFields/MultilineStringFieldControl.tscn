@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxc7nuoorss48"]
+
+[ext_resource type="Script" uid="uid://by5eb07yfb0gx" path="res://Scripts/UIFields/FieldControls/LineFields/StringFieldControl.cs" id="1_vp5yf"]
+[ext_resource type="StyleBox" uid="uid://c0fmcs0r5eq65" path="res://Style/PunkStyleSimpleLabel.tres" id="2_nlfwu"]
+
+[node name="UniversalFieldString" type="MarginContainer" node_paths=PackedStringArray("_titleControl", "_multiLineValueControl")]
+clip_contents = true
+custom_minimum_size = Vector2(90, 50)
+offset_right = 226.0
+offset_bottom = 117.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_vp5yf")
+_titleControl = NodePath("VBoxContainer/Title")
+_multiLineValueControl = NodePath("VBoxContainer/TextEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_nlfwu")
+text = "Name"
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 67.16)
+layout_mode = 2
+size_flags_vertical = 3
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+scroll_smooth = true
+scroll_fit_content_height = true
+caret_blink = true

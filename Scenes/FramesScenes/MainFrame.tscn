@@ -1,0 +1,303 @@
+[gd_scene load_steps=21 format=3 uid="uid://dde7llu3m4h0u"]
+
+[ext_resource type="Script" uid="uid://btud6o8s06n0n" path="res://Scripts/UI/Draggable.cs" id="2_gms3c"]
+[ext_resource type="Texture2D" uid="uid://bhojwx3vngq1u" path="res://Sprites/cross.png" id="3_wp4fi"]
+[ext_resource type="Script" uid="uid://wetprpt8oi65" path="res://Scripts/UI/QuitButton.cs" id="4_fj07f"]
+[ext_resource type="Texture2D" uid="uid://c3fgmsepow0kj" path="res://Sprites/HideTab.png" id="5_72mqg"]
+[ext_resource type="Script" uid="uid://dbc2gwptpf5cq" path="res://Scripts/UI/MinimizingButton.cs" id="6_akiog"]
+[ext_resource type="Theme" uid="uid://biap20igfxrus" path="res://Style/RollPunkMainTheme.tres" id="7_jeni6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mms3q"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnnhj"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rpbeq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_killa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_74lkm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rgoil"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4kny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbq6o"]
+content_margin_left = 3.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.19, 0.19, 1)
+border_color = Color(1, 0.188235, 0.188235, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oeuo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqe3g"]
+content_margin_left = 4.0
+bg_color = Color(1, 0.192157, 0.192157, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fyv8w"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rosj1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wnuo2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma15t"]
+content_margin_left = 4.0
+bg_color = Color(1, 0.192157, 0.192157, 1)
+corner_detail = 1
+
+[node name="MainFrame" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(600, 450)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 450.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="FrameBase" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.192157, 0.192157, 0)
+
+[node name="RedLine" type="ColorRect" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 27.0
+offset_bottom = 42.0
+grow_horizontal = 2
+color = Color(1, 0.188235, 0.188235, 1)
+
+[node name="ContentPanel" type="PanelContainer" parent="FrameBase"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 38.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mms3q")
+
+[node name="UpperPanel" type="Panel" parent="FrameBase" node_paths=PackedStringArray("scaleHandler")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnnhj")
+script = ExtResource("2_gms3c")
+scaleHandler = NodePath("..")
+
+[node name="QuitButton" type="Button" parent="FrameBase/UpperPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 4
+theme_override_constants/icon_max_width = 20
+theme_override_icons/icon = ExtResource("3_wp4fi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_74lkm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_rgoil")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_t4kny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
+script = ExtResource("4_fj07f")
+
+[node name="QuitButton2" type="Button" parent="FrameBase/UpperPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 5.0
+offset_right = -34.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 4
+theme_override_constants/icon_max_width = 20
+theme_override_icons/icon = ExtResource("5_72mqg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_74lkm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_rgoil")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_t4kny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
+script = ExtResource("6_akiog")
+
+[node name="Title" type="Label" parent="FrameBase/UpperPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -182.0
+offset_top = 5.0
+offset_right = -67.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_1oeuo")
+text = "Title"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Tabs" type="HBoxContainer" parent="FrameBase/UpperPanel"]
+clip_contents = true
+layout_mode = 2
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 407.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 3
+theme = ExtResource("7_jeni6")
+theme_override_constants/separation = 5
+
+[node name="ColorRect" type="ColorRect" parent="FrameBase"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+
+[node name="BottomText1" type="RichTextLabel" parent="FrameBase/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_right = 216.0
+grow_vertical = 0
+theme = ExtResource("7_jeni6")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqe3g")
+text = "ROLLPUNK_GAME_SYSTEM"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="FrameBase/ColorRect"]
+modulate = Color(1, 0.188235, 0.188235, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 13.0
+offset_right = 61.3778
+offset_bottom = 50.0
+grow_vertical = 0
+texture = SubResource("CompressedTexture2D_fyv8w")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="FrameBase/ColorRect"]
+modulate = Color(1, 0.188235, 0.188235, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 13.0
+offset_right = 40.0
+offset_bottom = 50.0
+grow_vertical = 0
+texture = SubResource("CompressedTexture2D_rosj1")
+expand_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="FrameBase/ColorRect"]
+modulate = Color(1, 0.188235, 0.188235, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_top = 13.0
+offset_right = -39.6222
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("CompressedTexture2D_fyv8w")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="FrameBase/ColorRect"]
+modulate = Color(1, 0.188235, 0.188235, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 61.0
+offset_top = 13.0
+offset_right = -61.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("CompressedTexture2D_wnuo2")
+expand_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="FrameBase/ColorRect"]
+modulate = Color(1, 0.188235, 0.188235, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 13.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("CompressedTexture2D_rosj1")
+expand_mode = 3
+
+[node name="BottomText2" type="RichTextLabel" parent="FrameBase/ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("7_jeni6")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma15t")
+text = "ROLLPUNK_FAKE_COPYRIGHT"
+scroll_active = false

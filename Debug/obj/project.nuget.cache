@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vHP6+NH07ME=",
+  "success": true,
+  "projectFilePath": "E:\\Projs\\Git\\RollPunk\\Debug\\Debug.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nikit\\.nuget\\packages\\godotsharp\\4.4.1\\godotsharp.4.4.1.nupkg.sha512"
+  ],
+  "logs": []
+}

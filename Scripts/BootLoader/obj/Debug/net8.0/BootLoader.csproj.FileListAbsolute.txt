@@ -1,0 +1,12 @@
+E:\Projs\Git\RollPunk\Scripts\BootLoader\bin\Debug\net8.0\BootLoader.deps.json
+E:\Projs\Git\RollPunk\Scripts\BootLoader\bin\Debug\net8.0\BootLoader.dll
+E:\Projs\Git\RollPunk\Scripts\BootLoader\bin\Debug\net8.0\BootLoader.pdb
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.AssemblyInfoInputs.cache
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.AssemblyInfo.cs
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.csproj.CoreCompileInputs.cache
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.sourcelink.json
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.dll
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\refint\BootLoader.dll
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\BootLoader.pdb
+E:\Projs\Git\RollPunk\Scripts\BootLoader\obj\Debug\net8.0\ref\BootLoader.dll

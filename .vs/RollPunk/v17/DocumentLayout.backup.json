@@ -1,0 +1,205 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\forms\\gamesceneview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:forms\\gamesceneview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\game\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\game\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Cyberpunk RED\\Git\\RollPunk\\Forms\\SceneTree.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Forms\\SceneTree.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\game\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\game\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\fields\\treeitem\\treeitemfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\fields\\treeitem\\treeitemfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\fields\\treeitem\\gameobjectfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\fields\\treeitem\\gameobjectfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\fields\\entityfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\fields\\entityfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\fields\\field.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\fields\\field.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\fields\\treeitem\\treefield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\fields\\treeitem\\treefield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 36,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TreeItemField.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\TreeItemField.cs",
+              "RelativeDocumentMoniker": "Scripts\\Fields\\TreeItem\\TreeItemField.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\TreeItemField.cs",
+              "RelativeToolTip": "Scripts\\Fields\\TreeItem\\TreeItemField.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:09:37.147Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GameObjectField.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\GameObjectField.cs",
+              "RelativeDocumentMoniker": "Scripts\\Fields\\TreeItem\\GameObjectField.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\GameObjectField.cs",
+              "RelativeToolTip": "Scripts\\Fields\\TreeItem\\GameObjectField.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:17:49.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TreeField.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\TreeField.cs",
+              "RelativeDocumentMoniker": "Scripts\\Fields\\TreeItem\\TreeField.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\TreeItem\\TreeField.cs",
+              "RelativeToolTip": "Scripts\\Fields\\TreeItem\\TreeField.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:20:27.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Field.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Field.cs",
+              "RelativeDocumentMoniker": "Scripts\\Fields\\Field.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Field.cs",
+              "RelativeToolTip": "Scripts\\Fields\\Field.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:27:00.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EntityField.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\EntityField.cs",
+              "RelativeDocumentMoniker": "Scripts\\Fields\\EntityField.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\EntityField.cs",
+              "RelativeToolTip": "Scripts\\Fields\\EntityField.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T01:47:03.542Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 106,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SceneTree.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Forms\\SceneTree.cs",
+              "RelativeDocumentMoniker": "Forms\\SceneTree.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Forms\\SceneTree.cs",
+              "RelativeToolTip": "Forms\\SceneTree.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T08:48:06.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Scene.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Game\\Scene.cs",
+              "RelativeDocumentMoniker": "Scripts\\Game\\Scene.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Game\\Scene.cs",
+              "RelativeToolTip": "Scripts\\Game\\Scene.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:35:21.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameSceneView.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Forms\\GameSceneView.cs",
+              "RelativeDocumentMoniker": "Forms\\GameSceneView.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Forms\\GameSceneView.cs",
+              "RelativeToolTip": "Forms\\GameSceneView.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAIwKMAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T02:32:09.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameObject.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Game\\GameObject.cs",
+              "RelativeDocumentMoniker": "Scripts\\Game\\GameObject.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Game\\GameObject.cs",
+              "RelativeToolTip": "Scripts\\Game\\GameObject.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwCYAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T01:34:50.35Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 58,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 58,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
