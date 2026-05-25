@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HierarchyFields")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86e50f9d9ebbabcda0f4be76fe521c9e4b902f5c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fc91039f7ceb7f6a5b6d513ee24c99acfa24f4b")]
 [assembly: System.Reflection.AssemblyProductAttribute("HierarchyFields")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HierarchyFields")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

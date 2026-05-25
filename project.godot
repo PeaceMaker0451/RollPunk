@@ -22,7 +22,7 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 boot_splash/image="res://Sprites/logo.png"
 config/icon="res://Sprites/logo.png"
-config/windows_native_icon="res://Sprites/ico.ico"
+config/windows_native_icon="res://Sprites/logo.ico"
 
 [display]
 

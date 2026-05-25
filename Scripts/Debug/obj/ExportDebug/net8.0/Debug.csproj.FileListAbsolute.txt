@@ -1,0 +1,13 @@
+E:\Projs\Git\RollPunk\Scripts\Debug\bin\ExportDebug\net8.0\Debug.deps.json
+E:\Projs\Git\RollPunk\Scripts\Debug\bin\ExportDebug\net8.0\Debug.dll
+E:\Projs\Git\RollPunk\Scripts\Debug\bin\ExportDebug\net8.0\Debug.pdb
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.csproj.AssemblyReference.cache
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.AssemblyInfoInputs.cache
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.AssemblyInfo.cs
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.csproj.CoreCompileInputs.cache
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.sourcelink.json
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.dll
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\refint\Debug.dll
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\Debug.pdb
+E:\Projs\Git\RollPunk\Scripts\Debug\obj\ExportDebug\net8.0\ref\Debug.dll

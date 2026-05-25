@@ -3,6 +3,50 @@
   "WorkspaceRootPath": "E:\\Projs\\Git\\RollPunk\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\linefield\\rulefield\\rulefield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\linefield\\rulefield\\rulefield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\serializator\\serializator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\serializator\\serializator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\forms\\mainmenu\\mainsubmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\forms\\mainmenu\\mainsubmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\forms\\mainmenu\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\forms\\mainmenu\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\intfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\intfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrolssorter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrolssorter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\stringtemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\stringtemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\fieldstablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\fieldstablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\forms\\entityform\\entityview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\forms\\entityform\\entityview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\boolfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\boolfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|e:\\projs\\git\\rollpunk\\scripts\\fields\\fields\\field.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|solutionrelative:scripts\\fields\\fields\\field.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -63,28 +107,8 @@
       "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\fieldstablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\fieldstablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\forms\\entityform\\entityview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\forms\\entityform\\entityview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\intfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\intfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\stringfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\stringfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\boolfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\boolfieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\containertypemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -118,7 +142,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 25,
-          "SelectedChildIndex": 21,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -126,7 +150,85 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RuleField.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\LineField\\RuleField\\RuleField.cs",
+              "RelativeDocumentMoniker": "Scripts\\UIFields\\LineField\\RuleField\\RuleField.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\LineField\\RuleField\\RuleField.cs",
+              "RelativeToolTip": "Scripts\\UIFields\\LineField\\RuleField\\RuleField.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T15:08:51.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Serializator.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Serializator\\Serializator.cs",
+              "RelativeDocumentMoniker": "Scripts\\Client\\Serializator\\Serializator.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Serializator\\Serializator.cs",
+              "RelativeToolTip": "Scripts\\Client\\Serializator\\Serializator.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowCcAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T13:34:47.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainSubMenu.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\MainMenu\\MainSubMenu.cs",
+              "RelativeDocumentMoniker": "Scripts\\Client\\Forms\\MainMenu\\MainSubMenu.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\MainMenu\\MainSubMenu.cs",
+              "RelativeToolTip": "Scripts\\Client\\Forms\\MainMenu\\MainSubMenu.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T13:20:58.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainMenu.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\MainMenu\\MainMenu.cs",
+              "RelativeDocumentMoniker": "Scripts\\Client\\Forms\\MainMenu\\MainMenu.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\MainMenu\\MainMenu.cs",
+              "RelativeToolTip": "Scripts\\Client\\Forms\\MainMenu\\MainMenu.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwDQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T13:20:56.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FieldControlsSorter.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControlsSorter.cs",
+              "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControlsSorter.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControlsSorter.cs",
+              "RelativeToolTip": "Scripts\\UIFields\\FieldControlsSorter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T12:46:56.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StringTemplate.cs",
+              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\StringTemplate.cs",
+              "RelativeDocumentMoniker": "Scripts\\StringTemplate.cs",
+              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\StringTemplate.cs",
+              "RelativeToolTip": "Scripts\\StringTemplate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T12:38:57.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Entity.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entity.cs",
               "RelativeDocumentMoniker": "Scripts\\Entities\\Entity.cs",
@@ -134,12 +236,11 @@
               "RelativeToolTip": "Scripts\\Entities\\Entity.cs",
               "ViewState": "AgIAAEYAAAAAAAAAAAAYwFIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T09:35:58.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T09:35:58.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
               "Title": "MutationCatcher.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
@@ -147,12 +248,11 @@
               "RelativeToolTip": "Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAQwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T09:32:40.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T09:32:40.603Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 14,
               "Title": "SessionAPI.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\SessionAPI.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Sessions\\SessionAPI.cs",
@@ -160,12 +260,11 @@
               "RelativeToolTip": "Scripts\\Client\\Runtime\\Sessions\\SessionAPI.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAiwB0AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T09:30:53.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T09:30:53.282Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "FieldAPI.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields\\FieldAPI.cs",
               "RelativeDocumentMoniker": "Scripts\\Fields\\Fields\\FieldAPI.cs",
@@ -173,12 +272,11 @@
               "RelativeToolTip": "Scripts\\Fields\\Fields\\FieldAPI.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAqwAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T09:24:56.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T09:24:56.785Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
               "Title": "FieldsConstructorAPI.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructorAPI.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructorAPI.cs",
@@ -186,12 +284,11 @@
               "RelativeToolTip": "Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructorAPI.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T04:53:06.251Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T04:53:06.251Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 17,
               "Title": "FieldsConstructor.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructor.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructor.cs",
@@ -199,12 +296,11 @@
               "RelativeToolTip": "Scripts\\Client\\Constructor\\FieldConstructor\\FieldsConstructor.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAgwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T04:52:56.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T04:52:56.187Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 16,
               "Title": "ConstructorAPI.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Constructor\\ConstructorAPI.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Constructor\\ConstructorAPI.cs",
@@ -212,12 +308,11 @@
               "RelativeToolTip": "Scripts\\Client\\Constructor\\ConstructorAPI.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAxwC0AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T04:52:54.266Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T04:52:54.266Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "Constructor.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Constructor\\Constructor.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Constructor\\Constructor.cs",
@@ -225,12 +320,11 @@
               "RelativeToolTip": "Scripts\\Client\\Constructor\\Constructor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T04:52:52.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T04:52:52.531Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 20,
               "Title": "EntityFactory.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\EntityFactory.cs",
               "RelativeDocumentMoniker": "Scripts\\Entities\\EntityFactory.cs",
@@ -238,25 +332,23 @@
               "RelativeToolTip": "Scripts\\Entities\\EntityFactory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T03:24:58.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T03:24:58.187Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RollPunk",
+              "DocumentIndex": 21,
+              "Title": "RollPunk.csproj",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\RollPunk.csproj",
               "RelativeDocumentMoniker": "RollPunk.csproj",
               "ToolTip": "E:\\Projs\\Git\\RollPunk\\RollPunk.csproj",
               "RelativeToolTip": "RollPunk.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-16T03:24:57.102Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T03:24:57.102Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 22,
               "Title": "FileDebugUtils.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Debug\\FileDebugUtils.cs",
               "RelativeDocumentMoniker": "Scripts\\Debug\\FileDebugUtils.cs",
@@ -264,12 +356,11 @@
               "RelativeToolTip": "Scripts\\Debug\\FileDebugUtils.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T13:18:58.789Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T13:18:58.789Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 23,
               "Title": "ClientConfig.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\ClientConfig.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\ClientConfig.cs",
@@ -281,7 +372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 25,
               "Title": "Client.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Client.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Client.cs",
@@ -293,7 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 24,
               "Title": "RollPunkRuntime.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
@@ -305,19 +396,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 8,
               "Title": "EntityView.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\EntityForm\\EntityView.cs",
               "RelativeDocumentMoniker": "Scripts\\Client\\Forms\\EntityForm\\EntityView.cs",
               "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Forms\\EntityForm\\EntityView.cs",
               "RelativeToolTip": "Scripts\\Client\\Forms\\EntityForm\\EntityView.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAowFIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T03:27:18.893Z"
+              "WhenOpened": "2026-04-14T03:27:18.893Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "ContainerTypeMapper.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\ContainerTypeMapper.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\ContainerTypeMapper.cs",
@@ -329,7 +421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "IReadOnlyFieldRegistry.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\FieldsRegistry\\IReadOnlyFieldRegistry.cs",
               "RelativeDocumentMoniker": "Scripts\\Fields\\FieldsRegistry\\IReadOnlyFieldRegistry.cs",
@@ -341,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "FieldsRegistry.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\FieldsRegistry\\FieldsRegistry.cs",
               "RelativeDocumentMoniker": "Scripts\\Fields\\FieldsRegistry\\FieldsRegistry.cs",
@@ -353,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "FieldsTests.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Tests\\FieldsTests.cs",
               "RelativeDocumentMoniker": "Scripts\\Tests\\FieldsTests.cs",
@@ -365,7 +457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "RuleFieldControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
@@ -377,7 +469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 11,
               "Title": "Field.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields\\Field.cs",
               "RelativeDocumentMoniker": "Scripts\\Fields\\Fields\\Field.cs",
@@ -390,19 +482,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 4,
               "Title": "IntFieldControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\IntFieldControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\IntFieldControl.cs",
               "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\IntFieldControl.cs",
               "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\LineFields\\IntFieldControl.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwCAAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowD8AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T15:40:14.547Z"
+              "WhenOpened": "2026-04-13T15:40:14.547Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "FieldControlsConstructor.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\FieldControlsConstructor.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\FieldControlsConstructor.cs",
@@ -414,7 +507,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 26,
               "Title": "StringFieldControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\StringFieldControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\StringFieldControl.cs",
@@ -426,31 +519,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 7,
               "Title": "FieldsTableControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\FieldsTableControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\FieldsTableControl.cs",
               "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\FieldsTableControl.cs",
               "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\LineFields\\FieldsTableControl.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAswJAAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAUwGoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T14:49:55.688Z"
+              "WhenOpened": "2026-04-13T14:49:55.688Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 9,
               "Title": "FieldControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\FieldControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\FieldControl.cs",
               "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\FieldControl.cs",
               "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\FieldControl.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T14:47:43.311Z"
+              "WhenOpened": "2026-04-13T14:47:43.311Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 10,
               "Title": "BoolFieldControl.cs",
               "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\BoolFieldControl.cs",
               "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\BoolFieldControl.cs",
@@ -458,7 +553,8 @@
               "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\LineFields\\BoolFieldControl.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T14:44:31.987Z"
+              "WhenOpened": "2026-04-13T14:44:31.987Z",
+              "EditorCaption": ""
             }
           ]
         },
