@@ -192,8 +192,8 @@ namespace Tests
                 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if(field.Value is ValueField valueField)
-                    stringBuilder.Append($" ({valueField.GetRawValue()})");
+                if(field.Value is LineField lineField)
+                    stringBuilder.Append($" ({lineField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
             }
@@ -282,7 +282,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -297,7 +297,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -350,7 +350,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -389,7 +389,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -404,7 +404,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -454,7 +454,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -495,7 +495,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();
@@ -510,7 +510,7 @@ namespace Tests
 
                 stringBuilder.Append($"{field.Key} - {field.Value.Name}");
 
-                if (field.Value is ValueField valueField)
+                if (field.Value is LineField valueField)
                     stringBuilder.Append($" ({valueField.GetRawValue()})");
 
                 stringBuilder.AppendLine();

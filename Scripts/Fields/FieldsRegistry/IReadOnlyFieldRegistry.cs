@@ -10,12 +10,6 @@ namespace RollPunk.Fields
         public event Action<Field> Updated;
         public event Action<Field> Changed;
 
-        public event Action<ValueField> ValueChanged;
-
-        //public event Action<LineField> LinePriorityChanged;
-        //public event Action<LineField> EditableChanged;
-        //public event Action<LineField> VisibleChanged;
-
         public IReadOnlyCollection<Field> Fields { get; }
         public IReadOnlyDictionary<Guid, Field> FieldsDictionary { get; }
 

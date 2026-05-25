@@ -5,7 +5,7 @@ using System;
 
 namespace RollPunk.UIFields
 {
-    public class LineFieldAPI : ValueFieldAPI
+    public class LineFieldAPI : FieldAPI
     {
         readonly private LineField _lineFieldHandler;
         public int line_priority => _lineFieldHandler.LinePriority;
@@ -41,5 +41,7 @@ namespace RollPunk.UIFields
                 LuaErrorsHandler.Handle(ex);
             }
         }
+
+        public object getValue() { return _lineFieldHandler.GetRawValue(); }
     }
 }

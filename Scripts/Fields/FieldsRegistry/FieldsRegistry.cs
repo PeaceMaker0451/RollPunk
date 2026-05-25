@@ -24,12 +24,6 @@ namespace RollPunk.Fields
         public event Action<Field, Field> ParentRemoved;
         public event Action<Field> Changed;
 
-        public event Action<ValueField> ValueChanged;
-
-        //public event Action<LineField> LinePriorityChanged;
-        //public event Action<LineField> EditableChanged;
-        //public event Action<LineField> VisibleChanged;
-
         public IReadOnlyCollection<Field> Fields => _fields.Values;
         public IReadOnlyDictionary<Guid, Field> FieldsDictionary => _fields;
 
@@ -154,28 +148,6 @@ namespace RollPunk.Fields
             handlers.ParentRemoved = onParentRemoved;
             field.ParentRemoved += onParentRemoved;
 
-            if (field is ValueField valueField)
-            {
-                Action onValueChanged = () => ValueChanged?.Invoke(valueField);
-                handlers.ValueChanged = onValueChanged;
-                valueField.ValueChanged += onValueChanged;
-
-                //if (valueField is LineField lineField)
-                //{
-                //    Action onLinePriorityChanged = () => LinePriorityChanged?.Invoke(lineField);
-                //    handlers.LinePriorityChanged = onLinePriorityChanged;
-                //    lineField.LinePriorityChanged += onLinePriorityChanged;
-
-                //    Action onEditableChanged = () => EditableChanged?.Invoke(lineField);
-                //    handlers.EditableChanged = onEditableChanged;
-                //    lineField.EditableChanged += onEditableChanged;
-
-                //    Action onVisibleChanged = () => VisibleChanged?.Invoke(lineField);
-                //    handlers.VisibleChanged = onVisibleChanged;
-                //    lineField.VisibleChanged += onVisibleChanged;
-                //}
-            }
-
             _handlers.Add(field, handlers);
         }
 
@@ -200,19 +172,6 @@ namespace RollPunk.Fields
                 field.ParentChanged -= handlers.ParentChanged;
             if(handlers.ParentRemoved != null)
                 field.ParentRemoved -= handlers.ParentRemoved;
-
-            if (field is ValueField valueField && handlers.ValueChanged != null)
-                valueField.ValueChanged -= handlers.ValueChanged;
-
-            //if (field is LineField lineField)
-            //{
-            //    if (handlers.LinePriorityChanged != null)
-            //        lineField.LinePriorityChanged -= handlers.LinePriorityChanged;
-            //    if (handlers.EditableChanged != null)
-            //        lineField.EditableChanged -= handlers.EditableChanged;
-            //    if (handlers.VisibleChanged != null)
-            //        lineField.VisibleChanged -= handlers.VisibleChanged;
-            //}
 
             _handlers.Remove(field);
         }

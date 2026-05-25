@@ -18,12 +18,11 @@ namespace RollPunk.Client.Runtime
     public class Session : IDisposable, IAPIHandler
     {
         private string SessionInitializedHookName = "SessionInitialized";
-        private string EntityInitializedHookName = "EntityInitialized";
 
         private IRuntimeData _runtimeData;
         private SessionAPI _api;
 
-        private Dictionary<Guid, Player> _players = new();
+        //private Dictionary<Guid, Player> _players = new();
 
         private Constructor _constructor;
         private ModHooker _hooker;

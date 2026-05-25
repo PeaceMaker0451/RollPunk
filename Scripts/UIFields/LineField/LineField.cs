@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 namespace RollPunk.UIFields
 {
-    public abstract partial class LineField : ValueField
+    public abstract partial class LineField : Field
     {
+        public event Action ValueChanged;
         public event Action LinePriorityChanged;
         public event Action VisibleNameChanged;
         public event Action ViewAccessLevelChanged;
@@ -34,12 +35,12 @@ namespace RollPunk.UIFields
         {
             VisibleName = name;
             VisibleNameChanged?.Invoke();
+            RaiseChanged();
         }
         
         public void SetLinePriority(int _newPriority)
         {
             LinePriority = _newPriority;
-            LinePriorityChanged?.Invoke();
             RaiseChanged();
         }
 
@@ -47,13 +48,22 @@ namespace RollPunk.UIFields
         {
             ViewAccessLevel = minLevel;
             ViewAccessLevelChanged?.Invoke();
+            RaiseChanged();
         }
 
         public void SetEditAccessLevel(PlayerRole minLevel)
         {
             EditAccessLevel = minLevel;
             EditAccessLevelChanged?.Invoke();
+            RaiseChanged();
         }
+
+        public void RaiseValueChanged()
+        {
+            ValueChanged?.Invoke();
+        }
+        
+        public abstract object GetRawValue();
 
         protected override void ApplyPayload(Dictionary<string, JToken> payload)
         {

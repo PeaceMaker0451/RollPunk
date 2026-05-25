@@ -21,4 +21,8 @@
     <Folder Include="FieldsContainer\FieldsOwneredFieldsContainer\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Remove="**/*.uid" />
+	</ItemGroup>
+
 </Project>
