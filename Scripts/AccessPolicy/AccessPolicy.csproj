@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Players\Players.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Remove="**/*.uid" />
+	</ItemGroup>
+
 </Project>

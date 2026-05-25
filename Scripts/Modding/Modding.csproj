@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Debug\Debug.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Remove="**/*.uid" />
+	</ItemGroup>
+
 </Project>
