@@ -23,9 +23,9 @@ namespace RollPunk.Entities
             if (data.EntityType != GetEntityType())
                 throw new Exception($"Data type mismatch object Type - {data.EntityType} - {GetType().ToString()}");
 
-            ApplyPayload(data.Payload);
             Name = data.Name;
             ID = data.ID;
+            ApplyPayload(data.Payload);
         }
 
         public EntityState GetState()

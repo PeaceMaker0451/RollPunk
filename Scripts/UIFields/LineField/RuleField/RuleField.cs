@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿ using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
+using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
@@ -30,6 +31,9 @@ namespace RollPunk.UIFields
             if (entityField == null)
                 throw new InvalidOperationException();
 
+            if(_ruleName == null || _ruleName == string.Empty)
+                throw new Exception($"RuleName is null or empty!");
+            
             if (entityField.TryGetRule(_ruleName, out Rule rule) == false)
                 throw new InvalidOperationException();
 
@@ -41,11 +45,26 @@ namespace RollPunk.UIFields
             return _ruleName;
         }
 
+        public void SetRuleName(string ruleName)
+        {
+            RPDebug.Log($"RuleField {Name} [{ID}] RuleName setted to {ruleName}!");
+            _ruleName = ruleName;
+        }
+
         protected override void ApplyPayload(Dictionary<string, JToken> payload)
         {
             base.ApplyPayload(payload);
 
-            _ruleName = Get<string>(payload, nameof(RuleName));
+            try
+            {
+                _ruleName = Get<string>(payload, nameof(RuleName));
+            }
+            catch(Exception ex)
+            {
+                _ruleName = string.Empty;
+                RPDebug.LogError($"RuleField {Name} [{ID}] payloads field RuleName is Null!");
+            }
+            
         }
 
         protected override void WritePayload(Dictionary<string, JToken> payload)

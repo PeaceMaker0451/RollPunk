@@ -7,7 +7,7 @@ namespace RollPunk.Fields
 {
     public class TreeState
     {
-        [JsonProperty] public Guid ParentID;
+        [JsonProperty] public Guid? ParentID;
         [JsonProperty] public EntityState State;
         [JsonProperty] public List<TreeState> Children = new();
     }

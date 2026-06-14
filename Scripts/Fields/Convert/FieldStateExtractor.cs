@@ -13,7 +13,7 @@ namespace RollPunk.Fields
             if(field.Parent != null)
                 fieldState.ParentID = field.Parent.ID;
             else
-                fieldState.ParentID = Guid.Empty;
+                fieldState.ParentID = null;
 
             if (fieldState.Children == null)
                 throw new Exception("Children null");

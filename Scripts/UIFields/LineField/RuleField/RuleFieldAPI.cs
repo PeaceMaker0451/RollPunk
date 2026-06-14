@@ -14,5 +14,7 @@ namespace RollPunk.UIFields
         }
 
         public void execute() => _ruleField.Execute();
+
+        public void setRuleName(string ruleName) => _ruleField.SetRuleName(ruleName);
     }
 }

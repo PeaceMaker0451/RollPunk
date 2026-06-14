@@ -24,6 +24,7 @@ local PsychoSubsystem = require('character.subsystems.psycho_subsystem')
 local UpdateSubsystem = require('character.subsystems.update_subsystem')
 
 
+---@param character EntityFieldAPI
 function CommonPlayerConstructor:new(character)
     local instance = setmetatable({}, self)
     instance.character = character
@@ -49,23 +50,14 @@ function CommonPlayerConstructor:new(character)
     instance.psycho_subsystem = PsychoSubsystem:new(character, instance.groups_subsystem.action_group, instance.groups_subsystem.parameters_group, instance.groups_subsystem.character_group, instance.stats_subsystem.emp_stat)
     table.insert(instance.subsystems, instance.psycho_subsystem)
     
-    instance.update_subsystem = UpdateSubsystem:new(character, instance.groups_subsystem.update_group, instance.skill_subsystem, 
+    instance.update_subsystem = UpdateSubsystem:new(character, instance.groups_subsystem.action_group, instance.groups_subsystem.update_group, instance.skill_subsystem, 
     instance.stats_subsystem, instance.stats_subsystem.emp_stat.name, instance.psycho_subsystem.real_emp_value_name)
     table.insert(instance.subsystems, instance.update_subsystem)
 
+    character.setAdditionalDataField("version", "0.5.1")
+
     return instance
 end
-
--- function CommonPlayerConstructor:initializeCharacter()
---     for _, subsystem in pairs(self.subsystems) do
---         if subsystem ~= nil and subsystem.name ~= nil then
---             RollPunkAPI.log("Инициализация подсистемы: " .. subsystem.name or "Unknown Name" .. "...")
---             subsystem:initialize()
---         else
---             RollPunkAPI.logError("Невозможно инициализировать подсистему " .. _)
---         end
---     end 
--- end
 
 function  CommonPlayerConstructor:validateCharacter(UpdatedField)
     RollPunkAPI.log("Валидация персонажа из-за: " .. UpdatedField.name .. " (" .. UpdatedField.id .. ")")

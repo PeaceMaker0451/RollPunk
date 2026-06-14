@@ -61,6 +61,7 @@ namespace RollPunk.UIFields
         public void RaiseValueChanged()
         {
             ValueChanged?.Invoke();
+            RaiseChanged();
         }
         
         public abstract object GetRawValue();

@@ -1,6 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using RollPunk.Debug;
 using System;
+using System.Reflection;
 using System.Text;
 
 
@@ -36,10 +37,19 @@ namespace RollPunk.Modding
                 }
                 
             }
+            else if(exception is TargetInvocationException invocationException)
+            {
+                stringBuilder.AppendLine(
+                $"[Target Invocation Exception]\n" +
+                $"{invocationException.Message} ({invocationException.Source})\n" +
+                $"{invocationException.InnerException}\n" +
+                $"{invocationException.StackTrace}\n"
+                );
+            }
             else
             {
                 stringBuilder.AppendLine(
-                $"[Lua Exception]\n" +
+                $"[Lua Exception] ({exception.GetType()})\n" +
                 $"{exception.Message}\n" +
                 $"{exception.StackTrace}\n"
                 );
