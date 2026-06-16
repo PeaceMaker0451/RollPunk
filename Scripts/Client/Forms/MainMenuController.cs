@@ -35,43 +35,13 @@ namespace RollPunk.Client.Forms
 
             MainMenu = (MainMenu)form;
 
-            MainMenu.CreateSessionPressed += () => _runtime.StartSession(_runtime.ReadedMods);
-            MainMenu.ExitSessionPressed += () => _runtime.KillSession();
-
-            MainMenu.SettingsPressed += MainMenu_SettingsPressed;
+            MainMenu.CreateSessionRequested += () => _runtime.StartSession(_runtime.ReadedMods);
+            //MainMenu.ExitSessionPressed += () => _runtime.KillSession();
+            MainMenu.EnterSessionRequested += (adress) => _runtime.TryConnectToSession(adress, _runtime.ReadedMods);
 
             MenuOpened = true;
             MainMenu.Initialize();
             OnStateChanged();
-        }
-
-        private async void MainMenu_SettingsPressed()
-        {
-            string result = await _uiController.OpenStringDialogue("В чем ваша проблема?");
-            await _uiController.OpenInformationDialogue("Помощь", "Мы вам ооОООоочень сочуствуем!!" +
-                "\n\"[i]{Вставьте сюда проблему пользователя}[/i]\" - Это ООООчень серьезно!!" +
-                "\nМы сейчас же позовем кого-то с этим разобраться!!!");
-        }
-
-        public void CloseMainMenu()
-        {
-            if(MainMenu == null)
-                throw new InvalidOperationException("Главное меню не было загружено");
-
-            _uiController.CloseForm(MainMenu);
-
-            MenuOpened = false;
-            GD.Print("Главное меню закрыто");
-        }
-
-        private void OpenSettings()
-        {
-
-        }
-
-        private void OpenModManager()
-        {
-
         }
 
         private void OnStateChanged()

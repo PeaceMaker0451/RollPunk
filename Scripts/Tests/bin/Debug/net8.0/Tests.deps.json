@@ -513,6 +513,26 @@
           }
         }
       },
+      "ClientNetcode/1.0.0": {
+        "dependencies": {
+          "AccessPolicy": "1.0.0",
+          "Debug": "1.0.0",
+          "Entities": "1.0.0",
+          "Fields": "1.0.0",
+          "HierarchyFields": "1.0.0",
+          "Modding": "1.0.0",
+          "NetcodeCommon": "1.0.0",
+          "Newtonsoft.Json": "13.0.4",
+          "Players": "1.0.0",
+          "Rules": "1.0.0"
+        },
+        "runtime": {
+          "ClientNetcode.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "CommandsSystem/1.0.0": {
         "runtime": {
           "CommandsSystem.dll": {
@@ -585,6 +605,22 @@
           }
         }
       },
+      "NetcodeCommon/1.0.0": {
+        "dependencies": {
+          "Debug": "1.0.0",
+          "Entities": "1.0.0",
+          "Fields": "1.0.0",
+          "HierarchyFields": "1.0.0",
+          "Newtonsoft.Json": "13.0.4",
+          "Players": "1.0.0"
+        },
+        "runtime": {
+          "NetcodeCommon.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Players/1.0.0": {
         "dependencies": {
           "Entities": "1.0.0",
@@ -600,6 +636,7 @@
       "RollPunk/1.0.0": {
         "dependencies": {
           "AccessPolicy": "1.0.0",
+          "ClientNetcode": "1.0.0",
           "Discord.Net": "3.16.0",
           "Discord.Net.WebSocket": "3.16.0",
           "Entities": "1.0.0",
@@ -830,6 +867,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ClientNetcode/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "CommandsSystem/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -856,6 +898,11 @@
       "sha512": ""
     },
     "Modding/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NetcodeCommon/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

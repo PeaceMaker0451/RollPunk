@@ -36,6 +36,9 @@
               "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
                 "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
               },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj"
+              },
               "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
                 "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
               },
@@ -58,7 +61,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -106,7 +109,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -164,7 +167,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -186,7 +189,108 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
+        "projectName": "ClientNetcode",
+        "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Players\\Players.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -231,7 +335,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -253,7 +357,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -298,7 +402,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -326,7 +430,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -371,7 +475,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -399,7 +503,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -451,7 +555,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -483,7 +587,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -538,7 +642,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -560,7 +664,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -612,7 +716,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -648,7 +752,96 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
+        "projectName": "NetcodeCommon",
+        "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              },
+              "E:\\Projs\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
+                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Players\\Players.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -700,7 +893,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -722,7 +915,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -774,7 +967,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -796,7 +989,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -837,9 +1030,6 @@
               },
               "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
                 "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
-              },
-              "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\UIFields.csproj": {
-                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\UIFields.csproj"
               }
             }
           }
@@ -854,7 +1044,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -894,80 +1084,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\UIFields.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\UIFields.csproj",
-        "projectName": "UIFields",
-        "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\UIFields.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\UIFields\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "framework": "net8.0",
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
-                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
-              },
-              "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
-              },
-              "E:\\Projs\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.200"
-      },
-      "frameworks": {
-        "net8.0": {
-          "framework": "net8.0",
-          "targetAlias": "net8.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -246,3 +246,7 @@ E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\System.Linq.Async.dll
 E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\System.Reactive.dll
 E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\RollPunk.dll
 E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\RollPunk.pdb
+E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\ClientNetcode.dll
+E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\ClientNetcode.pdb
+E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\NetcodeCommon.dll
+E:\Projs\Git\RollPunk\Scripts\Tests\bin\Debug\net8.0\NetcodeCommon.pdb

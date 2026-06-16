@@ -13,7 +13,7 @@ namespace RollPunk.Fields
             _factory = entityFactory;
         }
         
-        public void ApplyFieldState(TreeState stateToApply, IFieldsHandler fieldsContainer, IFieldsHandler defaultRoot = null, FieldsRegistry fieldsRegistry = null)
+        public void ApplyFieldState(FieldState stateToApply, IFieldsHandler fieldsContainer, IFieldsHandler defaultRoot = null, FieldsRegistry fieldsRegistry = null)
         {
             if (defaultRoot == null)
                 defaultRoot = fieldsContainer;
@@ -47,7 +47,7 @@ namespace RollPunk.Fields
                 ApplyFieldState(fieldState, fieldsContainer, defaultRoot, fieldsRegistry);
         }
 
-        public Field CreateFieldsTree(TreeState stateToApply)
+        public Field CreateFieldsTree(FieldState stateToApply)
         {
             Field field = CreateField(stateToApply.State);
 

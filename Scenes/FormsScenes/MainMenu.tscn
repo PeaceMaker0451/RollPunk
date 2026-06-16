@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://88lp7ntqxq0t"]
+[gd_scene load_steps=6 format=3 uid="uid://88lp7ntqxq0t"]
 
 [ext_resource type="Script" uid="uid://hlu3jpvjuyxt" path="res://Scripts/Client/Forms/MainMenu/MainMenu.cs" id="1_v0jhx"]
+[ext_resource type="Script" uid="uid://couldqbrilins" path="res://Scripts/Client/Forms/MainMenu/EnterSessionSubMenu.cs" id="2_tf62t"]
 [ext_resource type="Script" uid="uid://56cxr40p3sm0" path="res://Scripts/Client/Forms/MainMenu/MainSubMenu.cs" id="3_2aawn"]
 [ext_resource type="PackedScene" uid="uid://coxmfns81m0gj" path="res://Scenes/Other/rollpunkLogo.tscn" id="4_slnmx"]
 
@@ -11,7 +12,7 @@ content_margin_right = 8.0
 content_margin_bottom = 5.0
 bg_color = Color(1, 0.19, 0.19, 1)
 
-[node name="MainForm" type="Control" node_paths=PackedStringArray("_mainMenu")]
+[node name="MainForm" type="Control" node_paths=PackedStringArray("_mainMenu", "_enterMenu")]
 custom_minimum_size = Vector2(933, 529)
 layout_mode = 3
 anchors_preset = 0
@@ -19,6 +20,7 @@ offset_right = 933.0
 offset_bottom = 529.0
 script = ExtResource("1_v0jhx")
 _mainMenu = NodePath("ColorRect/Menus/MainMenu")
+_enterMenu = NodePath("ColorRect/Menus/EnterSession")
 Title = "Главное меню"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -81,14 +83,17 @@ offset_right = 432.0
 offset_bottom = -56.0
 grow_vertical = 2
 
-[node name="EnterSession" type="Control" parent="ColorRect/Menus"]
-visible = false
+[node name="EnterSession" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_tf62t")
+_returnButton = NodePath("BackButton")
+_connectButton = NodePath("VBoxContainer/Button8")
+_adressField = NodePath("VBoxContainer/Control2/LineEdit")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Menus/EnterSession"]
 layout_mode = 1
@@ -122,7 +127,7 @@ offset_right = 105.0
 offset_bottom = 29.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "ID Сессии"
+text = "Адрес подключения"
 
 [node name="LineEdit" type="LineEdit" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control2"]
 layout_mode = 1
@@ -130,34 +135,11 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -28.0
+offset_top = -27.89
+offset_right = 155.515
+offset_bottom = 0.110001
 grow_horizontal = 2
 grow_vertical = 0
-placeholder_text = "00AAAA"
-
-[node name="Control" type="Control" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
-custom_minimum_size = Vector2(118.485, 66.89)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Label2" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control"]
-layout_mode = 1
-offset_right = 105.0
-offset_bottom = 29.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "ID Игрока"
-
-[node name="LineEdit" type="LineEdit" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -28.0
-grow_horizontal = 2
-grow_vertical = 0
-placeholder_text = "00AAAA"
 
 [node name="Button8" type="Button" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
 layout_mode = 2
@@ -229,7 +211,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Назад"
 
-[node name="MainMenu" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_createSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton", "_exitButton")]
+[node name="MainMenu" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton", "_exitButton")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -238,6 +221,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_2aawn")
 _createSessionButton = NodePath("ButtonsList/CreateSessionButton")
+_enterSessionButton = NodePath("ButtonsList/EnterSessionButton")
 _exitSessionButton = NodePath("ButtonsList/LeaveSessionButton")
 _settingsButton = NodePath("ButtonsList/SettingsButton")
 _modManagerButton = NodePath("ButtonsList/ModManagerButton")
@@ -274,7 +258,6 @@ theme_override_constants/separation = 10
 layout_mode = 2
 
 [node name="EnterSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Присоедениться к сессии"

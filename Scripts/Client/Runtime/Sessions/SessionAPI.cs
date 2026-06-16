@@ -11,13 +11,13 @@ namespace RollPunk.Client.Runtime.Sessions
 {
     public class SessionAPI : HeldAPI
     {
-        private Session _session;
+        private ClientSession _session;
 
         public OwnersRegistryAPI OwnersRegistry { get; private set; }
 
         public PlayerAPI current_player => (PlayerAPI)_session.CurrentPlayer.GetAPI();
         
-        public SessionAPI(Session handler) : base(handler)
+        public SessionAPI(ClientSession handler) : base(handler)
         {
             _session = handler;
             OwnersRegistry = new OwnersRegistryAPI(_session.OwnersRegistry);

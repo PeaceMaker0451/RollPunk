@@ -49,7 +49,8 @@ enabled=PackedStringArray()
 [gui]
 
 common/snap_controls_to_pixels=false
-theme/custom="res://Style/RollPunkMainTheme.tres"
+theme/custom="uid://biap20igfxrus"
+theme/default_font_antialiasing=2
 
 [internationalization]
 

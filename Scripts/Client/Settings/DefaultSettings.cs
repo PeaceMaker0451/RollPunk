@@ -17,7 +17,8 @@ namespace RollPunk.Client.Settings
                 OneScreenMode = false,
                 SmoothWindowResizing = true,
                 WaitForResizeToChangeWindow = true,
-                ClientID = new Guid()
+                ClientID = Guid.NewGuid(),
+                Name = String.Empty
             };
         }
     }

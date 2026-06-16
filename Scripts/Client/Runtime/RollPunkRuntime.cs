@@ -1,5 +1,7 @@
 ﻿using Godot;
 using RollPunk.Client.Forms;
+using RollPunk.ClientNetcode;
+using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
@@ -32,7 +34,7 @@ namespace RollPunk.Client.Runtime
 
         public event Action StateChanged;
         
-        public Session Session { get; private set; }
+        public ClientSession Session { get; private set; }
         public RollPunkState State { get; private set; }
         public IReadOnlyList<Mod> ReadedMods => _mods;
 
@@ -56,12 +58,51 @@ namespace RollPunk.Client.Runtime
 
         public void StartSession(IReadOnlyList<Mod> mods)
         {
-            Session = new Session(new SessionRuntimeData(Client.Instance.SettingsManager.LoadSettings().ClientID), mods);
+            Session = new ClientSession(new SessionRuntimeData(Client.Instance.SettingsManager.LoadSettings().ClientID), mods);
             Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
 
             Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
             Session.InitializeSession();
             SetState(RollPunkState.Session);
+        }
+
+        public bool TryConnectToSession(string adress, IReadOnlyList<Mod> mods)
+        {
+            var adressParts = adress.Split(new char[] { ':' });
+            
+            if (adressParts.Length != 2)
+            {
+                RPDebug.LogError("Невозможно подключиться к хосту: неправильный формат адресной строки.");
+                return false;
+            }
+
+            try
+            {
+                TcpClient client = new(adressParts[0], Convert.ToInt32(adressParts[1]), Client.Instance.ThreadManager.ThreadManager);
+
+                client.ReceivedWelcome += (message) =>
+                {
+                    RPDebug.Log($"Сервер передал нам: {message}");
+                    client.SendClientData(Client.Instance.SettingsManager.LoadSettings().Name, Client.Instance.SettingsManager.LoadSettings().ClientID);
+
+                    Session = new ClientSession(new SessionRuntimeData(Client.Instance.SettingsManager.LoadSettings().ClientID), mods, client);
+                    Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
+
+                    Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
+                    Session.InitializeSession();
+                    SetState(RollPunkState.Session);
+                };
+
+                client.ConnectToServer();
+            }
+            catch (Exception ex)
+            {
+                RPDebug.LogError($"Невозможно подключиться к хосту: {ex.Message}." +
+                    $"\n{ex.StackTrace}");
+                return false;
+            }
+
+            return true;
         }
 
         public void KillSession()

@@ -8,26 +8,26 @@ namespace RollPunk.Client
     internal enum MainMenuTab
     {
         Main,
+        EnterSession,
+        CreateSession,
     }
 
     internal partial class MainMenu : Form
     {
         [Export] private MainSubMenu _mainMenu;
+        [Export] private EnterSessionSubMenu _enterMenu;
+        [Export] private MainSubMenu _createMenu;
 
-        public event Action CreateSessionPressed;
-        public event Action ExitSessionPressed;
-        public event Action SettingsPressed;
-        public event Action ModManagerPressed;
-        public event Action ExitPressed;
+        public event Action CreateSessionRequested;
+        public event Action<string> EnterSessionRequested;
 
         public void Initialize()
         {
             _mainMenu.Initialize(this);
-            _mainMenu.CreateSessionPressed += () => CreateSessionPressed?.Invoke();
-            _mainMenu.ExitSessionPressed += () => ExitSessionPressed?.Invoke();
-            _mainMenu.SettingsPressed += () => SettingsPressed?.Invoke();
-            _mainMenu.ModManagerPressed += () => ModManagerPressed?.Invoke();
-            _mainMenu.ExitPressed += () => ExitPressed?.Invoke();
+            _mainMenu.CreateSessionPressed += () => CreateSessionRequested?.Invoke();
+
+            _enterMenu.Initialize(this);
+            _enterMenu.EnterSessionRequested += (adress) => EnterSessionRequested?.Invoke(adress);
 
             SetMenu(MainMenuTab.Main);
             GD.Print("Главное меню инициализировано");
@@ -37,10 +37,19 @@ namespace RollPunk.Client
         {
             GD.Print($"Main menu set menu {tab}");
 
+            DisableAllMenus();
+
             switch (tab)
             {
                 case (MainMenuTab.Main):
-                    DisableAllMenus();
+                    _mainMenu.Show();
+                    break;
+
+                case (MainMenuTab.EnterSession):
+                    _enterMenu.Show();
+                    break;
+
+                case (MainMenuTab.CreateSession):
                     _mainMenu.Show();
                     break;
 
@@ -63,6 +72,7 @@ namespace RollPunk.Client
         private void DisableAllMenus()
         {
             _mainMenu.Hide();
+            _enterMenu.Hide();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RollPunk.Client.Forms
         
         private UIController _ui;
         private FieldControlsConstructor _constructor;
-        private Session _session;
+        private ClientSession _session;
 
         public GameView GameView { get; private set; }
         
@@ -25,7 +25,7 @@ namespace RollPunk.Client.Forms
             _constructor = fieldControlsConstructor;
         }
 
-        public void OpenSessionView(Session session)
+        public void OpenSessionView(ClientSession session)
         {
             _session = session;
             

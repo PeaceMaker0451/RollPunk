@@ -2,6 +2,7 @@
 using PunkCommandSystem;
 using RollPunk.Client.Runtime;
 using RollPunk.Client.Settings;
+using RollPunk.ClientNetcode;
 using RollPunk.Debug;
 using RollPunk.Modding;
 using RollPunk.UI.Forms;
@@ -27,6 +28,8 @@ namespace RollPunk.Client
         internal FormsFactory FormsFactory { get; private set; }
         internal UIController UIController { get; private set; }
 
+        internal GodotThreadManager ThreadManager { get; private set; }
+
         public Client(Node rootNode)
         {
             FileDebugUtils = new FileDebugUtils();
@@ -47,11 +50,17 @@ namespace RollPunk.Client
             SettingsManager = new SettingsManager(new ClientSettingsStorage(), ClientConfig.ClientVersion);
 
             var settings = SettingsManager.LoadSettings();
+            SettingsManager.SaveSettings(settings);
+
             FramesManager = new(_rootNode, settings.OneScreenMode, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
             FormsFactory = new();
             UIController = new(FramesManager, FormsFactory);
 
             FramesManager.SetMainFrameTitle($"RollPunk {ClientConfig.ClientVersion}");
+
+            ThreadManager = new();
+            _rootNode.AddChild(ThreadManager);
+            RPDebug.Log($"ThreadManager создан - {ThreadManager.Name}");
 
             RollPunkRuntime rollPunk = new RollPunkRuntime();
         }

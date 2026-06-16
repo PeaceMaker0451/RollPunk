@@ -40,7 +40,7 @@ namespace RollPunk.Client
                 //Formatting = Formatting.Indented
             };
 
-            TreeState fieldState = FieldStateExtractor.ExtractFieldTreeState(field);
+            FieldState fieldState = FieldStateExtractor.ExtractFieldTreeState(field);
             
             string output = JsonConvert.SerializeObject(fieldState, settings); // Применяем настройки
             RPDebug.DebugLog($"Сериализация объекта {fieldState} завершена: \n{output}");
@@ -57,7 +57,7 @@ namespace RollPunk.Client
 
         public Field DeserializeFieldTree(string json)
         {
-            TreeState fieldState = JsonConvert.DeserializeObject<TreeState>(json);
+            FieldState fieldState = JsonConvert.DeserializeObject<FieldState>(json);
             Field field = _fieldsHierarchyReconstructor.CreateFieldsTree(fieldState);
             RPDebug.DebugLog($"Десериализация строки \n{json}\n завершена: {field.GetState()}");
             return field;

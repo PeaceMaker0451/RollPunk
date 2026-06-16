@@ -6,6 +6,7 @@ namespace RollPunk.Client
     internal partial class MainSubMenu : SubMenu
     {
         [Export] Button _createSessionButton;
+        [Export] Button _enterSessionButton;
         [Export] Button _exitSessionButton;
         [Export] Button _settingsButton;
         [Export] Button _modManagerButton;
@@ -20,6 +21,7 @@ namespace RollPunk.Client
         public override void _Ready()
         {
             _createSessionButton.Pressed += () => CreateSessionPressed?.Invoke();
+            _enterSessionButton.Pressed += () => Menu.SetMenu(MainMenuTab.EnterSession);
             _exitSessionButton.Pressed += () => ExitSessionPressed?.Invoke();
             _settingsButton.Pressed += () => SettingsPressed?.Invoke();
             _modManagerButton.Pressed += () => ModManagerPressed?.Invoke();

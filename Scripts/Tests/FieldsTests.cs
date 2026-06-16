@@ -218,7 +218,7 @@ namespace Tests
             fieldsContainer1.AddField(entityField1);
             fieldsContainer1.AddField(entityField2);
 
-            List<TreeState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
+            List<FieldState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
 
             Assert.Equal(2, states.Count);
 
@@ -244,7 +244,7 @@ namespace Tests
             fieldsContainer1.AddField(entityField1);
             fieldsContainer1.AddField(entityField2);
 
-            List<TreeState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
+            List<FieldState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
             
             FieldsContainer<EntityField> fieldsContainer2 = new();
 
@@ -255,7 +255,7 @@ namespace Tests
 
             FieldsHierarchyReconstructor reconstructor = new(entityFactory);
 
-            foreach(TreeState state in states)
+            foreach(FieldState state in states)
                 reconstructor.ApplyFieldState(state, fieldsContainer2);
 
             Assert.True(fieldsContainer1.List.Count == fieldsContainer2.List.Count);
@@ -323,7 +323,7 @@ namespace Tests
             fieldsContainer1.AddField(entityField1);
             fieldsContainer1.AddField(entityField2);
 
-            List<TreeState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
+            List<FieldState> states = FieldStateExtractor.ExtractFieldsCollectionTreeState(fieldsContainer1.Fields);
 
             FieldsContainer<EntityField> fieldsContainer2 = new();
 
@@ -334,7 +334,7 @@ namespace Tests
 
             FieldsHierarchyReconstructor reconstructor = new(entityFactory);
 
-            foreach (TreeState state in states)
+            foreach (FieldState state in states)
                 reconstructor.ApplyFieldState(state, fieldsContainer2);
 
             FieldsRegistry registry1 = new FieldsRegistry(fieldsContainer1);
@@ -359,7 +359,7 @@ namespace Tests
             _output.WriteLine(stringBuilder.ToString());
 
             StringField newString = new StringField("BrandNewStringField", "someName", PlayerRole.All, PlayerRole.All, "SomeImportantData");
-            TreeState fieldState = null;
+            FieldState fieldState = null;
             
             bool raisedAdded = false;
             registry1.ChildAdded += (field) =>
@@ -463,7 +463,7 @@ namespace Tests
             _output.WriteLine(stringBuilder.ToString());
 
             StringField newString = new StringField("BrandNewStringField", "someName", PlayerRole.All, PlayerRole.All, "SomeImportantData");
-            TreeState fieldState = null;
+            FieldState fieldState = null;
 
             bool raisedChildAdded = false;
             registry1.ChildAdded += (field) =>

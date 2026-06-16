@@ -1,4 +1,6 @@
-﻿using RollPunk.Debug;
+﻿using NetcodeCommon;
+using RollPunk.ClientNetcode;
+using RollPunk.Debug;
 using RollPunk.Fields;
 using System;
 using System.Collections.Generic;
@@ -9,15 +11,18 @@ namespace RollPunk.Client.Runtime
 {
     internal class MutationCatcher
     {
-        FieldsRegistry _registry;
+        private IDataBridge _dataBridge;
+        private FieldsRegistry _registry;
 
-        HashSet<Guid> _pending = new();
-        HashSet<Guid> _removed = new();
-        bool _sendingBlocked = false;
+        private HashSet<Guid> _pending = new();
+        private HashSet<Guid> _removed = new();
+        private bool _sendingBlocked = false;
 
-        public MutationCatcher(FieldsRegistry registry)
+        public MutationCatcher(FieldsRegistry registry, IDataBridge dataBridge = null)
         {
+            _dataBridge = dataBridge;
             _registry = registry;
+
             _registry.Changed += OnFieldChanged;
             _registry.FieldAdded += OnFieldChanged;
             _registry.FieldRemoved += OnFieldRemoved;
@@ -55,11 +60,19 @@ namespace RollPunk.Client.Runtime
         {
             if (_pending.Count == 0 && _removed.Count == 0) return;
 
-            var changes = _pending.Select(id => _registry.FieldsDictionary[id].GetState()).ToList();
+            var changes = _pending.Select(id => _registry.FieldsDictionary[id]);
             var deletions = _removed.ToList();
 
             _pending.Clear();
             _removed.Clear();
+
+            SessionPatch patch = new SessionPatch();
+
+            foreach (var field in changes)
+                patch.PendingFields.Add(FieldStateExtractor.ExtractFieldTreeState(field));
+
+            foreach (var fieldId in deletions)
+                patch.RemoveFields.Add(fieldId);
 
             // лог
             StringBuilder sb = new StringBuilder();
@@ -72,7 +85,8 @@ namespace RollPunk.Client.Runtime
             RPDebug.Log(sb.ToString());
 
             // отправка на сервер
-            //_net.SendDelta(changes, deletions);
+            if(_dataBridge != null)
+                _dataBridge.SendSessionPatch(patch);
         }
     }
 }

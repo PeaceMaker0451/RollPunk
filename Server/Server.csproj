@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>RollPunk.Server</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RollPunk.csproj" />
+    <ProjectReference Include="..\Scripts\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="..\Scripts\CommandsSystem\CommandsSystem.csproj" />
+    <ProjectReference Include="..\Scripts\Debug\Debug.csproj" />
+    <ProjectReference Include="..\Scripts\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Scripts\Fields\Fields.csproj" />
+    <ProjectReference Include="..\Scripts\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Scripts\Modding\Modding.csproj" />
+    <ProjectReference Include="..\Scripts\NetcodeCommon\NetcodeCommon.csproj" />
+    <ProjectReference Include="..\Scripts\Players\Players.csproj" />
+    <ProjectReference Include="..\Scripts\Rules\Rules.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Remove="**/*.uid" />
+	</ItemGroup>
+
+</Project>

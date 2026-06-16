@@ -1,12 +1,11 @@
 ﻿using Godot;
 using Godot.Collections;
-using RollPunk.Debug;
 using RollPunk.Modding.APIs;
 using RollPunk.UI.Forms;
 using RollPunk.UI.Frames;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
 using static Godot.Control;
 
 namespace RollPunk.Client
@@ -18,7 +17,7 @@ namespace RollPunk.Client
         private FramesManager _framesManager;
         private FormsFactory _formsFactory;
 
-        private Dictionary<Form, Frame> _forms = new();
+        private System.Collections.Generic.Dictionary<Form, Frame> _forms = new();
 
         public UIController(FramesManager framesManager, FormsFactory formsFactory)
         {

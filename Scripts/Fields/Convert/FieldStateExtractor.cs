@@ -5,9 +5,9 @@ namespace RollPunk.Fields
 {
     public static class FieldStateExtractor
     {
-        public static TreeState ExtractFieldTreeState(Field field)
+        public static FieldState ExtractFieldTreeState(Field field)
         {
-            TreeState fieldState = new TreeState();
+            FieldState fieldState = new FieldState();
             fieldState.State = field.GetState();
 
             if(field.Parent != null)
@@ -30,9 +30,9 @@ namespace RollPunk.Fields
             return fieldState;
         }
 
-        public static List<TreeState> ExtractFieldsCollectionTreeState(IReadOnlyCollection<Field> fields)
+        public static List<FieldState> ExtractFieldsCollectionTreeState(IReadOnlyCollection<Field> fields)
         {
-            List<TreeState> states = new List<TreeState>();
+            List<FieldState> states = new List<FieldState>();
 
             foreach (var child in fields)
                 states.Add(ExtractFieldTreeState(child));

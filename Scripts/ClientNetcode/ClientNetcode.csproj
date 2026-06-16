@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>RollPunk.ClientNetcode</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="..\Debug\Debug.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Fields\Fields.csproj" />
+    <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Modding\Modding.csproj" />
+    <ProjectReference Include="..\NetcodeCommon\NetcodeCommon.csproj" />
+    <ProjectReference Include="..\Players\Players.csproj" />
+    <ProjectReference Include="..\Rules\Rules.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Remove="**/*.uid" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	</ItemGroup>
+
+</Project>

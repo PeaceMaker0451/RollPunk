@@ -57,7 +57,7 @@ namespace RollPunk.Client.Forms
 
 		private void AddTextToConsole(string text)
 		{
-			consoleField.AppendText(text);
+			consoleField.CallDeferred("append_text", text);
 		}
 	}
 }
