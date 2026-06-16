@@ -7,7 +7,7 @@ local _characters = {}
 ---@type EntityFieldData
 local _character_entity_data =
 {
-  name = "CP_Charater",
+  name = "New Character",
   type = "EntityField",
   additional_data = {type = "CP_Character"}
 }

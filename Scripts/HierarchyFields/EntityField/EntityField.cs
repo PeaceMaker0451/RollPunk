@@ -2,7 +2,6 @@
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.Rules;
-using System.Runtime.InteropServices;
 
 namespace RollPunk.HierarchyFields
 {
@@ -87,18 +86,26 @@ namespace RollPunk.HierarchyFields
         {
             base.ApplyPayload(payload);
 
-            _rulesByNames = Get<Dictionary<string, Guid>>(payload, nameof(_rulesByNames));
-            var rules = Get<List<EntityState>>(payload, nameof(_rules));
+            //_rulesByNames = Get<Dictionary<string, Guid>>(payload, nameof(_rulesByNames));
+            _rules.Clear();
 
-            foreach (var rule in rules)
-                _rules.Add(rule.ID, new(rule));
+            var ruleStates = Get<List<EntityState>>(payload, nameof(_rules));
+
+            foreach (var ruleState in ruleStates)
+            {
+                var rule = new Rule(ruleState);
+                AddRule(rule);
+            }
+
+            //Надо будет переписать хранение правил, чтобы сущность не несла за них ответственность 
+
         }
 
         protected override void WritePayload(Dictionary<string, JToken> payload)
         {
             base.WritePayload(payload);
 
-            Set(payload, nameof(_rulesByNames), _rulesByNames);
+            //Set(payload, nameof(_rulesByNames), _rulesByNames);
 
             List<EntityState> rules = new();
 

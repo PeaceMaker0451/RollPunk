@@ -25,7 +25,7 @@ namespace RollPunk.Client
         {
             var settings = new JsonSerializerSettings
             {
-                //Formatting = Formatting.Indented
+                Formatting = Formatting.Indented
             };
 
             string output = JsonConvert.SerializeObject(entity.GetState(), settings); // Применяем настройки
@@ -37,10 +37,10 @@ namespace RollPunk.Client
         {
             var settings = new JsonSerializerSettings
             {
-                //Formatting = Formatting.Indented
+                Formatting = Formatting.Indented
             };
 
-            FieldState fieldState = FieldStateExtractor.ExtractFieldTreeState(field);
+            TreeState fieldState = FieldStateExtractor.ExtractFieldTreeState(field);
             
             string output = JsonConvert.SerializeObject(fieldState, settings); // Применяем настройки
             RPDebug.DebugLog($"Сериализация объекта {fieldState} завершена: \n{output}");
@@ -57,9 +57,24 @@ namespace RollPunk.Client
 
         public Field DeserializeFieldTree(string json)
         {
-            FieldState fieldState = JsonConvert.DeserializeObject<FieldState>(json);
-            Field field = _fieldsHierarchyReconstructor.CreateFieldsTree(fieldState);
-            RPDebug.DebugLog($"Десериализация строки \n{json}\n завершена: {field.GetState()}");
+            TreeState fieldState = JsonConvert.DeserializeObject<TreeState>(json);
+            Field field = _fieldsHierarchyReconstructor.CloneFieldsTree(fieldState);
+            RPDebug.DebugLog($"Десериализация строки завершена: {field.GetState()}");
+
+            WriteChildren(field);
+
+            void WriteChildren(Field field, string prefix = "")
+            {
+                string newPrefix = prefix + "|_";
+                
+                foreach (var child in field.Fields)
+                {
+                    RPDebug.DebugLog($"{prefix}{child.Name}");
+                    WriteChildren(child, newPrefix);
+                }
+            }
+
+
             return field;
         }
 

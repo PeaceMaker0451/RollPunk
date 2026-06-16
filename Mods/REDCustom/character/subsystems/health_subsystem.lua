@@ -80,10 +80,15 @@ local _heal_rule_field_data =
 }
 
 local function addRuleHooks(self)
+    
     ModHookerAPI.addHook(_damage_rule_data.hook,function (character)
+        RollPunkAPI.log("Пришел хук на персонажа " .. character.name .. ". Это персонаж " .. self.character.name)
+        
         if self == nil or character ~= self.character then
             return
         end
+
+        RollPunkAPI.log("Обработка события нанесения урона..")
 
         UIAPI.openIntDialogue("Введите число урона:", function(result)
             HealthSubsystem.damage(self,  result)
@@ -95,6 +100,8 @@ local function addRuleHooks(self)
             return
         end
 
+        RollPunkAPI.log("Обработка события восстановления..")
+        
         UIAPI.openIntDialogue("Введите число здоровья:", function(result)
             HealthSubsystem.heal(self,  result)
         end)
@@ -107,6 +114,23 @@ local function _updateMaxHealth(self)
     local newMaxHP = (((bodyValue + willValue) / 4) * 5) + 10
 
     self.hp_field.setMaxValue(newMaxHP)
+end
+
+---@param self HealthSubsystem
+local function _upgradeTo051(self)
+    RollPunkAPI.log("Обновление подсистемы здоровья до версии 0.5.1...")
+    
+    local healButton = self.character.getField(_heal_rule_field_data.name)
+    local damageButton = self.character.getField(_damage_rule_field_data.name)
+
+    healButton.setRuleName(_heal_rule_data.name)
+    damageButton.setRuleName(_damage_rule_data.name)
+
+    local healRule = self.character.getRule(_heal_rule_data.name)
+    local damageRule = self.character.getRule(_damage_rule_data.name)
+
+    healRule.setHook(_heal_rule_data.hook)
+    damageRule.setHook(_damage_rule_data.hook)
 end
 
 function HealthSubsystem:_create()
@@ -126,8 +150,13 @@ end
 function HealthSubsystem:_connect()
     RollPunkAPI.log("Присоединение HealthSubsystem")
 
+    local version = self.character.getAdditionalDataField("version")
+
+    if version == nil then
+        _upgradeTo051(self)
+    end
+
     self.hp_field = self.character.getField(_hp_field_data.name)
-    
     self.armor_field = self.character.getField( _armor_field_data.name)
     
     addRuleHooks(self)

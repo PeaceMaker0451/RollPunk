@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RollPunk.Debug;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,6 +55,8 @@ namespace RollPunk.Fields
 
         private void AddField(Field field, bool silent = false)
         {
+            RPDebug.Log($"Добавляем и начинаем отслеживать в реестре поле {field.Name}");
+            
             if (_fields.ContainsKey(field.ID))
                 throw new Exception("Поле уже содержится в этом реестре. Если оно попало сюда дважды, значит, что-то вовне пошло не так. Разберись, дурак.");
 
@@ -124,7 +127,7 @@ namespace RollPunk.Fields
             handlers.AdditionalDataChanged = onAdditionalDataChanged;
             field.AdditionalDataChanged += onAdditionalDataChanged;
 
-            Action onChanged = () => Changed?.Invoke(field);
+            Action onChanged = () => { RPDebug.Log($"Changed поля {field.Name}"); Changed?.Invoke(field); };
             handlers.Changed = onChanged;
             field.Changed += onChanged;
 

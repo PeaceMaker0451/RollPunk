@@ -78,9 +78,7 @@ namespace RollPunk.Fields
         {
             try
             {
-                var field = _fieldHandler.Registry.GetField(name);
-
-                if (field == null)
+                if(_fieldHandler.TryGetField(name, out var field) == false)
                     throw new Exception($"Unnable to find field \"{name}\"");
 
                 return field.GetFieldAPI();

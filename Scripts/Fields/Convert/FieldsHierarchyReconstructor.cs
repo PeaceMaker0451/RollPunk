@@ -23,15 +23,14 @@ namespace RollPunk.Fields
             
             if(TryUpdateField(stateToApply.State, fieldsRegistry) == false)
             {
-                if(stateToApply.ParentID == Guid.Empty)
+                if(stateToApply.ParentID == null)
                 {
                     var field = CreateField(stateToApply.State);
                     fieldsContainer.AddField(field);
                 }
-                    
                 else
                 {
-                    if (fieldsRegistry.FieldsDictionary.TryGetValue(stateToApply.ParentID, out Field parent))
+                    if (fieldsRegistry.FieldsDictionary.TryGetValue((Guid)stateToApply.ParentID, out Field parent))
                     {
                         var field = CreateField(stateToApply.State);
                         parent.AddField(field);
@@ -56,7 +55,22 @@ namespace RollPunk.Fields
 
             return field;
         }
+
+        public Field CloneFieldsTree(TreeState stateToApply)
+        {
+            Field field = CloneField(stateToApply.State);
+
+            foreach(var fieldState in stateToApply.Children)
+                field.AddField(CloneFieldsTree(fieldState));
+
+            return field;
+        }
         
+        private Field CloneField(EntityState state)
+        {
+            return (Field)_factory.Clone(state);
+        }
+
         private Field CreateField(EntityState state)
         {
             return (Field)_factory.Create(state);

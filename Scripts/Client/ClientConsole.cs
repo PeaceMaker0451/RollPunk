@@ -22,7 +22,6 @@ namespace RollPunk.Client
             else
                 formattedText = $"\n{log}";
 
-            GD.Print(log);
             ConsoleBuffer.Append(formattedText);
             ConsoleUpdated?.Invoke(formattedText);
         }

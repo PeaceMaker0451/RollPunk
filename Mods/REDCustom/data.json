@@ -2,7 +2,7 @@
     "Type": "rulepack",
     "Name": "CyberpunkRED Custom",
     "Description": "Default \"CP-like\" rules of RollPunk writed in lua",
-    "Version": "0.5.0",
+    "Version": "0.5.1",
     "Author": "peacemkr_png",
     "Dependencies": []
 }

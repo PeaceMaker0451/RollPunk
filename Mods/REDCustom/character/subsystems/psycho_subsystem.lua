@@ -195,6 +195,17 @@ local function _removeHumanityForPsychoPoints(self, psycho_points)
     self.humanity_loss_field.setValue(self.humanity_loss_field.getValue() + (psycho_points * 2))
 end
 
+---@param self HealthSubsystem
+local function _upgradeTo051(self)
+    RollPunkAPI.log("Обновление псих-подсистемы до версии 0.5.1...")
+    
+    local psychoButton = self.character.getField(_spend_psycho_rule_field_data.name)
+    psychoButton.setRuleName(_spend_psycho_rule_data.name)
+
+    local psychoRule = self.character.getRule(_spend_psycho_rule_data.name)
+    psychoRule.setHook(_spend_psycho_rule_data.hook)
+end
+
 function PsychoSubsystem:_create()
     self.humanity_field = FieldsServices.createAndChild(self.parameters_group_field, humanity_field_data)
     self.humanity_loss_field = FieldsServices.createAndChild(self.parameters_group_field, humanityt_loss_field_data)
@@ -211,6 +222,12 @@ function PsychoSubsystem:_create()
 end
 
 function PsychoSubsystem:_connect()
+    local version = self.character.getAdditionalDataField("version")
+
+    if version == nil then
+        _upgradeTo051(self)
+    end
+
     self.humanity_field = self.character.getField(humanity_field_data.name)
     self.humanity_loss_field = self.character.getField(humanityt_loss_field_data.name)
     self.max_humanity_loss_field = self.character.getField(humanityt_max_loss_field_data.name)

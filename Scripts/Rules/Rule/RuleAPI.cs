@@ -32,5 +32,7 @@ namespace RollPunk.Rules
         {
             return _ruleHandler.Execute(arguments);
         }
+
+        public void setHook(string hook) => _ruleHandler.SetHook(hook); 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Modding.APIs;
 using System;
@@ -85,6 +86,11 @@ namespace RollPunk.Rules
             return _api;
         }
 
+        public void SetHook(string hook)
+        {
+            Hook = hook;
+        }
+
         private void ValidateReturnValues(object[] returnValues)
         {
             if (_returnPairs == null)
@@ -138,6 +144,17 @@ namespace RollPunk.Rules
             {
                 _returnPairs[i / 2] = (returnParameters[i], Type.GetType(returnParameters[i + 1]));
             }
+
+            try
+            {
+                Hook = Get<string>(payload, nameof(Hook));
+            }
+            catch (Exception ex)
+            {
+                Hook = string.Empty;
+                RPDebug.LogError($"Rule {Name} [{ID}] payloads field Hook is Null!");
+            }
+            
         }
 
         protected override void WritePayload(Dictionary<string, JToken> payload)
@@ -148,6 +165,8 @@ namespace RollPunk.Rules
 
             var returnPairs = _returnPairs.Select(pair => new[] { pair.Name, pair.Type.AssemblyQualifiedName }).SelectMany(x => x).ToArray();
             Set(payload, nameof(ReturnParameters), returnPairs);
+
+            Set(payload, nameof(Hook), Hook);
         }
     }
 }

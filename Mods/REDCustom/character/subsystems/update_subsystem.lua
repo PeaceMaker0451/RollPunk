@@ -3,6 +3,7 @@ local CharacterSubsystem = require("character.subsystems.character_subsystem")
 
 ---@class UpdateSubsystem : CharacterSubsystem
 ---@field update_group FieldGroupAPI
+---@field action_group FieldGroupAPI
 ---@field stats_points_field LineFieldAPI
 ---@field skills_points_field LineFieldAPI
 ---@field confirm_field LineFieldAPI
@@ -59,6 +60,24 @@ local _updateFields =
         edit_access_level = 3,
         additional_data = { [_stats_updated_value_name] = false, [_skills_updated_value_name] = false },
     }
+}
+
+---@type RuleData
+local _add_skill_points_rule_data =
+{
+    name = "AddSkillUpdatePoints",
+    type = "Rule",
+    hook = "AddSkillUpdatePoints"
+}
+
+---@type RuleFieldData
+local _spend_psycho_rule_field_data =
+{
+    name = "SpendPsychoPointsField",
+    rule_name = _add_skill_points_rule_data.name,
+    visible_name = "Добавить очки ",
+    type = "RuleField",
+    line_priority = 67,
 }
 
 ---@param self UpdateSubsystem
@@ -180,6 +199,17 @@ function UpdateSubsystem:setStatsUpdatePoints(value, should_update_offset)
     _refreshUpdateGroup(self)
 end
 
+-- ---@param self HealthSubsystem
+-- local function _upgradeTo051(self)
+--     RollPunkAPI.log("Обновление подсистемы обновлений до версии 0.5.1...")
+    
+--     local psychoButton = self.character.getField(_spend_psycho_rule_field_data.name)
+--     psychoButton.setRuleName(_spend_psycho_rule_data.name)
+
+--     local psychoRule = self.character.getRule(_spend_psycho_rule_data.name)
+--     psychoRule.setHook(_spend_psycho_rule_data.hook)
+-- end
+
 function UpdateSubsystem:_create()
     self.stats_points_field = FieldsServices.createAndChild(self.update_group, _updateFields.stats_update_points_field_data)
     self.skills_points_field = FieldsServices.createAndChild(self.update_group, _updateFields.skills_update_points_field_data)
@@ -187,12 +217,18 @@ function UpdateSubsystem:_create()
 end
 
 function UpdateSubsystem:_connect()
+    local version = self.character.getAdditionalDataField("version")    
+
+    -- if version == nil then
+    --     _upgradeTo051(self)
+    -- end
+
     self.stats_points_field = self.character.getField(_updateFields.stats_update_points_field_data.name)
     self.skills_points_field = self.character.getField(_updateFields.skills_update_points_field_data.name)
     self.confirm_field = self.character.getField(_updateFields.update_confirm.name)
 end
 
-function UpdateSubsystem:new(character, update_group, skills_ss, stats_ss, emp_field_name, real_emp_value_name)
+function UpdateSubsystem:new(character, action_group, update_group, skills_ss, stats_ss, emp_field_name, real_emp_value_name)
     ---@type UpdateSubsystem
     local instance = CharacterSubsystem.new(self, "UpdateSubsystem", character)    
     
@@ -201,6 +237,7 @@ function UpdateSubsystem:new(character, update_group, skills_ss, stats_ss, emp_f
     instance.update_group = update_group
     instance.emp_field_name = emp_field_name
     instance.real_emp_value_name = real_emp_value_name
+    instance.action_group = action_group
 
     if instance:isCreated() == false then
         instance:_create()

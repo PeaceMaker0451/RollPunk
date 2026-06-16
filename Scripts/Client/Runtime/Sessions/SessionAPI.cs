@@ -71,8 +71,16 @@ namespace RollPunk.Client.Runtime.Sessions
 
                 Client.Instance.FileDebugUtils.LoadStringWithDialog((data) =>
                 {
-                    RPDebug.Log($"Файл загружен - \n{data}\n - передаем в lua");
-                    function.Function.Call(data);
+                    try
+                    {
+                        RPDebug.Log($"Файл загружен - \n{data}\n - передаем в lua");
+                        function.Function.Call(data);
+                    }
+                    catch(Exception ex)
+                    {
+                        LuaErrorsHandler.Handle(ex);
+                        throw;
+                    }
                 });
             }
             catch(Exception e)

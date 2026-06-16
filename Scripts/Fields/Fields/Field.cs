@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Godot;
+using Newtonsoft.Json.Linq;
+using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Modding.APIs;
 using System;
@@ -11,7 +13,10 @@ namespace RollPunk.Fields
         protected readonly FieldAPI _api;
 
         private readonly List<Field> _children = new();
-        private readonly FieldsRegistry _registry;
+        //private readonly FieldsRegistry _registry;
+
+        private Dictionary<string, Field> _childrenByNames = new();
+        private Dictionary<Guid, Field> _childrenByIds = new();
 
         public event Action NameChanged;
         public event Action<string> AdditionalDataChanged;
@@ -24,7 +29,7 @@ namespace RollPunk.Fields
         public Dictionary<string, object> AdditionalData { get; private set; } = new();
         public Field Parent { get; private set; }
         public IReadOnlyList<Field> Fields => _children;
-        public IReadOnlyFieldRegistry Registry => _registry;
+        //public IReadOnlyFieldRegistry Registry => _registry;
 
         public Field(string name, Type apiType, Dictionary<string, object> additionalData = null) : base(name)
         {
@@ -33,16 +38,12 @@ namespace RollPunk.Fields
 
             FieldAPI api = CreateAPI(apiType);
             _api = api;
-
-            _registry = new(this);
         }
 
         public Field(EntityState data, Type apiType) : base(data)
         {
             FieldAPI api = CreateAPI(apiType);
             _api = api;
-
-            _registry = new(this);
         }
 
         public void SetName(string newName)
@@ -86,6 +87,10 @@ namespace RollPunk.Fields
 
         public void AddField(Field child)
         {
+            if(Name == "CP_Charater")
+                RPDebug.Log($"[color=green]Добавление поля {child.Name}...[/color]");
+            
+            
             if (child == null) 
                 throw new ArgumentNullException(nameof(child));
 
@@ -93,15 +98,36 @@ namespace RollPunk.Fields
                 return;
 
             if(child.Parent != null)
-                throw new InvalidOperationException("Cannot add field: remove child field from it's parent first!");
-
-            ValidateChild(child);
+                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: remove child field from it's parent first!");
 
             if (child.IsAncestorOf(this))  
-                throw new InvalidOperationException("Cannot add field: operation would create ownership cycle.");
+                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: operation would create ownership cycle.");
+
+            if(child.TryGetField(child.Name, out var field) == true)
+                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: childs hierar");
+
+            var names = new HashSet<string>(_childrenByNames.Keys);
+            names.IntersectWith(child._childrenByNames.Keys);
+
+            if(names.Count > 0)
+                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: childs hierarchy has intersections by fields names: ({string.Join(", ", names)})");
+
+            var ids = new HashSet<string>(_childrenByNames.Keys);
+            ids.IntersectWith(child._childrenByNames.Keys);
+
+            if (ids.Count > 0)
+                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: childs hierarchy has intersections by fields Ids: ({string.Join(", ", ids)})");
+
+            ValidateChild(child);
+            ThrowValidateChildOnParent(child);
 
             _children.Add(child);
             child.SetParent(this);
+            AddFieldToRegistry(child);
+
+            foreach (var childsChild in child._childrenByIds.Values)
+                AddFieldToRegistry(childsChild);
+
             ChildAdded?.Invoke(child);
         }
 
@@ -112,9 +138,21 @@ namespace RollPunk.Fields
             if (removed)
             {
                 child.ClearParent();
+                RemoveFieldFromRegistry(child);
+
                 ChildRemoved?.Invoke(child);
             }
             return removed;
+        }
+
+        public bool TryGetField(string name, out Field field)
+        {
+            return _childrenByNames.TryGetValue(name, out field);
+        }
+
+        public bool TryGetField(Guid id, out Field field)
+        {
+            return _childrenByIds.TryGetValue(id, out field);
         }
 
         public FieldAPI GetFieldAPI()
@@ -145,6 +183,51 @@ namespace RollPunk.Fields
         protected override void WritePayload(Dictionary<string, JToken> payload)
         {
             Set(payload, nameof(AdditionalData), AdditionalData);
+        }
+
+        private void AddFieldToRegistry(Field field)
+        {
+            if (Name == "CP_Charater")
+                RPDebug.Log($"[color=blue]Интеграция поля в реестр {field.Name}...[/color]");
+
+            _childrenByIds.Add(field.ID, field);
+            _childrenByNames.Add(field.Name, field);
+
+            field.ChildAdded += AddFieldToRegistry;
+            field.ChildRemoved += RemoveFieldFromRegistry;
+        }
+
+        private void RemoveFieldFromRegistry(Field field)
+        {
+            _childrenByIds.Remove(field.ID);
+            _childrenByNames.Remove(field.Name);
+
+            field.ChildAdded -= AddFieldToRegistry;
+            field.ChildRemoved -= RemoveFieldFromRegistry;
+        }
+
+        private void ThrowValidateChildOnParent(Field field)
+        {
+            if(Name == "CP_Charater")
+            {
+                RPDebug.Log($"[color=pink]Проверка поля {field.Name}!! \nТекущий реестр персонажа:");
+
+                foreach(var child in _childrenByNames.Values)
+                {
+                    RPDebug.Log($"{child.Name} [{child.ID}]");
+                }
+
+                RPDebug.Log($"[/color]");
+            }
+            
+            if (_childrenByNames.ContainsKey(field.Name))
+                throw new InvalidOperationException($"Unnable to child field {field.Name} [{field.ID}]: Field with such name already contains in the hierarchy tree of {Name} [{ID}]");
+
+            if (_childrenByIds.ContainsKey(field.ID))
+                throw new InvalidOperationException($"Unnable to child field {field.Name} [{field.ID}]: Field with such ID already contains in the hierarchy tree of {Name} [{ID}]");
+
+            if (Parent != null)
+                Parent.ThrowValidateChildOnParent(field);
         }
 
         private void SetParent(Field owner)
