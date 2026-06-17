@@ -33,7 +33,6 @@ namespace RollPunk.NetcodeCommon
         {   
             if (actionToExecuteOnMainThread)
             {
-                RPDebug.Log($"Опа!");
                 executeCopiedOnMainThread.Clear();
                 lock (executeOnMainThread)
                 {

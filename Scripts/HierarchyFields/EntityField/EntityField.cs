@@ -87,6 +87,7 @@ namespace RollPunk.HierarchyFields
             base.ApplyPayload(payload);
 
             //_rulesByNames = Get<Dictionary<string, Guid>>(payload, nameof(_rulesByNames));
+            _rulesByNames.Clear();
             _rules.Clear();
 
             var ruleStates = Get<List<EntityState>>(payload, nameof(_rules));

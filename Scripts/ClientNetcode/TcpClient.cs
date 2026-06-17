@@ -34,6 +34,8 @@ namespace RollPunk.ClientNetcode
             _packetHandlers = new Dictionary<int, Action<Packet>>()
             {
                 { (int)ServerPackets.Welcome, _handle.HandleWelcome },
+                { (int)ServerPackets.SessionPatch, _handle.HandleSessionPatch },
+                { (int)ServerPackets.SessionState, _handle.HandleSessionState },
             };
 
             Tcp = new(_packetHandlers, threadManager);

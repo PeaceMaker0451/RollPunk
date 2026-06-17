@@ -5,15 +5,22 @@ namespace RollPunk.Fields
 {
     public static class FieldStateExtractor
     {
-        public static FieldState ExtractFieldTreeState(Field field)
+        public static FieldState ExctractExclusiveFieldState(Field field)
         {
             FieldState fieldState = new FieldState();
             fieldState.State = field.GetState();
 
-            if(field.Parent != null)
+            if (field.Parent != null)
                 fieldState.ParentID = field.Parent.ID;
             else
                 fieldState.ParentID = null;
+
+            return fieldState;
+        }
+        
+        public static FieldState ExtractFieldTreeState(Field field)
+        {
+            FieldState fieldState = ExctractExclusiveFieldState(field);
 
             if (fieldState.Children == null)
                 throw new Exception("Children null");

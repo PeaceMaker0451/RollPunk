@@ -26,6 +26,7 @@ namespace RollPunk.Server
         public void HandleClientSessionPatch(int fromClient, Packet packet)
         {
             string data = packet.ReadString();
+
             SessionPatch patch = JsonConvert.DeserializeObject<SessionPatch>(data);
             _server.ApplySessionPatch(fromClient, patch);
 

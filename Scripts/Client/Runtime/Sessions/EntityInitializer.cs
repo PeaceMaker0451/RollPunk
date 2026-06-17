@@ -13,6 +13,8 @@ namespace RollPunk.Client.Runtime
         private FieldsRegistry _fieldsRegistry;
         private ModHooker _modHooker;
 
+        private bool _isChangesIgnoring = false;
+
         public EntityInitializer(FieldsRegistry registry, ModHooker modHooker, MutationCatcher catcher = null)
         {
             _catcher = catcher;
@@ -22,8 +24,14 @@ namespace RollPunk.Client.Runtime
             _fieldsRegistry.FieldAdded += OnFieldAdded;
         }
 
+        public void StartIgnore() => _isChangesIgnoring = true;
+        public void StopIgnore() => _isChangesIgnoring = false;
+
         private void OnFieldAdded(Field field)
         {
+            if (_isChangesIgnoring)
+                return;
+
             if (field is EntityField entityField)
             {
                 RPDebug.Log($"[color=teal]>>EntityField added catched - Initializing - {field.Name}[/color]");

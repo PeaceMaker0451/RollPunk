@@ -70,14 +70,14 @@ namespace RollPunk.Client.Runtime
             
             Serializator = new(EntityFactory, HierarchyReconstructor);
 
-            LoadMods(mods);
-            InitializeFieldsContainer();
-
-            if(dataBridge != null)
+            if (dataBridge != null)
             {
                 _dataBridge = dataBridge;
                 InitializeNetworking();
             }
+
+            LoadMods(mods);
+            InitializeFieldsContainer();
         }
 
         public void InitializeSession()
@@ -115,13 +115,12 @@ namespace RollPunk.Client.Runtime
                 _loadedMods.AddMod(mod);
             }
                 
-
             _modLoader = new ModLoader();
             _hooker = new ModHooker();
-            _ruleExecuter = new ModHookerRuleExecuter(_hooker);
+            _ruleExecuter = new ModHookerRuleExecuter(_hooker, _mutationCatcher);
             APIInjector = new GlobalAPIInjector(_loadedMods);
 
-            _constructor = new Constructor(new ModHookerRuleExecuter(_hooker));
+            _constructor = new Constructor(_ruleExecuter);
 
             APIInjector.AddGlobalAPI(_hooker.GetAPI());
             APIInjector.AddGlobalAPI(_constructor.GetAPI());
@@ -144,18 +143,40 @@ namespace RollPunk.Client.Runtime
         {
             Fields.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
 
-            _entityValidator = new(base.FieldsRegistry, _hooker, _mutationCatcher);
-            _entityInitializer = new(base.FieldsRegistry, _hooker, _mutationCatcher);
+            _entityValidator = new(FieldsRegistry, _hooker, _mutationCatcher);
+            _entityInitializer = new(FieldsRegistry, _hooker, _mutationCatcher);
         }
 
         private void InitializeNetworking()
         {
             RPDebug.Log($"[color=bisque]Network initializing...[/color]");
 
-            _mutationCatcher = new(base.FieldsRegistry, _dataBridge);
+            _mutationCatcher = new(FieldsRegistry, _dataBridge);
 
             _dataBridge.ReceivedSessionPatch += ApplySessionPatch;
             _dataBridge.ReceivedSessionState += ApplyState;
+        }
+
+        private new void ApplySessionPatch(SessionPatch patch)
+        {
+            _mutationCatcher.StartIgnore();
+            _entityValidator.StartIgnore();
+            _entityInitializer.StartIgnore();
+            base.ApplySessionPatch(patch);
+            _mutationCatcher.StopIgnore();
+            _entityValidator.StopIgnore();
+            _entityInitializer.StopIgnore();
+        }
+
+        private new void ApplyState(SessionState state)
+        {
+            _mutationCatcher.StartIgnore();
+            _entityValidator.StartIgnore();
+            _entityInitializer.StartIgnore();
+            base.ApplyState(state);
+            _mutationCatcher.StopIgnore();
+            _entityValidator.StopIgnore();
+            _entityInitializer.StopIgnore();
         }
     }
 }

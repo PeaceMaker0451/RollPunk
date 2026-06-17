@@ -36,7 +36,7 @@ namespace RollPunk.Fields
                         parent.AddField(field);
                     } 
                     else
-                        throw new Exception($"Parent with ID {stateToApply.ParentID} not found for field with ID {stateToApply.State.ID}");
+                        throw new Exception($"Parent with ID {stateToApply.ParentID} not found for field {stateToApply.State.Name} ({stateToApply.State.ID})");
                 }
             }
 
@@ -56,7 +56,7 @@ namespace RollPunk.Fields
             return field;
         }
 
-        public Field CloneFieldsTree(TreeState stateToApply)
+        public Field CloneFieldsTree(FieldState stateToApply)
         {
             Field field = CloneField(stateToApply.State);
 

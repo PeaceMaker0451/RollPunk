@@ -1,4 +1,5 @@
-﻿using RollPunk.Modding;
+﻿using RollPunk.Debug;
+using RollPunk.Modding;
 
 namespace RollPunk.Client.Runtime
 {
@@ -8,7 +9,10 @@ namespace RollPunk.Client.Runtime
         {
             using (new MutationsBatch(catcher))
             {
-                return hooker.CallHook(hookName, args);
+                RPDebug.DebugLog($"[color=olive]Начинаем батчить хук {hookName}...[/color]");
+                var result = hooker.CallHook(hookName, args);
+                RPDebug.DebugLog($"[color=olive]Конец батчинга хука {hookName}[/color]");
+                return result;
             }
         }
     }

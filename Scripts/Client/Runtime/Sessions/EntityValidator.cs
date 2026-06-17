@@ -19,6 +19,8 @@ namespace RollPunk.Client.Runtime
         private int _validatingEmbeding = 0;
         private int _validatingEmbedingLimit = 2;
 
+        private bool _isChangesIgnoring = false;
+
         public EntityValidator(FieldsRegistry registry, ModHooker modHooker, MutationCatcher catcher = null)
         {
             _catcher = catcher;
@@ -29,8 +31,14 @@ namespace RollPunk.Client.Runtime
             _fieldsRegistry.FieldAdded += OnFieldAdded;
         }
 
+        public void StartIgnore() => _isChangesIgnoring = true;
+        public void StopIgnore() => _isChangesIgnoring = false;
+
         private void OnFieldAdded(Field field)
         {
+            if (_isChangesIgnoring)
+                return;
+
             RPDebug.Log($"[color=forest_green]>>Field added catched - {field.Name} ({field.ID})[/color]");
             if (field is EntityField)
             {
@@ -43,6 +51,9 @@ namespace RollPunk.Client.Runtime
 
         private void OnChanged(Field field)
         {
+            if (_isChangesIgnoring)
+                return;
+
             RPDebug.Log($"[color=forest_green]>>Field changed catched - {field.Name} ({field.ID})[/color]");
             Validate(field);
         }

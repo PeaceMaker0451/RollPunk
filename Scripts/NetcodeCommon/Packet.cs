@@ -155,10 +155,12 @@ namespace RollPunk.NetcodeCommon
         }
         /// <summary>Adds a string to the packet.</summary>
         /// <param name="_value">The string to add.</param>
-        public void Write(string _value)
+        public void Write(string value)
         {
-            Write(_value.Length); // Add the length of the string to the packet
-            buffer.AddRange(Encoding.UTF8.GetBytes(_value)); // Add the string itself
+            byte[] bytes = Encoding.UTF8.GetBytes(value);
+
+            Write(bytes.Length);
+            buffer.AddRange(bytes);
         }
         #endregion
 
@@ -313,23 +315,21 @@ namespace RollPunk.NetcodeCommon
 
         /// <summary>Reads a string from the packet.</summary>
         /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-        public string ReadString(bool _moveReadPos = true)
+        public string ReadString(bool moveReadPos = true)
         {
-            try
+            int length = ReadInt();
+
+            string value = Encoding.UTF8.GetString(
+                readableBuffer,
+                readPos,
+                length);
+
+            if (moveReadPos)
             {
-                int _length = ReadInt(); // Get the length of the string
-                string _value = Encoding.UTF8.GetString(readableBuffer, readPos, _length); // Convert the bytes to a string
-                if (_moveReadPos && _value.Length > 0)
-                {
-                    // If _moveReadPos is true string is not empty
-                    readPos += _length; // Increase readPos by the length of the string
-                }
-                return _value; // Return the string
+                readPos += length;
             }
-            catch
-            {
-                throw new Exception("Could not read value of type 'string'!");
-            }
+
+            return value;
         }
         #endregion
 
@@ -354,6 +354,11 @@ namespace RollPunk.NetcodeCommon
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public override string ToString()
+        {
+            return string.Join(" ", buffer); ;
         }
     }
 }
