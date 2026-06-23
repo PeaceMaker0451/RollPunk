@@ -24,7 +24,9 @@ end
 
 local function _onSessionInitialized()
     RollPunkAPI.log("RollPunk default rules initialization...")
-    _baseActions.setup(_createCharacter, _loadCharacter)
+    _baseActions.create(_createCharacter, _loadCharacter)
+    
 end
 
+_baseActions.initialize(_createCharacter, _loadCharacter)
 ModHookerAPI.addHook("SessionInitialized", _onSessionInitialized)

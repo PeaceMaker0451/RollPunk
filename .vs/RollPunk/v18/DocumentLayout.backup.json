@@ -1,98 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Projs\\Git\\RollPunk\\",
+  "WorkspaceRootPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\mutation\\mutationcatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\mutation\\mutationcatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\linefields\\rulefieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\linefields\\rulefieldcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\sessions\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\sessions\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\sessions\\entityinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\sessions\\entityinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\sessions\\entityvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\sessions\\entityvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3337B278-9B5A-4AD0-8F20-9F2356368BA2}|Scripts\\HierarchyFields\\HierarchyFields.csproj|e:\\projs\\git\\rollpunk\\scripts\\hierarchyfields\\entityfield\\entityfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3337B278-9B5A-4AD0-8F20-9F2356368BA2}|Scripts\\HierarchyFields\\HierarchyFields.csproj|solutionrelative:scripts\\hierarchyfields\\entityfield\\entityfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7378508-B559-4245-BE81-58D3F47E0E86}|Scripts\\Rules\\Rules.csproj|e:\\projs\\git\\rollpunk\\scripts\\rules\\rule\\rule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7378508-B559-4245-BE81-58D3F47E0E86}|Scripts\\Rules\\Rules.csproj|solutionrelative:scripts\\rules\\rule\\rule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|e:\\projs\\git\\rollpunk\\scripts\\fields\\convert\\fieldshierarchyreconstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|solutionrelative:scripts\\fields\\convert\\fieldshierarchyreconstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7893623A-32E2-49C6-883E-AC64A58E5641}|Scripts\\NetcodeCommon\\NetcodeCommon.csproj|e:\\projs\\git\\rollpunk\\scripts\\netcodecommon\\threadmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7893623A-32E2-49C6-883E-AC64A58E5641}|Scripts\\NetcodeCommon\\NetcodeCommon.csproj|solutionrelative:scripts\\netcodecommon\\threadmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|e:\\projs\\git\\rollpunk\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|e:\\projs\\git\\rollpunk\\server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|solutionrelative:server\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|e:\\projs\\git\\rollpunk\\server\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|solutionrelative:server\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|e:\\projs\\git\\rollpunk\\server\\serversend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|solutionrelative:server\\serversend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|e:\\projs\\git\\rollpunk\\server\\serverhandle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F55CD2AA-73CA-4EDF-BDBA-A628D0312A10}|Server\\Server.csproj|solutionrelative:server\\serverhandle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|e:\\projs\\git\\rollpunk\\scripts\\clientnetcode\\tcpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|solutionrelative:scripts\\clientnetcode\\tcpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|e:\\projs\\git\\rollpunk\\scripts\\clientnetcode\\clienthandle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|solutionrelative:scripts\\clientnetcode\\clienthandle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\rollpunkruntime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\rollpunkruntime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|e:\\projs\\git\\rollpunk\\scripts\\clientnetcode\\idatabridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|solutionrelative:scripts\\clientnetcode\\idatabridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|e:\\projs\\git\\rollpunk\\scripts\\clientnetcode\\clientsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{456452D5-4F68-4849-BCBF-BD46CFDDB1CB}|Scripts\\ClientNetcode\\ClientNetcode.csproj|solutionrelative:scripts\\clientnetcode\\clientsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7893623A-32E2-49C6-883E-AC64A58E5641}|Scripts\\NetcodeCommon\\NetcodeCommon.csproj|e:\\projs\\git\\rollpunk\\scripts\\netcodecommon\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7893623A-32E2-49C6-883E-AC64A58E5641}|Scripts\\NetcodeCommon\\NetcodeCommon.csproj|solutionrelative:scripts\\netcodecommon\\packet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|e:\\projs\\git\\rollpunk\\scripts\\fields\\fieldstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|solutionrelative:scripts\\fields\\fieldstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\runtime\\mutation\\hookerbatchingextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\runtime\\mutation\\hookerbatchingextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|e:\\projs\\git\\rollpunk\\scripts\\fields\\convert\\fieldstateextractor.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{91DCB1E6-7158-4D11-9D37-3F29110B3EEC}|Scripts\\Fields\\Fields.csproj|solutionrelative:scripts\\fields\\convert\\fieldstateextractor.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|e:\\projs\\git\\rollpunk\\scripts\\client\\modhookerruleexecuter.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\client\\modhookerruleexecuter.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|f:\\cyberpunk red\\git\\rollpunk\\scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DA068876-78E5-456D-A75F-E6C16D78B6C7}|RollPunk.csproj|solutionrelative:scripts\\uifields\\fieldcontrols\\fieldcontrol.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -101,8 +17,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 41,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -110,87 +26,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EntityInitializer.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\EntityInitializer.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Sessions\\EntityInitializer.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\EntityInitializer.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\Sessions\\EntityInitializer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T11:21:04.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ClientSession.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\ClientSession.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Sessions\\ClientSession.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\ClientSession.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\Sessions\\ClientSession.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAAAJwAAAA6AAAAAAAAAA==",
+              "Title": "FieldControl.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\FieldControl.cs",
+              "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\FieldControl.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\FieldControl.cs",
+              "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\FieldControl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:27:32.74Z",
+              "WhenOpened": "2026-06-18T09:40:16.902Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MutationCatcher.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\Mutation\\MutationCatcher.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwEkAAAAbAAAAAAAAAA==",
+              "Title": "RuleFieldControl.cs",
+              "DocumentMoniker": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
+              "RelativeDocumentMoniker": "Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
+              "ToolTip": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
+              "RelativeToolTip": "Scripts\\UIFields\\FieldControls\\LineFields\\RuleFieldControl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:34:12.643Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ModHookerRuleExecuter.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\ModHookerRuleExecuter.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\ModHookerRuleExecuter.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\ModHookerRuleExecuter.cs",
-              "RelativeToolTip": "Scripts\\Client\\ModHookerRuleExecuter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:57:16.083Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "FieldState.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\FieldState.cs",
-              "RelativeDocumentMoniker": "Scripts\\Fields\\FieldState.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\FieldState.cs",
-              "RelativeToolTip": "Scripts\\Fields\\FieldState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:53:13.507Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "HookerBatchingExtension.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Mutation\\HookerBatchingExtension.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Mutation\\HookerBatchingExtension.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Mutation\\HookerBatchingExtension.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\Mutation\\HookerBatchingExtension.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:28:46.461Z",
+              "WhenOpened": "2026-06-18T09:37:05.059Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 17,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 48,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -199,227 +63,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "Server\\Program.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Server\\Program.cs",
-              "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:37:36.111Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ServerSession.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Server\\ServerSession.cs",
-              "RelativeDocumentMoniker": "Server\\ServerSession.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Server\\ServerSession.cs",
-              "RelativeToolTip": "Server\\ServerSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:37:32.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Server.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Server\\Server.cs",
-              "RelativeDocumentMoniker": "Server\\Server.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Server\\Server.cs",
-              "RelativeToolTip": "Server\\Server.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAcwFAAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:30:48.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "RollPunkRuntime.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\RollPunkRuntime.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:35:05.44Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EntityValidator.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\EntityValidator.cs",
-              "RelativeDocumentMoniker": "Scripts\\Client\\Runtime\\Sessions\\EntityValidator.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Client\\Runtime\\Sessions\\EntityValidator.cs",
-              "RelativeToolTip": "Scripts\\Client\\Runtime\\Sessions\\EntityValidator.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwCYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:27:09.912Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ThreadManager.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\ThreadManager.cs",
-              "RelativeDocumentMoniker": "Scripts\\NetcodeCommon\\ThreadManager.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\ThreadManager.cs",
-              "RelativeToolTip": "Scripts\\NetcodeCommon\\ThreadManager.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:37:49.871Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IDataBridge.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\IDataBridge.cs",
-              "RelativeDocumentMoniker": "Scripts\\ClientNetcode\\IDataBridge.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\IDataBridge.cs",
-              "RelativeToolTip": "Scripts\\ClientNetcode\\IDataBridge.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:34:47.496Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FieldsHierarchyReconstructor.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Convert\\FieldsHierarchyReconstructor.cs",
-              "RelativeDocumentMoniker": "Scripts\\Fields\\Convert\\FieldsHierarchyReconstructor.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Convert\\FieldsHierarchyReconstructor.cs",
-              "RelativeToolTip": "Scripts\\Fields\\Convert\\FieldsHierarchyReconstructor.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACYAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:44:42.336Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Rule.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Rules\\Rule\\Rule.cs",
-              "RelativeDocumentMoniker": "Scripts\\Rules\\Rule\\Rule.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Rules\\Rule\\Rule.cs",
-              "RelativeToolTip": "Scripts\\Rules\\Rule\\Rule.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAuwEwAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:56:23.805Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ClientHandle.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientHandle.cs",
-              "RelativeDocumentMoniker": "Scripts\\ClientNetcode\\ClientHandle.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientHandle.cs",
-              "RelativeToolTip": "Scripts\\ClientNetcode\\ClientHandle.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:34:41.472Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ServerHandle.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Server\\ServerHandle.cs",
-              "RelativeDocumentMoniker": "Server\\ServerHandle.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Server\\ServerHandle.cs",
-              "RelativeToolTip": "Server\\ServerHandle.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAwB4AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:48:15.982Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ClientSend.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientSend.cs",
-              "RelativeDocumentMoniker": "Scripts\\ClientNetcode\\ClientSend.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientSend.cs",
-              "RelativeToolTip": "Scripts\\ClientNetcode\\ClientSend.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAswCUAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T09:40:56.271Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ServerSend.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Server\\ServerSend.cs",
-              "RelativeDocumentMoniker": "Server\\ServerSend.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Server\\ServerSend.cs",
-              "RelativeToolTip": "Server\\ServerSend.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:30:30.314Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Packet.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\Packet.cs",
-              "RelativeDocumentMoniker": "Scripts\\NetcodeCommon\\Packet.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\NetcodeCommon\\Packet.cs",
-              "RelativeToolTip": "Scripts\\NetcodeCommon\\Packet.cs",
-              "ViewState": "AgIAACoBAAAAAAAAAAAqwE0BAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:11:42.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TcpClient.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\TcpClient.cs",
-              "RelativeDocumentMoniker": "Scripts\\ClientNetcode\\TcpClient.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\ClientNetcode\\TcpClient.cs",
-              "RelativeToolTip": "Scripts\\ClientNetcode\\TcpClient.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAA1wCkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:03:56.19Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "FieldStateExtractor.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Convert\\FieldStateExtractor.cs",
-              "RelativeDocumentMoniker": "Scripts\\Fields\\Convert\\FieldStateExtractor.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\Fields\\Convert\\FieldStateExtractor.cs",
-              "RelativeToolTip": "Scripts\\Fields\\Convert\\FieldStateExtractor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:25:20.47Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EntityField.cs",
-              "DocumentMoniker": "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\EntityField\\EntityField.cs",
-              "RelativeDocumentMoniker": "Scripts\\HierarchyFields\\EntityField\\EntityField.cs",
-              "ToolTip": "E:\\Projs\\Git\\RollPunk\\Scripts\\HierarchyFields\\EntityField\\EntityField.cs",
-              "RelativeToolTip": "Scripts\\HierarchyFields\\EntityField\\EntityField.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAswB4AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T10:21:32.751Z",
-              "EditorCaption": ""
             }
           ]
         },

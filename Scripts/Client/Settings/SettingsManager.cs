@@ -1,4 +1,7 @@
-﻿namespace RollPunk.Client.Settings
+﻿using Godot;
+using System;
+
+namespace RollPunk.Client.Settings
 {
     internal class SettingsManager
     {
@@ -18,6 +21,8 @@
 
             if (settings.Version != _currentSettingsVersion)
                 MigrateSettings(settings);
+
+
 
             return settings;
         }

@@ -106,17 +106,20 @@ namespace RollPunk.Client
             textBox.SizeFlagsVertical = SizeFlags.ShrinkCenter;
 
             var continueButton = CreateAndAddButton(buttonContainer, "Ок");
+            var denyButton = CreateAndAddButton(buttonContainer, "Отмена");
 
             bool buttonPressed = false;
-            continueButton.Pressed += () => buttonPressed = true;
+            string result = null;
+
+            continueButton.Pressed += () => { buttonPressed = true; result = textBox.Text; };
+            denyButton.Pressed += () => buttonPressed = true;
 
             Frame frame = _framesManager.OpenInNewFrame(dialogue, false);
             frame.SetCloseButtonVisible(false);
 
             while (buttonPressed == false)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
-
-            string result = textBox.Text;
+            
             _framesManager.CloseFrame(frame);
             return result;
         }
@@ -124,6 +127,7 @@ namespace RollPunk.Client
         public async Task OpenInformationDialogue(string title, string information)
         {
             var (dialogue, container, buttonContainer) = await GetDialogue(title);
+            dialogue.Size = new Vector2(600, 300);
 
             ScrollContainer scrollContainer = new ScrollContainer();
             container.AddChild(scrollContainer);

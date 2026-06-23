@@ -2,9 +2,6 @@
 using Newtonsoft.Json;
 using RollPunk.Debug;
 using RollPunk.NetcodeCommon;
-using RollPunk.Players;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace RollPunk.ClientNetcode
 {
@@ -17,15 +14,15 @@ namespace RollPunk.ClientNetcode
             _client = client;
         }
         
-        public void SendClientInitialize(int clientId, string name, Guid playerId)
+        public void SendClientInitialize(int connectionId, string name, Guid clientId)
         {
             using(Packet packet = new((int)ClientPackets.ClientInitialize))
             {
-                packet.Write(clientId);
+                packet.Write(connectionId);
                 packet.Write(name);
-                packet.Write(playerId.ToString());
+                packet.Write(clientId.ToString());
 
-                RPDebug.Log($"[color=web_purple]Отправляем инициализацию... {name} - ({playerId})[/color]");
+                RPDebug.Log($"[color=web_purple]Отправляем инициализацию... {name} - ({clientId})[/color]");
                 SendTcpData(packet);
             }
         }

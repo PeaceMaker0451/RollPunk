@@ -28,3 +28,33 @@ E:\Projs\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.dll
 E:\Projs\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\refint\AccessPolicy.dll
 E:\Projs\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.pdb
 E:\Projs\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\ref\AccessPolicy.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\AccessPolicy.deps.json
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\AccessPolicy.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\AccessPolicy.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\CommandsSystem.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Debug.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Entities.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Fields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\HierarchyFields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Modding.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Players.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Rules.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Fields.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\HierarchyFields.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Modding.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Players.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\CommandsSystem.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Debug.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Entities.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\bin\Debug\net8.0\Rules.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.csproj.AssemblyReference.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.GeneratedMSBuildEditorConfig.editorconfig
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.AssemblyInfoInputs.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.AssemblyInfo.cs
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.csproj.CoreCompileInputs.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.sourcelink.json
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPo.DFE3B9BF.Up2Date
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\refint\AccessPolicy.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\AccessPolicy.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\AccessPolicy\obj\Debug\net8.0\ref\AccessPolicy.dll

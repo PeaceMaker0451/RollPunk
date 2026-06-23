@@ -21,7 +21,7 @@ namespace RollPunk.Client
             {
                 string result = await _ui.OpenStringDialogue(title);
 
-                if (callback.IsNil() == false && callback.Type == DataType.Function)
+                if (result != null && callback.IsNil() == false && callback.Type == DataType.Function)
                     callback.Function.Call(result, parameters);
             }
             catch(Exception ex)
@@ -35,7 +35,12 @@ namespace RollPunk.Client
         {
             try
             {
-                int result = Int32.Parse(await _ui.OpenStringDialogue(title));
+                string result = await _ui.OpenStringDialogue(title);
+                
+                if (result == null)
+                    return;
+
+                int intResult = Int32.Parse(result);
 
                 if (callback.IsNil() == false && callback.Type == DataType.Function)
                     callback.Function.Call(result, parameters);

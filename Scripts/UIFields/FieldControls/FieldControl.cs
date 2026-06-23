@@ -14,6 +14,7 @@ namespace RollPunk.UIFields
         public event Action EditCheckChanged;
 
         private bool _isSubscriptionsAdded = false;
+        private Random _random;
         
         public override void _ExitTree()
         {
@@ -51,6 +52,7 @@ namespace RollPunk.UIFields
             field.ViewAccessLevelChanged += CheckVisibility;
             field.EditAccessLevelChanged += CheckEditability;
             field.AdditionalDataChanged += OnAdditionalDataChanged;
+            field.Updated += OnUpdated;
 
             _isSubscriptionsAdded = true;
         }
@@ -63,6 +65,7 @@ namespace RollPunk.UIFields
             field.ViewAccessLevelChanged -= CheckVisibility;
             field.EditAccessLevelChanged -= CheckEditability;
             field.AdditionalDataChanged -= OnAdditionalDataChanged;
+            field.Updated -= OnUpdated;
 
             _isSubscriptionsAdded = false;
         }
@@ -92,12 +95,14 @@ namespace RollPunk.UIFields
 
         protected async Task PlayLabelAnimation(Label label)
         {
-            //label.VisibleRatio = 0;
-            //while(label.VisibleRatio < 1)
-            //{
-            //    label.VisibleRatio += 1f * (float)GetProcessDeltaTime();
-            //    await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-            //}
+            float speed = Random.Shared.NextSingle() + 1f;
+            
+            label.VisibleRatio = 0;
+            while (label.VisibleRatio < 1)
+            {
+                label.VisibleRatio += speed * (float)GetProcessDeltaTime();
+                await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            }
         }
 
         public abstract LineField GetField();
@@ -107,6 +112,14 @@ namespace RollPunk.UIFields
         protected new abstract void SetName(string name);
         protected abstract void UpdateValue();
         protected virtual void OnAdditionalDataChanged(string dataName) { }
+        private void OnUpdated()
+        {
+            UpdateValue();
+            UpdateName();
+            CheckVisibility();
+            CheckEditability();
+            OnAdditionalDataChanged(string.Empty);
+        }
 
         protected virtual void OnExittingTree() { }
     }

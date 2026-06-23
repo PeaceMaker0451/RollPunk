@@ -10,6 +10,8 @@ namespace RollPunk.Server
 {
     internal class ServerSession : Session
     {
+        public bool SessionInitialized { get; private set; } = false;
+        
         public ServerSession() : base(new())
         {
             
@@ -23,5 +25,11 @@ namespace RollPunk.Server
         new public void ApplySessionPatch(SessionPatch patch) => base.ApplySessionPatch(patch);
         new public SessionState GetState() => base.GetState();
         new public void ApplyState(SessionState state) => base.ApplyState(state);
+        new public Player AddPlayer(Guid clientId, string name, bool isAdmin = false) => base.AddPlayer(clientId, name, isAdmin);
+
+        public void SetSessionInitialized()
+        {
+            SessionInitialized = true;
+        }
     }
 }

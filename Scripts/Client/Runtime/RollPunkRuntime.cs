@@ -32,6 +32,8 @@ namespace RollPunk.Client.Runtime
         private ModReader _modReader = new ();
         private List<Mod> _mods;
 
+        private SessionRuntimeData _runtimeData;
+
         public event Action StateChanged;
         
         public ClientSession Session { get; private set; }
@@ -54,11 +56,23 @@ namespace RollPunk.Client.Runtime
             entityFactory.RegisterRules();
 
             LuaErrorsHandler.ErrorLogged += (error) => _ = Client.Instance.UIController.OpenInformationDialogue("LuaError", error);
+
+            Guid clientId = Client.Instance.SettingsManager.LoadSettings().ClientID;
+            Guid? overridedGuid = TryOverrideGuid();
+
+            if (overridedGuid != null)
+            {
+                clientId = (Guid)overridedGuid;
+                RPDebug.Log($"Client ID will be changed to {clientId}");
+            }
+                
+
+            _runtimeData = new SessionRuntimeData(clientId);
         }
 
         public void StartSession(IReadOnlyList<Mod> mods)
         {
-            Session = new ClientSession(new SessionRuntimeData(Client.Instance.SettingsManager.LoadSettings().ClientID), mods);
+            Session = new ClientSession(_runtimeData, mods);
             Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
 
             Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
@@ -83,13 +97,11 @@ namespace RollPunk.Client.Runtime
                 client.ReceivedWelcome += (message) =>
                 {
                     RPDebug.Log($"Сервер передал нам: {message}");
-                    client.SendClientData(Client.Instance.SettingsManager.LoadSettings().Name, Client.Instance.SettingsManager.LoadSettings().ClientID);
+                    client.SendClientData(Client.Instance.SettingsManager.LoadSettings().Name, _runtimeData.ClientID);
 
-                    Session = new ClientSession(new SessionRuntimeData(Client.Instance.SettingsManager.LoadSettings().ClientID), mods, client);
-                    Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
+                    Session = new ClientSession(_runtimeData, mods, client);
 
                     Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
-                    Session.InitializeSession();
                     SetState(RollPunkState.Session);
                 };
 
@@ -137,6 +149,34 @@ namespace RollPunk.Client.Runtime
                 _consoleController = new(Client.Instance.UIController, Client.Instance.Console);
 
             _consoleController.CreateConsole();
+        }
+
+        private Guid? TryOverrideGuid()
+        {
+            const string ClientIdPrefix = "--clientId=";
+
+            bool TryExtractClientId(string[] args, out Guid result)
+            {
+                result = Guid.Empty;
+
+                string clientArg = Array.Find(args, arg => arg.StartsWith(ClientIdPrefix, StringComparison.OrdinalIgnoreCase));
+
+                if (string.IsNullOrEmpty(clientArg))
+                {
+                    return false;
+                }
+
+                string guidString = clientArg.Substring(ClientIdPrefix.Length);
+
+                return Guid.TryParse(guidString, out result);
+            }
+
+            string[] args = OS.GetCmdlineArgs();
+
+            if (TryExtractClientId(args, out Guid parsedGuid))
+                return parsedGuid;
+            else
+                return null;
         }
 
         private class SessionRuntimeData : IRuntimeData

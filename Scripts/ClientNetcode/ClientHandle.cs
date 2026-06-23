@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using RollPunk.Debug;
 using RollPunk.NetcodeCommon;
-using RollPunk.Players;
-using System.Xml.Linq;
 
 namespace RollPunk.ClientNetcode
 {
@@ -23,6 +21,12 @@ namespace RollPunk.ClientNetcode
 
             RPDebug.Log($"[color=dark_violet]Получен Welcome пакет от сервера - {clientId} {message}[/color]");
             _client.WelcomeReceived(clientId, message);
+        }
+
+        public void HandleSessionInitializeRequest(Packet packet)
+        {
+            RPDebug.Log($"[color=dark_violet]Получен запрос инициализировать сессию от сервера[/color]");
+            _client.SessionInitializeRequestReceived();
         }
 
         public void HandleSessionPatch(Packet packet)

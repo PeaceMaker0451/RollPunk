@@ -24,3 +24,29 @@ E:\Projs\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.d
 E:\Projs\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\refint\HierarchyFields.dll
 E:\Projs\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.pdb
 E:\Projs\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\ref\HierarchyFields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\HierarchyFields.deps.json
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\HierarchyFields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\HierarchyFields.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\CommandsSystem.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Debug.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Entities.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Fields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Modding.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Rules.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Fields.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Modding.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Rules.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\CommandsSystem.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Debug.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\bin\Debug\net8.0\Entities.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.csproj.AssemblyReference.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.GeneratedMSBuildEditorConfig.editorconfig
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.AssemblyInfoInputs.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.AssemblyInfo.cs
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.csproj.CoreCompileInputs.cache
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.sourcelink.json
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\Hierarch.0F03BA0A.Up2Date
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\refint\HierarchyFields.dll
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\HierarchyFields.pdb
+F:\Cyberpunk RED\Git\RollPunk\Scripts\HierarchyFields\obj\Debug\net8.0\ref\HierarchyFields.dll

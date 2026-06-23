@@ -13,14 +13,16 @@ namespace RollPunk.Server
 
         public void HandleClientInitialization(int fromClient, Packet packet)
         {
-            int clientIdCheck = packet.ReadInt();
+            int clientConnectionIdCheck = packet.ReadInt();
             string name = packet.ReadString();
-            Guid id = Guid.Parse(packet.ReadString());
+            Guid clientId = Guid.Parse(packet.ReadString());
 
-            RPDebug.Log($"{_server.Clients[fromClient].Tcp.Socket.Client.RemoteEndPoint} connected succesfully: ({fromClient}) {name} | {id}");
+            RPDebug.Log($"{_server.Clients[fromClient].Tcp.Socket.Client.RemoteEndPoint} connected succesfully: ({fromClient}) {name} | {clientId}");
 
-            if (clientIdCheck != fromClient)
-                RPDebug.LogError($"{_server.Clients[fromClient].Tcp.Socket.Client.RemoteEndPoint} has assumed the wrong client ID: ({fromClient}:{clientIdCheck})");
+            if (clientConnectionIdCheck != fromClient)
+                RPDebug.LogError($"{_server.Clients[fromClient].Tcp.Socket.Client.RemoteEndPoint} has assumed the wrong client ID: ({fromClient}:{clientConnectionIdCheck})");
+
+            _server.InitializePlayer(fromClient, name, clientId);
         }
 
         public void HandleClientSessionPatch(int fromClient, Packet packet)

@@ -7,6 +7,7 @@ namespace RollPunk.ClientNetcode
         public event Action<string> ReceivedWelcome;
         public event Action<SessionPatch> ReceivedSessionPatch;
         public event Action<SessionState> ReceivedSessionState;
+        public event Action SessionInitializeRequest;
 
         public void SendClientData(string name, Guid id);
 

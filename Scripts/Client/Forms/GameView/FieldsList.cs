@@ -55,6 +55,7 @@ namespace RollPunk.ClientSide.Runtime.UI
 
             Action onNameUpdated = () => UpdateName(field);
             field.NameChanged += onNameUpdated;
+            field.Updated += onNameUpdated;
             _updateNameActions.Add(field, onNameUpdated);
         }
 
@@ -75,6 +76,7 @@ namespace RollPunk.ClientSide.Runtime.UI
                 _indexToField = newDict;
 
                 field.NameChanged -= _updateNameActions[field];
+                field.Updated -= _updateNameActions[field];
                 _updateNameActions.Remove(field);
             }
         }

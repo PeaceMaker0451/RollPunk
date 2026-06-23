@@ -16,17 +16,30 @@ local _perception_skills =
     concentration = 
     {
         Name = "Concentration",
-        DisplayName = "Концентрация", 
-        Stat = "WILL",
+        DisplayName = "Концентрация",
+        Description = "Навык сосредаточения, памяти, запоминания информации и игнорирования отвлекающих факторов",
+        Stat = "ВОЛЯ",
         Cost = 1,
-        Base = true
+        Base = false
+    },
+
+    concealReveal = 
+    { 
+        Name = "ConcealReveal",
+        DisplayName = "Скрытие/Раскрытие",
+        Description = "Умение прятать предметы и находить спрятанные предметы. \
+        Этот навык используется для скрытия или обнурежения скрытого предмета под одеждой",
+        Stat = "ИНТ",
+        Cost = 1,
+        Base = false
     },
 
     perception = 
     { 
         Name = "Perception",
         DisplayName = "Внимательность",
-        Stat = "INT",
+        Description = "Навык обнаружения скрытых вещей (кроме предметов скрытых через Скрытие)",
+        Stat = "ИНТ",
         Cost = 1,
         Base = true
     }
@@ -42,7 +55,8 @@ local _physical_skills =
     { 
         Name = "Athletics",
         DisplayName = "Атлетика",
-        Stat = "DEX",
+        Description = "Умение лазать, метать, прыгать, плавать, поднимать тяжести и т.д.",
+        Stat = "ЛВК",
         Cost = 1,
         Base = true
     },
@@ -51,25 +65,30 @@ local _physical_skills =
     { 
         Name = "Contortionist",
         DisplayName = "Акробатика",
-        Stat = "DEX",
+        Description = "Способность избавиться от наручников или других пут, пролезть в недоступные места или пространства",
+        Stat = "ЛВК",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     endurance = 
     { 
         Name = "Endurance",
         DisplayName = "Выносливость",
-        Stat = "WILL",
+        Description = "Превозмогание суровых условий, тягостей и лишений \
+        + сопротевление болезненным воздействиям допросов, пыток, наркотиков и других веществ",
+        Stat = "ВОЛЯ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     stealth = 
     { 
         Name = "Stealth",
         DisplayName = "Скрытность",
-        Stat = "DEX",
+        Description = "Умение незаметно двигаться, прятаться, действовать скрытно.\
+        Вас могут найти с помощью навыка внимательности.",
+        Stat = "ЛВК",
         Cost = 1,
         Base = true
     },
@@ -78,9 +97,47 @@ local _physical_skills =
     { 
         Name = "Evasion",
         DisplayName = "Уклонение",
-        Stat = "DEX",
+        Description = "Умение уходить с пути опасности",
+        Stat = "ЛВК",
         Cost = 1,
         Base = true
+    }
+}
+
+-- Навыки управления
+local _control_skills = 
+{
+    name = "ControlSkills",
+    visible_name = "Навыки управления", 
+
+    driveLandVehicle = 
+    {
+        Name = "DriveLandVehicle",
+        DisplayName = "Вождение",
+        Description = "Навык вождения и маневрирования наземным транспортом",
+        Stat = "РЕА",
+        Cost = 1,
+        Base = false
+    },
+
+    pilotAirVehicle = 
+    { 
+        Name = "PilotAirVehicle",
+        DisplayName = "Пилотирование (x2)",
+        Description = "Навык управления летательными аппаратами",
+        Stat = "РЕА",
+        Cost = 2,
+        Base = false
+    },
+
+    pilotSeaVehicle = 
+    { 
+        Name = "PilotSeaVehicle",
+        DisplayName = "Судоходство",
+        Description = "Навык обнаружения скрытых вещей (кроме предметов скрытых через Скрытие)",
+        Stat = "РЕА",
+        Cost = 1,
+        Base = false
     }
 }
 
@@ -94,27 +151,41 @@ local _educational_skills =
     { 
         Name = "Deduction",
         DisplayName = "Дедукция",
-        Stat = "INT",
+        Description = "Умение сделать неочевидный вывод из зацепок",
+        Stat = "ИНТ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     education = 
     { 
         Name = "Education",
         DisplayName = "Образование",
-        Stat = "INT",
+        Description = "Навык общих знаний, эквивалентный школьному образованию, \
+        позволяющий читать, писать и знать достаточно, чтобы свести концы с концами",
+        Stat = "ИНТ",
         Cost = 1,
         Base = true
     },
 
-    science = 
+    criminology = 
     { 
-        Name = "Science",
-        DisplayName = "Наука",
-        Stat = "INT",
+        Name = "Criminology",
+        DisplayName = "Криминология",
+        Description = "Поиск отпечатков пальцев, проведение баллистических тестов и чтение полицейских файлов и записей",
+        Stat = "ИНТ",
         Cost = 1,
-        Base = true
+        Base = false
+    },
+
+    cryptography = 
+    { 
+        Name = "Cryptography",
+        DisplayName = "Криптография",
+        Description = "Умение шифровать и расшифровывать сообщения",
+        Stat = "ИНТ",
+        Cost = 1,
+        Base = false
     }
 }
 
@@ -128,7 +199,8 @@ local _melee_skills =
     { 
         Name = "Brawling",
         DisplayName = "Рукопашный бой",
-        Stat = "DEX",
+        Description = "Умение драться и бороться с помощью грубой силы",
+        Stat = "ЛВК",
         Cost = 1,
         Base = true
     },
@@ -137,9 +209,10 @@ local _melee_skills =
     { 
         Name = "MeleeWeapon",
         DisplayName = "Оружие ближнего боя",
-        Stat = "DEX",
+        Description = "Умение драться холодным оружием",
+        Stat = "ЛВК",
         Cost = 1,
-        Base = true
+        Base = false
     }
 }
 
@@ -153,36 +226,40 @@ local _ranged_skills =
     { 
         Name = "ShoulderArms",
         DisplayName = "Тактическое оружие",
-        Stat = "REF",
+        Description = "Навык стрельбы из носимого оружия с плечевым упором",
+        Stat = "РЕА",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     handguns = 
     { 
         Name = "HandGuns",
         DisplayName = "Пистолеты",
-        Stat = "REF",
+        Description = "Навык стрельбы из легкого ручного оружия",
+        Stat = "РЕА",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     heavyweapons = 
     { 
         Name = "HeavyWeapons",
         DisplayName = "Тяжелое оружие",
-        Stat = "REF",
+        Description = "Навык точной стрельбы из оружия крупного калибра, например гранотометы и ракетницы",
+        Stat = "РЕА",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     autofire = 
     { 
         Name = "AutoFire",
-        DisplayName = "Автоматический огонь",
-        Stat = "REF",
-        Cost = 1,
-        Base = true
+        DisplayName = "Автоматический огонь (x2)",
+        Description = "Навык удержания цеои в прицеле в режиме автоматического огня, вопреки отдаче",
+        Stat = "РЕА",
+        Cost = 2,
+        Base = false
     }
 }
 
@@ -196,18 +273,20 @@ local _performance_skills =
     { 
         Name = "PlayInstrument",
         DisplayName = "Игра на инструменте",
-        Stat = "TECH",
+        Description = "Умение профессионально играть на музыкальном инструменте",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     acting = 
     { 
         Name = "Acting",
         DisplayName = "Исполнение",
-        Stat = "COOL",
+        Description = "Умение играть роли, маскироваться под кого-то реального или вымышленного, имитировать эмоции и настроения",
+        Stat = "ХАР",
         Cost = 1,
-        Base = true
+        Base = false
     }
 }
 
@@ -221,7 +300,9 @@ local _social_skills =
     { 
         Name = "HumanPerception",
         DisplayName = "Проницательность",
-        Stat = "EMP",
+        Description = "Умение читать выражение лица, язык тела, \
+        различать эмоциональное состояние и обнаруживать ложь и обман",
+        Stat = "ЭМП",
         Cost = 1,
         Base = true
     },
@@ -230,7 +311,8 @@ local _social_skills =
     { 
         Name = "Conversation",
         DisplayName = "Общение",
-        Stat = "EMP",
+        Description = "Умение вытягивать информацию из людей, не вызывая подозрений при разговоре",
+        Stat = "ЭМП",
         Cost = 1,
         Base = true
     },
@@ -239,25 +321,28 @@ local _social_skills =
     { 
         Name = "Trading",
         DisplayName = "Торговля",
-        Stat = "COOL",
+        Description = "Умение заключать выгодные сделки и торговаться",
+        Stat = "ХАР",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     interrogation = 
     { 
         Name = "Interrogation",
         DisplayName = "Допрос",
-        Stat = "COOL",
+        Description = "Навык насильственного извлечения информации",
+        Stat = "ХАР",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     persuasion = 
     { 
         Name = "Persuasion",
         DisplayName = "Убеждение",
-        Stat = "COOL",
+        Description = "Умение убеждать, уговаривать или оказывать влияние на людей",
+        Stat = "ХАР",
         Cost = 1,
         Base = true
     },
@@ -266,7 +351,9 @@ local _social_skills =
     { 
         Name = "StreetWise",
         DisplayName = "Знаток улиц",
-        Stat = "COOL",
+        Description = "Умение устанавливать контакты для получения незаконных товаров и контрабанды, \
+        ведение переговоров с криминальными структурами. Так же позволяет избегать плохих ситуаций в плохих районах",
+        Stat = "ХАР",
         Cost = 1,
         Base = true
     }
@@ -281,35 +368,52 @@ local _technical_skills =
     basictech = 
     { 
         Name = "BasicTech",
-        DisplayName = "Техника",
-        Stat = "TECH",
+        DisplayName = "Базовая техника",
+        Description = "Умение определять, понимать и ремонтировать простые электронные и механические устройства, \
+        а также все другие предметы, которые не относятся к другим техническим навыкам.",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     cybertech = 
     { 
         Name = "CyberTech",
         DisplayName = "Кибернетика",
-        Stat = "TECH",
+        Description = "Навык определения, понимания и ремонта кибернетики",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     electronics = 
     { 
         Name = "Electronics",
-        DisplayName = "Электротехника",
-        Stat = "TECH",
-        Cost = 1,
-        Base = true
+        DisplayName = "Электротехника (x2)",
+        Description = "Знание, понимание, консультирование, установка и взлом сложных электронных \
+        устройств и систем безопасности (компьютеры, кибердеки, нажимные плиты, камеры, лазерные ловушки и т.п.)",
+        Stat = "ТЕХ",
+        Cost = 2,
+        Base = false
+    },
+
+    forgery = 
+    { 
+        Name = "Forgery",
+        DisplayName = "Фальсификация",
+        Description = "Умение создавать и обнаруживать фальшивые документы и ID-карты",
+        Stat = "ТЕХ",
+        Cost = 2,
+        Base = false
     },
 
     firstaid = 
     { 
         Name = "FirstAid",
         DisplayName = "Первая помощь",
-        Stat = "TECH",
+        Description = "Навык применения медецинских процедур к раненому человеку \
+        для лечения наиболее распространенных критических ранений и предотвращения смерти",
+        Stat = "ТЕХ",
         Cost = 1,
         Base = true
     },
@@ -317,55 +421,73 @@ local _technical_skills =
     paramedic = 
     { 
         Name = "Paramedic",
-        DisplayName = "Парамедик",
-        Stat = "TECH",
-        Cost = 1,
-        Base = true
+        DisplayName = "Парамедик (x2)",
+        Description = "Навык лечения раненых людей для устранения всех критическихранений \
+        и предотвращения смерти, не требующих хирургии",
+        Stat = "ТЕХ",
+        Cost = 2,
+        Base = false
     },
 
     vehicletech = 
     { 
         Name = "VehicleTech",
         DisplayName = "Автомеханик",
-        Stat = "TECH",
+        Description = "Умение ремонтировать автомобили и мотоциклы",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
-    specialvehicletech = 
+    airvehicletech = 
     { 
-        Name = "SpecialVehicleTech",
-        DisplayName = "Особый транспорт",
-        Stat = "TECH",
+        Name = "AirVehicleTech",
+        DisplayName = "Воздушный транспорт",
+        Description = "Умение ремонтировать авиатехнику",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
+    },
+
+    seavehicletech = 
+    { 
+        Name = "SeaVehicleTech",
+        DisplayName = "Водный транспорт",
+        Description = "Умение ремонтировать водную технику",
+        Stat = "ТЕХ",
+        Cost = 1,
+        Base = false
     },
 
     weaponstech = 
     { 
         Name = "WeaponsTech",
         DisplayName = "Оружейник",
-        Stat = "TECH",
+        Description = "Навык ремонта и обслуживания оружия всх типов",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     picklock = 
     { 
         Name = "PickLock",
         DisplayName = "Взлом замков",
-        Stat = "TECH",
+        Description = "Навык взлома не электронных замков",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     },
 
     pickpocket = 
     { 
         Name = "PickPocket",
         DisplayName = "Карманник",
-        Stat = "TECH",
+        Description = "Навык кражи предметов, закрепленных на другом человеке, \
+        кражи мелких вещей в магазине, оставаясь незамеченным",
+        Stat = "ТЕХ",
         Cost = 1,
-        Base = true
+        Base = false
     }
 }
 
@@ -377,12 +499,18 @@ end
 
 local function _createSkillFieldData(SkillData, priority)
     ---@type IntFieldData
+    local custom_min_value = 0
+
+    if SkillData.Base then
+        custom_min_value = 2
+    end
+    
     local fieldData = {
         name = SkillData.Name,
         visible_name = (SkillData.DisplayName) .. " ({stat})",
         type = "IntField",
         value = 0,
-        min_value = 0,
+        min_value = custom_min_value,
         max_value = 20,
         view_access_level = 0,
         edit_access_level = 2,
@@ -433,6 +561,7 @@ function SkillSubsystem:_create(character)
 
     create_skills_category(self, _perception_skills, self.skills_group)
     create_skills_category(self,_physical_skills, self.skills_group)
+    create_skills_category(self,_control_skills, self.skills_group)
     create_skills_category(self,_educational_skills, self.skills_group)
     create_skills_category(self,_melee_skills, self.skills_group)
     create_skills_category(self,_ranged_skills, self.skills_group)
@@ -446,6 +575,7 @@ function SkillSubsystem:_connect()
     
     connect_skills_category(self, _perception_skills)
     connect_skills_category(self,_physical_skills)
+    connect_skills_category(self,_control_skills)
     connect_skills_category(self,_educational_skills)
     connect_skills_category(self,_melee_skills)
     connect_skills_category(self,_ranged_skills)
@@ -475,8 +605,13 @@ function SkillSubsystem:setEditingEnabled(enabled)
     for _, skill in pairs(self.skills) do
         if enabled then
             skill.setEditAccessLevel(2)
+            skill.setViewAccessLevel(2)
         else
             skill.setEditAccessLevel(3)
+
+            if skill.getValue() == 0 then
+                skill.setViewAccessLevel(3)
+            end
         end
     end
 end

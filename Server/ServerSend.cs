@@ -24,6 +24,19 @@ namespace RollPunk.Server
             }
         }
 
+        public void SendInitializeSessionRequest(int clientId)
+        {
+            using (Packet packet = new((int)ServerPackets.SessionInitialize))
+            {
+                SendTcpData(clientId, packet);
+            }
+        }
+
+        public void SendSessionPatch(SessionPatch patch)
+        {
+            SendSessionPatch(-1, patch);
+        }
+
         public void SendSessionPatch(int exceptClientId, SessionPatch patch)
         {
             using (Packet packet = new((int)ServerPackets.SessionPatch))
@@ -31,7 +44,10 @@ namespace RollPunk.Server
                 string data = JsonConvert.SerializeObject(patch);
                 packet.Write(data);
 
-                SendTcpDataToAll(exceptClientId, packet);
+                if (exceptClientId == -1)
+                    SendTcpDataToAll(packet);
+                else
+                    SendTcpDataToAll(exceptClientId, packet);
             }
         }
 

@@ -47,10 +47,12 @@ local function _createRuleField(rule_data)
     return rule_field
 end
 
-function BaseActions.setup(create_character_function, load_character_function)
+function BaseActions.initialize(create_character_function, load_character_function)
     _create_character_function = create_character_function
-    _load_character_function = load_character_function    
+    _load_character_function = load_character_function
+end
 
+function BaseActions.create()
 ---@type EntityFieldAPI    
     local entity = ConstructorAPI.createField(_actions_entity_data)
 

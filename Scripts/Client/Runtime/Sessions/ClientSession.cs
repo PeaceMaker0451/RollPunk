@@ -78,22 +78,17 @@ namespace RollPunk.Client.Runtime
 
             LoadMods(mods);
             InitializeFieldsContainer();
+            APIInjector.AddGlobalAPI(GetAPI());
         }
 
         public void InitializeSession()
         {
-            APIInjector.AddGlobalAPI(GetAPI());
             BatchHook(SessionInitializedHookName);
         }
 
-        public Player CreatePlayer(string name, bool isAdmin = false)
+        public void CreatePlayer(string name, bool isAdmin = false)
         {
-            if (base.Players.ContainsKey(_runtimeData.ClientID))
-                throw new InvalidOperationException($"Player for Client {_runtimeData.ClientID} already exists");
-            
-            Player player = new(name, new Guid(), isAdmin);
-            base.Players.Add(_runtimeData.ClientID, player);
-            return player;
+            AddPlayer(_runtimeData.ClientID, name, isAdmin);
         }
 
         public void Dispose() { }
@@ -155,6 +150,7 @@ namespace RollPunk.Client.Runtime
 
             _dataBridge.ReceivedSessionPatch += ApplySessionPatch;
             _dataBridge.ReceivedSessionState += ApplyState;
+            _dataBridge.SessionInitializeRequest += InitializeSession;
         }
 
         private new void ApplySessionPatch(SessionPatch patch)

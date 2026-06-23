@@ -22,6 +22,7 @@ namespace RollPunk.ClientNetcode
         public event Action<string> ReceivedWelcome;
         public event Action<SessionPatch> ReceivedSessionPatch;
         public event Action<SessionState> ReceivedSessionState;
+        public event Action SessionInitializeRequest;
 
         public TcpClient(string ip, int port, ThreadManager threadManager)
         {
@@ -36,6 +37,7 @@ namespace RollPunk.ClientNetcode
                 { (int)ServerPackets.Welcome, _handle.HandleWelcome },
                 { (int)ServerPackets.SessionPatch, _handle.HandleSessionPatch },
                 { (int)ServerPackets.SessionState, _handle.HandleSessionState },
+                { (int)ServerPackets.SessionInitialize, _handle.HandleSessionInitializeRequest },
             };
 
             Tcp = new(_packetHandlers, threadManager);
@@ -59,6 +61,11 @@ namespace RollPunk.ClientNetcode
         public void RequestSessionState()
         {
             _send.SendSessionStateRequest();
+        }
+
+        public void SessionInitializeRequestReceived()
+        {
+            SessionInitializeRequest?.Invoke();
         }
 
         public void WelcomeReceived(int clientId, string message)

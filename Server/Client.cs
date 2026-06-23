@@ -10,6 +10,7 @@ namespace RollPunk.Server
         
         public int Id;
         public TCP Tcp;
+        public Guid ClientId;
 
         public Client(int clientId, IReadOnlyDictionary<int, Action<int, Packet>> packetHandlers, ThreadManager threadManager)
         {

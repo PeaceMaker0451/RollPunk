@@ -56,6 +56,27 @@ namespace RollPunk.Server
             RPDebug.DebugLog($"Server started on {Port}");
         }
 
+        public void InitializePlayer(int clientConnectionId, string name, Guid clientId)
+        {
+            _clients[clientConnectionId].ClientId = clientId;
+            var player = _session.AddPlayer(clientId, name);
+
+            SessionPatch newPlayerPatch = new()
+            {
+                PendingPlayers = new() { { clientId, player.GetState() } }
+            };
+
+            if (_session.SessionInitialized == false)
+            {
+                _send.SendInitializeSessionRequest(clientConnectionId);
+                _session.SetSessionInitialized();
+            }
+            else
+                _send.SendSessionState(clientConnectionId, _session.GetState());
+
+            _send.SendSessionPatch(newPlayerPatch);
+        }
+
         public void ApplySessionPatch(int fromClient, SessionPatch sessionPatch)
         {
             _session.ApplySessionPatch(sessionPatch);

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ab0P/lWwIA0=",
+  "dgSpecHash": "Y5EFMHH47B4=",
   "success": true,
-  "projectFilePath": "E:\\Projs\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj",
+  "projectFilePath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nikit\\.nuget\\packages\\godotsharp\\4.4.0\\godotsharp.4.4.0.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\moonsharp\\2.0.0\\moonsharp.2.0.0.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\godotsharp\\4.4.0\\godotsharp.4.4.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\moonsharp\\2.0.0\\moonsharp.2.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
   ],
   "logs": []
 }

@@ -28,6 +28,8 @@ namespace NetcodeCommon
 
         protected void ApplySessionPatch(SessionPatch patch)
         {
+            EntityUpdater updater = new();
+            
             foreach (var deletedField in patch.RemoveFields)
             {
                 var field = FieldsRegistry.GetField(deletedField);
@@ -40,6 +42,17 @@ namespace NetcodeCommon
 
             foreach (var pendingField in patch.PendingFields)
                 HierarchyReconstructor.ApplyFieldState(pendingField, Fields, null, FieldsRegistry);
+
+            foreach (var pendingPlayer in patch.PendingPlayers)
+            {
+                if (Players.ContainsKey(pendingPlayer.Key))
+                    updater.UpdateEntity(Players[pendingPlayer.Key], pendingPlayer.Value);
+                else
+                    Players.Add(pendingPlayer.Key, new Player(pendingPlayer.Value));
+            }
+
+            foreach (var removedPlayer in patch.RemovePlayers)
+                Players.Remove(removedPlayer);
         }
 
         protected SessionState GetState()
@@ -52,10 +65,26 @@ namespace NetcodeCommon
             return state;
         }
 
+        protected Player AddPlayer(Guid clientId, string name, bool isAdmin = false)
+        {
+            if(Players.ContainsKey(clientId))
+                throw new InvalidOperationException($"Player for Client {clientId} already exists");
+
+            Player player = new(name, new Guid(), isAdmin);
+            Players.Add(clientId, player);
+
+            return player;
+        }
+
         protected void ApplyState(SessionState state)
         {
             List<FieldState> fields = state.Fields;
             ApplyFields(fields);
+
+            Players.Clear();
+
+            foreach(var player in state.Players)
+                Players.Add(player.Key, new(player.Value));
         }
 
         private void ApplyFields(List<FieldState> fields)

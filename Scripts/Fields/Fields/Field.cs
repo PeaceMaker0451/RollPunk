@@ -13,7 +13,6 @@ namespace RollPunk.Fields
         protected readonly FieldAPI _api;
 
         private readonly List<Field> _children = new();
-        //private readonly FieldsRegistry _registry;
 
         private Dictionary<string, Field> _childrenByNames = new();
         private Dictionary<Guid, Field> _childrenByIds = new();
@@ -29,7 +28,6 @@ namespace RollPunk.Fields
         public Dictionary<string, object> AdditionalData { get; private set; } = new();
         public Field Parent { get; private set; }
         public IReadOnlyList<Field> Fields => _children;
-        //public IReadOnlyFieldRegistry Registry => _registry;
 
         public Field(string name, Type apiType, Dictionary<string, object> additionalData = null) : base(name)
         {
@@ -103,8 +101,8 @@ namespace RollPunk.Fields
             if (child.IsAncestorOf(this))  
                 throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: operation would create ownership cycle.");
 
-            if(child.TryGetField(child.Name, out var field) == true)
-                throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: childs hierar");
+            //if(child.TryGetField(child.Name, out var field) == true)
+            //    throw new InvalidOperationException($"Unnable to child field {child.Name} [{child.ID}]: childs hierar");
 
             var names = new HashSet<string>(_childrenByNames.Keys);
             names.IntersectWith(child._childrenByNames.Keys);
@@ -145,6 +143,16 @@ namespace RollPunk.Fields
             return removed;
         }
 
+        public Field GetField(string name)
+        {
+            return _childrenByNames[name];
+        }
+
+        public Field GetField(Guid id)
+        {
+            return _childrenByIds[id];
+        }
+        
         public bool TryGetField(string name, out Field field)
         {
             return _childrenByNames.TryGetValue(name, out field);
@@ -170,10 +178,7 @@ namespace RollPunk.Fields
             Changed?.Invoke();
         }
 
-        protected virtual void ValidateChild(Field field)
-        {
-
-        }
+        protected virtual void ValidateChild(Field field) { }
 
         protected override void ApplyPayload(Dictionary<string, JToken> payload)
         {
@@ -187,9 +192,6 @@ namespace RollPunk.Fields
 
         private void AddFieldToRegistry(Field field)
         {
-            if (Name == "CP_Charater")
-                RPDebug.Log($"[color=blue]Интеграция поля в реестр {field.Name}...[/color]");
-
             _childrenByIds.Add(field.ID, field);
             _childrenByNames.Add(field.Name, field);
 
@@ -207,19 +209,7 @@ namespace RollPunk.Fields
         }
 
         private void ThrowValidateChildOnParent(Field field)
-        {
-            if(Name == "CP_Charater")
-            {
-                RPDebug.Log($"[color=pink]Проверка поля {field.Name}!! \nТекущий реестр персонажа:");
-
-                foreach(var child in _childrenByNames.Values)
-                {
-                    RPDebug.Log($"{child.Name} [{child.ID}]");
-                }
-
-                RPDebug.Log($"[/color]");
-            }
-            
+        {            
             if (_childrenByNames.ContainsKey(field.Name))
                 throw new InvalidOperationException($"Unnable to child field {field.Name} [{field.ID}]: Field with such name already contains in the hierarchy tree of {Name} [{ID}]");
 
