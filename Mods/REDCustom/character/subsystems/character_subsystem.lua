@@ -1,15 +1,14 @@
 ---@class CharacterSubsystem
 ---@field name string
----@field character EntityFieldAPI
 local CharacterSubsystem = {}
 CharacterSubsystem.__index = CharacterSubsystem
 
-function CharacterSubsystem:markAsCreated()
-    self.character.setAdditionalDataField("is_" .. self.name .. "_created", true)
+function CharacterSubsystem:markAsCreated(character)
+    character.setAdditionalDataField("is_" .. self.name .. "_created", true)
 end
 
-function CharacterSubsystem:isCreated()
-    local is_created = self.character.getAdditionalDataField("is_" .. self.name .. "_created")
+function CharacterSubsystem:isCreated(character)
+    local is_created = character.getAdditionalDataField("is_" .. self.name .. "_created")
     if is_created == nil or type(is_created) ~= "boolean" then
         return false
     else
@@ -17,19 +16,15 @@ function CharacterSubsystem:isCreated()
     end
 end
 
+function CharacterSubsystem.initialize()
+end
+
 ---@param character EntityFieldAPI
-function CharacterSubsystem:new(name, character)
-    local instance = setmetatable({}, self)
-    instance.character = character
-    instance.name = name
-
-    return instance
+function CharacterSubsystem.create(character)
 end
 
-function CharacterSubsystem.initialize(self)
-end
-
-function CharacterSubsystem.validate(self, updatedField)
+---@param character EntityFieldAPI
+function CharacterSubsystem.connect(character)
 end
 
 return CharacterSubsystem

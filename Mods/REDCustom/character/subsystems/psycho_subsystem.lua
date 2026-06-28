@@ -2,18 +2,6 @@ local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
 
 ---@class PsychoSubsystem : CharacterSubsystem
----@field humanity_field LineFieldAPI
----@field humanity_loss_field LineFieldAPI
----@field max_humanity_loss_field LineFieldAPI
----@field psycho_points_field LineFieldAPI
----@
----@field emp_field LineFieldAPI
----@field old_emp_value_name string
----@field real_emp_value_name string
----@
----@field character_group_field FieldGroupAPI
----@field parameters_group_field FieldGroupAPI
----@field action_group_field FieldGroupAPI
 local PsychoSubsystem = setmetatable({}, CharacterSubsystem)
 PsychoSubsystem.__index = PsychoSubsystem
 
@@ -98,8 +86,12 @@ local _spend_psycho_rule_field_data =
 local _humanity_factor = 5
 local _max_emp_value = 20 
 
----@param self PsychoSubsystem
-local function _addRuleHooks(self)
+local _action_group_name
+local _parameters_group_name
+local _character_group_name
+local _emp_field_name
+
+local function _addRuleHooks(character)
     ModHookerAPI.addHook(_spend_psycho_rule_data.hook,function (character)
         if self == nil or character ~= self.character then
             return
@@ -112,7 +104,7 @@ local function _addRuleHooks(self)
 end
 
 ---@param self PsychoSubsystem
-local function _handleOuterEMPChange(self)
+local function _handleOuterEMPChange(character)
     local empValue = self.emp_field.getValue()
     local realEmpValue = self.emp_field.getAdditionalDataField(self.real_emp_value_name)
     local oldEmpValue = self.emp_field.getAdditionalDataField(self.old_emp_value_name)
@@ -129,7 +121,7 @@ local function _handleOuterEMPChange(self)
 end
 
 ---@param self PsychoSubsystem
-local function _updateHumanity(self)
+local function _updateHumanity(character)
     local empRealValue = self.emp_field.getAdditionalDataField(self.real_emp_value_name)
     local totalHumanity = empRealValue * _humanity_factor
 
@@ -143,7 +135,7 @@ local function _updateHumanity(self)
 end
 
 ---@param self PsychoSubsystem
-local function _updateEMPFromHumanity(self)
+local function _updateEMPFromHumanity(character)
     local humanityValue = self.humanity_field.getValue()
 
     self.emp_field.setMaxValue(_max_emp_value + 1)
@@ -158,7 +150,7 @@ local function _updateEMPFromHumanity(self)
 end
 
 ---@param self PsychoSubsystem
-local function _handleInnerEMPChange(self)
+local function _handleInnerEMPChange(character)
     local realEmpValue = self.emp_field.getAdditionalDataField(self.real_emp_value_name)
     local empValue = self.emp_field.getValue()
     
@@ -173,13 +165,13 @@ local function _handleInnerEMPChange(self)
 end
 
 ---@param self PsychoSubsystem
-local function _setHumanityLossOverMaxLoss(self)
+local function _setHumanityLossOverMaxLoss(character)
     local humanityMaxLossValue = self.max_humanity_loss_field.getValue()
     self.humanity_loss_field.setMinValue(humanityMaxLossValue)
 end
 
 ---@param self PsychoSubsystem
-local function _updatePsychoPointsMax(self)
+local function _updatePsychoPointsMax(character)
     local emp = self.emp_field.getValue()
     local psycho_max = ((emp * emp) / 6) + 4
 
@@ -191,12 +183,12 @@ local function _updatePsychoPointsMax(self)
 end
 
 ---@param self PsychoSubsystem
-local function _removeHumanityForPsychoPoints(self, psycho_points)
+local function _removeHumanityForPsychoPoints(character, psycho_points)
     self.humanity_loss_field.setValue(self.humanity_loss_field.getValue() + (psycho_points * 2))
 end
 
 ---@param self HealthSubsystem
-local function _upgradeTo051(self)
+local function _upgradeTo051(character)
     RollPunkAPI.log("Обновление псих-подсистемы до версии 0.5.1...")
     
     local psychoButton = self.character.getField(_spend_psycho_rule_field_data.name)
@@ -206,12 +198,21 @@ local function _upgradeTo051(self)
     psychoRule.setHook(_spend_psycho_rule_data.hook)
 end
 
-function PsychoSubsystem:_create()
-    self.humanity_field = FieldsServices.createAndChild(self.parameters_group_field, humanity_field_data)
-    self.humanity_loss_field = FieldsServices.createAndChild(self.parameters_group_field, humanityt_loss_field_data)
-    self.max_humanity_loss_field = FieldsServices.createAndChild(self.parameters_group_field, humanityt_max_loss_field_data)
+function PsychoSubsystem.initialize(action_group_name, parameters_group_name, character_group_name, emp_field_name)
+    _action_group_name = action_group_name
+    _parameters_group_name = parameters_group_name
+    _character_group_name = character_group_name
+    _emp_field_name = emp_field_name
+end
+
+function PsychoSubsystem.create(character)
+    local parameters_group_field = character.getField(_parameters_group_name)
     
-    self.psycho_points_field = FieldsServices.createAndChild(self.character_group_field, psycho_points_field_data)
+    FieldsServices.createAndChild(parameters_group_field, humanity_field_data)
+    FieldsServices.createAndChild(parameters_group_field, humanityt_loss_field_data)
+    FieldsServices.createAndChild(parameters_group_field, humanityt_max_loss_field_data)
+    
+    FieldsServices.createAndChild(self.character_group_field, psycho_points_field_data)
 
     self.emp_field.setAdditionalDataField(self.real_emp_value_name, self.emp_field.getValue())
     self.emp_field.setAdditionalDataField(self.old_emp_value_name, self.emp_field.getValue())
@@ -219,9 +220,16 @@ function PsychoSubsystem:_create()
 
     FieldsServices.createAndChild(self.action_group_field, _spend_psycho_rule_field_data)
     self.character.addRule(ConstructorAPI.createRule(_spend_psycho_rule_data))
+
+    _handleOuterEMPChange(character)
+    _setHumanityLossOverMaxLoss(character)
+    _updateHumanity(character)
+    _updateEMPFromHumanity(character)
+    _handleInnerEMPChange(character)
+    _updatePsychoPointsMax(character)
 end
 
-function PsychoSubsystem:_connect()
+function PsychoSubsystem.connect()
     local version = self.character.getAdditionalDataField("version")
 
     if version == nil then
@@ -260,8 +268,6 @@ function PsychoSubsystem:new(character, action_group, parameters_group, characte
     _updateEMPFromHumanity(instance)
     _handleInnerEMPChange(instance)
     _updatePsychoPointsMax(instance)
-
-    _addRuleHooks(instance)
 
     return instance  
 end

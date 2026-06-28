@@ -2,14 +2,6 @@ local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
 
 ---@class HealthSubsystem : CharacterSubsystem
----@field character_group FieldGroupAPI
----@field action_group FieldGroupAPI
----@field parameters_group FieldGroupAPI
----@field will_field LineFieldAPI
----@field body_field LineFieldAPI
----@
----@field hp_field LineFieldAPI
----@field armor_field LineFieldAPI
 local HealthSubsystem = setmetatable({}, CharacterSubsystem)
 HealthSubsystem.__index = HealthSubsystem
 
@@ -79,116 +71,83 @@ local _heal_rule_field_data =
     line_priority = 68,
 }
 
-local function addRuleHooks(self)
-    
-    ModHookerAPI.addHook(_damage_rule_data.hook,function (character)
-        RollPunkAPI.log("Пришел хук на персонажа " .. character.name .. ". Это персонаж " .. self.character.name)
-        
-        if self == nil or character ~= self.character then
-            return
-        end
+local _character_group_name 
+local _parameters_group_name
+local _action_group_name
+local _body_stat_name
+local _will_stat_name
 
-        RollPunkAPI.log("Обработка события нанесения урона..")
+HealthSubsystem.heal_hook_name = _heal_rule_data.hook
+HealthSubsystem.damage_hook_name = _damage_rule_data.hook
 
-        UIAPI.openIntDialogue("Введите число урона:", function(result)
-            HealthSubsystem.damage(self,  result)
-        end)
-    end)
-
-    ModHookerAPI.addHook(_heal_rule_data.hook,function (character)
-        if self == nil or character ~= self.character then
-            return
-        end
-
-        RollPunkAPI.log("Обработка события восстановления..")
-        
-        UIAPI.openIntDialogue("Введите число здоровья:", function(result)
-            HealthSubsystem.heal(self,  result)
-        end)
-    end)
-end
-
-local function _updateMaxHealth(self)
-    local bodyValue = self.body_field.getValue()
-    local willValue = self.will_field.getValue()
+local function _updateMaxHealth(character)
+    local bodyValue = character.getField(_body_stat_name).getValue()
+    local willValue = character.getField(_will_stat_name).getValue()
     local newMaxHP = (((bodyValue + willValue) / 4) * 5) + 10
 
-    self.hp_field.setMaxValue(newMaxHP)
+    character.getField(_hp_field_data.name).setMaxValue(newMaxHP)
 end
 
----@param self HealthSubsystem
-local function _upgradeTo051(self)
+local function _upgradeTo051(character)
     RollPunkAPI.log("Обновление подсистемы здоровья до версии 0.5.1...")
     
-    local healButton = self.character.getField(_heal_rule_field_data.name)
-    local damageButton = self.character.getField(_damage_rule_field_data.name)
+    local healButton = character.getField(_heal_rule_field_data.name)
+    local damageButton = character.getField(_damage_rule_field_data.name)
 
     healButton.setRuleName(_heal_rule_data.name)
     damageButton.setRuleName(_damage_rule_data.name)
 
-    local healRule = self.character.getRule(_heal_rule_data.name)
-    local damageRule = self.character.getRule(_damage_rule_data.name)
+    local healRule = character.getRule(_heal_rule_data.name)
+    local damageRule = character.getRule(_damage_rule_data.name)
 
     healRule.setHook(_heal_rule_data.hook)
     damageRule.setHook(_damage_rule_data.hook)
 end
 
-function HealthSubsystem:_create()
+function HealthSubsystem.initialize(character_group_name, parameters_group_name, action_group_name, body_stat_name, will_stat_name)
+    HealthSubsystem.name = "HealthSubsystem"
+    
+    _character_group_name = character_group_name
+    _parameters_group_name = parameters_group_name
+    _action_group_name = action_group_name
+    _body_stat_name = body_stat_name
+    _will_stat_name = will_stat_name
+end
+
+function HealthSubsystem.create(character)
     RollPunkAPI.log("Создание HealthSubsystem")
     
-    self.character.addRule(ConstructorAPI.createRule(_heal_rule_data))
-    self.character.addRule(ConstructorAPI.createRule(_damage_rule_data))
-    
-    self.hp_field = FieldsServices.createAndChild(self.character_group, _hp_field_data)
-    self.armor_field = FieldsServices.createAndChild(self.parameters_group, _armor_field_data)
-    FieldsServices.createAndChild(self.action_group, _heal_rule_field_data)
-    FieldsServices.createAndChild(self.action_group, _damage_rule_field_data)
+    character.addRule(ConstructorAPI.createRule(_heal_rule_data))
+    character.addRule(ConstructorAPI.createRule(_damage_rule_data))
 
-    addRuleHooks(self)
+    local character_group = character.getField(_character_group_name)
+    local parameters_group = character.getField(_parameters_group_name)
+    local action_group = character.getField(_action_group_name)
+    
+    FieldsServices.createAndChild(character_group, _hp_field_data)
+    FieldsServices.createAndChild(parameters_group, _armor_field_data)
+    FieldsServices.createAndChild(action_group, _heal_rule_field_data)
+    FieldsServices.createAndChild(action_group, _damage_rule_field_data)
 end
 
-function HealthSubsystem:_connect()
+function HealthSubsystem.connect(character)
     RollPunkAPI.log("Присоединение HealthSubsystem")
 
-    local version = self.character.getAdditionalDataField("version")
+    local version = character.getAdditionalDataField("version")
 
     if version == nil then
-        _upgradeTo051(self)
+        _upgradeTo051(character)
     end
-
-    self.hp_field = self.character.getField(_hp_field_data.name)
-    self.armor_field = self.character.getField( _armor_field_data.name)
-    
-    addRuleHooks(self)
 end
 
-function HealthSubsystem:new(character, action_group, character_group, parameters_group, body_stat_field, will_stat_field)
-    ---@type HealthSubsystem
-    local instance = CharacterSubsystem.new(self, "HealthSubsystem", character)    
-    
-    instance.character_group = character_group
-    instance.action_group = action_group
-    instance.parameters_group = parameters_group
-    instance.body_field = body_stat_field
-    instance.will_field = will_stat_field
-    
-    if instance:isCreated() == false then
-        instance:_create()
-        instance:markAsCreated()
-    else
-        instance:_connect()
-    end
-
-    _updateMaxHealth(instance)
-    return instance    
+function HealthSubsystem.heal(character, value)
+    local hp_field = character.getField(_hp_field_data.name)
+    hp_field.setValue(hp_field.getValue() + value)
 end
 
-function HealthSubsystem:heal(value)
-    self.hp_field.setValue(self.hp_field.getValue() + value)
-end
-
-function HealthSubsystem:damage(value)
-    local armor_value = self.armor_field.getValue()
+function HealthSubsystem.damage(character, value)
+    local hp_field = character.getField(_hp_field_data.name)
+    local armor_value = character.getField(_armor_field_data.name).getValue()
 
     if armor_value > value/2 then
         armor_value = value/2
@@ -196,16 +155,29 @@ function HealthSubsystem:damage(value)
 
     local damage = value - armor_value
 
-    self.hp_field.setValue(self.hp_field.getValue() - damage)
+    hp_field.setValue(hp_field.getValue() - damage)
 end
 
-function HealthSubsystem:validate(updatedField)
-    RollPunkAPI.log(self.body_field.name .. " " .. self.body_field.id)
-    RollPunkAPI.log(updatedField == self.body_field or updatedField == self.will_field)
-
-    if updatedField == self.body_field or updatedField == self.will_field then
-        _updateMaxHealth(self)
+local function _onValidate(character, updatedField)
+    if updatedField.name == _body_stat_name or updatedField.name == _will_stat_name then
+        _updateMaxHealth(character)
     end
 end
+
+local function _onDamage(character)
+    UIAPI.openIntDialogue("Введите число урона:", function(result)
+            HealthSubsystem.damage(character,  result)
+        end)
+end
+
+local function _onHeal(character)
+    UIAPI.openIntDialogue("Введите число здоровья:", function(result)
+            HealthSubsystem.heal(character,  result)
+        end)
+end
+
+ModHookerAPI.addHook("Validate", _onValidate)
+ModHookerAPI.addHook(_damage_rule_data.hook, _onDamage)
+ModHookerAPI.addHook(_heal_rule_data.hook, _onHeal)
 
 return HealthSubsystem

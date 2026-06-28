@@ -2,21 +2,6 @@ local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
 
 ---@class CommonSubsystem : CharacterSubsystem
----@
----@field character_group FieldGroupAPI
----@field parameters_group FieldGroupAPI
----@
----@field name_field LineFieldAPI
----@field nickname_field LineFieldAPI
----@field class_field LineFieldAPI
----@field level_field LineFieldAPI
----@
----@field armor_field LineFieldAPI
----@field bio_field LineFieldAPI
----@field inventory_field LineFieldAPI
----@field implants_field LineFieldAPI
----@field notes_field LineFieldAPI
----@
 local CommonSubsystem = setmetatable({}, CharacterSubsystem)
 CommonSubsystem.__index = CommonSubsystem
 
@@ -124,62 +109,45 @@ local _notes =
     additional_data = { is_multiline = true, is_wrap_enabled = true }
 }
 
-function CommonSubsystem:_create()
+local _character_group_name
+local _parameters_group_name
+
+function CommonSubsystem.initialize(character_group_name, parameters_group_name)
+    CommonSubsystem.name = "CommonSubsystem"
+    
+    _character_group_name = character_group_name
+    _parameters_group_name = parameters_group_name
+end
+
+function CommonSubsystem.create(character)
     RollPunkAPI.log("Создание CommonSubsystem")
-    self.name_field = FieldsServices.createAndChild(self.character_group, _name_field_data)
-    self.nickname_field = FieldsServices.createAndChild(self.character_group, _nick_name_field_data)
-    self.class_field = FieldsServices.createAndChild(self.character_group, _class_field_data)
-    self.level_field = FieldsServices.createAndChild(self.character_group, _level_field_data)
+    local character_group = character.getField(_character_group_name)
+    local parameters_group = character.getField(_parameters_group_name)
     
-    --self.armor_field = FieldsServices.createAndChild(self.parameters_group, _armor_field_data)
-    --self.bio_field = FieldsServices.createAndChild(self.parameters_group, _bio)
-    self.inventory_field = FieldsServices.createAndChild(self.parameters_group, _inventory)
-    self.implants_field = FieldsServices.createAndChild(self.parameters_group, _implants)
-    self.notes_field = FieldsServices.createAndChild(self.parameters_group, _notes)
-end
-
-function CommonSubsystem:_connect()
-    RollPunkAPI.log("Присоединение CommonSubsystem")
-    self.name_field = self.character.getField(_name_field_data.name)
-    self.nickname_field = self.character.getField( _nick_name_field_data.name)
-    self.class_field = self.character.getField( _class_field_data.name)
-    self.level_field = self.character.getField( _level_field_data.name)
+    FieldsServices.createAndChild(character_group, _name_field_data)
+    FieldsServices.createAndChild(character_group, _nick_name_field_data)
+    FieldsServices.createAndChild(character_group, _class_field_data)
+    FieldsServices.createAndChild(character_group, _level_field_data)
     
-    --self.armor_field = self.character.getField( _armor_field_data.name)
-    --self.bio_field = self.character.getField( _bio.name)
-    self.inventory_field = self.character.getField( _inventory.name)
-    self.implants_field = self.character.getField( _implants.name)
-    self.notes_field = self.character.getField( _notes.name)
+    FieldsServices.createAndChild(parameters_group, _inventory)
+    FieldsServices.createAndChild(parameters_group, _implants)
+    FieldsServices.createAndChild(parameters_group, _notes)
 end
 
----@param character EntityFieldAPI
----@param character_group FieldGroupAPI
----@param parameters_group FieldGroupAPI
-function CommonSubsystem:new(character, character_group, parameters_group)
-    ---@type CommonSubsystem
-    local instance = CharacterSubsystem.new(self, "CommonSubsystem", character)
-
-    instance.character_group = character_group
-    instance.parameters_group = parameters_group
-
-    if instance:isCreated() == false then
-        instance:_create()
-        instance:markAsCreated()
-    else
-        instance:_connect()
-    end
-
-    return instance
+function CommonSubsystem.connect()
 end
 
-function CommonSubsystem:SetLevel(level)
-    self.level_field.setValue(level)
-end
+-- function CommonSubsystem.SetLevel(character, level)
+--     local level_field = character.getField(_level_field_data.name) 
+--     level_field.setValue(level)
+-- end
 
-function CommonSubsystem:validate(updated_field)
-    if updated_field == self.nickname_field then
-        self.character.setName(self.nickname_field.getValue())
+local function _onValidate(character, updated_field)
+    if updated_field.name == _name_field_data.name then
+        character.setName(character.getField(_name_field_data.name).getValue())
     end
 end
+
+ModHookerAPI.addHook("Validate", _onValidate)
 
 return CommonSubsystem

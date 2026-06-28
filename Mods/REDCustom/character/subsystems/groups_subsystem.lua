@@ -2,17 +2,6 @@ local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
 
 ---@class GroupsSubsystem : CharacterSubsystem
----@
----@field head_group FieldGroupAPI
----@field action_group FieldGroupAPI
----@field character_group FieldGroupAPI
----@field update_group FieldGroupAPI
----@field data_group FieldGroupAPI
----@field stats_group FieldGroupAPI
----@field skills_scroll_group FieldGroupAPI
----@field skills_group FieldGroupAPI
----@field parameters_group FieldGroupAPI
----@
 local GroupsSubsystem = setmetatable({}, CharacterSubsystem)
 GroupsSubsystem.__index = GroupsSubsystem
 
@@ -99,52 +88,36 @@ local _parameters_group =
     additional_data = { container_type = "VBox", label_visible = true, stretch_ratio = 3.0 }
 }
 
+GroupsSubsystem.head_group_name = _head_group.name
+GroupsSubsystem.update_group_name = _update_group.name
+GroupsSubsystem.action_group_name = _action_group.name
+GroupsSubsystem.character_group_name = _character_group.name
+GroupsSubsystem.stats_group_name = _stats_group.name
+GroupsSubsystem.data_group_name = _data_group.name
+GroupsSubsystem.skills_scroll_group_name = _skills_scroll_group.name
+GroupsSubsystem.skills_group_name = _skills_group.name
+GroupsSubsystem.parameters_group_name = _parameters_group.name
 
-function GroupsSubsystem:_create()
+
+function GroupsSubsystem.initialize()
+    GroupsSubsystem.name = "GroupsSubsystem"
+end
+
+function GroupsSubsystem.create(character)
     RollPunkAPI.log("Создание GroupsSubsystem")
-    self.update_group = FieldsServices.createAndChild(self.character, _update_group)
-    self.head_group = FieldsServices.createAndChild(self.character, _head_group)
-    self.action_group = FieldsServices.createAndChild(self.head_group, _action_group)
-    self.character_group = FieldsServices.createAndChild(self.head_group, _character_group)
-    self.stats_group = FieldsServices.createAndChild(self.head_group, _stats_group)
-    self.data_group = FieldsServices.createAndChild(self.character, _data_group)
-    self.skills_scroll_group = FieldsServices.createAndChild(self.data_group, _skills_scroll_group)
-    self.skills_group = FieldsServices.createAndChild(self.skills_scroll_group, _skills_group)
-    self.parameters_group = FieldsServices.createAndChild(self.data_group, _parameters_group)
+
+    FieldsServices.createAndChild(character, _update_group)
+    local head_group = FieldsServices.createAndChild(character, _head_group)
+    FieldsServices.createAndChild(head_group, _action_group)
+    FieldsServices.createAndChild(head_group, _character_group)
+    FieldsServices.createAndChild(head_group, _stats_group)
+    local data_group = FieldsServices.createAndChild(character, _data_group)
+    local skills_scroll_group = FieldsServices.createAndChild(data_group, _skills_scroll_group)
+    FieldsServices.createAndChild(skills_scroll_group, _skills_group)
+    FieldsServices.createAndChild(data_group, _parameters_group)
 end
 
-function GroupsSubsystem:_connect()
-    RollPunkAPI.log("Присоединение GroupsSubsystem")
-    self.head_group = self.character.getField(_head_group.name)
-    self.action_group = self.character.getField( _action_group.name)
-    self.character_group = self.character.getField( _character_group.name)
-    self.update_group = self.character.getField( _update_group.name)
-    self.data_group = self.character.getField( _data_group.name)
-    self.stats_group = self.character.getField( _stats_group.name)
-    self.skills_scroll_group = self.character.getField( _skills_scroll_group.name)
-    self.skills_group = self.character.getField( _skills_group.name)
-    self.parameters_group = self.character.getField( _parameters_group.name)
-end
-
----@param character EntityFieldAPI
-function GroupsSubsystem:new(character)
-    RollPunkAPI.log("3")
-
-    ---@type GroupsSubsystem
-    local instance = CharacterSubsystem.new(self, "GroupsSubsystem", character)
-
-    if instance:isCreated() == false then
-        instance:_create()
-        instance:markAsCreated()
-    else
-        instance:_connect()
-    end
-
-    return instance
-end
-
-function GroupsSubsystem:validate(updated_field)
-
+function GroupsSubsystem.connect(character)
 end
 
 return GroupsSubsystem
