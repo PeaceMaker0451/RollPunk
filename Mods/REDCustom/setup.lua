@@ -25,8 +25,18 @@ local _load_character_rule_data =
     hook = "LoadCharacter"
 }
 
+---@type RuleData
+local _load_field_rule_data = 
+{
+    type = "Rule",
+    name = "LoadField",
+    visible_name = "Загрузить поле",
+    hook = "LoadField"
+}
+
 local _create_character_function
 local _load_character_function
+local _load_field_function
 
 ---@param rule_data RuleData
 ---@return RuleFieldAPI
@@ -47,9 +57,10 @@ local function _createRuleField(rule_data)
     return rule_field
 end
 
-function BaseActions.initialize(create_character_function, load_character_function)
+function BaseActions.initialize(create_character_function, load_character_function, load_field_function)
     _create_character_function = create_character_function
     _load_character_function = load_character_function
+    _load_field_function = load_field_function
 end
 
 function BaseActions.create()
@@ -65,6 +76,11 @@ function BaseActions.create()
     entity.addRule(load_character_rule)
     local load_character_rule_field = _createRuleField(_load_character_rule_data)
     entity.addField(load_character_rule_field)
+
+    local load_field_rule = ConstructorAPI.createRule(_load_field_rule_data)
+    entity.addRule(load_field_rule)
+    local load_field_rule_field = _createRuleField(_load_field_rule_data)
+    entity.addField(load_field_rule_field)
 
     SessionAPI.addEntityField(entity)
 end
@@ -85,8 +101,17 @@ local function _load_character(ActionsField)
     end
 end
 
+local function _load_field(ActionsField)
+    if _load_field_function ~= nil then
+        _load_field_function()
+    else
+        RollPunkAPI.log("Функция загрузки не установлена!")
+    end
+end
+
 
 ModHookerAPI.addHook(_create_character_rule_data.hook, _create_character)
 ModHookerAPI.addHook(_load_character_rule_data.hook, _load_character)
+ModHookerAPI.addHook(_load_field_rule_data.hook, _load_field)
 
 return BaseActions

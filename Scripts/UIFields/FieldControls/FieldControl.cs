@@ -1,12 +1,16 @@
 ﻿using Godot;
+using RollPunk.Popup;
 using SquadfestBot;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RollPunk.UIFields
 {
-    public abstract partial class FieldControl : Control
+    public abstract partial class FieldControl : Control, IContextActionsProvider
     {
+        protected List<ContextAction> ContextActions;
+        
         protected Func<LineField, bool> ViewCheck;
         protected Func<LineField, bool> EditCheck;
 
@@ -15,6 +19,14 @@ namespace RollPunk.UIFields
 
         private bool _isSubscriptionsAdded = false;
         private Random _random;
+
+        public FieldControl()
+        {
+            ContextActions = new List<ContextAction>()
+            {
+                new() {Name = "Удалить", Action = DeleteField}
+            };
+        }
         
         public override void _ExitTree()
         {
@@ -107,11 +119,18 @@ namespace RollPunk.UIFields
 
         public abstract LineField GetField();
 
+        public IEnumerable<ContextAction> GetContextActions()
+        {
+            return ContextActions;
+        }
+
         protected new abstract void SetVisible(bool visible);
         protected abstract void SetEditable(bool editable);
         protected new abstract void SetName(string name);
         protected abstract void UpdateValue();
         protected virtual void OnAdditionalDataChanged(string dataName) { }
+        protected virtual void OnExittingTree() { }
+
         private void OnUpdated()
         {
             UpdateValue();
@@ -121,6 +140,9 @@ namespace RollPunk.UIFields
             OnAdditionalDataChanged(string.Empty);
         }
 
-        protected virtual void OnExittingTree() { }
+        private void DeleteField()
+        {
+            GetField().Parent.RemoveField(GetField());
+        }
     }
 }

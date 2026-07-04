@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://baeakl8bsuypq"]
+[gd_scene format=3 uid="uid://baeakl8bsuypq"]
 
 [ext_resource type="Script" uid="uid://bk0bg24ys0me8" path="res://Scripts/UIFields/FieldControls/LineFields/IntFieldControl.cs" id="1_m508s"]
 [ext_resource type="Theme" uid="uid://dg7lyx8b5au00" path="res://Style/StatTheme.tres" id="1_sfi4j"]
 
-[node name="Stat" type="MarginContainer" node_paths=PackedStringArray("_titleControl", "_valueControl")]
-custom_minimum_size = Vector2(65.98, 63.775)
+[node name="Stat" type="MarginContainer" unique_id=2017942459 node_paths=PackedStringArray("_titleControl", "_valueControl")]
+custom_minimum_size = Vector2(65.98, 67.29)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
 offset_right = -729.0
-offset_bottom = -536.0
+offset_bottom = -533.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -23,13 +23,13 @@ script = ExtResource("1_m508s")
 _titleControl = NodePath("LineEdit")
 _valueControl = NodePath("LineEdit/SpinBox")
 
-[node name="LineEdit" type="Label" parent="."]
+[node name="LineEdit" type="Label" parent="." unique_id=1601578874]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Текст"
 visible_characters_behavior = 1
 
-[node name="SpinBox" type="SpinBox" parent="LineEdit"]
+[node name="SpinBox" type="SpinBox" parent="LineEdit" unique_id=1389084378]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 12
@@ -43,6 +43,6 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_sfi4j")
-max_value = 1e+10
+max_value = 10000000000.0
 alignment = 1
 editable = false

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj": {}
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj",
         "projectName": "RollPunk",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\.godot\\mono\\temp\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,20 +33,20 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\ClientNetcode.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
               }
             }
           }
@@ -73,16 +77,20 @@
               "version": "[3.16.0, )"
             },
             "Godot.SourceGenerators": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[4.4.1, )"
+              "version": "[4.7.0, )",
+              "autoReferenced": true
             },
             "GodotSharp": {
               "target": "Package",
-              "version": "[4.4.1, )"
+              "version": "[4.7.0, )",
+              "autoReferenced": true
             },
             "GodotSharpEditor": {
               "target": "Package",
-              "version": "[4.4.1, )"
+              "version": "[4.7.0, )",
+              "autoReferenced": true
             },
             "MoonSharp": {
               "target": "Package",
@@ -109,17 +117,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj",
         "projectName": "AccessPolicy",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -134,17 +146,17 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj"
               }
             }
           }
@@ -185,17 +197,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\ClientNetcode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
         "projectName": "ClientNetcode",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\ClientNetcode\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\ClientNetcode.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\ClientNetcode\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -210,32 +226,32 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\AccessPolicy\\AccessPolicy.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj"
               }
             }
           }
@@ -282,17 +298,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\CommandsSystem.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\CommandsSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\CommandsSystem.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\CommandsSystem.csproj",
         "projectName": "CommandsSystem",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\CommandsSystem.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\CommandsSystem.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -345,17 +365,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj",
         "projectName": "Debug",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -414,17 +438,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -483,17 +511,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj",
         "projectName": "Fields",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -508,11 +540,11 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               }
             }
           }
@@ -563,17 +595,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj",
         "projectName": "HierarchyFields",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -588,14 +624,14 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj"
               }
             }
           }
@@ -636,17 +672,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj",
         "projectName": "Modding",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -661,11 +701,11 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\CommandsSystem.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\CommandsSystem\\CommandsSystem.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\CommandsSystem.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\CommandsSystem\\CommandsSystem.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj"
               }
             }
           }
@@ -720,17 +760,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
         "projectName": "NetcodeCommon",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\NetcodeCommon\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\NetcodeCommon.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\NetcodeCommon\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -745,20 +789,20 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Debug\\Debug.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Debug\\Debug.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\HierarchyFields\\HierarchyFields.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj"
               }
             }
           }
@@ -805,17 +849,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj",
         "projectName": "Players",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\Players.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Players\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\Players.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Players\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -830,11 +878,11 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               }
             }
           }
@@ -875,17 +923,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj",
         "projectName": "Rules",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\Rules.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Rules\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\Rules.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Rules\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -900,11 +952,11 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Modding\\Modding.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Modding\\Modding.csproj"
               }
             }
           }
@@ -945,17 +997,21 @@
         }
       }
     },
-    "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj": {
+    "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj",
+        "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\obj\\",
+        "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -970,14 +1026,14 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
               },
-              "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-                "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+              "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+                "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
               }
             }
           }

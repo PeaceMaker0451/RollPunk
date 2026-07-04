@@ -21,6 +21,8 @@ namespace RollPunk.Fields
         public event Action<string> AdditionalDataChanged;
         public event Action<Field> ChildAdded;
         public event Action<Field> ChildRemoved;
+        public event Action<Field> DescendantAdded;
+        public event Action<Field> DescendantRemoved;
         public event Action<Field> ParentChanged;
         public event Action<Field> ParentRemoved;
         public event Action Changed;
@@ -85,10 +87,6 @@ namespace RollPunk.Fields
 
         public void AddField(Field child)
         {
-            if(Name == "CP_Charater")
-                RPDebug.Log($"[color=green]Добавление поля {child.Name}...[/color]");
-            
-            
             if (child == null) 
                 throw new ArgumentNullException(nameof(child));
 
@@ -195,8 +193,20 @@ namespace RollPunk.Fields
             _childrenByIds.Add(field.ID, field);
             _childrenByNames.Add(field.Name, field);
 
-            field.ChildAdded += AddFieldToRegistry;
-            field.ChildRemoved += RemoveFieldFromRegistry;
+            field.ChildAdded += OnDescendantAdded;
+            field.ChildRemoved += OnDescendantRemoved;
+        }
+
+        private void OnDescendantAdded(Field field)
+        {
+            AddFieldToRegistry(field);
+            DescendantAdded?.Invoke(field);
+        }
+
+        private void OnDescendantRemoved(Field field)
+        {
+            RemoveFieldFromRegistry(field);
+            DescendantRemoved?.Invoke(field);
         }
 
         private void RemoveFieldFromRegistry(Field field)

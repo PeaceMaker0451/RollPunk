@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://yibs42h3he6s"]
+[gd_scene format=3 uid="uid://yibs42h3he6s"]
 
 [ext_resource type="Script" uid="uid://by5eb07yfb0gx" path="res://Scripts/UIFields/FieldControls/LineFields/StringFieldControl.cs" id="1_04nqa"]
 [ext_resource type="StyleBox" uid="uid://c0fmcs0r5eq65" path="res://Style/PunkStyleSimpleLabel.tres" id="2_sbsnx"]
 
-[node name="UniversalFieldString" type="MarginContainer" node_paths=PackedStringArray("_titleControl", "_valueControl")]
-clip_contents = true
+[node name="UniversalFieldString" type="MarginContainer" unique_id=1730063497 node_paths=PackedStringArray("_titleControl", "_valueControl")]
 custom_minimum_size = Vector2(89.695, 50)
+clip_contents = true
 offset_right = 56.0
 offset_bottom = 50.0
 size_flags_vertical = 4
@@ -17,11 +17,11 @@ script = ExtResource("1_04nqa")
 _titleControl = NodePath("VBoxContainer/Title")
 _valueControl = NodePath("VBoxContainer/ValueField")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1221349256]
 layout_mode = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=1338982145]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("2_sbsnx")
@@ -30,12 +30,12 @@ vertical_alignment = 1
 justification_flags = 0
 visible_characters_behavior = 3
 
-[node name="ValueField" type="LineEdit" parent="VBoxContainer"]
+[node name="ValueField" type="LineEdit" parent="VBoxContainer" unique_id=1169728391]
 layout_mode = 2
 text = "Value"
 expand_to_text_length = true
 context_menu_enabled = false
 emoji_menu_enabled = false
-virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
 caret_blink = true

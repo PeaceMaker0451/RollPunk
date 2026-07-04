@@ -1,6 +1,5 @@
 using Godot;
 using RollPunk.Client;
-using RollPunk.Debug;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Scripts.UIFields;
@@ -8,7 +7,6 @@ using RollPunk.UI.Forms;
 using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 internal partial class EntityView : Form
 {
@@ -51,22 +49,57 @@ internal partial class EntityView : Form
 
     public void DisplayField(EntityField entityField)
     {
+        if(_entity != null)
+        {
+            _entity.DescendantAdded -= OnEntityDescendantAdded;
+            _entity.DescendantRemoved -= OnEntityDescendantRemoved;
+            _entity.ChildAdded -= OnEntityDescendantAdded;
+            _entity.ChildRemoved -= OnEntityDescendantRemoved;
+        }
+        
+        _entity = entityField;
+        _entity.DescendantAdded += OnEntityDescendantAdded;
+        _entity.DescendantRemoved += OnEntityDescendantRemoved;
+        _entity.ChildAdded += OnEntityDescendantAdded;
+        _entity.ChildRemoved += OnEntityDescendantRemoved;
+
+        UpdateView();
+    }
+
+    public void SetViewRule(Func<LineField, bool> rule)
+    {
+        _viewCheck = rule;
+    }
+
+    public void SetEditRule(Func<LineField, bool> rule)
+    {
+        _editCheck = rule;
+    }
+
+    private void OnEntityDescendantAdded(Field child)
+    {
+        UpdateView();
+    }
+
+    private void OnEntityDescendantRemoved(Field child)
+    {
+        UpdateView();
+    }
+
+    private void UpdateView()
+    {
         if (_controlsConstructor == null)
             throw new InvalidOperationException("EntityView is not initialized!");
-        
+
         foreach (var control in _controls.Values)
-        {
             control.QueueFree();
-        }
 
         _controls.Clear();
 
-        _entity = entityField;
+        _id.Text = _entity.ID.ToString();
+        _name.Text = _entity.Name;
 
-        _id.Text = entityField.ID.ToString();
-        _name.Text = entityField.Name;
-
-        foreach (var field in entityField.Fields)
+        foreach (var field in _entity.Fields)
         {
             if (field is LineField lineField == false)
                 continue;
@@ -81,15 +114,5 @@ internal partial class EntityView : Form
         }
 
         FieldControlsSorter.Sort(_fieldsContainer);
-    }
-
-    public void SetViewRule(Func<LineField, bool> rule)
-    {
-        _viewCheck = rule;
-    }
-
-    public void SetEditRule(Func<LineField, bool> rule)
-    {
-        _editCheck = rule;
     }
 }

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bxfkvoykc3khy"]
+
+[ext_resource type="Script" uid="uid://ccw8rctv6wgqt" path="res://Scripts/UI/Popup/PopupMenu.cs" id="1_qa42u"]
+
+[node name="PopupMenu" type="PopupPanel" unique_id=999169265 node_paths=PackedStringArray("_buttonsContainer")]
+oversampling_override = 1.0
+size = Vector2i(188, 34)
+visible = true
+script = ExtResource("1_qa42u")
+_buttonsContainer = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1853951712]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 184.0
+offset_bottom = 30.0
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1816063227]
+layout_mode = 2

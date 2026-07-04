@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c175gdbt8dx8i"]
+[gd_scene format=3 uid="uid://c175gdbt8dx8i"]
 
-[ext_resource type="Script" uid="uid://dt0jew2xvnwm6" path="res://Forms/Editor/Editor.cs" id="1_88why"]
-[ext_resource type="Script" uid="uid://b5p68twsei2f2" path="res://Forms/Editor/SceneTree.cs" id="2_aetk5"]
-
-[node name="GameSceneView" type="Control" node_paths=PackedStringArray("gameCamera", "gameViewPort", "gameViewportContainer", "sceneTree")]
+[node name="GameSceneView" type="Control"]
 custom_minimum_size = Vector2(580, 350)
 layout_mode = 3
 anchors_preset = 15
@@ -14,12 +11,6 @@ offset_right = 364.0
 offset_bottom = 118.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_88why")
-gameCamera = NodePath("PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer/SubViewport/Camera2D")
-gameViewPort = NodePath("PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer/SubViewport")
-gameViewportContainer = NodePath("PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer")
-sceneTree = NodePath("PanelContainer/HSplitContainer/VBoxContainer2/ColorRect/MarginContainer/VBoxContainer/Tree")
-Title = "Редактор"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -63,7 +54,6 @@ text = "Иерархия объектов"
 [node name="Tree" type="Tree" parent="PanelContainer/HSplitContainer/VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("2_aetk5")
 
 [node name="ColorRect2" type="PanelContainer" parent="PanelContainer/HSplitContainer/VBoxContainer2"]
 layout_mode = 2
@@ -83,7 +73,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(730, 726)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 

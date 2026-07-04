@@ -17,19 +17,26 @@ namespace RollPunk.Client
         private WindowsManager _windowsManager;
 
         private bool _oneScreenMode;
+        private bool _smoothResizing;
+        private bool _waitForReaizeEnd;
+        private float _scale = 1f;
 
         private List<Frame> _subFrames = new();
 
         public TabedFrame MainFrame { get; private set; }
         public IReadOnlyList<Frame> SubFrames => _subFrames;
 
-        public FramesManager(Node rootNode, bool oneScreenMode, string tabedFramePath, string defFramePath)
+        public FramesManager(Node rootNode, float scale, bool oneScreenMode, bool smoothResizing, bool waitForReaizeEnd, string tabedFramePath, string defFramePath)
         {
+            _scale = scale;
+            
             _tabedFramePath = tabedFramePath;
             _framePath = defFramePath;
             
             _rootNode = rootNode;
             _oneScreenMode = oneScreenMode;
+            _smoothResizing = smoothResizing;
+            _waitForReaizeEnd = waitForReaizeEnd;
 
             _windowsManager = new(_rootNode);
             
@@ -55,7 +62,12 @@ namespace RollPunk.Client
             frame.SetForm(form);
             frame.SetTitle(form.Title);
 
-            if(_oneScreenMode == false)
+            frame.SetScaleFactor(_scale);
+            frame.WaitForResizeToChangeForm = _waitForReaizeEnd;
+            frame.SmoothResizing = _smoothResizing;
+            window.Ready += () => OnWindowReady(window);
+
+            if (_oneScreenMode == false)
             {
                 Vector2I screenResolution = DisplayServer.ScreenGetSize();
                 window.Position = (screenResolution / 2) - (window.Size / 2);
@@ -90,6 +102,7 @@ namespace RollPunk.Client
 
             if (_oneScreenMode)
             {
+                
                 mainWindow.SetMode(Window.ModeEnum.Fullscreen);
                 mainWindow.Borderless = false;
                 mainWindow.Unresizable = false;
@@ -109,6 +122,8 @@ namespace RollPunk.Client
                 mainWindow.Transparent = true;
                 mainWindow.TransparentBg = true;
             }
+
+            mainWindow.Ready += () => OnWindowReady(mainWindow);
         }
 
         private void CreateMainFrame()
@@ -118,6 +133,15 @@ namespace RollPunk.Client
 
             MainFrame.ShouldChangeWindowResolution = !_oneScreenMode;
             MainFrame.UpdateSize();
+
+            MainFrame.SetScaleFactor(_scale);
+            MainFrame.WaitForResizeToChangeForm = _waitForReaizeEnd;
+            MainFrame.SmoothResizing = _smoothResizing;
+        }
+
+        private void OnWindowReady(Window window)
+        {
+            window.ContentScaleFactor = _scale;
         }
     }
 }

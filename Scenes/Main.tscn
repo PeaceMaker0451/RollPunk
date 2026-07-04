@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://g6v6k61m3anb"]
+[gd_scene format=3 uid="uid://g6v6k61m3anb"]
 
 [ext_resource type="Script" uid="uid://cdw717cqit6nh" path="res://Scripts/Program.cs" id="1_hrxkq"]
+[ext_resource type="Script" uid="uid://daxgpdbgg4w0k" path="res://Scripts/UI/Popup/ContextMenuManager.cs" id="2_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bxfkvoykc3khy" path="res://Scenes/Popup/popup.tscn" id="3_pbw6q"]
+[ext_resource type="Script" uid="uid://qqlvyk5ihl6c" path="res://Scripts/UI/Pointer.cs" id="4_v1gob"]
 
-[node name="Program" type="Node"]
+[node name="Program" type="Node" unique_id=1653662372]
 script = ExtResource("1_hrxkq")
+
+[node name="ContextMenuManager" type="Node" parent="." unique_id=951961821 node_paths=PackedStringArray("_popupMenu")]
+script = ExtResource("2_rgh2o")
+_popupMenu = NodePath("PopupMenu")
+
+[node name="PopupMenu" parent="ContextMenuManager" unique_id=999169265 instance=ExtResource("3_pbw6q")]
+visible = false
+
+[node name="Pointer" type="Node" parent="." unique_id=292789986 node_paths=PackedStringArray("_contextMenuManager")]
+script = ExtResource("4_v1gob")
+_contextMenuManager = NodePath("../ContextMenuManager")

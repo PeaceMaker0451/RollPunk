@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2lyqeeycshoi"]
+[gd_scene format=3 uid="uid://c2lyqeeycshoi"]
 
 [ext_resource type="Script" uid="uid://8of5e6rbiem7" path="res://Scripts/Client/Forms/EntityForm/EntityView.cs" id="1_1jb75"]
 
-[node name="Entity" type="PanelContainer" node_paths=PackedStringArray("_fieldsContainer", "_id", "_name", "_saveButton")]
-custom_minimum_size = Vector2(675, 0)
-offset_right = 695.0
-offset_bottom = 716.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dkj0c"]
+
+[node name="Entity" type="Panel" unique_id=2045114759 node_paths=PackedStringArray("_fieldsContainer", "_id", "_name", "_saveButton")]
+custom_minimum_size = Vector2(630, 200)
+clip_contents = true
+offset_right = 550.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dkj0c")
 script = ExtResource("1_1jb75")
 _fieldsContainer = NodePath("VBoxContainer/ScrollContainer/MarginContainer/CharacterFieldsContainer")
 _id = NodePath("VBoxContainer/HBoxContainer/LineEdit")
@@ -14,45 +18,51 @@ _saveButton = NodePath("VBoxContainer/HBoxContainer/Button")
 Title = "Лист сущности"
 resizable = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1393804762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=134404647]
 layout_mode = 2
 alignment = 2
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=825051649]
 layout_mode = 2
 placeholder_text = "EntityFieldID"
 editable = false
 expand_to_text_length = true
 flat = true
 
-[node name="LineEdit2" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="LineEdit2" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=73312342]
 layout_mode = 2
 placeholder_text = "FieldName"
 editable = false
 expand_to_text_length = true
 flat = true
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1115041956]
 layout_mode = 2
 text = "Export Entity"
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1439259872]
 visible = false
 layout_mode = 2
 text = "Import Entity"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1154105944]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1000858470]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
-clip_contents = true
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer" unique_id=555278746]
+propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -61,6 +71,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="CharacterFieldsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="CharacterFieldsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer" unique_id=1325861144]
+propagate_maximum_size = false
 layout_mode = 2
 size_flags_vertical = 3

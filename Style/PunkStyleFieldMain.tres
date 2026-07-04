@@ -11,7 +11,6 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
-corner_radius_bottom_right = 5
 corner_detail = 1
 shadow_color = Color(0, 0, 0, 0)
 anti_aliasing = false

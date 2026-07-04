@@ -25,6 +25,8 @@ namespace RollPunk.UI.Frames
 
         private int minFrameWidth = 200;
         private int minFrameHeight = 120;
+        private int maxFrameWidth = 200;
+        private int maxFrameHeight = 120;
 
         private Vector2I borderOffset;
 
@@ -56,8 +58,9 @@ namespace RollPunk.UI.Frames
         public bool WaitForResizeToChangeForm;
         public bool CloseOnButtonPress;
         public bool MinimizeOnButtonPress;
+        public bool TrySaveSize = true;
 
-        public float ScaleFactor = 1;
+        public float ScaleFactor { get; private set; } = 1;
 
         public override void _Ready()
         {
@@ -72,8 +75,14 @@ namespace RollPunk.UI.Frames
 
         public virtual void SetForm(Form form)
         {
-            minFrameHeight = Math.Max((int)form.CustomMinimumSize.Y + borderOffset.Y, (int)CustomMinimumSize.Y);
-            minFrameWidth = Math.Max((int)form.CustomMinimumSize.X + borderOffset.X, (int)CustomMinimumSize.X);
+            minFrameHeight = (int)(form.CustomMinimumSize.Y + borderOffset.Y * ScaleFactor);
+            minFrameWidth = (int)(form.CustomMinimumSize.X + borderOffset.X * ScaleFactor);
+
+            CustomMinimumSize = new(minFrameWidth, minFrameHeight);
+
+            maxFrameHeight = (int)form.CustomMaximumSize.Y != -1 ? Math.Max((int)form.CustomMaximumSize.Y + borderOffset.Y, (int)CustomMinimumSize.Y) : int.MaxValue;
+            maxFrameWidth = (int)form.CustomMaximumSize.X != -1 ? Math.Max((int)form.CustomMaximumSize.X + borderOffset.X, (int)CustomMinimumSize.X) : int.MaxValue;
+
             SetFormToContentPanel(form);
         }
 
@@ -102,6 +111,15 @@ namespace RollPunk.UI.Frames
             _contentPanel.ProcessMode = active?ProcessModeEnum.Inherit:ProcessModeEnum.Disabled;
         }
 
+        public void SetScaleFactor(float scaleFactor)
+        {
+            if (scaleFactor <= 0)
+                throw new Exception();
+            
+            ScaleFactor = scaleFactor;
+            UpdateSize();
+        }
+
         protected async void SetFormToContentPanel(Form form)
         {
             await AwaitCanChangeForm();
@@ -111,6 +129,9 @@ namespace RollPunk.UI.Frames
                 CurrentForm.OnHide();
                 CurrentForm.Hide();
             }
+
+            if (CurrentForm != null && TrySaveSize)
+                form.Size = CurrentForm.Size;
 
             CurrentForm = form;
 
@@ -179,14 +200,14 @@ namespace RollPunk.UI.Frames
 
         private void SetFrameSize(int pixelsX, int pixelsY)
         {
-            pixelsX = Math.Max(pixelsX, minFrameWidth);
-            pixelsY = Math.Max(pixelsY, minFrameHeight);
+            pixelsX = Math.Clamp(pixelsX, minFrameWidth, maxFrameWidth);
+            pixelsY = Math.Clamp(pixelsY, minFrameHeight, maxFrameHeight);
 
             currentWindowSizeX = pixelsX;
             currentWindowSizeY = pixelsY;
             CurrentFrameSize = new Vector2I(pixelsX, pixelsY);
 
-            Scale = new Vector2(ScaleFactor, ScaleFactor);
+            //Scale = new Vector2(ScaleFactor, ScaleFactor);
 
             if (ShouldChangeWindowResolution)
                 SetWindowResolution((int)(CurrentFrameSize.X * ScaleFactor), (int)(CurrentFrameSize.Y * ScaleFactor));

@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://88lp7ntqxq0t"]
+[gd_scene format=3 uid="uid://88lp7ntqxq0t"]
 
 [ext_resource type="Script" uid="uid://hlu3jpvjuyxt" path="res://Scripts/Client/Forms/MainMenu/MainMenu.cs" id="1_v0jhx"]
+[ext_resource type="VideoStream" uid="uid://b82k1625grhfw" path="res://Video/0001-0120.ogv" id="2_cfmt1"]
 [ext_resource type="Script" uid="uid://couldqbrilins" path="res://Scripts/Client/Forms/MainMenu/EnterSessionSubMenu.cs" id="2_tf62t"]
+[ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_0xosi"]
 [ext_resource type="Script" uid="uid://56cxr40p3sm0" path="res://Scripts/Client/Forms/MainMenu/MainSubMenu.cs" id="3_2aawn"]
+[ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="3_p1iy4"]
 [ext_resource type="PackedScene" uid="uid://coxmfns81m0gj" path="res://Scenes/Other/rollpunkLogo.tscn" id="4_slnmx"]
+[ext_resource type="Shader" uid="uid://d0w7fiqksxcwp" path="res://Shaders/LiquidGlass.gdshader" id="8_7bgxm"]
+[ext_resource type="Shader" uid="uid://bg5juswfbpk3j" path="res://Shaders/SphereProjection.gdshader" id="8_soisg"]
+[ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="9_7bgxm"]
+[ext_resource type="Script" uid="uid://dn1wwtr5nmgfw" path="res://Scripts/UI/CopyableRichTextLabel.cs" id="10_soisg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whksc"]
 content_margin_left = 8.0
@@ -12,39 +19,320 @@ content_margin_right = 8.0
 content_margin_bottom = 5.0
 bg_color = Color(1, 0.19, 0.19, 1)
 
-[node name="MainForm" type="Control" node_paths=PackedStringArray("_mainMenu", "_enterMenu")]
-custom_minimum_size = Vector2(933, 529)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8673"]
+shader = ExtResource("8_7bgxm")
+shader_parameter/blur = 2.76800013148
+shader_parameter/warp_intensity = 0.2450000116375
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 0.0990000047025
+shader_parameter/edge_smoothness = 3.0
+shader_parameter/tint = Color(0, 0, 0, 0.38039216)
+shader_parameter/edge_highlight = Color(0.65012825, 0.6501283, 0.65012825, 0.19215687)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuf7w"]
+shader = ExtResource("8_soisg")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.5
+shader_parameter/rotation_speed_x = 0.0
+shader_parameter/rotation_speed_y = 0.1
+shader_parameter/rotation_speed_z = 0.0
+shader_parameter/rotation_offset_x = 0.0
+shader_parameter/rotation_offset_y = 0.0
+shader_parameter/rotation_offset_z = 0.0
+
+[node name="MainForm" type="Control" unique_id=194105810 node_paths=PackedStringArray("_mainMenu", "_enterMenu")]
+custom_minimum_size = Vector2(950, 529)
+propagate_maximum_size = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 933.0
+offset_right = 950.0
 offset_bottom = 529.0
 script = ExtResource("1_v0jhx")
-_mainMenu = NodePath("ColorRect/Menus/MainMenu")
-_enterMenu = NodePath("ColorRect/Menus/EnterSession")
+_mainMenu = NodePath("Background/HBoxContainer/Menus/MainMenu")
+_enterMenu = NodePath("Background/HBoxContainer/Menus/EnterSession")
 Title = "Главное меню"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="Control" parent="." unique_id=663389259 node_paths=PackedStringArray("_videoPlayer")]
+self_modulate = Color(0.114897, 0.114897, 0.114897, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+script = ExtResource("3_p1iy4")
+_videoPlayer = NodePath("TextureRect/VideoStreamPlayer")
 
-[node name="RightPart" type="Control" parent="ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1758028967]
+modulate = Color(0.54497427, 0.5449743, 0.5449741, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 467.0
-offset_top = 30.0
-offset_right = -20.0
-offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0xosi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Background/TextureRect" unique_id=2001807848]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_cfmt1")
+autoplay = true
+expand = true
+loop = true
+
+[node name="HBoxContainer" type="Control" parent="Background" unique_id=499916817]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/RightPart"]
+[node name="Menus" type="MarginContainer" parent="Background/HBoxContainer" unique_id=1772207851]
+custom_minimum_size = Vector2(356.555, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 384.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="EnterSession" type="Control" parent="Background/HBoxContainer/Menus" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_tf62t")
+_returnButton = NodePath("BackButton")
+_connectButton = NodePath("VBoxContainer/Button8")
+_adressField = NodePath("VBoxContainer/Control2/LineEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/HBoxContainer/Menus/EnterSession" unique_id=349577375]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+
+[node name="LoginLabel" type="Label" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer" unique_id=1932299814]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
+text = "Войти в сессию"
+
+[node name="HSeparator" type="HSeparator" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer" unique_id=432191113]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer" unique_id=108947133]
+custom_minimum_size = Vector2(118.485, 66.89)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label2" type="Label" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer/Control2" unique_id=1342960490]
+layout_mode = 1
+offset_right = 105.0
+offset_bottom = 29.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Адрес подключения"
+
+[node name="LineEdit" type="LineEdit" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer/Control2" unique_id=1954985457]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.89
+offset_right = 155.515
+offset_bottom = 0.110001
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button8" type="Button" parent="Background/HBoxContainer/Menus/EnterSession/VBoxContainer" unique_id=1136034322]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Присоедениться к сессии"
+
+[node name="BackButton" type="Button" parent="Background/HBoxContainer/Menus/EnterSession" unique_id=391826838]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Назад"
+
+[node name="CreateSession" type="Control" parent="Background/HBoxContainer/Menus" unique_id=78800592]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/HBoxContainer/Menus/CreateSession" unique_id=258491398]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer" unique_id=561507937]
+layout_mode = 2
+theme_override_constants/separation = 21
+
+[node name="LoginLabel" type="Label" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer/VBoxContainer" unique_id=256917366]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
+text = "Создать Сессию"
+
+[node name="HSeparator" type="HSeparator" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer/VBoxContainer" unique_id=1063474643]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer/VBoxContainer" unique_id=876411265]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "Информация о сессии"
+
+[node name="HSeparator2" type="HSeparator" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer/VBoxContainer" unique_id=1559739796]
+layout_mode = 2
+
+[node name="Button8" type="Button" parent="Background/HBoxContainer/Menus/CreateSession/MarginContainer/VBoxContainer" unique_id=451522204]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Создать сессию и присоедениться как мастер"
+
+[node name="BackButton" type="Button" parent="Background/HBoxContainer/Menus/CreateSession" unique_id=101124173]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 59.0
+offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Назад"
+
+[node name="MainMenu" type="Control" parent="Background/HBoxContainer/Menus" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton", "_exitButton")]
+layout_mode = 2
+script = ExtResource("3_2aawn")
+_createSessionButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/CreateSessionButton")
+_enterSessionButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/EnterSessionButton")
+_exitSessionButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/LeaveSessionButton")
+_settingsButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/SettingsButton")
+_modManagerButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/ModManagerButton")
+_exitButton = NodePath("VBoxContainer/MarginContainer2/ButtonsList/ExitButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/HBoxContainer/Menus/MainMenu" unique_id=496544935]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer" unique_id=555638493]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 11
+
+[node name="Rollpunk" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer" unique_id=1531508065 instance=ExtResource("4_slnmx")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HSeparator2" type="HSeparator" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer" unique_id=1137364225]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer" unique_id=410621258]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="ButtonsList" type="VBoxContainer" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2" unique_id=1405613495]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EnterSessionButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1441861412]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Присоедениться к сессии"
+
+[node name="CreateSessionButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1114469199]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Создать сессию"
+
+[node name="PlayerListButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1735642168]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Редактор персонажа"
+
+[node name="LeaveSessionButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=133692852]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Покинуть сессию"
+
+[node name="SettingsButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1519318842]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Настройки"
+
+[node name="ModManagerButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1428824015]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Менеджер модов"
+
+[node name="AboutButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1260230369]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "О RollPunk'е"
+
+[node name="ExitButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=1868956393]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Выйти"
+
+[node name="RightPart" type="Control" parent="Background/HBoxContainer" unique_id=1715125138]
+custom_minimum_size = Vector2(568.94, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/HBoxContainer/RightPart" unique_id=537158954]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,10 +344,90 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/RightPart/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/HBoxContainer/RightPart/MarginContainer" unique_id=357869665]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ColorRect/RightPart"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer" unique_id=1536237691]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1008185642]
+material = SubResource("ShaderMaterial_d8673")
+layout_mode = 2
+
+[node name="MotdText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer" unique_id=336505649]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+bbcode_enabled = true
+text = "Я написал сделал роллпанк не в последнюю очередь ради того, чтобы вам сюда хуйню всякую писать"
+fit_content = true
+scroll_following = true
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2105957952]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1563644658]
+material = SubResource("ShaderMaterial_d8673")
+layout_mode = 2
+
+[node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=1622916374]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "[url={link}][b]RollPunk 0.5.1[/b][/url]
+- исправлены ошибки в сериализации и десериализации полей сущностей, и правил, из-за которых терялись данные, необходимые для обработки событий, вызываемыми кнопками
+- исправлена ошибка, из-за которой в текстовые поля нельзя было вставлять текст
+- изменен механизм загрузки файлов сущностей - теперь сущности \"клонируются\" с файла, то есть, теперь можно загружать несколько копий одной сущности
+- хранение полей переписано таким образом, чтобы в древе наследования не могло быть нескольких полей с одинаковыми названиями
+
+Набор КП правил
+- добавлен автоматический апгрейд файлов персонажей до актуальной версии
+- при апгрейде файлов персонажей автоматически будет восстановлен функционал кнопок действий"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=263659897]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1022933997]
+layout_mode = 2
+
+[node name="PeaceMaker" type="TextureRect" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=2094843323]
+material = SubResource("ShaderMaterial_cuf7w")
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_7bgxm")
+expand_mode = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1282397580]
+material = SubResource("ShaderMaterial_d8673")
+custom_maximum_size = Vector2(-1, 135.04)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3" unique_id=1501039377]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "Абоба
+Репозиторий:
+Документация:
+p4m4r: [color=#26a5ee][url=@p4m4r]Telegram[/url][/color], [color=#9a7bee][url=peacemaker0451]Discord[/url][/color]
+"
+fit_content = true
+vertical_alignment = 3
+script = ExtResource("10_soisg")
+
+[node name="Label" type="Label" parent="Background/HBoxContainer/RightPart" unique_id=277829963]
 visible = false
 layout_mode = 1
 anchors_preset = 14
@@ -73,237 +441,8 @@ offset_bottom = 14.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menus" type="Control" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = 15.0
-offset_right = 432.0
-offset_bottom = -56.0
-grow_vertical = 2
-
-[node name="EnterSession" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_tf62t")
-_returnButton = NodePath("BackButton")
-_connectButton = NodePath("VBoxContainer/Button8")
-_adressField = NodePath("VBoxContainer/Control2/LineEdit")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Menus/EnterSession"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 21
-
-[node name="LoginLabel" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 31
-theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
-text = "Войти в сессию"
-
-[node name="HSeparator" type="HSeparator" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
-custom_minimum_size = Vector2(118.485, 66.89)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Label2" type="Label" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control2"]
-layout_mode = 1
-offset_right = 105.0
-offset_bottom = 29.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Адрес подключения"
-
-[node name="LineEdit" type="LineEdit" parent="ColorRect/Menus/EnterSession/VBoxContainer/Control2"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -27.89
-offset_right = 155.515
-offset_bottom = 0.110001
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Button8" type="Button" parent="ColorRect/Menus/EnterSession/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Присоедениться к сессии"
-
-[node name="BackButton" type="Button" parent="ColorRect/Menus/EnterSession"]
-layout_mode = 2
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 59.0
-offset_bottom = 30.0
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "Назад"
-
-[node name="CreateSession" type="Control" parent="ColorRect/Menus"]
+[node name="Control" type="Control" parent="Background" unique_id=1433454923]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Menus/CreateSession"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 21
-
-[node name="LoginLabel" type="Label" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 31
-theme_override_styles/normal = SubResource("StyleBoxFlat_whksc")
-text = "Создать Сессию"
-
-[node name="HSeparator" type="HSeparator" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-text = "Информация о сессии"
-
-[node name="HSeparator2" type="HSeparator" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button8" type="Button" parent="ColorRect/Menus/CreateSession/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Создать сессию и присоедениться как мастер"
-
-[node name="BackButton" type="Button" parent="ColorRect/Menus/CreateSession"]
-layout_mode = 2
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 59.0
-offset_bottom = 30.0
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "Назад"
-
-[node name="MainMenu" type="Control" parent="ColorRect/Menus" node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton", "_exitButton")]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_2aawn")
-_createSessionButton = NodePath("ButtonsList/CreateSessionButton")
-_enterSessionButton = NodePath("ButtonsList/EnterSessionButton")
-_exitSessionButton = NodePath("ButtonsList/LeaveSessionButton")
-_settingsButton = NodePath("ButtonsList/SettingsButton")
-_modManagerButton = NodePath("ButtonsList/ModManagerButton")
-_exitButton = NodePath("ButtonsList/ExitButton")
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/Menus/MainMenu"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 135.0
-grow_horizontal = 2
-theme_override_constants/margin_left = -80
-theme_override_constants/margin_top = -15
-theme_override_constants/margin_right = 0
-
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/Menus/MainMenu/MarginContainer"]
-layout_mode = 2
-
-[node name="Rollpunk" parent="ColorRect/Menus/MainMenu/MarginContainer/CenterContainer" instance=ExtResource("4_slnmx")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="ButtonsList" type="VBoxContainer" parent="ColorRect/Menus/MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 135.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="HSeparator2" type="HSeparator" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-layout_mode = 2
-
-[node name="EnterSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Присоедениться к сессии"
-
-[node name="CreateSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Создать сессию"
-
-[node name="PlayerListButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Редактор персонажа"
-
-[node name="LeaveSessionButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Покинуть сессию"
-
-[node name="SettingsButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Настройки"
-
-[node name="ModManagerButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Менеджер модов"
-
-[node name="AboutButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "О RollPunk'е"
-
-[node name="ExitButton" type="Button" parent="ColorRect/Menus/MainMenu/ButtonsList"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Выйти"
-
-[node name="Control" type="Control" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -313,15 +452,15 @@ offset_top = -56.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Error" type="LineEdit" parent="ColorRect/Control"]
+[node name="Error" type="LineEdit" parent="Background/Control" unique_id=876796377]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_uneditable_color = Color(0.960784, 0, 0.105882, 1)
 theme_override_colors/font_color = Color(0.959731, 0, 0.104922, 1)
+theme_override_colors/font_uneditable_color = Color(0.960784, 0, 0.105882, 1)
 text = "Текст возможной ошибки"
 alignment = 1
 editable = false

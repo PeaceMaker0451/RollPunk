@@ -22,11 +22,19 @@ local function _loadCharacter()
     end)
 end
 
+local function _loadField()
+    SessionAPI.loadString(function(data)
+        local field = SerializatorAPI.deserializeField(data)
+        SessionAPI.addEntityField(field)
+        SessionAPI.OwnersRegistry.setEntityOwner(field, SessionAPI.current_player)
+    end)
+end
+
 local function _onSessionInitialized()
     RollPunkAPI.log("RollPunk default rules initialization...")
-    _baseActions.create(_createCharacter, _loadCharacter)
+    _baseActions.create()
     
 end
 
-_baseActions.initialize(_createCharacter, _loadCharacter)
+_baseActions.initialize(_createCharacter, _loadCharacter, _loadField)
 ModHookerAPI.addHook("SessionInitialized", _onSessionInitialized)

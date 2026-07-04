@@ -1,15 +1,12 @@
-[gd_resource type="Theme" load_steps=25 format=3 uid="uid://dg7lyx8b5au00"]
+[gd_resource type="Theme" format=3 uid="uid://dg7lyx8b5au00"]
 
 [ext_resource type="FontFile" uid="uid://bbg1lo0xbn50q" path="res://Fonts/ARIAL.TTF" id="1_trkpl"]
 [ext_resource type="StyleBox" uid="uid://bfsydac3s7mb8" path="res://Style/PunkStyleButtonHighlighted.tres" id="2_le4sq"]
 [ext_resource type="StyleBox" uid="uid://ctondjs8mkxwr" path="res://Style/PunkStyleButtonMain.tres" id="3_jjbmd"]
 [ext_resource type="StyleBox" uid="uid://d3u1l175maaoj" path="res://Style/PunkStyleButtonDark.tres" id="4_hpfxc"]
+[ext_resource type="FontFile" uid="uid://b5y75si8wbr6t" path="res://Fonts/Inter/static/Inter_18pt-Bold.ttf" id="5_4khbs"]
 [ext_resource type="StyleBox" uid="uid://br1xj0h1h8i64" path="res://Style/PunkStyleFieldMain.tres" id="5_604rm"]
 [ext_resource type="StyleBox" uid="uid://n0n5ob8g7wem" path="res://Style/PunkBackground.tres" id="6_0vwhc"]
-[ext_resource type="FontFile" uid="uid://d5ts76oryq7i" path="res://Fonts/ARIALBD.TTF" id="7_0nno8"]
-[ext_resource type="FontFile" uid="uid://cynmrsdjkmcxc" path="res://Fonts/ARIALBI.TTF" id="8_p3y4n"]
-[ext_resource type="FontFile" uid="uid://gqetr6vcrpfj" path="res://Fonts/ARIALI.TTF" id="9_ukk3i"]
-[ext_resource type="FontFile" uid="uid://dlke6vacj68gg" path="res://Fonts/ARIBLK.TTF" id="10_4u86o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u00a"]
 content_margin_left = 8.0
@@ -109,7 +106,7 @@ border_width_right = 2
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr4eo"]
 
 [resource]
-default_font_size = 15
+default_font_size = 22
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 0.529412)
 Button/font_sizes/font_size = 13
@@ -123,15 +120,15 @@ Button/styles/pressed = ExtResource("4_hpfxc")
 CheckBox/font_sizes/font_size = 13
 HSeparator/styles/separator = SubResource("StyleBoxLine_reo4n")
 Label/colors/font_color = Color(1, 1, 1, 1)
-Label/font_sizes/font_size = 20
-Label/fonts/font = ExtResource("1_trkpl")
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("5_4khbs")
 Label/styles/normal = SubResource("StyleBoxFlat_0el37")
 LineEdit/colors/font_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_uneditable_color = Color(1, 0.188235, 0.188235, 1)
 LineEdit/colors/selection_color = Color(1, 0.188235, 0.188235, 0.745098)
 LineEdit/constants/minimum_character_width = 0
 LineEdit/font_sizes/font_size = 24
-LineEdit/fonts/font = ExtResource("1_trkpl")
+LineEdit/fonts/font = null
 LineEdit/styles/normal = SubResource("StyleBoxFlat_trkpl")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_le4sq")
 Panel/styles/panel = ExtResource("6_0vwhc")
@@ -141,11 +138,6 @@ RichTextLabel/font_sizes/bold_italics_font_size = 14
 RichTextLabel/font_sizes/italics_font_size = 14
 RichTextLabel/font_sizes/mono_font_size = 14
 RichTextLabel/font_sizes/normal_font_size = 14
-RichTextLabel/fonts/bold_font = ExtResource("7_0nno8")
-RichTextLabel/fonts/bold_italics_font = ExtResource("8_p3y4n")
-RichTextLabel/fonts/italics_font = ExtResource("9_ukk3i")
-RichTextLabel/fonts/mono_font = ExtResource("10_4u86o")
-RichTextLabel/fonts/normal_font = ExtResource("1_trkpl")
 SplitContainer/constants/autohide = 0
 SplitContainer/constants/minimum_grab_thickness = 6
 SplitContainer/constants/separation = 12

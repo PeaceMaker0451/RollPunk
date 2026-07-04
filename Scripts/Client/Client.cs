@@ -52,7 +52,7 @@ namespace RollPunk.Client
             var settings = SettingsManager.LoadSettings();
             SettingsManager.SaveSettings(settings);
 
-            FramesManager = new(_rootNode, settings.OneScreenMode, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
+            FramesManager = new(_rootNode, settings.FormsScale, settings.OneScreenMode, settings.SmoothWindowResizing, settings.WaitForResizeToChangeWindow, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
             FormsFactory = new();
             UIController = new(FramesManager, FormsFactory);
 

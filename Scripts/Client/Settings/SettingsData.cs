@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Godot;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RollPunk.Client.Settings
 {
@@ -18,5 +15,10 @@ namespace RollPunk.Client.Settings
         [JsonProperty] public bool SmoothWindowResizing;
         [JsonProperty] public bool WaitForResizeToChangeWindow;
         [JsonProperty] public Guid ClientID;
+
+        public void Validate()
+        {
+            FormsScale = Mathf.Clamp(FormsScale, 0, 10);
+        }
     }
 }

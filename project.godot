@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="RollPunk"
@@ -15,10 +19,10 @@ config/version="0.1.0"
 run/main_scene="res://Scenes/Main.tscn"
 run/print_header=false
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 boot_splash/image="res://Sprites/logo.png"
 config/icon="res://Sprites/logo.png"
@@ -49,8 +53,9 @@ enabled=PackedStringArray()
 [gui]
 
 common/snap_controls_to_pixels=false
-theme/custom="uid://biap20igfxrus"
 theme/default_font_antialiasing=2
+theme/custom="uid://biap20igfxrus"
+theme/custom_font="uid://bbg1lo0xbn50q"
 
 [internationalization]
 

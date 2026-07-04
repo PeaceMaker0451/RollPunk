@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4t32sq20ceju"]
+[gd_scene format=3 uid="uid://b4t32sq20ceju"]
 
 [ext_resource type="Script" uid="uid://bk0bg24ys0me8" path="res://Scripts/UIFields/FieldControls/LineFields/IntFieldControl.cs" id="1_elneo"]
 [ext_resource type="StyleBox" uid="uid://c0fmcs0r5eq65" path="res://Style/PunkStyleSimpleLabel.tres" id="2_62btd"]
 
-[node name="IntFieldControl" type="MarginContainer" node_paths=PackedStringArray("_titleControl", "_valueControl", "_container")]
+[node name="IntFieldControl" type="MarginContainer" unique_id=71512943 node_paths=PackedStringArray("_titleControl", "_valueControl", "_container")]
 offset_top = -1.0
 offset_right = 94.0
 offset_bottom = 53.0
@@ -17,24 +17,26 @@ _titleControl = NodePath("HBoxContainer/Title")
 _valueControl = NodePath("HBoxContainer/ValueField")
 _container = NodePath("HBoxContainer")
 
-[node name="HBoxContainer" type="BoxContainer" parent="."]
+[node name="HBoxContainer" type="BoxContainer" parent="." unique_id=500228024]
 clip_contents = true
 layout_mode = 2
 
-[node name="Title" type="Label" parent="HBoxContainer"]
+[node name="Title" type="Label" parent="HBoxContainer" unique_id=1961665332]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("2_62btd")
 text = "Name"
 horizontal_alignment = 2
+vertical_alignment = 1
 visible_characters_behavior = 4
 
-[node name="ValueField" type="SpinBox" parent="HBoxContainer"]
+[node name="ValueField" type="SpinBox" parent="HBoxContainer" unique_id=1664239815]
 custom_minimum_size = Vector2(79.2, 0)
 layout_mode = 2
 size_flags_vertical = 4
-max_value = 1e+12
+max_value = 1000000000000.0
 rounded = true
 alignment = 1
 update_on_text_changed = true

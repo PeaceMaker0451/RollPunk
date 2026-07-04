@@ -124,13 +124,7 @@
           }
         }
       },
-      "Godot.SourceGenerators/4.4.1": {
-        "type": "package",
-        "build": {
-          "build/_._": {}
-        }
-      },
-      "GodotSharp/4.4.1": {
+      "GodotSharp/4.7.0": {
         "type": "package",
         "compile": {
           "lib/net8.0/GodotSharp.dll": {
@@ -143,10 +137,10 @@
           }
         }
       },
-      "GodotSharpEditor/4.4.1": {
+      "GodotSharpEditor/4.7.0": {
         "type": "package",
         "dependencies": {
-          "GodotSharp": "4.4.1"
+          "GodotSharp": "4.7.0"
         },
         "compile": {
           "lib/net8.0/GodotSharpEditor.dll": {
@@ -2158,9 +2152,8 @@
           "Discord.Net.WebSocket": "3.16.0",
           "Entities": "1.0.0",
           "Fields": "1.0.0",
-          "Godot.SourceGenerators": "4.4.1",
-          "GodotSharp": "4.4.1",
-          "GodotSharpEditor": "4.4.1",
+          "GodotSharp": "4.7.0",
+          "GodotSharpEditor": "4.7.0",
           "HierarchyFields": "1.0.0",
           "MoonSharp": "2.0.0"
         },
@@ -2390,40 +2383,27 @@
         "lib/netstandard2.1/Discord.Net.WebSocket.xml"
       ]
     },
-    "Godot.SourceGenerators/4.4.1": {
-      "sha512": "V/cuX41BxippWGD79zrP2bhqfXkuyiy9OFuCkTu3flo7I6STSJca637TL2phe7rzROIFre0vQR1+PAMdsjO3zg==",
+    "GodotSharp/4.7.0": {
+      "sha512": "cSlT7ziWnORTOxRz0LpmQNM+ZHBt5CWgegreJXiTinj37XucRZSQ65GIloblaozOju21L/FCBs4Y35WteHfQrw==",
       "type": "package",
-      "path": "godot.sourcegenerators/4.4.1",
+      "path": "godotsharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "analyzers/dotnet/cs/Godot.SourceGenerators.dll",
-        "build/Godot.SourceGenerators.props",
-        "godot.sourcegenerators.4.4.1.nupkg.sha512",
-        "godot.sourcegenerators.nuspec"
-      ]
-    },
-    "GodotSharp/4.4.1": {
-      "sha512": "ghnQEo5LikQPfbCYcVxje8epffNCiyNG4zvGWUDRZRC1O+653+yqG3wdxk3+5RZsA3jaRuGKRavsGcnhLKe12g==",
-      "type": "package",
-      "path": "godotsharp/4.4.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "godotsharp.4.4.1.nupkg.sha512",
+        "godotsharp.4.7.0.nupkg.sha512",
         "godotsharp.nuspec",
         "lib/net8.0/GodotSharp.dll",
         "lib/net8.0/GodotSharp.xml"
       ]
     },
-    "GodotSharpEditor/4.4.1": {
-      "sha512": "cc3nA24r/sjW8KxrNqfSQk4CQMQYcg/kYk5935R88IhGBdRuTH4miaBXPlzR/td5GR8i1oGtCMWyW8axpQ0DxA==",
+    "GodotSharpEditor/4.7.0": {
+      "sha512": "vXYw6PXzKVCTQCgPeGxLnw5Qlub8SY43yQYEPZNYlDN1/OOiLnaaKxJvLf2Wk5D+8/+K/pxRQXGPqj65bnWohQ==",
       "type": "package",
-      "path": "godotsharpeditor/4.4.1",
+      "path": "godotsharpeditor/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "godotsharpeditor.4.4.1.nupkg.sha512",
+        "godotsharpeditor.4.7.0.nupkg.sha512",
         "godotsharpeditor.nuspec",
         "lib/net8.0/GodotSharpEditor.dll",
         "lib/net8.0/GodotSharpEditor.xml"
@@ -6480,19 +6460,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\nikit\\.nuget\\packages\\": {},
+    "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj",
+      "projectUniqueName": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj",
       "projectName": "Tests",
-      "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\Tests.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Tests\\obj\\",
+      "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\Tests.csproj",
+      "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+      "outputPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Tests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6507,14 +6492,14 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj": {
-              "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\RollPunk.csproj"
+            "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj": {
+              "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\RollPunk.csproj"
             },
-            "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj": {
-              "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Entities\\Entities.csproj"
+            "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj": {
+              "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Entities\\Entities.csproj"
             },
-            "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj": {
-              "projectPath": "F:\\Cyberpunk RED\\Git\\RollPunk\\Scripts\\Fields\\Fields.csproj"
+            "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj": {
+              "projectPath": "E:\\PROJS\\GIT\\ROLLPUNK\\Scripts\\Fields\\Fields.csproj"
             }
           }
         }
