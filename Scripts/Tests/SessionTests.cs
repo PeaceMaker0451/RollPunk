@@ -91,18 +91,10 @@ namespace RollPunk.Tests
             // Arrange
             var session = CreateTestSession();
             var clientId = Guid.NewGuid();
-            var playerState = new EntityState
-            {
-                EntityType = "Player",
-                Name = "TestPlayer",
-                ID = Guid.NewGuid(),
-                Payload = new Dictionary<string, Newtonsoft.Json.Linq.JToken>
-                {
-                    ["IsAdmin"] = false,
-                    ["PlayerID"] = clientId.ToString(),
-                    ["TeamId"] = string.Empty
-                }
-            };
+            
+            // Создаем Player правильным способом и получаем его состояние
+            var player = new Player("TestPlayer", clientId, false);
+            var playerState = player.GetState();
 
             var patch = new SessionPatch
             {

@@ -118,26 +118,16 @@ namespace RollPunk.Tests
             var client1Id = Guid.NewGuid();
             var client2Id = Guid.NewGuid();
 
+            // Создаем игроков правильным способом
+            var player1 = new Player("Player1", client1Id, false);
+            var player2 = new Player("Player2", client2Id, true);
+
             // Act - применяем несколько патчей
             var patch1 = new SessionPatch
             {
                 PendingPlayers = new Dictionary<Guid, EntityState>
                 {
-                    {
-                        client1Id,
-                        new EntityState
-                        {
-                            EntityType = "Player",
-                            Name = "Player1",
-                            ID = Guid.NewGuid(),
-                            Payload = new Dictionary<string, Newtonsoft.Json.Linq.JToken>
-                            {
-                                ["IsAdmin"] = false,
-                                ["PlayerID"] = client1Id.ToString(),
-                                ["TeamId"] = string.Empty
-                            }
-                        }
-                    }
+                    { client1Id, player1.GetState() }
                 }
             };
 
@@ -145,21 +135,7 @@ namespace RollPunk.Tests
             {
                 PendingPlayers = new Dictionary<Guid, EntityState>
                 {
-                    {
-                        client2Id,
-                        new EntityState
-                        {
-                            EntityType = "Player",
-                            Name = "Player2",
-                            ID = Guid.NewGuid(),
-                            Payload = new Dictionary<string, Newtonsoft.Json.Linq.JToken>
-                            {
-                                ["IsAdmin"] = true,
-                                ["PlayerID"] = client2Id.ToString(),
-                                ["TeamId"] = string.Empty
-                            }
-                        }
-                    }
+                    { client2Id, player2.GetState() }
                 }
             };
 

@@ -60,8 +60,15 @@ namespace NetcodeCommon
         {
             SessionState state = new()
             {
-                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(Fields.Fields)
+                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(Fields.Fields),
+                Players = new Dictionary<Guid, EntityState>()
             };
+
+            // Добавляем игроков в состояние
+            foreach (var player in _players)
+            {
+                state.Players.Add(player.Key, player.Value.GetState());
+            }
 
             return state;
         }

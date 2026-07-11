@@ -28,14 +28,21 @@ namespace RollPunk.Players
         protected override void ApplyPayload(Dictionary<string, JToken> payload)
         {
             IsAdmin = Get<bool>(payload, nameof(IsAdmin));
-            PlayerID = Guid.Parse(Get<string>(payload, nameof(PlayerID)));
             
+            // Безопасный парсинг PlayerID
+            string playerIdStr = Get<string>(payload, nameof(PlayerID));
+            if (!Guid.TryParse(playerIdStr, out Guid parsedPlayerId))
+                throw new InvalidOperationException($"Invalid PlayerID format: {playerIdStr}");
+            PlayerID = parsedPlayerId;
+            
+            // Безопасный парсинг TeamId
             string teamID = Get<string>(payload, nameof(TeamId));
-            
-            if(teamID == string.Empty)
+            if (string.IsNullOrEmpty(teamID))
                 TeamId = null;
+            else if (!Guid.TryParse(teamID, out Guid parsedTeamId))
+                throw new InvalidOperationException($"Invalid TeamId format: {teamID}");
             else
-                TeamId = Guid.Parse(teamID);
+                TeamId = parsedTeamId;
         }
 
         protected override void WritePayload(Dictionary<string, JToken> payload)

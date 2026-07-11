@@ -13,24 +13,14 @@ namespace RollPunk.Tests
         public void SessionPatch_Serialize_Deserialize_DataPreserved()
         {
             // Arrange
+            var clientId = Guid.NewGuid();
+            var player = new Player("TestPlayer", clientId, false);
+            
             var originalPatch = new SessionPatch
             {
                 PendingPlayers = new Dictionary<Guid, EntityState>
                 {
-                    {
-                        Guid.NewGuid(),
-                        new EntityState
-                        {
-                            EntityType = "Player",
-                            Name = "TestPlayer",
-                            ID = Guid.NewGuid(),
-                            Payload = new Dictionary<string, Newtonsoft.Json.Linq.JToken>
-                            {
-                                ["IsAdmin"] = false,
-                                ["PlayerID"] = Guid.NewGuid().ToString()
-                            }
-                        }
-                    }
+                    { clientId, player.GetState() }
                 },
                 RemovePlayers = new List<Guid> { Guid.NewGuid() },
                 PendingFields = new List<RollPunk.Fields.FieldState>(),
@@ -52,25 +42,15 @@ namespace RollPunk.Tests
         public void SessionState_Serialize_Deserialize_DataPreserved()
         {
             // Arrange
+            var clientId = Guid.NewGuid();
+            var player = new Player("TestPlayer", clientId, true);
+            
             var originalState = new SessionState
             {
                 Fields = new List<RollPunk.Fields.FieldState>(),
                 Players = new Dictionary<Guid, EntityState>
                 {
-                    {
-                        Guid.NewGuid(),
-                        new EntityState
-                        {
-                            EntityType = "Player",
-                            Name = "TestPlayer",
-                            ID = Guid.NewGuid(),
-                            Payload = new Dictionary<string, Newtonsoft.Json.Linq.JToken>
-                            {
-                                ["IsAdmin"] = true,
-                                ["PlayerID"] = Guid.NewGuid().ToString()
-                            }
-                        }
-                    }
+                    { clientId, player.GetState() }
                 }
             };
 
