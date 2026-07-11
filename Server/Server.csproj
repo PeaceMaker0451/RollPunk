@@ -22,6 +22,10 @@
     <ProjectReference Include="..\Scripts\Rules\Rules.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<None Remove="**/*.uid" />
 	</ItemGroup>
