@@ -76,6 +76,16 @@ namespace NetcodeCommon
             return player;
         }
 
+        protected Player RemovePlayer(Guid clientId)
+        {
+            if (!Players.ContainsKey(clientId))
+                return null;
+
+            Player removedPlayer = Players[clientId];
+            Players.Remove(clientId);
+            return removedPlayer;
+        }
+
         protected void ApplyState(SessionState state)
         {
             List<FieldState> fields = state.Fields;

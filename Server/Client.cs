@@ -23,6 +23,7 @@ namespace RollPunk.Server
             public TcpClient Socket;
 
             public event Action Connected;
+            public event Action<int> Disconnected;
 
             private readonly int _id;
             private NetworkStream _stream;
@@ -67,6 +68,26 @@ namespace RollPunk.Server
                 catch(Exception ex)
                 {
                     RPDebug.LogError($"Error sending data to client {_id}: {ex.Message}");
+                    Disconnect();
+                }
+            }
+
+            public void Disconnect()
+            {
+                try
+                {
+                    Socket?.Close();
+                    _stream?.Close();
+                }
+                catch (Exception ex)
+                {
+                    RPDebug.LogError($"Error disconnecting client {_id}: {ex.Message}");
+                }
+                finally
+                {
+                    Socket = null;
+                    _stream = null;
+                    Disconnected?.Invoke(_id);
                 }
             }
 
@@ -122,6 +143,8 @@ namespace RollPunk.Server
                     
                     if(length <= 0)
                     {
+                        RPDebug.Log($"Client {_id} disconnected (length: {length})");
+                        Disconnect();
                         return;
                     }
 
@@ -133,7 +156,8 @@ namespace RollPunk.Server
                 }
                 catch (Exception ex)
                 {
-                    RPDebug.LogError($"Error receiving TCP Data: {ex}");
+                    RPDebug.LogError($"Error receiving TCP Data from client {_id}: {ex}");
+                    Disconnect();
                 }
             }
         }

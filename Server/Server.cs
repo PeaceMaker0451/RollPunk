@@ -88,6 +88,28 @@ namespace RollPunk.Server
             _send.SendSessionState(fromClient, _session.GetState());
         }
 
+        public void HandleClientDisconnect(int clientId)
+        {
+            if (!_clients.ContainsKey(clientId) || _clients[clientId].ClientId == Guid.Empty)
+                return;
+
+            RPDebug.Log($"Client {clientId} ({_clients[clientId].ClientId}) disconnected");
+
+            var removedPlayer = _session.RemovePlayer(_clients[clientId].ClientId);
+            if (removedPlayer != null)
+            {
+                SessionPatch disconnectPatch = new()
+                {
+                    RemovePlayers = new() { _clients[clientId].ClientId }
+                };
+
+                _send.SendSessionPatch(disconnectPatch);
+            }
+
+            // Очищаем слот клиента для новых подключений
+            _clients[clientId].ClientId = Guid.Empty;
+        }
+
         private void TCPConnectCallback(IAsyncResult result)
         {
             TcpClient client = _tcpListener.EndAcceptTcpClient(result);
@@ -113,6 +135,7 @@ namespace RollPunk.Server
             {
                 var client = new Client(i, _handlers, _threadManager);
                 client.Tcp.Connected += () => _send.SendWelcome(client.Id, "Gooool!");
+                client.Tcp.Disconnected += HandleClientDisconnect;
                 _clients.Add(i, client);
                 
             }
