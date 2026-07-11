@@ -38,8 +38,7 @@ namespace RollPunk.Client.Runtime
 
         public Guid ID { get; private set; }
 
-        public IReadOnlyDictionary<Guid, Player> Players => base.Players;
-        public Player CurrentPlayer => base.Players.ContainsKey(_runtimeData.ClientID) ? base.Players[_runtimeData.ClientID] : null;
+        public Player CurrentPlayer => Players.ContainsKey(_runtimeData.ClientID) ? Players[_runtimeData.ClientID] : null;
 
         public GlobalAPIInjector APIInjector { get; private set; }
 
@@ -153,7 +152,7 @@ namespace RollPunk.Client.Runtime
             _dataBridge.SessionInitializeRequest += InitializeSession;
         }
 
-        private new void ApplySessionPatch(SessionPatch patch)
+        public override void ApplySessionPatch(SessionPatch patch)
         {
             _mutationCatcher.StartIgnore();
             _entityValidator.StartIgnore();
@@ -164,7 +163,7 @@ namespace RollPunk.Client.Runtime
             _entityInitializer.StopIgnore();
         }
 
-        private new void ApplyState(SessionState state)
+        public override void ApplyState(SessionState state)
         {
             _mutationCatcher.StartIgnore();
             _entityValidator.StartIgnore();

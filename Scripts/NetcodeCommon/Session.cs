@@ -10,7 +10,8 @@ namespace NetcodeCommon
         protected FieldsContainer<EntityField> Fields;
         protected FieldsRegistry FieldsRegistry;
 
-        protected Dictionary<Guid, Player> Players;
+        private Dictionary<Guid, Player> _players;
+        public IReadOnlyDictionary<Guid, Player> Players => _players;
 
         protected EntityFactory EntityFactory;
 
@@ -23,10 +24,10 @@ namespace NetcodeCommon
 
             Fields = new();
             FieldsRegistry = new(Fields);
-            Players = new();
+            _players = new();
         }
 
-        protected void ApplySessionPatch(SessionPatch patch)
+        public virtual void ApplySessionPatch(SessionPatch patch)
         {
             EntityUpdater updater = new();
             
@@ -45,17 +46,17 @@ namespace NetcodeCommon
 
             foreach (var pendingPlayer in patch.PendingPlayers)
             {
-                if (Players.ContainsKey(pendingPlayer.Key))
-                    updater.UpdateEntity(Players[pendingPlayer.Key], pendingPlayer.Value);
+                if (_players.ContainsKey(pendingPlayer.Key))
+                    updater.UpdateEntity(_players[pendingPlayer.Key], pendingPlayer.Value);
                 else
-                    Players.Add(pendingPlayer.Key, new Player(pendingPlayer.Value));
+                    _players.Add(pendingPlayer.Key, new Player(pendingPlayer.Value));
             }
 
             foreach (var removedPlayer in patch.RemovePlayers)
-                Players.Remove(removedPlayer);
+                _players.Remove(removedPlayer);
         }
 
-        protected SessionState GetState()
+        public virtual SessionState GetState()
         {
             SessionState state = new()
             {
@@ -65,36 +66,36 @@ namespace NetcodeCommon
             return state;
         }
 
-        protected Player AddPlayer(Guid clientId, string name, bool isAdmin = false)
+        public virtual Player AddPlayer(Guid clientId, string name, bool isAdmin = false)
         {
-            if(Players.ContainsKey(clientId))
+            if(_players.ContainsKey(clientId))
                 throw new InvalidOperationException($"Player for Client {clientId} already exists");
 
             Player player = new(name, new Guid(), isAdmin);
-            Players.Add(clientId, player);
+            _players.Add(clientId, player);
 
             return player;
         }
 
-        protected Player RemovePlayer(Guid clientId)
+        public virtual Player RemovePlayer(Guid clientId)
         {
-            if (!Players.ContainsKey(clientId))
+            if (!_players.ContainsKey(clientId))
                 return null;
 
-            Player removedPlayer = Players[clientId];
-            Players.Remove(clientId);
+            Player removedPlayer = _players[clientId];
+            _players.Remove(clientId);
             return removedPlayer;
         }
 
-        protected void ApplyState(SessionState state)
+        public virtual void ApplyState(SessionState state)
         {
             List<FieldState> fields = state.Fields;
             ApplyFields(fields);
 
-            Players.Clear();
+            _players.Clear();
 
             foreach(var player in state.Players)
-                Players.Add(player.Key, new(player.Value));
+                _players.Add(player.Key, new(player.Value));
         }
 
         private void ApplyFields(List<FieldState> fields)

@@ -22,11 +22,6 @@ namespace RollPunk.Server
             EntityFactory.RegisterPlayers();
         }
 
-        new public void ApplySessionPatch(SessionPatch patch) => base.ApplySessionPatch(patch);
-        new public SessionState GetState() => base.GetState();
-        new public void ApplyState(SessionState state) => base.ApplyState(state);
-        new public Player AddPlayer(Guid clientId, string name, bool isAdmin = false) => base.AddPlayer(clientId, name, isAdmin);
-        new public Player RemovePlayer(Guid clientId) => base.RemovePlayer(clientId);
 
         public void SetSessionInitialized()
         {
