@@ -41,7 +41,6 @@ namespace RollPunk.UI.Frames
 
     public partial class TabedFrame : Frame
     {
-        public static TabedFrame instance;
         [Export] public Node tabButtonsContainer { get; private set; }
         [Export] public string defaultTabButtonScene;
         public PackedScene defaultTabButton { get; private set; }
@@ -67,13 +66,7 @@ namespace RollPunk.UI.Frames
         public override void _Ready()
         {
             base._Ready();
-            instance = this;
             defaultTabButton = GD.Load<PackedScene>(defaultTabButtonScene);
-        }
-
-        public static TabedFrame GetInstance()
-        {
-            return instance;
         }
 
         public bool HasTab(string name)

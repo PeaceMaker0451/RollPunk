@@ -23,9 +23,9 @@ namespace RollPunk.Client.Runtime
     
     internal class RollPunkRuntime
     {
-        private MainMenuController _mainMenuController;
-        private SessionViewController _sessionViewController;
-        private ConsoleController _consoleController;
+        private IFormHandle _mainMenuHandle;
+        private IFormHandle _gameViewHandle;
+        private IFormHandle _consoleHandle;
 
         private FieldControlsConstructor _controlsConstructor = new();
         
@@ -42,8 +42,6 @@ namespace RollPunk.Client.Runtime
 
         public RollPunkRuntime()
         {
-            _mainMenuController = new(Client.Instance.UIController, this);
-            _sessionViewController = new(Client.Instance.UIController, _controlsConstructor);
             _mods = _modReader.ReadMods(ClientConfig.ModsPaths);
 
             SetState(RollPunkState.Menu);
@@ -75,7 +73,7 @@ namespace RollPunk.Client.Runtime
             Session = new ClientSession(_runtimeData, mods);
             Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
 
-            Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
+            Session.APIInjector.AddGlobalAPI(Client.Instance.FormsManager.GetAPI());
             Session.InitializeSession();
             SetState(RollPunkState.Session);
         }
@@ -101,7 +99,7 @@ namespace RollPunk.Client.Runtime
 
                     Session = new ClientSession(_runtimeData, mods, client);
 
-                    Session.APIInjector.AddGlobalAPI(Client.Instance.UIController.GetAPI());
+                    Session.APIInjector.AddGlobalAPI(Client.Instance.FormsManager.GetAPI());
                     SetState(RollPunkState.Session);
                 };
 
@@ -131,11 +129,18 @@ namespace RollPunk.Client.Runtime
             switch (state)
             {
                 case RollPunkState.Menu:
-                    if(_mainMenuController.MenuOpened == false)
-                        _mainMenuController.CreateMainMenu();
+                    if (_mainMenuHandle == null || !_mainMenuHandle.IsValid)
+                        _mainMenuHandle = Client.Instance.FormsManager.ShowInMainTab("res://Scenes/FormsScenes/MainMenu.tscn", int.MaxValue);
                     break;
                 case RollPunkState.Session:
-                    _sessionViewController.OpenSessionView(Session);
+                    if (_gameViewHandle == null || !_gameViewHandle.IsValid)
+                    {
+                        _gameViewHandle = Client.Instance.FormsManager.ShowInMainTab("res://Scenes/FormsScenes/GameView.tscn", 1);
+                        var gameView = Client.Instance.FormsManager.GetForm<GameView>(_gameViewHandle);
+                        var controller = new SessionViewController(gameView, _controlsConstructor);
+                        gameView.SetController(controller);
+                        controller.SetSession(Session);
+                    }
                     break;
             }
             
@@ -145,10 +150,12 @@ namespace RollPunk.Client.Runtime
 
         private void CreateConsole()
         {
-            if (_consoleController == null)
-                _consoleController = new(Client.Instance.UIController, Client.Instance.Console);
-
-            _consoleController.CreateConsole();
+            if (_consoleHandle == null || !_consoleHandle.IsValid)
+            {
+                _consoleHandle = Client.Instance.FormsManager.ShowInNewWindow("res://Scenes/FormsScenes/Console.tscn");
+                var console = Client.Instance.FormsManager.GetForm<Console>(_consoleHandle);
+                // Консоль сама создает свой контроллер в _Ready()
+            }
         }
 
         private Guid? TryOverrideGuid()

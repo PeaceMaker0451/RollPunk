@@ -1,72 +1,54 @@
-﻿using RollPunk.AccessPolicy;
+using RollPunk.AccessPolicy;
 using RollPunk.Client.Runtime;
 using RollPunk.ClientSide.Runtime.UI;
-using RollPunk.Debug;
 using RollPunk.HierarchyFields;
-using RollPunk.UI.Forms;
 using RollPunk.UIFields;
 using System;
 
 namespace RollPunk.Client.Forms
 {
-    internal class SessionViewController
+    internal class SessionViewController : IFormController
     {
-        private const string GameViewScenePath = "res://Scenes/FormsScenes/GameView.tscn";
-        
-        private UIController _ui;
-        private FieldControlsConstructor _constructor;
+        private readonly GameView _view;
+        private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
 
-        public GameView GameView { get; private set; }
-        
-        public SessionViewController(UIController uIController, FieldControlsConstructor fieldControlsConstructor)
+        public SessionViewController(GameView view, FieldControlsConstructor constructor)
         {
-            _ui = uIController;
-            _constructor = fieldControlsConstructor;
+            _view = view;
+            _constructor = constructor;
         }
 
-        public void OpenSessionView(ClientSession session)
+        public void Initialize()
+        {
+            // Инициализация будет вызвана при установке сессии
+        }
+
+        public void SetSession(ClientSession session)
         {
             _session = session;
             
-            if (_ui.LoadFormAsMainFrameTab(GameViewScenePath, 1, out Form form) == false || form is not GameView gameView)
-                throw new InvalidOperationException("Unnable to load the GameView form");
+            _view.Initialize(_session.Entities, _constructor, session.Serializator);
 
-            GameView = gameView;
-            GameView.Initialize(_session.Entities, _constructor, session.Serializator);
-
-            GameView.EntityView.SetViewRule((lineField) =>
+            _view.EntityView.SetViewRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
                     throw new Exception("LineField don't have EntityField Ancestor");
                 
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
-
-                //RPDebug.DebugLog($"[color=dim_gray][SessionView] Linefield View Check - {lineField.Name} ViewLevel: [color=crimson]{lineField.ViewAccessLevel}[/color]" +
-                //    $"\nEntity relative role: [color=crimson]{role}[/color] - Should be viewable [b][color=teal]{role >= lineField.ViewAccessLevel}[/color][/b][/color]");
-
                 return role >= lineField.ViewAccessLevel;
             });
 
-            GameView.EntityView.SetEditRule((lineField) =>
+            _view.EntityView.SetEditRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
                     throw new Exception("LineField don't have EntityField Ancestor");
 
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
-
-                //RPDebug.DebugLog($"[color=gray][SessionView] Linefield Edit Check - {lineField.Name} EditLevel: [color=crimson]{lineField.EditAccessLevel}[/color]" +
-                //$"\nEntity relative role: [color=crimson]{role}[/color] - Should be editable [b][color=teal]{role >= lineField.EditAccessLevel}[/color][/b][/color]");
-
                 return role >= lineField.EditAccessLevel;
             });
-        }
-
-        public void CloseSessionView()
-        {
-            _ui.CloseForm(GameView);
         }
     }
 }

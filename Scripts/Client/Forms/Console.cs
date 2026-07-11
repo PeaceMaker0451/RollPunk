@@ -1,5 +1,6 @@
 using Godot;
 using RollPunk.Debug;
+using RollPunk.Scripts.Client.Forms;
 using RollPunk.UI.Forms;
 using System;
 
@@ -10,8 +11,16 @@ namespace RollPunk.Client.Forms
 		[Export] Button sendCommandButton;
 		[Export] RichTextLabel consoleField;
 		[Export] LineEdit consoleWriteLine;
+
+		private ConsoleController _controller;
+
 		public override void _Ready()
 		{
+			base._Ready();
+			
+			_controller = new ConsoleController(this, Client.Instance.Console);
+			_controller.Initialize();
+			
 			Client.Instance.Console.ConsoleUpdated += AddTextToConsole;
 			sendCommandButton.Pressed += SendCommandButton_Pressed;
 			consoleWriteLine.TextSubmitted += ConsoleWriteLine_TextSubmitted;

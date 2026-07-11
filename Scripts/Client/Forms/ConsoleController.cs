@@ -1,30 +1,22 @@
-﻿using RollPunk.Client;
 using RollPunk.Client.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RollPunk.Scripts.Client.Forms
 {
-    internal class ConsoleController
+    internal class ConsoleController : IFormController
     {
-        private UIController _ui;
-        private ClientConsole _console;
-        public ConsoleController(UIController ui, ClientConsole console)
+        private readonly Console _view;
+        private readonly ClientConsole _console;
+
+        public ConsoleController(Console view, ClientConsole console)
         {
-            _ui = ui;
+            _view = view;
             _console = console;
         }
 
-        public void CreateConsole()
+        public void Initialize()
         {
-            _ui.LoadFormAsNewFrame("res://Scenes/FormsScenes/Console.tscn", out var form);
-            Console console = (Console)form;
-
-            if (_ui.TryGetFrame(console, out var frame))
-                frame.SetCloseButtonVisible(false);
-
+            // Логика инициализации консоли уже в самой форме Console
+            // Контроллер может добавить дополнительную логику если нужно
         }
     }
 }

@@ -26,7 +26,8 @@ namespace RollPunk.Client
 
         internal FramesManager FramesManager { get; private set; }
         internal FormsFactory FormsFactory { get; private set; }
-        internal UIController UIController { get; private set; }
+        internal IFormsManager FormsManager { get; private set; }
+        internal RollPunkRuntime Runtime { get; private set; }
 
         internal GodotThreadManager ThreadManager { get; private set; }
 
@@ -54,7 +55,7 @@ namespace RollPunk.Client
 
             FramesManager = new(_rootNode, settings.FormsScale, settings.OneScreenMode, settings.SmoothWindowResizing, settings.WaitForResizeToChangeWindow, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
             FormsFactory = new();
-            UIController = new(FramesManager, FormsFactory);
+            FormsManager = new Forms.FormsManager(FramesManager, FormsFactory);
 
             FramesManager.SetMainFrameTitle($"RollPunk {ClientConfig.ClientVersion}");
 
@@ -62,7 +63,7 @@ namespace RollPunk.Client
             _rootNode.AddChild(ThreadManager);
             RPDebug.Log($"ThreadManager создан - {ThreadManager.Name}");
 
-            RollPunkRuntime rollPunk = new RollPunkRuntime();
+            Runtime = new RollPunkRuntime();
         }
 
         private void AddCommands(CommandManager commandManager)
