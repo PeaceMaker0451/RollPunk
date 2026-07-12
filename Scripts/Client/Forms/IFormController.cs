@@ -7,9 +7,14 @@ namespace RollPunk.Client.Forms
         void Initialize();
     }
 
-    public interface IFormController<T> : IFormController where T : Form
+    public interface IFormControllerBase : IFormController
     {
-        T View { get; set; }
         string FormPath { get; }
+        Form View { get; set; }
+    }
+
+    public interface IFormController<T> : IFormControllerBase where T : Form
+    {
+        new T View { get; set; }
     }
 }
