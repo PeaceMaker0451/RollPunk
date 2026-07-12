@@ -6,7 +6,13 @@ namespace RollPunk.Scripts.Client.Forms
 {
     internal class ConsoleController : IFormController<Console>
     {
-        public Console View { get; set; }
+        private Console _view;
+        public Console View => _view;
+
+        public void SetView(Console view)
+        {
+            _view = view;
+        }
 
         public string FormPath => "res://Scenes/FormsScenes/Console.tscn";
         

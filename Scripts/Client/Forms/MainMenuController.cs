@@ -6,7 +6,13 @@ namespace RollPunk.Client.Forms
 {
     internal class MainMenuController : IFormController<MainMenu>
     {
-        public MainMenu View { get; set; }
+        private MainMenu _view;
+        public MainMenu View => _view;
+
+        public void SetView(MainMenu view)
+        {
+            _view = view;
+        }
 
         public string FormPath => "res://Scenes/FormsScenes/MainMenu.tscn";
         

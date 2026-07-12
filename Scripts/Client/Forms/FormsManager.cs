@@ -88,7 +88,7 @@ namespace RollPunk.Client.Forms
             if (controller is IFormControllerBase baseController)
             {
                 var context = LoadForm(baseController.FormPath);
-                baseController.View = context.Form;
+                baseController.SetView(context.Form);
                 context.Controller = controller;
 
                 switch (mode)

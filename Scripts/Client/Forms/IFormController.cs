@@ -10,17 +10,19 @@ namespace RollPunk.Client.Forms
     public interface IFormControllerBase : IFormController
     {
         string FormPath { get; }
-        Form View { get; set; }
+        Form View { get; }
+
+        void SetView(Form view);
     }
 
     public interface IFormController<T> : IFormControllerBase where T : Form
     {
-        new T View { get; set; }
+        new T View { get; }
 
-        Form IFormControllerBase.View
-        {
-            get => View;
-            set => View = (T)value;
-        }
+        Form IFormControllerBase.View => View;
+
+        void IFormControllerBase.SetView(Form view) => SetView((T)view);
+
+        void SetView(T view);
     }
 }
