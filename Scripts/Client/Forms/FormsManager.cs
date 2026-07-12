@@ -83,6 +83,48 @@ namespace RollPunk.Client.Forms
             _forms.Remove(handle.Id);
         }
 
+        public IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0) 
+            where T : IFormController
+        {
+            if (controller is IFormController<Form> typedController)
+            {
+                var context = LoadForm(typedController.FormPath);
+                typedController.View = context.Form;
+                
+                // Сохраняем ссылку на контроллер в контексте
+                context.Controller = controller;
+                
+                // Показываем форму в нужном режиме
+                switch (mode)
+                {
+                    case FormDisplayMode.NewWindow:
+                        var frame = _framesManager.OpenInNewFrame(context.Form);
+                        context.Location = FormLocation.NewWindow;
+                        context.Container = frame;
+                        break;
+                    case FormDisplayMode.MainTab:
+                    default:
+                        _framesManager.MainFrame.AddTab(context.Form, context.Form.Title, priority);
+                        context.Location = FormLocation.MainTab;
+                        context.Container = _framesManager.MainFrame;
+                        break;
+                }
+                
+                // Инициализируем контроллер после создания формы
+                controller.Initialize();
+                
+                return context.Handle;
+            }
+            
+            throw new InvalidOperationException($"Controller {typeof(T).Name} must implement IFormController<Form>");
+        }
+
+        public T GetController<T>(IFormHandle handle) where T : class, IFormController
+        {
+            var context = GetContext(handle);
+            return context.Controller as T;
+        }
+
         public API GetAPI()
         {
             return _api;
@@ -129,6 +171,7 @@ namespace RollPunk.Client.Forms
         public Form Form { get; }
         public FormLocation Location { get; set; }
         public object Container { get; set; }
+        public IFormController Controller { get; set; }
 
         public FormContext(IFormHandle handle, Form form)
         {

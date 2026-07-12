@@ -19,8 +19,19 @@ namespace RollPunk.Client.Forms
         // Управление
         void CloseForm(IFormHandle handle);
         
+        // Работа с контроллерами
+        IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0) 
+            where T : IFormController;
+        T GetController<T>(IFormHandle handle) where T : class, IFormController;
+        
         // Диалоги
         IDialogFactory Dialogs { get; }
+    }
+
+    public enum FormDisplayMode
+    {
+        MainTab,
+        NewWindow
     }
 
     public interface IFormHandle

@@ -13,19 +13,9 @@ namespace RollPunk.ClientSide.Runtime.UI
         [Export] private FieldsList _fieldsList;
         [Export] public EntityView EntityView;
 
-        private SessionViewController _controller;
-
         public override void _Ready()
         {
             base._Ready();
-            
-            // Контроллер будет создан и настроен извне через SetController
-        }
-
-        public void SetController(SessionViewController controller)
-        {
-            _controller = controller;
-            _controller.Initialize();
         }
 
         public void Initialize(IReadOnlyFieldsContainer fieldsContainer, FieldControlsConstructor fieldControlsConstructor, Serializator serializator)

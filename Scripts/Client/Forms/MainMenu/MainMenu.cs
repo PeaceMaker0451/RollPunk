@@ -20,20 +20,12 @@ namespace RollPunk.Client
         [Export] private EnterSessionSubMenu _enterMenu;
         [Export] private MainSubMenu _createMenu;
 
-        private MainMenuController _controller;
-
         public event Action CreateSessionRequested;
         public event Action<string> EnterSessionRequested;
 
         public override void _Ready()
         {
             base._Ready();
-            
-            // Получаем runtime через DI или синглтон
-            var runtime = Client.Instance.Runtime; // Предполагаем, что добавим это свойство
-            _controller = new MainMenuController(runtime);
-            _controller.Initialize();
-            
             Initialize();
         }
 
