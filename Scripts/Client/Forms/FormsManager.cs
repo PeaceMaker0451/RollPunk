@@ -86,6 +86,8 @@ namespace RollPunk.Client.Forms
         public IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0) 
             where T : IFormController
         {
+            GD.Print($"Controller {typeof(T).Name} - {controller is IFormController<Form>} - {controller is IFormController}");
+            
             if (controller is IFormController<Form> typedController)
             {
                 var context = LoadForm(typedController.FormPath);
@@ -115,8 +117,8 @@ namespace RollPunk.Client.Forms
                 
                 return context.Handle;
             }
-            
-            throw new InvalidOperationException($"Controller {typeof(T).Name} must implement IFormController<Form>");
+            else
+                throw new InvalidOperationException($"Controller {typeof(T).Name} must implement IFormController<Form>");
         }
 
         public T GetController<T>(IFormHandle handle) where T : class, IFormController
