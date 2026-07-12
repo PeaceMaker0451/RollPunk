@@ -1,16 +1,12 @@
 using RollPunk.Client;
 using RollPunk.Client.Forms;
+using RollPunk.UI.Forms;
 
 namespace RollPunk.Scripts.Client.Forms
 {
     internal class ConsoleController : IFormController<Console>
     {
         public Console View { get; set; }
-        Form IFormControllerBase.View
-        {
-            get => View;
-            set => View = (Console)value;
-        }
 
         public string FormPath => "res://Scenes/FormsScenes/Console.tscn";
         

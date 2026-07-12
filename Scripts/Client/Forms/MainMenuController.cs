@@ -1,4 +1,5 @@
 using RollPunk.Client.Runtime;
+using RollPunk.UI.Forms;
 using System;
 
 namespace RollPunk.Client.Forms
@@ -6,11 +7,6 @@ namespace RollPunk.Client.Forms
     internal class MainMenuController : IFormController<MainMenu>
     {
         public MainMenu View { get; set; }
-        Form IFormControllerBase.View
-        {
-            get => View;
-            set => View = (MainMenu)value;
-        }
 
         public string FormPath => "res://Scenes/FormsScenes/MainMenu.tscn";
         

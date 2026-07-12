@@ -16,5 +16,11 @@ namespace RollPunk.Client.Forms
     public interface IFormController<T> : IFormControllerBase where T : Form
     {
         new T View { get; set; }
+
+        Form IFormControllerBase.View
+        {
+            get => View;
+            set => View = (T)value;
+        }
     }
 }

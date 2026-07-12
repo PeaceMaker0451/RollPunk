@@ -83,7 +83,7 @@ namespace RollPunk.Client.Forms
             _forms.Remove(handle.Id);
         }
 
-        IFormHandle IFormsManager.ShowController<T>(T controller, FormDisplayMode mode, int priority)
+        IFormHandle IFormsManager.ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0)
         {
             if (controller is IFormControllerBase baseController)
             {
