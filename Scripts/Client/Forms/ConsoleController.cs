@@ -3,14 +3,15 @@ using RollPunk.Client.Forms;
 
 namespace RollPunk.Scripts.Client.Forms
 {
-    internal class ConsoleController : IFormController
+    internal class ConsoleController : IFormController<Console>
     {
-        private readonly Console _view;
+        public Console View { get; set; }
+        public string FormPath => "res://Scenes/FormsScenes/Console.tscn";
+        
         private readonly ClientConsole _console;
 
-        public ConsoleController(Console view, ClientConsole console)
+        public ConsoleController(ClientConsole console)
         {
-            _view = view;
             _console = console;
         }
 

@@ -3,21 +3,22 @@ using System;
 
 namespace RollPunk.Client.Forms
 {
-    internal class MainMenuController : IFormController
+    internal class MainMenuController : IFormController<MainMenu>
     {
-        private readonly MainMenu _view;
+        public MainMenu View { get; set; }
+        public string FormPath => "res://Scenes/FormsScenes/MainMenu.tscn";
+        
         private readonly RollPunkRuntime _runtime;
 
-        public MainMenuController(MainMenu view, RollPunkRuntime runtime)
+        public MainMenuController(RollPunkRuntime runtime)
         {
-            _view = view;
             _runtime = runtime;
         }
 
         public void Initialize()
         {
-            _view.CreateSessionRequested += () => _runtime.StartSession(_runtime.ReadedMods);
-            _view.EnterSessionRequested += (address) => _runtime.TryConnectToSession(address, _runtime.ReadedMods);
+            View.CreateSessionRequested += () => _runtime.StartSession(_runtime.ReadedMods);
+            View.EnterSessionRequested += (address) => _runtime.TryConnectToSession(address, _runtime.ReadedMods);
             
             _runtime.StateChanged += OnStateChanged;
             OnStateChanged();
@@ -25,7 +26,7 @@ namespace RollPunk.Client.Forms
 
         private void OnStateChanged()
         {
-            _view.SetInSession(_runtime.State == RollPunkState.Session);
+            View.SetInSession(_runtime.State == RollPunkState.Session);
         }
     }
 }

@@ -7,15 +7,16 @@ using System;
 
 namespace RollPunk.Client.Forms
 {
-    internal class SessionViewController : IFormController
+    internal class SessionViewController : IFormController<GameView>
     {
-        private readonly GameView _view;
+        public GameView View { get; set; }
+        public string FormPath => "res://Scenes/FormsScenes/GameView.tscn";
+        
         private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
 
-        public SessionViewController(GameView view, FieldControlsConstructor constructor)
+        public SessionViewController(FieldControlsConstructor constructor)
         {
-            _view = view;
             _constructor = constructor;
         }
 
@@ -28,9 +29,9 @@ namespace RollPunk.Client.Forms
         {
             _session = session;
             
-            _view.Initialize(_session.Entities, _constructor, session.Serializator);
+            View.Initialize(_session.Entities, _constructor, session.Serializator);
 
-            _view.EntityView.SetViewRule((lineField) =>
+            View.EntityView.SetViewRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
@@ -40,7 +41,7 @@ namespace RollPunk.Client.Forms
                 return role >= lineField.ViewAccessLevel;
             });
 
-            _view.EntityView.SetEditRule((lineField) =>
+            View.EntityView.SetEditRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
