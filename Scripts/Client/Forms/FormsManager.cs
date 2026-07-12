@@ -83,31 +83,37 @@ namespace RollPunk.Client.Forms
             _forms.Remove(handle.Id);
         }
 
-        public IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0) 
-            where T : IFormControllerBase
+        IFormHandle IFormsManager.ShowController<T>(T controller, FormDisplayMode mode, int priority)
         {
-            var context = LoadForm(controller.FormPath);
-            controller.View = context.Form;
-            context.Controller = controller;
-
-            switch (mode)
+            if (controller is IFormControllerBase baseController)
             {
-                case FormDisplayMode.NewWindow:
-                    var frame = _framesManager.OpenInNewFrame(context.Form);
-                    context.Location = FormLocation.NewWindow;
-                    context.Container = frame;
-                    break;
-                case FormDisplayMode.MainTab:
-                default:
-                    _framesManager.MainFrame.AddTab(context.Form, context.Form.Title, priority);
-                    context.Location = FormLocation.MainTab;
-                    context.Container = _framesManager.MainFrame;
-                    break;
+                var context = LoadForm(baseController.FormPath);
+                baseController.View = context.Form;
+                context.Controller = controller;
+
+                switch (mode)
+                {
+                    case FormDisplayMode.NewWindow:
+                        var frame = _framesManager.OpenInNewFrame(context.Form);
+                        context.Location = FormLocation.NewWindow;
+                        context.Container = frame;
+                        break;
+                    case FormDisplayMode.MainTab:
+                    default:
+                        _framesManager.MainFrame.AddTab(context.Form, context.Form.Title, priority);
+                        context.Location = FormLocation.MainTab;
+                        context.Container = _framesManager.MainFrame;
+                        break;
+                }
+
+                controller.Initialize();
+
+                return context.Handle;
             }
-
-            controller.Initialize();
-
-            return context.Handle;
+            else
+            {
+                throw new InvalidOperationException($"Controller {typeof(T).Name} must implement IFormControllerBase");
+            }
         }
 
         public T GetController<T>(IFormHandle handle) where T : class, IFormController
