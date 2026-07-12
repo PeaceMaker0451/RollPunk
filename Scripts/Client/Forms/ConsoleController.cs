@@ -1,3 +1,4 @@
+using RollPunk.Client;
 using RollPunk.Client.Forms;
 
 namespace RollPunk.Scripts.Client.Forms
