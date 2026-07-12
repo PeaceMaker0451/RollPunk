@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RollPunk.Client.Forms
 {
-    public interface IFormsManager
+    public interface IFormsManager : IAPIHandler
     {
         // Основные операции
         IFormHandle ShowInNewWindow(string formPath);
@@ -21,9 +21,6 @@ namespace RollPunk.Client.Forms
         
         // Диалоги
         IDialogFactory Dialogs { get; }
-        
-        // API для модинга
-        API GetAPI();
     }
 
     public interface IFormHandle

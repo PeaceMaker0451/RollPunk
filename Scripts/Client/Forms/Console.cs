@@ -18,7 +18,7 @@ namespace RollPunk.Client.Forms
 		{
 			base._Ready();
 			
-			_controller = new ConsoleController(this, Client.Instance.Console);
+			_controller = new ConsoleController(Client.Instance.Console);
 			_controller.Initialize();
 			
 			Client.Instance.Console.ConsoleUpdated += AddTextToConsole;

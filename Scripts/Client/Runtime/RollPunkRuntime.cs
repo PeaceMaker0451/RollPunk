@@ -1,13 +1,13 @@
 ﻿using Godot;
 using RollPunk.Client.Forms;
 using RollPunk.ClientNetcode;
+using RollPunk.ClientSide.Runtime.UI;
 using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using RollPunk.Rules;
-using RollPunk.Scripts.Client.Forms;
 using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace RollPunk.Client.Runtime
             entityFactory.RegisterLineFields();
             entityFactory.RegisterRules();
 
-            LuaErrorsHandler.ErrorLogged += (error) => _ = Client.Instance.UIController.OpenInformationDialogue("LuaError", error);
+            LuaErrorsHandler.ErrorLogged += (error) => _ = Client.Instance.FormsManager.Dialogs.ShowInformation("LuaError", error);
 
             Guid clientId = Client.Instance.SettingsManager.LoadSettings().ClientID;
             Guid? overridedGuid = TryOverrideGuid();
@@ -153,7 +153,7 @@ namespace RollPunk.Client.Runtime
             if (_consoleHandle == null || !_consoleHandle.IsValid)
             {
                 _consoleHandle = Client.Instance.FormsManager.ShowInNewWindow("res://Scenes/FormsScenes/Console.tscn");
-                var console = Client.Instance.FormsManager.GetForm<Console>(_consoleHandle);
+                var console = Client.Instance.FormsManager.GetForm<Forms.Console>(_consoleHandle);
                 // Консоль сама создает свой контроллер в _Ready()
             }
         }

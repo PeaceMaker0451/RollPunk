@@ -31,7 +31,7 @@ namespace RollPunk.Client
             
             // Получаем runtime через DI или синглтон
             var runtime = Client.Instance.Runtime; // Предполагаем, что добавим это свойство
-            _controller = new MainMenuController(this, runtime);
+            _controller = new MainMenuController(runtime);
             _controller.Initialize();
             
             Initialize();
