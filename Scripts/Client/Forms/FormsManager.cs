@@ -90,6 +90,7 @@ namespace RollPunk.Client.Forms
                 var context = LoadForm(baseController.FormPath);
                 baseController.SetView(context.Form);
                 context.Controller = controller;
+                controller.SetFormHandle(context.Handle);
 
                 switch (mode)
                 {

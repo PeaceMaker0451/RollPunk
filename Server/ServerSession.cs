@@ -14,7 +14,6 @@ namespace RollPunk.Server
         
         public ServerSession() : base(new())
         {
-            
             EntityFactory.RegisterFields();
             EntityFactory.RegisterHierarchyFields();
             EntityFactory.RegisterRules();

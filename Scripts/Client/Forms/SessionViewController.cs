@@ -1,3 +1,4 @@
+using Godot;
 using RollPunk.AccessPolicy;
 using RollPunk.Client.Runtime;
 using RollPunk.ClientSide.Runtime.UI;
@@ -8,12 +9,14 @@ using System;
 namespace RollPunk.Client.Forms
 {
     internal class SessionViewController : IFormController<GameView>
-    {
-        public GameView View { get; set; }
-        public string FormPath => "res://Scenes/FormsScenes/GameView.tscn";
-        
+    {   
         private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
+
+        public GameView View { get; private set; }
+        public string FormPath => "res://Scenes/FormsScenes/GameView.tscn";
+
+        public IFormHandle FormHandle { get; private set; }
 
         public SessionViewController(FieldControlsConstructor constructor)
         {
@@ -28,6 +31,8 @@ namespace RollPunk.Client.Forms
         public void SetSession(ClientSession session)
         {
             _session = session;
+
+            GD.Print($"{View} | {_session.Entities} | {_constructor} | {session.Serializator}");
             
             View.Initialize(_session.Entities, _constructor, session.Serializator);
 
@@ -50,6 +55,16 @@ namespace RollPunk.Client.Forms
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
                 return role >= lineField.EditAccessLevel;
             });
+        }
+
+        public void SetView(GameView view)
+        {
+            View = view;
+        }
+
+        public void SetFormHandle(IFormHandle handle)
+        {
+            FormHandle = handle;
         }
     }
 }

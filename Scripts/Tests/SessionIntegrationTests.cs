@@ -5,6 +5,7 @@ using RollPunk.Client.Runtime;
 using System;
 using System.Collections.Generic;
 using Xunit;
+using RollPunk.Players;
 
 namespace RollPunk.Tests
 {

@@ -6,17 +6,12 @@ namespace RollPunk.Client.Forms
 {
     internal class MainMenuController : IFormController<MainMenu>
     {
-        private MainMenu _view;
-        public MainMenu View => _view;
-
-        public void SetView(MainMenu view)
-        {
-            _view = view;
-        }
-
-        public string FormPath => "res://Scenes/FormsScenes/MainMenu.tscn";
-        
         private readonly RollPunkRuntime _runtime;
+        private MainMenu _view;
+
+        public MainMenu View => _view;
+        public string FormPath => "res://Scenes/FormsScenes/MainMenu.tscn";
+        public IFormHandle FormHandle {  get; private set; }
 
         public MainMenuController(RollPunkRuntime runtime)
         {
@@ -31,6 +26,16 @@ namespace RollPunk.Client.Forms
             
             _runtime.StateChanged += OnStateChanged;
             OnStateChanged();
+        }
+
+        public void SetView(MainMenu view)
+        {
+            _view = view;
+        }
+
+        public void SetFormHandle(IFormHandle handle)
+        {
+            FormHandle = handle;
         }
 
         private void OnStateChanged()

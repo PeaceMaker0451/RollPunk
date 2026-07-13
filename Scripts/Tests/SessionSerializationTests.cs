@@ -1,6 +1,7 @@
 using NetcodeCommon;
 using Newtonsoft.Json;
 using RollPunk.Entities;
+using RollPunk.Players;
 using System;
 using System.Collections.Generic;
 using Xunit;
