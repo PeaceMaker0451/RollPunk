@@ -8,6 +8,7 @@ using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using RollPunk.Rules;
+using RollPunk.Scripts.Client.Forms;
 using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
@@ -143,8 +144,8 @@ namespace RollPunk.Client.Runtime
                     if (_sessionViewController == null)
                     {
                         _sessionViewController = new SessionViewController(_controlsConstructor);
-                        _sessionViewController.SetSession(Session);
                         _gameViewHandle = Client.Instance.FormsManager.ShowController(_sessionViewController, FormDisplayMode.MainTab, 1);
+                        _sessionViewController.SetSession(Session);
                     }
                     break;
             }
