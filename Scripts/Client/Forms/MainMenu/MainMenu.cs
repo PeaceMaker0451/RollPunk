@@ -49,7 +49,10 @@ namespace RollPunk.Client
 
             SetMenu(MainMenuTab.Main);
             
-            // Загружаем динамические данные
+            // Сначала показываем кешированные данные или заглушки
+            ShowInitialContent();
+            
+            // Затем загружаем свежие данные из сети
             await LoadDynamicDataAsync();
             
             GD.Print("Главное меню инициализировано");
@@ -97,62 +100,138 @@ namespace RollPunk.Client
             _enterMenu.Hide();
         }
 
+        private void ShowInitialContent()
+        {
+            var manager = OnlineDataManager.Instance;
+            
+            // Загружаем кешированные данные
+            manager.LoadAllFromCache();
+            
+            if (manager.HasCachedData)
+            {
+                // Показываем кешированные данные
+                UpdateDynamicContent(isFromCache: true);
+            }
+            else
+            {
+                // Показываем заглушки загрузки
+                ShowLoadingContent();
+            }
+        }
+
         private async Task LoadDynamicDataAsync()
         {
             try
             {
-                // Загружаем все данные
+                // Загружаем свежие данные из сети
                 var success = await OnlineDataManager.Instance.LoadAllDataAsync();
                 
                 if (success)
                 {
-                    GD.Print("Динамические данные загружены успешно");
+                    GD.Print("Динамические данные загружены успешно из сети");
+                    // Обновляем UI свежими данными
+                    UpdateDynamicContent(isFromCache: false);
                 }
                 else
                 {
-                    GD.PrintErr("Не удалось загрузить динамические данные, используем кеш или заглушки");
+                    GD.PrintErr("Не удалось загрузить динамические данные из сети");
+                    // Если не было кешированных данных, показываем ошибку
+                    if (!OnlineDataManager.Instance.HasCachedData)
+                    {
+                        ShowErrorContent();
+                    }
                 }
-
-                // Обновляем UI независимо от результата загрузки
-                UpdateDynamicContent();
             }
             catch (Exception ex)
             {
                 GD.PrintErr($"Ошибка при загрузке динамических данных: {ex.Message}");
-                UpdateDynamicContent(); // Показываем что есть в кеше
+                // Если не было кешированных данных, показываем ошибку
+                if (!OnlineDataManager.Instance.HasCachedData)
+                {
+                    ShowErrorContent();
+                }
             }
         }
 
-        private void UpdateDynamicContent()
+        private void ShowLoadingContent()
+        {
+            if (_motdLabel != null)
+            {
+                _motdLabel.Text = "[center][color=yellow]Сообщение дня[/color][/center]\n[color=gray]Загрузка...[/color]";
+            }
+
+            if (_updateLogsLabel != null)
+            {
+                _updateLogsLabel.Text = "[center][color=cyan]Обновления[/color][/center]\n[color=gray]Загрузка...[/color]";
+            }
+
+            if (_authorsLabel != null)
+            {
+                _authorsLabel.Text = "[center][color=green]Авторы[/color][/center]\n[color=gray]Загрузка...[/color]";
+            }
+
+            if (_versionLabel != null)
+            {
+                var currentVersion = ClientConfig.ClientVersion;
+                _versionLabel.Text = $"[center][color=orange]Версия[/color][/center]\n{currentVersion}";
+            }
+        }
+
+        private void ShowErrorContent()
+        {
+            if (_motdLabel != null)
+            {
+                _motdLabel.Text = "[center][color=yellow]Сообщение дня[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+            }
+
+            if (_updateLogsLabel != null)
+            {
+                _updateLogsLabel.Text = "[center][color=cyan]Обновления[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+            }
+
+            if (_authorsLabel != null)
+            {
+                _authorsLabel.Text = "[center][color=green]Авторы[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+            }
+
+            if (_versionLabel != null)
+            {
+                var currentVersion = ClientConfig.ClientVersion;
+                _versionLabel.Text = $"[center][color=orange]Версия[/color][/center]\n{currentVersion}";
+            }
+        }
+
+        private void UpdateDynamicContent(bool isFromCache = false)
         {
             var manager = OnlineDataManager.Instance;
+            var cacheIndicator = isFromCache ? " [color=gray](кеш)[/color]" : "";
 
             // Обновляем MOTD
             if (_motdLabel != null)
             {
                 var motdMessage = manager.GetRandomMotdMessage();
-                _motdLabel.Text = $"[center][color=yellow]Сообщение дня[/color][/center]\n{motdMessage}";
+                _motdLabel.Text = $"[center][color=yellow]Сообщение дня{cacheIndicator}[/color][/center]\n{motdMessage}";
             }
 
             // Обновляем логи обновлений
             if (_updateLogsLabel != null)
             {
                 var updateLog = GetRelevantUpdateLog(manager);
-                _updateLogsLabel.Text = $"[center][color=cyan]Обновления[/color][/center]\n{updateLog}";
+                _updateLogsLabel.Text = $"[center][color=cyan]Обновления{cacheIndicator}[/color][/center]\n{updateLog}";
             }
 
             // Обновляем информацию об авторах
             if (_authorsLabel != null)
             {
                 var authorsText = manager.GetAuthorsText();
-                _authorsLabel.Text = $"[center][color=green]Авторы[/color][/center]\n{authorsText}";
+                _authorsLabel.Text = $"[center][color=green]Авторы{cacheIndicator}[/color][/center]\n{authorsText}";
             }
 
             // Обновляем версию
             if (_versionLabel != null)
             {
                 var versionText = GetVersionText(manager);
-                _versionLabel.Text = $"[center][color=orange]Версия[/color][/center]\n{versionText}";
+                _versionLabel.Text = $"[center][color=orange]Версия{cacheIndicator}[/color][/center]\n{versionText}";
             }
         }
 

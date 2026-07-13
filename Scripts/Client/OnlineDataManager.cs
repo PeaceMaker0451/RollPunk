@@ -23,6 +23,9 @@ namespace RollPunk.Client
 
         public async Task<bool> LoadAllDataAsync()
         {
+            // Сначала загружаем из кеша
+            LoadAllFromCache();
+            
             var tasks = new[]
             {
                 LoadAuthorsDataAsync(),
@@ -33,7 +36,7 @@ namespace RollPunk.Client
 
             var results = await Task.WhenAll(tasks);
             
-            // Возвращаем true если хотя бы один файл загрузился успешно
+            // Возвращаем true если хотя бы один файл загрузился успешно из сети
             foreach (var result in results)
             {
                 if (result) return true;
@@ -250,11 +253,22 @@ namespace RollPunk.Client
             return "Нет логов обновлений";
         }
 
+        public void LoadAllFromCache()
+        {
+            _authorsData = LoadFromCache<AuthorsData>("authors.json");
+            _connectionConfigData = LoadFromCache<ConnectionConfigData>("connection-config.json");
+            _motdData = LoadFromCache<MotdData>("motd.json");
+            _updateLogsData = LoadFromCache<UpdateLogsData>("update-logs.json");
+        }
+
         // Проверка доступности данных
         public bool IsAuthorsDataLoaded => _authorsData != null;
         public bool IsConnectionConfigLoaded => _connectionConfigData != null;
         public bool IsMotdDataLoaded => _motdData != null;
         public bool IsUpdateLogsLoaded => _updateLogsData != null;
+        
+        // Проверка наличия кешированных данных
+        public bool HasCachedData => IsAuthorsDataLoaded || IsConnectionConfigLoaded || IsMotdDataLoaded || IsUpdateLogsLoaded;
     }
 
     // Классы для десериализации JSON данных
