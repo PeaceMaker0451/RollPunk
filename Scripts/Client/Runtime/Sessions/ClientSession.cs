@@ -90,7 +90,20 @@ namespace RollPunk.Client.Runtime
             AddPlayer(_runtimeData.ClientID, name, isAdmin);
         }
 
-        public void Dispose() { }
+        public void Dispose() 
+        {
+            if (_dataBridge != null)
+            {
+                _dataBridge.ReceivedSessionPatch -= ApplySessionPatch;
+                _dataBridge.ReceivedSessionState -= ApplyState;
+                _dataBridge.SessionInitializeRequest -= InitializeSession;
+                
+                if (_dataBridge is TcpClient tcpClient)
+                {
+                    tcpClient.Disconnect();
+                }
+            }
+        }
 
         public API GetAPI()
         {

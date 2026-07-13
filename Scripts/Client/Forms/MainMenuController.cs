@@ -27,6 +27,7 @@ namespace RollPunk.Client.Forms
         {
             View.CreateSessionRequested += () => _runtime.StartSession(_runtime.ReadedMods);
             View.EnterSessionRequested += (address) => _runtime.TryConnectToSession(address, _runtime.ReadedMods);
+            View.ExitSessionRequested += () => _runtime.KillSession();
             
             _runtime.StateChanged += OnStateChanged;
             OnStateChanged();

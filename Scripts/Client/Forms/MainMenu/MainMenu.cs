@@ -22,6 +22,7 @@ namespace RollPunk.Client
 
         public event Action CreateSessionRequested;
         public event Action<string> EnterSessionRequested;
+        public event Action ExitSessionRequested;
 
         public override void _Ready()
         {
@@ -33,6 +34,7 @@ namespace RollPunk.Client
         {
             _mainMenu.Initialize(this);
             _mainMenu.CreateSessionPressed += () => CreateSessionRequested?.Invoke();
+            _mainMenu.ExitSessionPressed += () => ExitSessionRequested?.Invoke();
 
             _enterMenu.Initialize(this);
             _enterMenu.EnterSessionRequested += (adress) => EnterSessionRequested?.Invoke(adress);

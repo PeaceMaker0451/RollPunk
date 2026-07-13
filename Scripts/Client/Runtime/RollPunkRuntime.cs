@@ -49,9 +49,6 @@ namespace RollPunk.Client.Runtime
         {
             _mods = _modReader.ReadMods(ClientConfig.ModsPaths);
 
-            SetState(RollPunkState.Menu);
-            CreateConsole();
-
             var entityFactory = new EntityFactory();
             entityFactory.RegisterFields();
             entityFactory.RegisterHierarchyFields();
@@ -69,8 +66,10 @@ namespace RollPunk.Client.Runtime
                 RPDebug.Log($"Client ID will be changed to {clientId}");
             }
                 
-
             _runtimeData = new SessionRuntimeData(clientId);
+            
+            CreateControllers();
+            SetState(RollPunkState.Menu);
         }
 
         public void StartSession(IReadOnlyList<Mod> mods)
@@ -122,9 +121,18 @@ namespace RollPunk.Client.Runtime
 
         public void KillSession()
         {
-            Session.Dispose();
+            CleanupSession();
+            Session?.Dispose();
             Session = null;
             SetState(RollPunkState.Menu);
+        }
+
+        private void CreateControllers()
+        {
+            _mainMenuController = new MainMenuController(this);
+            _mainMenuHandle = Client.Instance.FormsManager.ShowController(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
+            
+            CreateConsole();
         }
 
         private void SetState(RollPunkState state)
@@ -133,13 +141,6 @@ namespace RollPunk.Client.Runtime
 
             switch (state)
             {
-                case RollPunkState.Menu:
-                    if (_mainMenuController == null)
-                    {
-                        _mainMenuController = new MainMenuController(this);
-                        _mainMenuHandle = Client.Instance.FormsManager.ShowController(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
-                    }
-                    break;
                 case RollPunkState.Session:
                     if (_sessionViewController == null)
                     {
@@ -152,6 +153,16 @@ namespace RollPunk.Client.Runtime
             
             State = state;
             StateChanged?.Invoke();
+        }
+
+        private void CleanupSession()
+        {
+            if (_gameViewHandle != null)
+            {
+                Client.Instance.FormsManager.CloseForm(_gameViewHandle);
+                _gameViewHandle = null;
+            }
+            _sessionViewController = null;
         }
 
         private void CreateConsole()

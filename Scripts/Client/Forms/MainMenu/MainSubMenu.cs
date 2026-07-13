@@ -35,7 +35,7 @@ namespace RollPunk.Client
                 _modManagerButton.Disabled = true;
                 _createSessionButton.Disabled = true;
                 _settingsButton.Disabled = true;
-                _exitSessionButton.Visible = false;
+                _exitSessionButton.Visible = true;
             }
             else
             {

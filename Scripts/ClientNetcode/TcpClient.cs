@@ -63,6 +63,21 @@ namespace RollPunk.ClientNetcode
             _send.SendSessionStateRequest();
         }
 
+        public void Disconnect()
+        {
+            try
+            {
+                if (Tcp?.Socket?.Connected == true)
+                {
+                    Tcp.Socket.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                RPDebug.LogError($"Error disconnecting: {e.Message}");
+            }
+        }
+
         public void SessionInitializeRequestReceived()
         {
             SessionInitializeRequest?.Invoke();
