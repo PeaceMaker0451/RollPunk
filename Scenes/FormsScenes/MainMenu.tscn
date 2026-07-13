@@ -293,7 +293,6 @@ size_flags_horizontal = 0
 text = "Редактор персонажа"
 
 [node name="LeaveSessionButton" type="Button" parent="Background/HBoxContainer/Menus/MainMenu/VBoxContainer/MarginContainer2/ButtonsList" unique_id=133692852]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Покинуть сессию"
