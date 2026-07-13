@@ -55,8 +55,6 @@ namespace RollPunk.Fields
 
         private void AddField(Field field, bool silent = false)
         {
-            RPDebug.Log($"Добавляем и начинаем отслеживать в реестре поле {field.Name}");
-            
             if (_fields.ContainsKey(field.ID))
                 throw new Exception("Поле уже содержится в этом реестре. Если оно попало сюда дважды, значит, что-то вовне пошло не так. Разберись, дурак.");
 
