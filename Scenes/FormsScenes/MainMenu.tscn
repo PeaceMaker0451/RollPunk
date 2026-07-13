@@ -363,7 +363,7 @@ theme_override_font_sizes/bold_italics_font_size = 16
 theme_override_font_sizes/italics_font_size = 16
 theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
-text = "Я написал сделал роллпанк не в последнюю очередь ради того, чтобы вам сюда хуйню всякую писать"
+text = "Пример текста дня"
 fit_content = true
 scroll_following = true
 horizontal_alignment = 1
@@ -379,7 +379,8 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
-text = "[url={link}][b]RollPunk 0.5.1[/b][/url]
+text = "(пример текста обновлений)
+[url={link}][b]RollPunk 0.5.1[/b][/url]
 - исправлены ошибки в сериализации и десериализации полей сущностей, и правил, из-за которых терялись данные, необходимые для обработки событий, вызываемыми кнопками
 - исправлена ошибка, из-за которой в текстовые поля нельзя было вставлять текст
 - изменен механизм загрузки файлов сущностей - теперь сущности \"клонируются\" с файла, то есть, теперь можно загружать несколько копий одной сущности
@@ -417,11 +418,11 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
-text = "Абоба
-Репозиторий:
-Документация:
-p4m4r: [color=#26a5ee][url=@p4m4r]Telegram[/url][/color], [color=#9a7bee][url=peacemaker0451]Discord[/url][/color]
-"
+text = "[color=red][b]КрутитьБомжа от пусихантер_067[/b][/color] или типа того
+[url=https://github.com/PeaceMaker0451/RollPunk]Репозиторий RollPunk[/url]
+Документация (пока не существует)
+Контакты меня (вдруг вы не знаете): [color=#26a5ee][url=@p4m4r]Telegram[/url][/color], [color=#9a7bee][url=peacemaker0451]Discord[/url][/color]
+(ссылки копируются в буфер обмена)"
 fit_content = true
 vertical_alignment = 3
 script = ExtResource("10_soisg")

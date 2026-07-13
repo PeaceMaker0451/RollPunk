@@ -27,13 +27,16 @@ namespace RollPunk
 
         public static void Save(SaveFolder folder, string fileName, string data)
         {
+            var fullPath = $"user://{GetFolder(folder)}{fileName}";
+            var directoryPath = fullPath.GetBaseDir();
 
             using (var dirAccess = DirAccess.Open($"user://"))
             {
-                var error = dirAccess.MakeDir(GetFolder(folder));
+                // Создаем все необходимые директории рекурсивно
+                dirAccess.MakeDirRecursive(directoryPath.Replace("user://", ""));
             }
 
-            using (var file = FileAccess.Open($"user://{GetFolder(folder)}{fileName}", FileAccess.ModeFlags.Write))
+            using (var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Write))
             {
                 if (file != null)
                 {
@@ -42,7 +45,7 @@ namespace RollPunk
                 }
                 else
                 {
-                    GD.PrintErr($"Can't write file user://{GetFolder(folder)}{fileName}");
+                    GD.PrintErr($"Can't write file {fullPath}");
                 }
             }
         }
