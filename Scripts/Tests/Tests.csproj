@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -18,8 +18,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\RollPunk.csproj" />
+    <ProjectReference Include="..\..\Server\Server.csproj" />
+    <ProjectReference Include="..\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="..\ClientNetcode\ClientNetcode.csproj" />
+    <ProjectReference Include="..\CommandsSystem\CommandsSystem.csproj" />
+    <ProjectReference Include="..\Debug\Debug.csproj" />
     <ProjectReference Include="..\Fields\Fields.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Modding\Modding.csproj" />
+    <ProjectReference Include="..\NetcodeCommon\NetcodeCommon.csproj" />
+    <ProjectReference Include="..\Players\Players.csproj" />
+    <ProjectReference Include="..\Rules\Rules.csproj" />
   </ItemGroup>
 
   <ItemGroup>

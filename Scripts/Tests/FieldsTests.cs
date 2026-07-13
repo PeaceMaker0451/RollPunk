@@ -32,7 +32,7 @@ namespace Tests
                 entityField3.AddField(entityField1);
             });
 
-            Assert.Equal("Cannot add field: operation would create ownership cycle.", exception.Message);
+            Assert.Equal($"Unnable to child field {entityField1.Name} [{entityField1.ID}]: operation would create ownership cycle.", exception.Message);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Tests
                 entityField10.AddField(entityField1);
             });
 
-            Assert.Equal("Cannot add field: operation would create ownership cycle.", exception.Message);
+            Assert.Equal($"Unnable to child field {entityField1.Name} [{entityField1.ID}]: operation would create ownership cycle.", exception.Message);
         }
 
 

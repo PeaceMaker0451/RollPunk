@@ -113,6 +113,7 @@ namespace RollPunk.Tests
             try
             {
                 threadManager.UpdateMain();
+                threadManager.UpdateMain();
             }
             catch
             {
