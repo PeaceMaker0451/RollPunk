@@ -214,7 +214,7 @@ namespace RollPunk.Client
                 var versionNumber = ExtractVersionNumber(version);
                 if (versionNumber != null)
                 {
-                    var score = CalculateVersionSimilarity(currentVersionNumber.Value, versionNumber.Value);
+                    var score = CalculateVersionSimilarity(currentVersionNumber, versionNumber);
                     if (score > bestScore)
                     {
                         bestScore = score;
