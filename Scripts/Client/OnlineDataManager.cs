@@ -92,7 +92,12 @@ namespace RollPunk.Client
             {
                 // Пытаемся загрузить из интернета
                 var httpRequest = new HttpRequest();
-                GetTree().Root.AddChild(httpRequest);
+                
+                // Используем CallDeferred для безопасного добавления узла
+                GetTree().Root.CallDeferred("add_child", httpRequest);
+                
+                // Ждем, пока узел будет готов
+                await WaitForNodeReady(httpRequest);
                 
                 var url = BASE_URL + fileName;
                 var error = httpRequest.Request(url);
@@ -122,6 +127,23 @@ namespace RollPunk.Client
 
             // Если не удалось загрузить из интернета, пытаемся загрузить из кеша
             return LoadFromCache<T>(fileName);
+        }
+
+        private async Task WaitForNodeReady(Node node)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            
+            // Если узел уже готов, возвращаемся сразу
+            if (node.IsInsideTree())
+            {
+                return;
+            }
+            
+            // Иначе ждем сигнала ready
+            node.Ready += () => tcs.SetResult(true);
+            
+            // Таймаут 5 секунд на готовность узла
+            await Task.WhenAny(tcs.Task, Task.Delay(5000));
         }
 
         private async Task<string> WaitForHttpResponse(HttpRequest httpRequest)
