@@ -18,6 +18,8 @@ namespace RollPunk.Client
         private ConnectionConfigData _connectionConfigData;
         private MotdData _motdData;
         private UpdateLogsData _updateLogsData;
+        
+        private bool _loadedFromNetwork = false;
 
         private OnlineDataManager() { }
 
@@ -269,6 +271,9 @@ namespace RollPunk.Client
         
         // Проверка наличия кешированных данных
         public bool HasCachedData => IsAuthorsDataLoaded || IsConnectionConfigLoaded || IsMotdDataLoaded || IsUpdateLogsLoaded;
+        
+        // Проверка, были ли данные загружены из сети
+        public bool LoadedFromNetwork => _loadedFromNetwork;
     }
 
     // Классы для десериализации JSON данных

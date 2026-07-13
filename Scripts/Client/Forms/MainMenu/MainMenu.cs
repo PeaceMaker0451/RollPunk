@@ -125,21 +125,24 @@ namespace RollPunk.Client
             {
                 // Загружаем свежие данные из сети
                 var success = await OnlineDataManager.Instance.LoadAllDataAsync();
+                var manager = OnlineDataManager.Instance;
                 
-                if (success)
+                if (success && manager.LoadedFromNetwork)
                 {
                     GD.Print("Динамические данные загружены успешно из сети");
-                    // Обновляем UI свежими данными
+                    // Обновляем UI свежими данными без пометки кеша
                     UpdateDynamicContent(isFromCache: false);
+                }
+                else if (manager.HasCachedData)
+                {
+                    GD.Print("Используются кешированные данные");
+                    // Показываем кешированные данные с пометкой кеша
+                    UpdateDynamicContent(isFromCache: true);
                 }
                 else
                 {
-                    GD.PrintErr("Не удалось загрузить динамические данные из сети");
-                    // Если не было кешированных данных, показываем ошибку
-                    if (!OnlineDataManager.Instance.HasCachedData)
-                    {
-                        ShowErrorContent();
-                    }
+                    GD.PrintErr("Не удалось загрузить динамические данные из сети и нет кеша");
+                    ShowErrorContent();
                 }
             }
             catch (Exception ex)
