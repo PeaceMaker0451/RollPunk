@@ -28,6 +28,9 @@ namespace RollPunk.Client
             // Сначала загружаем из кеша
             LoadAllFromCache();
             
+            // Сбрасываем флаг перед попыткой загрузки из сети
+            _loadedFromNetwork = false;
+            
             var tasks = new[]
             {
                 LoadAuthorsDataAsync(),
@@ -38,13 +41,24 @@ namespace RollPunk.Client
 
             var results = await Task.WhenAll(tasks);
             
-            // Возвращаем true если хотя бы один файл загрузился успешно из сети
+            // Возвращаем true только если хотя бы один файл загрузился успешно из сети
+            var successFromNetwork = false;
             foreach (var result in results)
             {
-                if (result) return true;
+                if (result)
+                {
+                    successFromNetwork = true;
+                    break;
+                }
             }
             
-            return false;
+            // Устанавливаем флаг только если была успешная загрузка из сети
+            if (successFromNetwork)
+            {
+                _loadedFromNetwork = true;
+            }
+            
+            return successFromNetwork;
         }
 
         public async Task<bool> LoadAuthorsDataAsync()
