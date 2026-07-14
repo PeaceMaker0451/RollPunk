@@ -23,6 +23,18 @@ namespace RollPunk.Client
 
         private OnlineDataManager() { }
 
+        // Проверка доступности данных
+        public bool IsAuthorsDataLoaded => _authorsData != null;
+        public bool IsConnectionConfigLoaded => _connectionConfigData != null;
+        public bool IsMotdDataLoaded => _motdData != null;
+        public bool IsUpdateLogsLoaded => _updateLogsData != null;
+
+        // Проверка наличия кешированных данных
+        public bool HasCachedData => IsAuthorsDataLoaded || IsConnectionConfigLoaded || IsMotdDataLoaded || IsUpdateLogsLoaded;
+
+        // Проверка, были ли данные загружены из сети
+        public bool LoadedFromNetwork => _loadedFromNetwork;
+
         public async Task<bool> LoadAllDataAsync()
         {
             // Сначала загружаем из кеша
@@ -31,25 +43,32 @@ namespace RollPunk.Client
             // Сбрасываем флаг перед попыткой загрузки из сети
             _loadedFromNetwork = false;
             
-            var tasks = new[]
+            var methods = new[]
             {
-                LoadAuthorsDataAsync(),
-                LoadConnectionConfigAsync(),
-                LoadMotdDataAsync(),
-                LoadUpdateLogsAsync()
+                LoadAuthorsDataAsync,
+                LoadConnectionConfigAsync,
+                LoadMotdDataAsync,
+                LoadUpdateLogsAsync
             };
+
+            Task<bool>[] tasks = new Task<bool>[methods.Length];
+
+            for (int i = 0; i < methods.Length; i++)
+            {
+                tasks[i] = methods[i].Invoke();
+            }
 
             var results = await Task.WhenAll(tasks);
             
             // Возвращаем true только если хотя бы один файл загрузился успешно из сети
             var successFromNetwork = false;
-            foreach (var result in results)
+            
+            for(int i = 0; i < results.Length; i++)
             {
-                if (result)
-                {
+                GD.Print($"{methods[i].Method.Name} - {results[i]}");
+
+                if (successFromNetwork == false && results[i] == true)
                     successFromNetwork = true;
-                    break;
-                }
             }
             
             // Устанавливаем флаг только если была успешная загрузка из сети
@@ -276,18 +295,6 @@ namespace RollPunk.Client
             _motdData = LoadFromCache<MotdData>("motd.json");
             _updateLogsData = LoadFromCache<UpdateLogsData>("update-logs.json");
         }
-
-        // Проверка доступности данных
-        public bool IsAuthorsDataLoaded => _authorsData != null;
-        public bool IsConnectionConfigLoaded => _connectionConfigData != null;
-        public bool IsMotdDataLoaded => _motdData != null;
-        public bool IsUpdateLogsLoaded => _updateLogsData != null;
-        
-        // Проверка наличия кешированных данных
-        public bool HasCachedData => IsAuthorsDataLoaded || IsConnectionConfigLoaded || IsMotdDataLoaded || IsUpdateLogsLoaded;
-        
-        // Проверка, были ли данные загружены из сети
-        public bool LoadedFromNetwork => _loadedFromNetwork;
     }
 
     // Классы для десериализации JSON данных
@@ -311,30 +318,7 @@ namespace RollPunk.Client
 
     public class UpdateLogsData
     {
-        [JsonProperty]
+        [JsonProperty("logs")]
         public Dictionary<string, string> UpdateLogs { get; set; }
-
-        // Конструктор для правильной десериализации словаря
-        public UpdateLogsData()
-        {
-            UpdateLogs = new Dictionary<string, string>();
-        }
-
-        // Метод для десериализации всех свойств как элементы словаря
-        [JsonExtensionData]
-        public Dictionary<string, object> AdditionalData
-        {
-            get => null;
-            set
-            {
-                if (value != null)
-                {
-                    foreach (var kvp in value)
-                    {
-                        UpdateLogs[kvp.Key] = kvp.Value?.ToString() ?? "";
-                    }
-                }
-            }
-        }
     }
 }

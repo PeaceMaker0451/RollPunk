@@ -45,7 +45,7 @@ shader_parameter/rotation_offset_x = 0.0
 shader_parameter/rotation_offset_y = 0.0
 shader_parameter/rotation_offset_z = 0.0
 
-[node name="MainForm" type="Control" unique_id=194105810 node_paths=PackedStringArray("_mainMenu", "_enterMenu")]
+[node name="MainForm" type="Control" unique_id=194105810 node_paths=PackedStringArray("_mainMenu", "_enterMenu", "_motdLabel", "_updateLogsLabel", "_authorsLabel", "_versionLabel")]
 custom_minimum_size = Vector2(950, 529)
 propagate_maximum_size = true
 layout_mode = 3
@@ -55,6 +55,10 @@ offset_bottom = 529.0
 script = ExtResource("1_v0jhx")
 _mainMenu = NodePath("Background/HBoxContainer/Menus/MainMenu")
 _enterMenu = NodePath("Background/HBoxContainer/Menus/EnterSession")
+_motdLabel = NodePath("Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer/MotdText")
+_updateLogsLabel = NodePath("Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2/UpdateLog")
+_authorsLabel = NodePath("Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3/Authors")
+_versionLabel = NodePath("Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer3/VersionText")
 Title = "Главное меню"
 
 [node name="Background" type="Control" parent="." unique_id=663389259 node_paths=PackedStringArray("_videoPlayer")]
@@ -375,7 +379,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_d8673")
 layout_mode = 2
 
-[node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=1622916374]
+[node name="UpdateLog" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=1622916374]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
@@ -413,7 +417,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3" unique_id=1501039377]
+[node name="Authors" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3" unique_id=1501039377]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 0
@@ -426,6 +430,20 @@ text = "[color=red][b]КрутитьБомжа от пусихантер_067[/b]
 fit_content = true
 vertical_alignment = 3
 script = ExtResource("10_soisg")
+
+[node name="HSeparator3" type="HSeparator" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=260056344]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=741489608]
+material = SubResource("ShaderMaterial_d8673")
+layout_mode = 2
+
+[node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer3" unique_id=1929207100]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "Версия"
+fit_content = true
 
 [node name="Label" type="Label" parent="Background/HBoxContainer/RightPart" unique_id=277829963]
 visible = false

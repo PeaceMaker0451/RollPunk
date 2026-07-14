@@ -27,6 +27,7 @@ namespace RollPunk.Client
         [Export] private RichTextLabel _updateLogsLabel;
         [Export] private RichTextLabel _authorsLabel;
         [Export] private RichTextLabel _versionLabel;
+        private bool _updatedFromCache;
 
         public event Action CreateSessionRequested;
         public event Action<string> EnterSessionRequested;
@@ -160,17 +161,17 @@ namespace RollPunk.Client
         {
             if (_motdLabel != null)
             {
-                _motdLabel.Text = "[center][color=yellow]Сообщение дня[/color][/center]\n[color=gray]Загрузка...[/color]";
+                _motdLabel.Text = "[color=gray]Загрузка...[/color]";
             }
 
             if (_updateLogsLabel != null)
             {
-                _updateLogsLabel.Text = "[center][color=cyan]Обновления[/color][/center]\n[color=gray]Загрузка...[/color]";
+                _updateLogsLabel.Text = "[color=gray]Загрузка...[/color]";
             }
 
             if (_authorsLabel != null)
             {
-                _authorsLabel.Text = "[center][color=green]Авторы[/color][/center]\n[color=gray]Загрузка...[/color]";
+                _authorsLabel.Text = "[color=gray]Загрузка...[/color]";
             }
 
             if (_versionLabel != null)
@@ -182,60 +183,65 @@ namespace RollPunk.Client
 
         private void ShowErrorContent()
         {
+            string unnableToLoad = "[color=red]Не удалось загрузить данные[/color]";
+            
             if (_motdLabel != null)
             {
-                _motdLabel.Text = "[center][color=yellow]Сообщение дня[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+                _motdLabel.Text = unnableToLoad;
             }
 
             if (_updateLogsLabel != null)
             {
-                _updateLogsLabel.Text = "[center][color=cyan]Обновления[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+                _updateLogsLabel.Text = unnableToLoad;
             }
 
             if (_authorsLabel != null)
             {
-                _authorsLabel.Text = "[center][color=green]Авторы[/color][/center]\n[color=red]Не удалось загрузить данные[/color]";
+                _authorsLabel.Text = unnableToLoad;
             }
 
             if (_versionLabel != null)
             {
                 var currentVersion = ClientConfig.ClientVersion;
-                _versionLabel.Text = $"[center][color=orange]Версия[/color][/center]\n{currentVersion}";
+                _versionLabel.Text = $"[center]Версия[/center]\n{currentVersion}";
             }
         }
 
         private void UpdateDynamicContent(bool isFromCache = false)
         {
             var manager = OnlineDataManager.Instance;
-            var cacheIndicator = isFromCache ? " [color=gray](кеш)[/color]" : "";
+            var cacheIndicator = isFromCache ? "" : "";
 
             // Обновляем MOTD
-            if (_motdLabel != null)
+            if (_motdLabel != null && ((isFromCache == false && _updatedFromCache == true) == false))
             {
                 var motdMessage = manager.GetRandomMotdMessage();
-                _motdLabel.Text = $"[center][color=yellow]Сообщение дня{cacheIndicator}[/color][/center]\n{motdMessage}";
+                _motdLabel.Text = $"{motdMessage}{cacheIndicator}";
             }
 
             // Обновляем логи обновлений
             if (_updateLogsLabel != null)
             {
                 var updateLog = GetRelevantUpdateLog(manager);
-                _updateLogsLabel.Text = $"[center][color=cyan]Обновления{cacheIndicator}[/color][/center]\n{updateLog}";
+                _updateLogsLabel.Text = $"{updateLog}{cacheIndicator}";
             }
 
             // Обновляем информацию об авторах
             if (_authorsLabel != null)
             {
                 var authorsText = manager.GetAuthorsText();
-                _authorsLabel.Text = $"[center][color=green]Авторы{cacheIndicator}[/color][/center]\n{authorsText}";
+                _authorsLabel.Text = $"{authorsText}{cacheIndicator}";
             }
 
             // Обновляем версию
             if (_versionLabel != null)
             {
                 var versionText = GetVersionText(manager);
-                _versionLabel.Text = $"[center][color=orange]Версия{cacheIndicator}[/color][/center]\n{versionText}";
+                _versionLabel.Text = $"[center][color=orange]Версия[/color][/center]\n{versionText}{cacheIndicator}";
             }
+
+            if(isFromCache == true)
+                _updatedFromCache = true;
         }
 
         private string GetRelevantUpdateLog(OnlineDataManager manager)
