@@ -2,8 +2,6 @@ local CommonCharacterConstructor = require('character.common_character_construct
 
 local CharacterFactory = {}
 
-local _characters = {}
-
 ---@type EntityFieldData
 local _character_entity_data =
 {
@@ -11,11 +9,6 @@ local _character_entity_data =
   type = "EntityField",
   additional_data = {type = "CP_Character"}
 }
-
----@return CommonPlayerConstructor
-function CharacterFactory.getCharacterConstructor(character)
-    return _characters[character]
-end
 
 function CharacterFactory.createCharacter()
     RollPunkAPI.log("Создание нового персонажа...")   
@@ -26,20 +19,14 @@ end
 
 function CharacterFactory.handleCharacter(character)
     RollPunkAPI.log("Обработка систем для поля персонажа " .. character.id .. "...")
-    local character_constructor = CommonCharacterConstructor:new(character)
-    _characters[character] = character_constructor
+    CommonCharacterConstructor.initialize(character)
 end
 
--- function CharacterFactory.initializeCharacter(character)
---     if _characters[character] ~= nil then
---         _characters[character]:initializeCharacter()
---     end
--- end
-
 local function _onValidate(entity_field, field_API)
-    if _characters[entity_field] ~= nil then
+    -- Проверяем, что это персонаж по типу
+    if entity_field.getAdditionalDataField("type") == "CP_Character" then
         RollPunkAPI.log("Валидация поля персонажа " .. entity_field.id .. "...")
-        _characters[entity_field]:validateCharacter(field_API)
+        CommonCharacterConstructor.validate(entity_field, field_API)
     end
 end
 
