@@ -7,6 +7,8 @@ namespace RollPunk.ClientSide.Runtime.UI
 {
     internal partial class FieldsList : ItemList
     {
+        [Export] private Texture2D _entityFieldIcon;
+        
         private IReadOnlyFieldsContainer _container;
         private Dictionary<int, Field> _indexToField = new();
         private Dictionary<Field, Action> _updateNameActions = new();
@@ -53,6 +55,11 @@ namespace RollPunk.ClientSide.Runtime.UI
             int index = AddItem(text);
             _indexToField[index] = field;
 
+            if(_entityFieldIcon != null)
+                SetItemIcon(index, _entityFieldIcon);
+
+            UpdateName(field);
+
             Action onNameUpdated = () => UpdateName(field);
             field.NameChanged += onNameUpdated;
             field.Updated += onNameUpdated;
@@ -85,7 +92,7 @@ namespace RollPunk.ClientSide.Runtime.UI
         {
             var foundIndex = GetFieldIndex(field);
 
-            string name = field.Name == string.Empty ? "[empty name]" : field.Name;
+            string name = field.Name.Length < 1? "[empty name]" : field.Name;
 
             if(foundIndex.HasValue)
             SetItemText(foundIndex.Value, field.Name);

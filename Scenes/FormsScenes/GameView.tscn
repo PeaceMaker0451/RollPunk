@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dt2tx3ufddnwx"]
 
 [ext_resource type="Script" uid="uid://6k78ibynl0uu" path="res://Scripts/Client/Forms/GameView/GameView.cs" id="1_6vfg8"]
+[ext_resource type="Texture2D" uid="uid://b86fx5ev3h7qw" path="res://Sprites/logo.png" id="2_g2j63"]
 [ext_resource type="Script" uid="uid://bromkehumtcy3" path="res://Scripts/Client/Forms/GameView/FieldsList.cs" id="2_wukpt"]
 [ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="3_1rd3g"]
 
@@ -35,9 +36,12 @@ text = "Поля сессии"
 layout_mode = 2
 size_flags_vertical = 3
 item_count = 2
+fixed_icon_size = Vector2i(21, 21)
 item_0/text = "Поле1"
+item_0/icon = ExtResource("2_g2j63")
 item_1/text = "Поле2"
 script = ExtResource("2_wukpt")
+_entityFieldIcon = ExtResource("2_g2j63")
 
 [node name="Entity" parent="BoxContainer" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
 layout_mode = 2
