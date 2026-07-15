@@ -1,271 +1,203 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
+local FieldDefs = require("character.field_definitions")
 
----@class UpdateSubsystem : CharacterSubsystem
----@field update_group FieldGroupAPI
----@field action_group FieldGroupAPI
----@field stats_points_field LineFieldAPI
----@field skills_points_field LineFieldAPI
----@field confirm_field LineFieldAPI
----@
----@field skills_ss SkillSubsystem
----@field stats_ss StatsSubsystem
----@field emp_field_name string
----@field real_emp_value_name string
-local UpdateSubsystem = setmetatable({}, CharacterSubsystem)
-UpdateSubsystem.__index = UpdateSubsystem
+local UpdateSubsystem = {}
 
-local _update_pool_name = "update_pool"
-local _update_pool_offset_name = "update_pool_offset"
-local _stats_updated_value_name = "stats_updated"
-local _skills_updated_value_name = "skills_updated"
-
-local _updateFields = 
-{
-    ---@type IntFieldData
-    stats_update_points_field_data = 
-    {
-        name = "StatUpdate",
-        visible_name = "Очки обновления Статов",
-        type = "IntField",
-        value = 0,
-        max_value = 3000,
-        min_value = -3000,
-        view_access_level = 2,
-        edit_access_level = 3,
-        additional_data = { [_update_pool_name] = 0, [_update_pool_offset_name] = 0},
-    },
-
-    ---@type IntFieldData
-    skills_update_points_field_data = 
-    {
-        name = "SkillUpdate",
-        visible_name = "Очки обновления Навыков",
-        type = "IntField",
-        value = 0,
-        max_value = 3000,
-        min_value = -3000,
-        view_access_level = 2,
-        edit_access_level = 3,
-        additional_data = { [_update_pool_name] = 0, [_update_pool_offset_name] = 0 },
-    },
-    ---@type BoolFieldData
-    update_confirm = 
-    {
-        name = "UpdatedConfirm",
-        visible_name = "Подтвердить",
-        type = "BoolField",
-        value = false,
-        view_access_level = 2,
-        edit_access_level = 3,
-        additional_data = { [_stats_updated_value_name] = false, [_skills_updated_value_name] = false },
-    }
-}
-
----@type RuleData
-local _add_skill_points_rule_data =
-{
-    name = "AddSkillUpdatePoints",
-    type = "Rule",
-    hook = "AddSkillUpdatePoints"
-}
-
----@type RuleFieldData
-local _spend_psycho_rule_field_data =
-{
-    name = "SpendPsychoPointsField",
-    rule_name = _add_skill_points_rule_data.name,
-    visible_name = "Добавить очки ",
-    type = "RuleField",
-    line_priority = 67,
-}
-
----@param self UpdateSubsystem
-local function _calculateCurrentSkillsTotalValue(self)
+local function _calculateCurrentSkillsTotalValue(character)
     local currentTotalValue = 0
+    local skills_group = character.getField(FieldDefs.Groups.skills_group.name)
 
-    for _, skill in pairs(self.skills_ss.skills) do
-            local cost = skill.getAdditionalDataField("cost") or 1
-            currentTotalValue = currentTotalValue + skill.getValue() * cost
+    for _, skills_subgroup in pairs(skills_group.children) do
+        for _, skill in pairs(skills_subgroup.children) do
+            if skill.getAdditionalDataField("type") == "skill" then
+                local cost = skill.getAdditionalDataField("cost") or 1
+                currentTotalValue = currentTotalValue + skill.getValue() * cost
+            else
+                RollPunkAPI.log(skill.name .. " - не скилл по типу")
+            end
         end
+    end
 
     return currentTotalValue
 end
 
----@param self UpdateSubsystem
-local function _refreshSkillsUpdateField(self)
-    local pool_offset = self.skills_points_field.getAdditionalDataField(_update_pool_offset_name)
-    local pool_value = self.skills_points_field.getAdditionalDataField(_update_pool_name)
-    local current_total_value = _calculateCurrentSkillsTotalValue(self)
+local function _refreshSkillsUpdateField(character)
+    local skills_points_field = character.getField(FieldDefs.Update.skills_update_points.name)
+    local pool_offset = skills_points_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool_offset)
+    local pool_value = skills_points_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool)
+    local current_total_value = _calculateCurrentSkillsTotalValue(character)
 
     local available_points = pool_value + pool_offset - current_total_value
+    skills_points_field.setValue(available_points)
 
-    self.skills_points_field.setValue(available_points);
-
-    self.confirm_field.setAdditionalDataField(_skills_updated_value_name, available_points == 0)
+    local confirm_field = character.getField(FieldDefs.Update.update_confirm.name)
+    confirm_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.skills_updated, available_points == 0)
 end
 
----@param self UpdateSubsystem
-local function _calculate_current_stats_total_value(self)
+local function _calculate_current_stats_total_value(character)
     local current_total_value = 0
+    local stats_group = character.getField(FieldDefs.Groups.stats_group.name)
 
-    for _, stat in pairs(self.stats_ss.stats_group.children) do
-        if(stat.name == self.emp_field_name) and (stat.getAdditionalDataField(self.real_emp_value_name) ~= nil) then
-            current_total_value = current_total_value + stat.getAdditionalDataField(self.real_emp_value_name)
-        else
-            current_total_value = current_total_value + stat.getValue()
+    for _, stat in pairs(stats_group.children) do
+        if stat.getAdditionalDataField("type") == "stat" then
+            local emp_field = character.getField(FieldDefs.Stats.emp.name)
+            if stat.name == FieldDefs.Stats.emp.name and emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value) ~= nil then
+                current_total_value = current_total_value + emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value)
+            else
+                current_total_value = current_total_value + stat.getValue()
+            end
         end
     end
 
     return current_total_value
 end
 
----@param self UpdateSubsystem
-local function _refreshStatsUpdateField(self)
-    local poolOffset = self.stats_points_field.getAdditionalDataField(_update_pool_offset_name)
-    local poolValue = self.stats_points_field.getAdditionalDataField(_update_pool_name)
-    local currentTotalValue = _calculate_current_stats_total_value(self)
+local function _refreshStatsUpdateField(character)
+    local stats_points_field = character.getField(FieldDefs.Update.stats_update_points.name)
+    local poolOffset = stats_points_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool_offset)
+    local poolValue = stats_points_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool)
+    local currentTotalValue = _calculate_current_stats_total_value(character)
 
     local available_points = poolValue + poolOffset - currentTotalValue
+    stats_points_field.setValue(available_points)
 
-    self.stats_points_field.setValue(available_points);
-
-    self.confirm_field.setAdditionalDataField(_stats_updated_value_name, available_points == 0)
+    local confirm_field = character.getField(FieldDefs.Update.update_confirm.name)
+    confirm_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.stats_updated, available_points == 0)
 end
 
----@param self UpdateSubsystem
-local function _setUpdateGroupVisible(self, visible)
+local function _setUpdateGroupVisible(character, visible)
+    local update_group = character.getField(FieldDefs.Groups.update_group.name)
     if visible then
-        self.update_group.setViewAccessLevel(2)
+        update_group.setViewAccessLevel(2)
     else
-        self.update_group.setViewAccessLevel(3)
+        update_group.setViewAccessLevel(3)
     end
 end
 
----@param self UpdateSubsystem
-local function _refreshUpdateGroup(self)
-    local stats_updated = self.confirm_field.getAdditionalDataField(_stats_updated_value_name)
-    local skills_updated = self.confirm_field.getAdditionalDataField(_skills_updated_value_name)
+local function _refreshUpdateGroup(character)
+    local confirm_field = character.getField(FieldDefs.Update.update_confirm.name)
+    local stats_updated = confirm_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.stats_updated)
+    local skills_updated = confirm_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.skills_updated)
     
     if stats_updated == false or skills_updated == false then
-        _setUpdateGroupVisible(self, true)
-        self.confirm_field.setEditAccessLevel(3)
-        self.skills_ss:setEditingEnabled(true)
-        self.stats_ss:setEditingEnabled(true)
+        _setUpdateGroupVisible(character, true)
+        confirm_field.setEditAccessLevel(3)
+        UpdateSubsystem.setSkillsEditingEnabled(character, true)
+        UpdateSubsystem.setStatsEditingEnabled(character, true)
     else
-        self.confirm_field.setEditAccessLevel(2)
+        confirm_field.setEditAccessLevel(2)
     end
 end
 
----@param self UpdateSubsystem
-local function _handleConfirmation(self)
-    local stats_updated = self.confirm_field.getAdditionalDataField(_stats_updated_value_name)
-    local skills_updated = self.confirm_field.getAdditionalDataField(_skills_updated_value_name)
+local function _handleConfirmation(character)
+    local confirm_field = character.getField(FieldDefs.Update.update_confirm.name)
+    local stats_updated = confirm_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.stats_updated)
+    local skills_updated = confirm_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.skills_updated)
     
     if stats_updated and skills_updated then
-        _setUpdateGroupVisible(self, false)
-        self.skills_ss:setEditingEnabled(false)
-        self.stats_ss:setEditingEnabled(false)
+        _setUpdateGroupVisible(character, false)
+        UpdateSubsystem.setSkillsEditingEnabled(character, false)
+        UpdateSubsystem.setStatsEditingEnabled(character, false)
     end
 end
 
-function UpdateSubsystem:setSkillUpdatePoints(value, should_update_offset)
-    RollPunkAPI.log("Добавляем очки прокачки скиллов - " .. value)    
+function UpdateSubsystem.initialize(character)
+    if not CharacterSubsystem.isCreated(character, "UpdateSubsystem") then
+        UpdateSubsystem.create(character)
+        CharacterSubsystem.markAsCreated(character, "UpdateSubsystem")
+    end
+    
+    _refreshSkillsUpdateField(character)
+    _refreshStatsUpdateField(character)
+    _refreshUpdateGroup(character)
+end
 
-    if(should_update_offset) then
-        local currentTotalValue = _calculateCurrentSkillsTotalValue(self)
-        self.skills_points_field.setAdditionalDataField(_update_pool_offset_name, currentTotalValue)
-        self.skills_points_field.setAdditionalDataField(_update_pool_name, currentTotalValue + value)
+function UpdateSubsystem.create(character)
+    local update_group = character.getField(FieldDefs.Groups.update_group.name)
+    FieldsServices.createAndChild(update_group, FieldDefs.Update.stats_update_points)
+    FieldsServices.createAndChild(update_group, FieldDefs.Update.skills_update_points)
+    FieldsServices.createAndChild(update_group, FieldDefs.Update.update_confirm)
+end
+
+function UpdateSubsystem.setSkillUpdatePoints(character, value, should_update_offset)
+    RollPunkAPI.log("Добавляем очки прокачки скиллов - " .. value)
+    
+    local skills_points_field = character.getField(FieldDefs.Update.skills_update_points.name)
+    
+    if should_update_offset then
+        local currentTotalValue = _calculateCurrentSkillsTotalValue(character)
+        skills_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool_offset, currentTotalValue)
+        skills_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool, currentTotalValue + value)
     else
-        self.skills_points_field.setAdditionalDataField(_update_pool_name, value)
+        skills_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool, value)
     end
 
-    _refreshSkillsUpdateField(self)
-    _refreshUpdateGroup(self)
+    _refreshSkillsUpdateField(character)
+    _refreshUpdateGroup(character)
 end
 
-function UpdateSubsystem:setStatsUpdatePoints(value, should_update_offset)
+function UpdateSubsystem.setStatsUpdatePoints(character, value, should_update_offset)
     RollPunkAPI.log("Добавляем очки прокачки статов - " .. value)
-
-    if(should_update_offset) then
-        local currentTotalValue = _calculate_current_stats_total_value(self)
-        self.stats_points_field.setAdditionalDataField(_update_pool_offset_name, currentTotalValue)
-        self.stats_points_field.setAdditionalDataField(_update_pool_name, currentTotalValue + value)
+    
+    local stats_points_field = character.getField(FieldDefs.Update.stats_update_points.name)
+    
+    if should_update_offset then
+        local currentTotalValue = _calculate_current_stats_total_value(character)
+        stats_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool_offset, currentTotalValue)
+        stats_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool, currentTotalValue + value)
     else
-        self.stats_points_field.setAdditionalDataField(_update_pool_name, value)
+        stats_points_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.update_pool, value)
     end
 
-    _refreshStatsUpdateField(self)
-    _refreshUpdateGroup(self)
+    _refreshStatsUpdateField(character)
+    _refreshUpdateGroup(character)
 end
 
--- ---@param self HealthSubsystem
--- local function _upgradeTo051(self)
---     RollPunkAPI.log("Обновление подсистемы обновлений до версии 0.5.1...")
-    
---     local psychoButton = self.character.getField(_spend_psycho_rule_field_data.name)
---     psychoButton.setRuleName(_spend_psycho_rule_data.name)
-
---     local psychoRule = self.character.getRule(_spend_psycho_rule_data.name)
---     psychoRule.setHook(_spend_psycho_rule_data.hook)
--- end
-
-function UpdateSubsystem:_create()
-    self.stats_points_field = FieldsServices.createAndChild(self.update_group, _updateFields.stats_update_points_field_data)
-    self.skills_points_field = FieldsServices.createAndChild(self.update_group, _updateFields.skills_update_points_field_data)
-    self.confirm_field = FieldsServices.createAndChild(self.update_group, _updateFields.update_confirm)
-end
-
-function UpdateSubsystem:_connect()
-    local version = self.character.getAdditionalDataField("version")    
-
-    -- if version == nil then
-    --     _upgradeTo051(self)
-    -- end
-
-    self.stats_points_field = self.character.getField(_updateFields.stats_update_points_field_data.name)
-    self.skills_points_field = self.character.getField(_updateFields.skills_update_points_field_data.name)
-    self.confirm_field = self.character.getField(_updateFields.update_confirm.name)
-end
-
-function UpdateSubsystem:new(character, action_group, update_group, skills_ss, stats_ss, emp_field_name, real_emp_value_name)
-    ---@type UpdateSubsystem
-    local instance = CharacterSubsystem.new(self, "UpdateSubsystem", character)    
-    
-    instance.skills_ss = skills_ss
-    instance.stats_ss = stats_ss
-    instance.update_group = update_group
-    instance.emp_field_name = emp_field_name
-    instance.real_emp_value_name = real_emp_value_name
-    instance.action_group = action_group
-
-    if instance:isCreated() == false then
-        instance:_create()
-        instance:markAsCreated()
-    else
-        instance:_connect()
+function UpdateSubsystem.setSkillsEditingEnabled(character, enabled)
+    local skills_group = character.getField(FieldDefs.Groups.skills_group.name)
+    for _, skill in pairs(skills_group.children) do
+        if skill.getAdditionalDataField("type") == "skill" then
+            if enabled then
+                skill.setEditAccessLevel(2)
+                skill.setViewAccessLevel(2)
+            else
+                skill.setEditAccessLevel(3)
+                if skill.getValue() == 0 then
+                    skill.setViewAccessLevel(3)
+                end
+            end
+        end
     end
-
-    _refreshSkillsUpdateField(instance)
-    _refreshStatsUpdateField(instance)
-    _refreshUpdateGroup(instance)
-
-    return instance
 end
 
-function UpdateSubsystem:validate(updated_field)
+function UpdateSubsystem.setStatsEditingEnabled(character, enabled)
+    local stats_group = character.getField(FieldDefs.Groups.stats_group.name)
+    for _, stat in pairs(stats_group.children) do
+        if stat.getAdditionalDataField("type") == "stat" then
+            if enabled then
+                stat.setEditAccessLevel(2)
+            else
+                stat.setEditAccessLevel(3)
+            end
+        end
+    end
+end
+
+function UpdateSubsystem.validate(character, updated_field)
     if updated_field.getAdditionalDataField("type") == "stat" then
-        _refreshStatsUpdateField(self)
-        _refreshUpdateGroup(self)
+        _refreshStatsUpdateField(character)
+        _refreshUpdateGroup(character)
     end
 
     if updated_field.getAdditionalDataField("type") == "skill" then
-        _refreshSkillsUpdateField(self)
-        _refreshUpdateGroup(self)
+        _refreshSkillsUpdateField(character)
+        _refreshUpdateGroup(character)
     end
 
-    if updated_field == self.confirm_field then
-        _handleConfirmation(self)
+    local confirm_field = character.getField(FieldDefs.Update.update_confirm.name)
+    if updated_field == confirm_field then
+        _handleConfirmation(character)
     end
 end
 

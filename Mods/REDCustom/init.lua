@@ -1,12 +1,13 @@
 local _characterConfig = require("character.characters_registry")
 local _baseActions = require("setup")
+local UpdateSubsystem = require("character.subsystems.update_subsystem")
 
 local function _createCharacter()
     local character_field = _characterConfig.createCharacter()
     RollPunkAPI.log("[color=deep_pink]ADDING CHARACTER TO SESSION!!![/color]")
 
-    _characterConfig.getCharacterConstructor(character_field).update_subsystem:setStatsUpdatePoints(115, false)
-    _characterConfig.getCharacterConstructor(character_field).update_subsystem:setSkillUpdatePoints(150, false)
+    UpdateSubsystem.setStatsUpdatePoints(character_field, 115, false)
+    UpdateSubsystem.setSkillUpdatePoints(character_field, 150, false)
 
     SessionAPI.addEntityField(character_field)
     SessionAPI.OwnersRegistry.setEntityOwner(character_field, SessionAPI.current_player)

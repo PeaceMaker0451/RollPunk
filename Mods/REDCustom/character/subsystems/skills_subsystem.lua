@@ -1,11 +1,8 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
+local FieldDefs = require("character.field_definitions")
 
----@class SkillSubsystem : CharacterSubsystem
----@field skills table
----@field skills_group FieldGroupAPI
-local SkillSubsystem = setmetatable({}, CharacterSubsystem)
-SkillSubsystem.__index = SkillSubsystem
+local SkillsSubsystem = {}
 
 -- Навыки восприятия   
 local _perception_skills = 
@@ -493,7 +490,7 @@ local _technical_skills =
 
 local _skills_group_name
 
-function SkillSubsystem.construct(skills_group_name)
+function SkillsSubsystem.construct(skills_group_name)
     _skills_group_name = skills_group_name
 end
 
@@ -521,7 +518,7 @@ local function _createSkillFieldData(SkillData, priority)
     return fieldData
 end
 
-local function create_skills_category(self, skills, skiils_group)
+local function create_skills_category(skills, skills_group)
     ---@type FieldsGroupData
     local new_category_group_data = 
     {
@@ -530,94 +527,61 @@ local function create_skills_category(self, skills, skiils_group)
         visible_name = skills.visible_name
     }
 
-    local new_category_field = FieldsServices.createAndChild(skiils_group,new_category_group_data)
+    local new_category_field = FieldsServices.createAndChild(skills_group, new_category_group_data)
     
     local i = 0
     for _, skill_info in pairs(skills) do
         if type(skill_info) == "table" then
             local field_data = _createSkillFieldData(skill_info, i)
-            self.skills[skill_info.Name] = FieldsServices.createAndChild(new_category_field, field_data)
+            FieldsServices.createAndChild(new_category_field, field_data)
             RollPunkAPI.log("Создали скилл " .. skill_info.Name)
             i = i + 1
         end
     end
 end
 
-local function connect_skills_category(self, skills)
-    for _, skill_info in pairs(skills) do
-        if type(skill_info) == "table" then
-            if self.skills[skill_info.name] ~= nil then
-                RollPunkAPI.log("Повторное добавление скилла " .. skill_info.name)
-            end
-
-            self.skills[skill_info.Name] = self.character.getField(skill_info.Name)
-            RollPunkAPI.log("подключили скилл " .. skill_info.Name)
-        end
+function SkillsSubsystem.initialize(character)
+    if not CharacterSubsystem.isCreated(character, "SkillsSubsystem") then
+        SkillsSubsystem.create(character)
+        CharacterSubsystem.markAsCreated(character, "SkillsSubsystem")
     end
 end
 
-function SkillSubsystem:_create(character)
+function SkillsSubsystem.create(character)
     RollPunkAPI.log("Создание SkillsSubsystem")
 
-    create_skills_category(self, _perception_skills, self.skills_group)
-    create_skills_category(self,_physical_skills, self.skills_group)
-    create_skills_category(self,_control_skills, self.skills_group)
-    create_skills_category(self,_educational_skills, self.skills_group)
-    create_skills_category(self,_melee_skills, self.skills_group)
-    create_skills_category(self,_ranged_skills, self.skills_group)
-    create_skills_category(self,_performance_skills, self.skills_group)
-    create_skills_category(self,_social_skills, self.skills_group)
-    create_skills_category(self,_technical_skills, self.skills_group)
+    local skills_group = character.getField(FieldDefs.Groups.skills_group.name)
+
+    create_skills_category(_perception_skills, skills_group)
+    create_skills_category(_physical_skills, skills_group)
+    create_skills_category(_control_skills, skills_group)
+    create_skills_category(_educational_skills, skills_group)
+    create_skills_category(_melee_skills, skills_group)
+    create_skills_category(_ranged_skills, skills_group)
+    create_skills_category(_performance_skills, skills_group)
+    create_skills_category(_social_skills, skills_group)
+    create_skills_category(_technical_skills, skills_group)
 end
 
-function SkillSubsystem:_connect()
-    RollPunkAPI.log("Присоединение SkillsSubsystem")
-    
-    connect_skills_category(self, _perception_skills)
-    connect_skills_category(self,_physical_skills)
-    connect_skills_category(self,_control_skills)
-    connect_skills_category(self,_educational_skills)
-    connect_skills_category(self,_melee_skills)
-    connect_skills_category(self,_ranged_skills)
-    connect_skills_category(self,_performance_skills)
-    connect_skills_category(self,_social_skills)
-    connect_skills_category(self,_technical_skills)
-end
-
-function SkillSubsystem:new(character, skills_group)
-    ---@type SkillSubsystem
-    local instance = CharacterSubsystem.new(self, "SkillsSubsystem", character)    
-    
-    instance.skills_group = skills_group
-    instance.skills = {}
-
-    if instance:isCreated() == false then
-        instance:_create()
-        instance:markAsCreated()
-    else
-        instance:_connect()
-    end
-
-    return instance    
-end
-
-function SkillSubsystem:setEditingEnabled(enabled)
-    for _, skill in pairs(self.skills) do
-        if enabled then
-            skill.setEditAccessLevel(2)
-            skill.setViewAccessLevel(2)
-        else
-            skill.setEditAccessLevel(3)
-
-            if skill.getValue() == 0 then
-                skill.setViewAccessLevel(3)
+function SkillsSubsystem.setEditingEnabled(character, enabled)
+    local skills_group = character.getField(FieldDefs.Groups.skills_group.name)
+    for _, skill in pairs(skills_group.children) do
+        if skill.getAdditionalDataField("type") == "skill" then
+            if enabled then
+                skill.setEditAccessLevel(2)
+                skill.setViewAccessLevel(2)
+            else
+                skill.setEditAccessLevel(3)
+                if skill.getValue() == 0 then
+                    skill.setViewAccessLevel(3)
+                end
             end
         end
     end
 end
 
-function SkillSubsystem:validate(character, updatedField)
-
+function SkillsSubsystem.validate(character, updatedField)
+    -- Пока пустая, но готова для будущих валидаций
 end
 
-return SkillSubsystem
+return SkillsSubsystem
