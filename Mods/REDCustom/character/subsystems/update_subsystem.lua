@@ -8,10 +8,14 @@ local function _calculateCurrentSkillsTotalValue(character)
     local currentTotalValue = 0
     local skills_group = character.getField(FieldDefs.Groups.skills_group.name)
 
-    for _, skill in pairs(skills_group.children) do
-        if skill.getAdditionalDataField("type") == "skill" then
-            local cost = skill.getAdditionalDataField("cost") or 1
-            currentTotalValue = currentTotalValue + skill.getValue() * cost
+    for _, skills_subgroup in pairs(skills_group.children) do
+        for _, skill in pairs(skills_subgroup.children) do
+            if skill.getAdditionalDataField("type") == "skill" then
+                local cost = skill.getAdditionalDataField("cost") or 1
+                currentTotalValue = currentTotalValue + skill.getValue() * cost
+            else
+                RollPunkAPI.log(skill.name .. " - не скилл по типу")
+            end
         end
     end
 

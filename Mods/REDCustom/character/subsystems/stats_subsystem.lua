@@ -61,4 +61,4 @@ function StatsSubsystem.validate(character, updatedField)
     -- Пока пустая, но готова для будущих валидаций
 end
 
-return StatSubsystem
+return StatsSubsystem

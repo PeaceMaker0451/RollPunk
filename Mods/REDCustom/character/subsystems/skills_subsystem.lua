@@ -490,7 +490,7 @@ local _technical_skills =
 
 local _skills_group_name
 
-function SkillSubsystem.construct(skills_group_name)
+function SkillsSubsystem.construct(skills_group_name)
     _skills_group_name = skills_group_name
 end
 
