@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Scripts\Entitie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessPolicy", "Scripts\AccessPolicy\AccessPolicy.csproj", "{E3C6E44A-FF17-4E36-80A6-59FC6F66FDB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debug", "Scripts\Debug\Debug.csproj", "{721A93DF-3989-4462-B2A4-6B79B384E01E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPDebug", "Scripts\RPDebug\RPDebug.csproj", "{721A93DF-3989-4462-B2A4-6B79B384E01E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsSystem", "Scripts\CommandsSystem\CommandsSystem.csproj", "{C0522485-06D7-4959-B682-65E548EC3EC9}"
 EndProject

@@ -2,6 +2,9 @@
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.Rules;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RollPunk.HierarchyFields
 {

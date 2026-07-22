@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
 	  <Nullable>disable</Nullable>
 	  <RootNamespace>RollPunk.Entities</RootNamespace>
   </PropertyGroup>
@@ -13,6 +13,10 @@
 
 	<ItemGroup>
 		<None Remove="**/*.uid" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
 	</ItemGroup>
 
 </Project>

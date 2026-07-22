@@ -1,4 +1,6 @@
-﻿namespace RollPunk.Entities
+﻿using System;
+
+namespace RollPunk.Entities
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public sealed class EntityTypeAttribute : Attribute

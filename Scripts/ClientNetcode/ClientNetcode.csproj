@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Modding\Modding.csproj" />
     <ProjectReference Include="..\NetcodeCommon\NetcodeCommon.csproj" />
     <ProjectReference Include="..\Players\Players.csproj" />
+    <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
     <ProjectReference Include="..\Rules\Rules.csproj" />
   </ItemGroup>
 

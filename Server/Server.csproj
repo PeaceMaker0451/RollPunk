@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Scripts\Modding\Modding.csproj" />
     <ProjectReference Include="..\Scripts\NetcodeCommon\NetcodeCommon.csproj" />
     <ProjectReference Include="..\Scripts\Players\Players.csproj" />
+    <ProjectReference Include="..\Scripts\RPDebug\RPDebug.csproj" />
     <ProjectReference Include="..\Scripts\Rules\Rules.csproj" />
   </ItemGroup>
 

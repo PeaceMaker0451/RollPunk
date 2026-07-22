@@ -6,12 +6,14 @@ uid="uid://clfai734qe4ei"
 
 [deps]
 
-files=["res://Localization/LocalizationFileMain.ru.translation", "res://Localization/LocalizationFileMain.en.translation"]
+files=["res://Localization/LocalizationFileMain.ru.translation"]
 
 source_file="res://Localization/LocalizationFileMain.csv"
-dest_files=["res://Localization/LocalizationFileMain.ru.translation", "res://Localization/LocalizationFileMain.en.translation"]
+dest_files=["res://Localization/LocalizationFileMain.ru.translation"]
 
 [params]
 
 compress=true
 delimiter=0
+unescape_keys=false
+unescape_translations=true

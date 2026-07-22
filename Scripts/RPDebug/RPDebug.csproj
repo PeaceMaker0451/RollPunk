@@ -4,13 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>RollPunk.Players</RootNamespace>
+    <RootNamespace>RollPunk.Debug</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modding\Modding.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
-    <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
+    <PackageReference Include="GodotSharp" Version="4.4.0" />
   </ItemGroup>
 
 	<ItemGroup>
