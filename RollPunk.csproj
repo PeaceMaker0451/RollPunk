@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
+    <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Scripts\AccessPolicies\**" />
@@ -46,5 +47,6 @@
     <ProjectReference Include="Scripts\Entities\Entities.csproj" />
     <ProjectReference Include="Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="Scripts\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="Scripts\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 </Project>

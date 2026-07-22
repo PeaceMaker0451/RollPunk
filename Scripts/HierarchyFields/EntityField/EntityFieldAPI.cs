@@ -1,5 +1,6 @@
 ﻿using RollPunk.Fields;
 using RollPunk.Rules;
+using System;
 
 namespace RollPunk.HierarchyFields
 {

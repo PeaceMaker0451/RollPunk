@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CommandsSystem\CommandsSystem.csproj" />
     <ProjectReference Include="..\Debug\Debug.csproj" />
+    <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

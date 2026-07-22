@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using RollPunk.Entities;
 using RollPunk.Modding.APIs;
+using System;
+using System.Collections.Generic;
 
 namespace RollPunk.Players
 {

@@ -1,6 +1,5 @@
 using RollPunk.Client;
 using RollPunk.Client.Forms;
-using RollPunk.UI.Forms;
 
 namespace RollPunk.Scripts.Client.Forms
 {

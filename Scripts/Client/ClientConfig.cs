@@ -10,7 +10,7 @@ namespace RollPunk.Client
     {
         public const string TabedFramePath = "res://Scenes/FramesScenes/TabledFrame.tscn";
         public const string DefaultFramePath = "res://Scenes/FramesScenes/Frame.tscn";
-        public const string ClientVersion = "0.6.0 Netcode Test";
+        public const string ClientVersion = "0.6.0";
 
         public static readonly string[] ModsPaths = new string[]
         {

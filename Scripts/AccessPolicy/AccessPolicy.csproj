@@ -12,6 +12,7 @@
     <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />
     <ProjectReference Include="..\Modding\Modding.csproj" />
     <ProjectReference Include="..\Players\Players.csproj" />
+    <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

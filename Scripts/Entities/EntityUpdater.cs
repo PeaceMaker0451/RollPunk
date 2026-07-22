@@ -1,4 +1,6 @@
-﻿namespace RollPunk.Entities
+﻿using System;
+
+namespace RollPunk.Entities
 {
     public class EntityUpdater
     {
