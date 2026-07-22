@@ -55,7 +55,10 @@ namespace RollPunk.ClientSide.Runtime.UI
         public override void _Ready()
         {
             ItemSelected += OnItemSelected;
-            SetHideRoot(false);
+            SetHideRoot(true);
+            
+            // Ограничиваем размер иконок
+            SetFixedIconSize(new Vector2I(16, 16));
         }
 
         private void OnItemSelected()
@@ -79,9 +82,16 @@ namespace RollPunk.ClientSide.Runtime.UI
             
             SubscribeToFieldEvents(field);
             
+            // Добавляем дочерние поля
             foreach (var childField in field.Fields)
             {
                 AddFieldRecursive(childField, item);
+            }
+            
+            // Делаем узел изначально закрытым, если у него есть дети
+            if (field.Fields.Count > 0)
+            {
+                item.SetCollapsed(true);
             }
         }
 
