@@ -11,33 +11,43 @@ namespace RollPunk.ClientSide.Runtime.UI
         [Export] private Texture2D _entityFieldIcon;
         [Export] private Texture2D _containerFieldIcon;
         
-        private IReadOnlyList<Field> _fields;
+        private IReadOnlyFieldsContainer _container;
         private Dictionary<TreeItem, Field> _itemToField = new();
         private Dictionary<Field, TreeItem> _fieldToItem = new();
         private Dictionary<Field, Action> _updateNameActions = new();
         private Dictionary<Field, Action<Field>> _childAddedActions = new();
         private Dictionary<Field, Action<Field>> _childRemovedActions = new();
+        private TreeItem _root;
 
         public event Action<Field> FieldSelected;
 
-        public void SetFields(IReadOnlyList<Field> fields)
+        public void SetContainer(IReadOnlyFieldsContainer container)
         {
             ClearSubscriptions();
             
-            _fields = fields;
+            if (_container != null)
+            {
+                _container.ChildAdded -= OnContainerFieldAdded;
+                _container.ChildRemoved -= OnContainerFieldRemoved;
+            }
+            
+            _container = container;
             
             Clear();
             _itemToField.Clear();
             _fieldToItem.Clear();
             
-            if (_fields != null)
+            if (_container != null)
             {
-                var root = CreateItem();
-                root.SetText(0, "Fields");
+                _container.ChildAdded += OnContainerFieldAdded;
+                _container.ChildRemoved += OnContainerFieldRemoved;
                 
-                foreach (var field in _fields)
+                _root = CreateItem();
+                _root.SetText(0, "Fields");
+                
+                foreach (var field in _container.Fields)
                 {
-                    AddFieldRecursive(field, root);
+                    AddFieldRecursive(field, _root);
                 }
             }
         }
@@ -179,9 +189,22 @@ namespace RollPunk.ClientSide.Runtime.UI
             };
         }
 
+        private void OnContainerFieldAdded(Field field)
+        {
+            if (_root != null)
+            {
+                AddFieldRecursive(field, _root);
+            }
+        }
+
+        private void OnContainerFieldRemoved(Field field)
+        {
+            RemoveFieldRecursive(field);
+        }
+
         private void ClearSubscriptions()
         {
-            if (_fields != null)
+            if (_fieldToItem != null)
             {
                 foreach (var field in _fieldToItem.Keys)
                 {
