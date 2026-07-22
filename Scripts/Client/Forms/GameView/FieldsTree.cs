@@ -10,6 +10,7 @@ namespace RollPunk.ClientSide.Runtime.UI
         [Export] private Texture2D _defaultFieldIcon;
         [Export] private Texture2D _entityFieldIcon;
         [Export] private Texture2D _containerFieldIcon;
+        [Export] private int _maxIconWidth;
         
         private IReadOnlyFieldsContainer _container;
         private Dictionary<TreeItem, Field> _itemToField = new();
@@ -56,9 +57,6 @@ namespace RollPunk.ClientSide.Runtime.UI
         {
             ItemSelected += OnItemSelected;
             SetHideRoot(true);
-            
-            // Ограничиваем размер иконок
-            SetFixedIconSize(new Vector2I(16, 16));
         }
 
         private void OnItemSelected()
@@ -183,6 +181,7 @@ namespace RollPunk.ClientSide.Runtime.UI
             if (icon != null)
             {
                 item.SetIcon(0, icon);
+                item.SetIconMaxWidth(0, _maxIconWidth);
             }
         }
 

@@ -10,7 +10,7 @@ namespace RollPunk.ClientSide.Runtime.UI
 {
     internal partial class GameView : Form
     {
-        [Export] private FieldsList _fieldsList;
+        [Export] private FieldsTree _fieldsTree;
         [Export] public EntityView EntityView;
 
         public override void _Ready()
@@ -20,10 +20,10 @@ namespace RollPunk.ClientSide.Runtime.UI
 
         public void Initialize(IReadOnlyFieldsContainer fieldsContainer, FieldControlsConstructor fieldControlsConstructor, Serializator serializator)
         {
-            _fieldsList.SetContainer(fieldsContainer);
+            _fieldsTree.SetContainer(fieldsContainer);
             EntityView.Initialize(fieldControlsConstructor, serializator);
 
-            _fieldsList.FieldSelected += (field) =>
+            _fieldsTree.FieldSelected += (field) =>
             {
                 if (field is EntityField entityField)
                     EntityView.DisplayField(entityField);
