@@ -22,9 +22,9 @@ local function _createStatsFieldData(stats_data, priority)
 end
 
 function StatsSubsystem.initialize(character)
-    if not CharacterSubsystem.isCreated(character, "StatsSubsystem") then
+    if not CharacterSubsystem.isCreated(character, "StatSubsystem") then
         StatsSubsystem.create(character)
-        CharacterSubsystem.markAsCreated(character, "StatsSubsystem")
+        CharacterSubsystem.markAsCreated(character, "StatSubsystem")
     end
 end
 
