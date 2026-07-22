@@ -12,6 +12,10 @@ namespace RollPunk.Client.Forms
         IFormHandle ShowInMainTab(string formPath, int priority = 0);
         T GetForm<T>(IFormHandle handle) where T : Form;
         
+        // Работа с программно созданными формами
+        IFormHandle ShowForm(Form form, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0);
+        IFormHandle ShowDialog(Form dialog, bool modal = true, bool alwaysOnTop = true);
+        
         // Перемещение между контейнерами
         void MoveToNewWindow(IFormHandle handle);
         void MoveToMainTab(IFormHandle handle, int priority = 0);

@@ -158,12 +158,7 @@ namespace RollPunk.Client.Forms
 
         private IFormHandle ShowDialog(Form dialogue)
         {
-            // Создаем временный handle для диалога
-            var handle = new FormHandle(Guid.NewGuid().ToString());
-            var frame = Client.Instance.FramesManager.OpenInNewFrame(dialogue, true);
-            frame.SetCloseButtonVisible(false);
-            
-            return handle;
+            return _formsManager.ShowDialog(dialogue, modal: true, alwaysOnTop: true);
         }
     }
 }

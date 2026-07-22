@@ -106,6 +106,18 @@ namespace RollPunk.UI.Frames
             _minimizeButton.Visible = visible;
         }
 
+        public void SetAlwaysOnTop(bool alwaysOnTop)
+        {
+            if (GetWindow() != null)
+                GetWindow().AlwaysOnTop = alwaysOnTop;
+        }
+
+        public void SetModal(bool modal)
+        {
+            // TODO: Реализовать модальность
+            // Можно добавить overlay или блокировку других окон
+        }
+
         public void SetContentPanelInputActive(bool active)
         {
             _contentPanel.ProcessMode = active?ProcessModeEnum.Inherit:ProcessModeEnum.Disabled;

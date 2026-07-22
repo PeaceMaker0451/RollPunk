@@ -123,6 +123,45 @@ namespace RollPunk.Client.Forms
             return context.Controller as T;
         }
 
+        public IFormHandle ShowForm(Form form, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0)
+        {
+            var handle = new FormHandle(Guid.NewGuid().ToString());
+            var context = new FormContext(handle, form);
+            _forms[handle.Id] = context;
+
+            switch (mode)
+            {
+                case FormDisplayMode.NewWindow:
+                    var frame = _framesManager.OpenInNewFrame(form);
+                    context.Location = FormLocation.NewWindow;
+                    context.Container = frame;
+                    break;
+                case FormDisplayMode.MainTab:
+                default:
+                    _framesManager.MainFrame.AddTab(form, form.Title, priority);
+                    context.Location = FormLocation.MainTab;
+                    context.Container = _framesManager.MainFrame;
+                    break;
+            }
+
+            return handle;
+        }
+
+        public IFormHandle ShowDialog(Form dialog, bool modal = true, bool alwaysOnTop = true)
+        {
+            var handle = ShowForm(dialog, FormDisplayMode.NewWindow);
+            var context = GetContext(handle);
+            
+            if (context.Container is Frame frame)
+            {
+                frame.SetCloseButtonVisible(false);
+                frame.SetAlwaysOnTop(alwaysOnTop);
+                frame.SetModal(modal);
+            }
+            
+            return handle;
+        }
+
         public API GetAPI()
         {
             return _api;
