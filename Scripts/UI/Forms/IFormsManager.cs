@@ -54,8 +54,8 @@ namespace RollPunk.Client.Forms
 
     public interface IDialogFactory
     {
-        Task<DialogResult<string>> ShowStringInput(string title, string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");
-        Task<DialogResult<int?>> ShowIntInput(string title, int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");
+        Task<DialogResult<string>> ShowStringInput(string title, string message, string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");
+        Task<DialogResult<int?>> ShowIntInput(string title, string message, int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");
         Task ShowInformation(string title, string message, Vector2? minSize = null, bool allowCancel = true, string okButtonText = "Продолжить");
         Task<DialogResult<bool>> ShowConfirmation(string title, string message, bool allowCancel = true, Vector2? minSize = null, string yesButtonText = "Да", string noButtonText = "Нет");
     }

@@ -27,7 +27,7 @@ namespace RollPunk.Client.Forms
             MarginContainer margin = new MarginContainer();
             panel.AddChild(margin);
             margin.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-            margin.SizeFlags.Vertical = Control.SizeFlags.ShrinkCenter;
+            margin.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             margin.AddThemeConstantOverride("margin_left", 10);
             margin.AddThemeConstantOverride("margin_right", 10);
             margin.AddThemeConstantOverride("margin_top", 10);
@@ -37,7 +37,7 @@ namespace RollPunk.Client.Forms
             margin.AddChild(vbox);
             vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             vbox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
-            vbox.Separation = 6;
+            //vbox.Separation = 6;
 
             RichTextLabel text = new RichTextLabel();
             vbox.AddChild(text);
@@ -98,7 +98,7 @@ namespace RollPunk.Client.Forms
             margin.AddChild(vbox);
             vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             vbox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
-            vbox.Separation = 6;
+            //vbox.Separation = 6;
 
             RichTextLabel text = new RichTextLabel();
             vbox.AddChild(text);

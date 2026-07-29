@@ -71,7 +71,7 @@ namespace RollPunk.Client.Game
             CreateControllers();
             SetState(RollPunkState.Menu);
 
-            ClientRoot.FormsManager.Dialogs.ShowIntInput("Тест", );
+            ClientRoot.FormsManager.Dialogs.ShowIntInput("Тест", "какая-то информация");
             ClientRoot.FormsManager.Dialogs.ShowInformation("Тест", "какая-то информация");
             ClientRoot.FormsManager.Dialogs.ShowConfirmation("Тест", "какая-то информация");
         }
