@@ -38,7 +38,7 @@ namespace RollPunk.Client.Forms
             vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             vbox.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
             vbox.Alignment = BoxContainer.AlignmentMode.Center;
-            vbox.Separation = 6;
+            //vbox.Separation = 6;
 
             RichTextLabel text = new RichTextLabel();
             vbox.AddChild(text);
@@ -79,7 +79,7 @@ namespace RollPunk.Client.Forms
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
-            dialogue.CustomMinimumSize = minSize ?? new Vector2(300, 130);
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 250);
 
             PanelContainer panel = new PanelContainer();
             container.AddChild(panel);
@@ -100,7 +100,7 @@ namespace RollPunk.Client.Forms
             vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             vbox.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
             vbox.Alignment = BoxContainer.AlignmentMode.Center;
-            vbox.Separation = 6;
+            //vbox.Separation = 6;
 
             RichTextLabel text = new RichTextLabel();
             vbox.AddChild(text);
@@ -143,13 +143,16 @@ namespace RollPunk.Client.Forms
         public async Task ShowInformation(string title, string message, Vector2? minSize = null, bool allowCancel = true, string okButtonText = "Продолжить")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
-            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 250);
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 300);
+
+            Vector2 textBoxMinSizeOffset = new(50, 80);
 
             ScrollContainer scrollContainer = new ScrollContainer();
             container.AddChild(scrollContainer);
             scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
             scrollContainer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             scrollContainer.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+            scrollContainer.CustomMinimumSize = dialogue.CustomMinimumSize - textBoxMinSizeOffset;
 
             RichTextLabel text = new RichTextLabel();
             scrollContainer.AddChild(text);
@@ -179,11 +182,13 @@ namespace RollPunk.Client.Forms
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
-            Label messageLabel = new Label();
+            RichTextLabel messageLabel = new();
             container.AddChild(messageLabel);
             messageLabel.Text = message;
+            messageLabel.FitContent = true;
             messageLabel.HorizontalAlignment = HorizontalAlignment.Center;
             messageLabel.VerticalAlignment = VerticalAlignment.Center;
+            messageLabel.ScrollActive = true;
 
             var yesButton = CreateButton(buttonContainer, yesButtonText);
             Button noButton = null;
@@ -208,12 +213,18 @@ namespace RollPunk.Client.Forms
         private async Task<(Form, Container, Container)> CreateBaseDialog(string title)
         {
             Form dialogue = new Form(title);
-            dialogue.CustomMinimumSize = new Vector2(350, 150);
+            dialogue.CustomMinimumSize = new Vector2(450, 200);
+            Vector2 panelMinSize = new Vector2(350, 150);
+
+            CenterContainer centerContainer = new CenterContainer();
+            dialogue.AddChild(centerContainer);
+            centerContainer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            centerContainer.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+            centerContainer.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 
             PanelContainer panelContainer = new PanelContainer();
-            dialogue.AddChild(panelContainer);
-            panelContainer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-            panelContainer.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+            centerContainer.AddChild(panelContainer);
+            panelContainer.CustomMinimumSize = panelMinSize;
 
             MarginContainer marginContainer = new MarginContainer();
             panelContainer.AddChild(marginContainer);

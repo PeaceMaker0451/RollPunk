@@ -71,9 +71,10 @@ namespace RollPunk.Client.Game
             CreateControllers();
             SetState(RollPunkState.Menu);
 
-            ClientRoot.FormsManager.Dialogs.ShowIntInput("Тест", "какая-то информация");
-            ClientRoot.FormsManager.Dialogs.ShowInformation("Тест", "какая-то информация");
-            ClientRoot.FormsManager.Dialogs.ShowConfirmation("Тест", "какая-то информация");
+            ClientRoot.FormsManager.Dialogs.ShowIntInput("Тест", "какой-то такой типа текст где написано наху вообще эти данные вводить короч");
+            ClientRoot.FormsManager.Dialogs.ShowInformation("Тест", "Какая-то длииииннная информация о чем-то очень важно, например ошибка там или типа того, хз. как у вас дела? у меня норм. а вот лог короче консоли" +
+                "Ранний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nRuntime set state Menu\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nLoadAuthorsDataAsync - True\r\nLoadConnectionConfigAsync - True\r\nLoadMotdDataAsync - True\r\nLoadUpdateLogsAsync - True\r\nДинамические данные загружены успешно из сети\r\nГлавное меню инициализировано\r\n");
+            ClientRoot.FormsManager.Dialogs.ShowConfirmation("Тест", "ВЫ УВЕРЕНЫ В ЧЕМ БЫ ТО НИ БЫЛО ВООБЩЕ?? ТОЧНО? Я ЕСЛИ ВЫ ОШИБАЕТЕСЬ? ПОДУМАЙТЕ ХОРОШЕНЬКО");
         }
 
         public void StartSession(IReadOnlyList<Mod> mods)

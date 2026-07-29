@@ -19,6 +19,7 @@ namespace RollPunk.Client.Forms
             try
             {
                 // Разбор параметров из optionsTable
+                string message = "";
                 string placeholder = "";
                 bool allowCancel = true;
                 int minWidth = 350;
@@ -29,6 +30,7 @@ namespace RollPunk.Client.Forms
                 if (optionsTable != null && optionsTable.Type == DataType.Table)
                 {
                     var table = optionsTable.Table;
+                    message = table.Get("message").CastToString() ?? message;
                     placeholder = table.Get("placeholder").CastToString() ?? placeholder;
                     allowCancel = table.Get("allowCancel").CastToBool();
                     minWidth = (int)(table.Get("minWidth").CastToNumber() ?? minWidth);
@@ -54,6 +56,7 @@ namespace RollPunk.Client.Forms
         {
             try
             {
+                string message = "";
                 int? defaultValue = null;
                 bool allowCancel = true;
                 int minValue = int.MinValue;
@@ -67,6 +70,7 @@ namespace RollPunk.Client.Forms
                 if (optionsTable != null && optionsTable.Type == DataType.Table)
                 {
                     var table = optionsTable.Table;
+                    message = table.Get("message").CastToString() ?? message;
                     defaultValue = (int?)table.Get("defaultValue").CastToNumber();
                     allowCancel = table.Get("allowCancel").CastToBool();
                     minValue = (int)(table.Get("minValue").CastToNumber() ?? minValue);
