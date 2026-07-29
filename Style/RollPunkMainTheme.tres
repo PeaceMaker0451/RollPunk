@@ -72,17 +72,6 @@ border_width_right = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvwvm"]
 bg_color = Color(0.46, 0.12879999, 0.14536005, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0el37"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 15.0
-content_margin_bottom = 3.0
-bg_color = Color(1, 0.19, 0.19, 1)
-border_color = Color(0.670689, 0.67069, 0.670689, 1)
-corner_radius_top_right = 15
-corner_detail = 1
-anti_aliasing = false
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvo7s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gv3gy"]
@@ -102,6 +91,10 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gaqyn"]
 bg_color = Color(0.0475, 0.047666665, 0.05, 1)
 border_color = Color(0.23, 0.23, 0.23, 0.6392157)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h26xu"]
 
@@ -131,10 +124,14 @@ image = SubResource("Image_8g2jh")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ugtxx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxy8p"]
-bg_color = Color(0.6, 0.6, 0.6, 0.56078434)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8g2jh"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qd6w"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up2gu"]
+bg_color = Color(1, 0.1882353, 0.1882353, 0.22352941)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr4eo"]
 
@@ -176,7 +173,7 @@ Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0.962704, 0.442445, 0.387379, 1)
 Label/font_sizes/font_size = 12
 Label/fonts/font = ExtResource("4_0lvey")
-Label/styles/normal = SubResource("StyleBoxFlat_0el37")
+Label/styles/normal = ExtResource("3_ajq1u")
 LineEdit/colors/font_uneditable_color = Color(1, 1, 1, 1)
 LineEdit/colors/selection_color = Color(1, 0.188235, 0.188235, 0.745098)
 LineEdit/constants/minimum_character_width = 2
@@ -207,12 +204,22 @@ TabBar/styles/tab_unselected = ExtResource("3_ajq1u")
 TextEdit/styles/focus = SubResource("StyleBoxEmpty_ugtxx")
 TextEdit/styles/normal = ExtResource("4_ovqnu")
 TextEdit/styles/read_only = ExtResource("4_ovqnu")
-Tree/font_sizes/font_size = 13
-Tree/font_sizes/title_button_font_size = 13
-Tree/fonts/font = ExtResource("1_66xi7")
-Tree/styles/hovered_selected = SubResource("StyleBoxFlat_wxy8p")
-Tree/styles/panel = SubResource("StyleBoxFlat_7dn60")
-Tree/styles/selected = SubResource("StyleBoxEmpty_8qd6w")
+Tree/colors/font_color = Color(0.45840502, 0.45840508, 0.45840502, 1)
+Tree/colors/font_hovered_color = Color(1, 0.1882353, 0.1882353, 1)
+Tree/colors/font_hovered_selected_color = Color(1, 0.5082628, 0.45994687, 1)
+Tree/colors/guide_color = Color(0.30588236, 0.30588236, 0.30588236, 0.49411765)
+Tree/colors/parent_hl_line_color = Color(1, 0.1882353, 0.1882353, 1)
+Tree/constants/draw_guides = 0
+Tree/constants/draw_relationship_lines = 1
+Tree/constants/icon_max_width = 21
+Tree/constants/parent_hl_line_margin = 4
+Tree/constants/parent_hl_line_width = 1
+Tree/constants/relationship_line_width = 1
+Tree/constants/v_separation = 2
+Tree/font_sizes/font_size = 14
+Tree/font_sizes/title_button_font_size = 14
+Tree/styles/panel = SubResource("StyleBoxEmpty_8g2jh")
+Tree/styles/selected = SubResource("StyleBoxFlat_up2gu")
 Tree/styles/selected_focus = SubResource("StyleBoxEmpty_vr4eo")
 VScrollBar/styles/grabber = ExtResource("3_ajq1u")
 VScrollBar/styles/grabber_highlight = ExtResource("1_gfa48")

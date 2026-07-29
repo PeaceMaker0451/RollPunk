@@ -1,7 +1,7 @@
 ﻿using RollPunk.Debug;
 using RollPunk.Modding;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     internal static class HookerBatchingExtension
     {

@@ -7,7 +7,7 @@ using RollPunk.Modding.APIs;
 using RollPunk.Players;
 using System;
 
-namespace RollPunk.Client.Runtime.Sessions
+namespace RollPunk.Client.Game.Sessions
 {
     public class SessionAPI : HeldAPI
     {
@@ -53,7 +53,7 @@ namespace RollPunk.Client.Runtime.Sessions
         {
             try
             {
-                Client.Instance.FileDebugUtils.SaveStringWithDialog(value);
+                ClientRoot.FileDebugUtils.SaveStringWithDialog(value);
             }
             catch (Exception e)
             {
@@ -69,7 +69,7 @@ namespace RollPunk.Client.Runtime.Sessions
                 if (function == null || function.Type != DataType.Function)
                     throw new InvalidOperationException("Передана хуйня, должна быть функция");
 
-                Client.Instance.FileDebugUtils.LoadStringWithDialog((data) =>
+                ClientRoot.FileDebugUtils.LoadStringWithDialog((data) =>
                 {
                     try
                     {

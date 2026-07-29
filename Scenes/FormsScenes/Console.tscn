@@ -17,7 +17,7 @@ script = ExtResource("1_gdu3y")
 sendCommandButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
 consoleField = NodePath("ColorRect/VBoxContainer/ConsoleField")
 consoleWriteLine = NodePath("ColorRect/VBoxContainer/HBoxContainer/LineEdit")
-Title = "Консоль PS5"
+Title = "Консоль"
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2028503920]
 layout_mode = 1

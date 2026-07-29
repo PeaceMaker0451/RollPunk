@@ -16,6 +16,7 @@
     <Compile Remove="Scripts\Modding\**" />
     <Compile Remove="Scripts\NetcodeCommon\**" />
     <Compile Remove="Scripts\Players\**" />
+    <Compile Remove="Scripts\RPDebug\**" />
     <Compile Remove="Scripts\Rules\**" />
     <Compile Remove="Scripts\Entities\**" />
     <Compile Remove="Scripts\Tests\**" />
@@ -31,6 +32,7 @@
     <EmbeddedResource Remove="Scripts\Modding\**" />
     <EmbeddedResource Remove="Scripts\NetcodeCommon\**" />
     <EmbeddedResource Remove="Scripts\Players\**" />
+    <EmbeddedResource Remove="Scripts\RPDebug\**" />
     <EmbeddedResource Remove="Scripts\Rules\**" />
     <EmbeddedResource Remove="Scripts\Entities\**" />
     <EmbeddedResource Remove="Scripts\Tests\**" />

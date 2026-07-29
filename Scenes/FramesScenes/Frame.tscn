@@ -3,20 +3,10 @@
 [ext_resource type="Script" uid="uid://b68c3ju1alejx" path="res://Scripts/UI/Frames/Frame.cs" id="1_yhqyt"]
 [ext_resource type="Script" uid="uid://btud6o8s06n0n" path="res://Scripts/UI/Draggable.cs" id="2_4gv6g"]
 [ext_resource type="Shader" uid="uid://cyk820o82ujhq" path="res://Shaders/4CornerGradient.gdshader" id="2_a8suo"]
-[ext_resource type="Texture2D" uid="uid://bhojwx3vngq1u" path="res://Sprites/cross.png" id="3_uvcno"]
+[ext_resource type="Texture2D" uid="uid://2souy0316wjm" path="res://Sprites/HideTabWhite.png" id="3_5su3i"]
 [ext_resource type="Script" uid="uid://wetprpt8oi65" path="res://Scripts/UI/QuitButton.cs" id="4_7d7vk"]
-[ext_resource type="Texture2D" uid="uid://c3fgmsepow0kj" path="res://Sprites/HideTab.png" id="5_whhg1"]
+[ext_resource type="Texture2D" uid="uid://cksahys8x8i7p" path="res://Sprites/crossWhite.png" id="5_a8suo"]
 [ext_resource type="Script" uid="uid://dbc2gwptpf5cq" path="res://Scripts/UI/MinimizingButton.cs" id="6_nmcuh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8upgq"]
-shader = ExtResource("2_a8suo")
-shader_parameter/topleft = Color(0, 0, 0, 1)
-shader_parameter/topright = Color(0.039215688, 0.039215688, 0.050980393, 1)
-shader_parameter/bottomleft = Color(0.15, 0.0285, 0.0285, 1)
-shader_parameter/bottomright = Color(0.08, 0.015199999, 0.015199999, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ug1o"]
-bg_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oeuo"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,7 +16,7 @@ content_margin_left = 3.0
 content_margin_top = 2.0
 content_margin_right = 3.0
 content_margin_bottom = 2.0
-bg_color = Color(1, 0.19, 0.19, 1)
+bg_color = Color(1, 0.1882353, 0.1882353, 0)
 border_color = Color(1, 0.188235, 0.188235, 1)
 corner_detail = 1
 
@@ -40,20 +30,41 @@ corner_detail = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rpbeq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5su3i"]
+bg_color = Color(1, 0.19215687, 0.19215687, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8upgq"]
+shader = ExtResource("2_a8suo")
+shader_parameter/topleft = Color(0, 0, 0, 1)
+shader_parameter/topright = Color(0.039215688, 0.039215688, 0.050980393, 1)
+shader_parameter/bottomleft = Color(0.121235944, 0.019308986, 0.019311035, 1)
+shader_parameter/bottomright = Color(0.0462593, 0.008084548, 0.008085367, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ug1o"]
+bg_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Frame" type="Control" unique_id=332903462 node_paths=PackedStringArray("_title", "_contentPanel", "_closeButton", "_minimizeButton")]
 custom_minimum_size = Vector2(250, 150)
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 425.0
-offset_bottom = 367.0
+offset_right = 250.0
+offset_bottom = 150.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_yhqyt")
-_title = NodePath("FrameBase/UpperPanel/HBoxContainer/Title")
-_contentPanel = NodePath("FrameBase/ContentPanel")
-_closeButton = NodePath("FrameBase/UpperPanel/HBoxContainer/QuitButton")
-_minimizeButton = NodePath("FrameBase/UpperPanel/HBoxContainer/MinimizeButton")
+_title = NodePath("FrameBase/UpperPanel/MarginContainer/HBoxContainer/Title")
+_contentPanel = NodePath("FrameBase/UpperPanel/RedLine/MarginContainer/ContentPanel")
+_closeButton = NodePath("FrameBase/UpperPanel/MarginContainer/HBoxContainer/QuitButton")
+_minimizeButton = NodePath("FrameBase/UpperPanel/MarginContainer/HBoxContainer/MinimizeButton")
 resizeBorderThickness = 4
 resizeCornerSize = 8
 
@@ -65,53 +76,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RedLine" type="ColorRect" parent="FrameBase" unique_id=228021552]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.188235, 0.188235, 1)
-
-[node name="ContentPanel" type="PanelContainer" parent="FrameBase" unique_id=1646537592]
-material = SubResource("ShaderMaterial_8upgq")
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 36.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6ug1o")
-
 [node name="UpperPanel" type="Panel" parent="FrameBase" unique_id=927353085]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4gv6g")
+
+[node name="MarginContainer" type="MarginContainer" parent="FrameBase/UpperPanel" unique_id=1136491806]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 34.0
+offset_bottom = 33.0
 grow_horizontal = 2
-script = ExtResource("2_4gv6g")
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FrameBase/UpperPanel" unique_id=1673731036]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 5.0
-offset_top = -12.0
-offset_right = -5.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="FrameBase/UpperPanel/MarginContainer" unique_id=1673731036]
+layout_mode = 2
 alignment = 2
 
-[node name="Title" type="Label" parent="FrameBase/UpperPanel/HBoxContainer" unique_id=1725429317]
+[node name="Title" type="Label" parent="FrameBase/UpperPanel/MarginContainer/HBoxContainer" unique_id=1725429317]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -121,12 +111,13 @@ text = "Title"
 vertical_alignment = 1
 clip_text = true
 
-[node name="MinimizeButton" type="Button" parent="FrameBase/UpperPanel/HBoxContainer" unique_id=1635400275]
+[node name="MinimizeButton" type="Button" parent="FrameBase/UpperPanel/MarginContainer/HBoxContainer" unique_id=1635400275]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0.44705883, 0.44705883, 0.44705883, 1)
 theme_override_constants/h_separation = 4
 theme_override_constants/icon_max_width = 20
-theme_override_icons/icon = ExtResource("5_whhg1")
+theme_override_icons/icon = ExtResource("3_5su3i")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
@@ -137,12 +128,13 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
 script = ExtResource("6_nmcuh")
 
-[node name="QuitButton" type="Button" parent="FrameBase/UpperPanel/HBoxContainer" unique_id=221106133]
+[node name="QuitButton" type="Button" parent="FrameBase/UpperPanel/MarginContainer/HBoxContainer" unique_id=221106133]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0.44705883, 0.44705883, 0.44705883, 1)
 theme_override_constants/h_separation = 4
 theme_override_constants/icon_max_width = 20
-theme_override_icons/icon = ExtResource("3_uvcno")
+theme_override_icons/icon = ExtResource("5_a8suo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pbq6o")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pbq6o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pbq6o")
@@ -152,3 +144,31 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_74lkm")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_killa")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rpbeq")
 script = ExtResource("4_7d7vk")
+
+[node name="RedLine" type="Panel" parent="FrameBase/UpperPanel" unique_id=1310264175]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5su3i")
+
+[node name="MarginContainer" type="MarginContainer" parent="FrameBase/UpperPanel/RedLine" unique_id=1701295819]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="ContentPanel" type="PanelContainer" parent="FrameBase/UpperPanel/RedLine/MarginContainer" unique_id=1646537592]
+material = SubResource("ShaderMaterial_8upgq")
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ug1o")

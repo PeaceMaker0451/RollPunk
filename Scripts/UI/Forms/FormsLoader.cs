@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RollPunk.UI.Forms
 {
-    public class FormsFactory
+    public class FormsLoader
     {
         public bool TryLoadForm(string scenePath, out Form form)
         {

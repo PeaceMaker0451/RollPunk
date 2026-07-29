@@ -1,6 +1,5 @@
 using Godot;
 using RollPunk.UI.Forms;
-using System;
 using System.Threading.Tasks;
 
 namespace RollPunk.Client.Forms
@@ -14,16 +13,25 @@ namespace RollPunk.Client.Forms
             _formsManager = formsManager;
         }
 
-        public async Task<string> ShowStringInput(string title, string placeholder = "")
+        public async Task<string> ShowStringInput(string title, string message = "", string placeholder = "")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
             LineEdit textBox = new LineEdit();
+            RichTextLabel text = new RichTextLabel();
+            container.AddChild(text);
             container.AddChild(textBox);
+
             textBox.CustomMinimumSize = new Vector2(300, 0);
             textBox.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
             textBox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             textBox.PlaceholderText = placeholder;
+
+            text.Text = message;
+            text.CustomMinimumSize = new Vector2(300, 0);
+            text.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
+            text.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            text.FitContent = true;
 
             var continueButton = CreateButton(buttonContainer, "Ок");
             var cancelButton = CreateButton(buttonContainer, "Отмена");
@@ -43,10 +51,10 @@ namespace RollPunk.Client.Forms
             return result;
         }
 
-        public async Task<int?> ShowIntInput(string title, int? defaultValue = null)
+        public async Task<int?> ShowIntInput(string title, string message = "", int? defaultValue = null)
         {
             string defaultText = defaultValue?.ToString() ?? "";
-            string result = await ShowStringInput(title, defaultText);
+            string result = await ShowStringInput(title, message: message, placeholder: defaultText);
             
             if (string.IsNullOrEmpty(result))
                 return null;
@@ -135,6 +143,7 @@ namespace RollPunk.Client.Forms
             upperLayoutContainer.AddChild(container);
             container.Vertical = true;
             container.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+            container.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             container.Alignment = BoxContainer.AlignmentMode.Center;
             container.AddThemeConstantOverride("separation", 10);
 
@@ -158,7 +167,7 @@ namespace RollPunk.Client.Forms
 
         private IFormHandle ShowDialog(Form dialogue)
         {
-            return _formsManager.ShowDialog(dialogue, modal: true, alwaysOnTop: true);
+            return _formsManager.ShowForm(dialogue);
         }
     }
 }

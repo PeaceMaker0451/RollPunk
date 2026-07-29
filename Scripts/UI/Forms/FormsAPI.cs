@@ -33,7 +33,7 @@ namespace RollPunk.Client.Forms
         {
             try
             {
-                int? result = await _formsManager.Dialogs.ShowIntInput(title, defaultValue);
+                int? result = await _formsManager.Dialogs.ShowIntInput(title, defaultValue: defaultValue);
                 
                 if (result.HasValue && callback.IsNil() == false && callback.Type == DataType.Function)
                     callback.Function.Call(result.Value, parameters);

@@ -1,6 +1,7 @@
 using Godot;
 using RollPunk.UI.Forms;
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 
 namespace RollPunk.UI.Frames
@@ -62,15 +63,37 @@ namespace RollPunk.UI.Frames
 
         public float ScaleFactor { get; private set; } = 1;
 
-        public override void _Ready()
+        public override async void _Ready()
         {
-            borderOffset = (Vector2I)(GetRect().Size - _contentPanel.GetRect().Size);
+            _contentPanel.ForceUpdateTransform();
+            Container parent = _contentPanel.GetParent() as Container;
+            Stack parents = new Stack();
+
+            while(parent != null)
+            {
+                parents.Push(parent);
+                parent = parent.GetParent() as Container;
+            }
+
+            foreach(Container control in parents)
+            {
+                control.Notification((int)Container.NotificationSortChildren);
+            }
+
+            _contentPanel.ForceUpdateTransform();
+
+            borderOffset = (Vector2I)(Size - _contentPanel.Size);
+            GD.Print($"Ранний апдейт размера {Name} - оффсет - {borderOffset} \nсчитали как: ({Size} - {_contentPanel.Size})");
 
             CreateResizeZones();
             UpdateResizeZones();
 
             _closeButton.Pressed += OnCloseButtonPressed;
             _minimizeButton.Pressed += OnMinimizeButtonPressed;
+
+            //await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            //borderOffset = (Vector2I)(Size - _contentPanel.Size);
+            //GD.Print($"Поздний апдейт размера {Name} - оффсет - {borderOffset} \nсчитали как: ({Size} - {_contentPanel.Size})");
         }
 
         public virtual void SetForm(Form form)
@@ -110,12 +133,6 @@ namespace RollPunk.UI.Frames
         {
             if (GetWindow() != null)
                 GetWindow().AlwaysOnTop = alwaysOnTop;
-        }
-
-        public void SetModal(bool modal)
-        {
-            // TODO: Реализовать модальность
-            // Можно добавить overlay или блокировку других окон
         }
 
         public void SetContentPanelInputActive(bool active)
@@ -218,8 +235,6 @@ namespace RollPunk.UI.Frames
             currentWindowSizeX = pixelsX;
             currentWindowSizeY = pixelsY;
             CurrentFrameSize = new Vector2I(pixelsX, pixelsY);
-
-            //Scale = new Vector2(ScaleFactor, ScaleFactor);
 
             if (ShouldChangeWindowResolution)
                 SetWindowResolution((int)(CurrentFrameSize.X * ScaleFactor), (int)(CurrentFrameSize.Y * ScaleFactor));

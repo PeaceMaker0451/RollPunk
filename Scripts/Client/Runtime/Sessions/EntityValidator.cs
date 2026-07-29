@@ -5,7 +5,7 @@ using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using System.Collections.Generic;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     internal class EntityValidator
     {

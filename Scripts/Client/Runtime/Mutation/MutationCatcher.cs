@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     internal class MutationCatcher
     {

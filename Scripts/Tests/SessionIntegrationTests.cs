@@ -1,7 +1,7 @@
 using NetcodeCommon;
 using RollPunk.Entities;
 using RollPunk.Server;
-using RollPunk.Client.Runtime;
+using RollPunk.Client.Game;
 using System;
 using System.Collections.Generic;
 using Xunit;

@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 namespace RollPunk.Client
 {
-    internal class FramesManager
+    internal class FramesHost
     {
-        private readonly string _tabedFramePath = "";
-        private readonly string _framePath = "";
+        private readonly string _tabedFramePath;
+        private readonly string _framePath;
         
         private Node _rootNode;
 
-        private FramesFactory _framesFactory = new();
-        private WindowsManager _windowsManager;
+        private FramesLoader _framesFactory = new();
+        private WindowsCreator _windowsManager;
 
         private bool _oneScreenMode;
         private bool _smoothResizing;
@@ -26,7 +26,7 @@ namespace RollPunk.Client
         public TabedFrame MainFrame { get; private set; }
         public IReadOnlyList<Frame> SubFrames => _subFrames;
 
-        public FramesManager(Node rootNode, float scale, bool oneScreenMode, bool smoothResizing, bool waitForReaizeEnd, string tabedFramePath, string defFramePath)
+        public FramesHost(Node rootNode, float scale, bool oneScreenMode, bool smoothResizing, bool waitForReaizeEnd, string tabedFramePath, string defFramePath)
         {
             _scale = scale;
             
@@ -65,15 +65,13 @@ namespace RollPunk.Client
             frame.SetScaleFactor(_scale);
             frame.WaitForResizeToChangeForm = _waitForReaizeEnd;
             frame.SmoothResizing = _smoothResizing;
-            window.Ready += () => OnWindowReady(window);
-
-            if (_oneScreenMode == false)
+            
+            if(window.IsNodeReady() == false)
+                window.Ready += () => OnWindowReady(window, alwaysOnTop);
+            else
             {
-                Vector2I screenResolution = DisplayServer.ScreenGetSize();
-                window.Position = (screenResolution / 2) - (window.Size / 2);
-
-                if(alwaysOnTop)
-                    window.AlwaysOnTop = true;
+                GD.Print("ОКНО БЛЯТЬ РЕАДИ");
+                OnWindowReady(window, alwaysOnTop);
             }
 
             _subFrames.Add(frame);
@@ -123,7 +121,7 @@ namespace RollPunk.Client
                 mainWindow.TransparentBg = true;
             }
 
-            mainWindow.Ready += () => OnWindowReady(mainWindow);
+            mainWindow.Ready += () => OnWindowReady(mainWindow, false);
         }
 
         private void CreateMainFrame()
@@ -139,9 +137,15 @@ namespace RollPunk.Client
             MainFrame.SmoothResizing = _smoothResizing;
         }
 
-        private void OnWindowReady(Window window)
+        private void OnWindowReady(Window window, bool alwaysOnTop)
         {
             window.ContentScaleFactor = _scale;
+
+            Vector2I screenResolution = DisplayServer.ScreenGetSize();
+            window.Position = (screenResolution / 2) - (window.Size / 2);
+
+            if (alwaysOnTop)
+                window.AlwaysOnTop = true;
         }
     }
 }

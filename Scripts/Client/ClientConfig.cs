@@ -8,7 +8,7 @@ namespace RollPunk.Client
 {
     internal static class ClientConfig
     {
-        public const string TabedFramePath = "res://Scenes/FramesScenes/TabledFrame.tscn";
+        public const string TabedFramePath = "res://Scenes/FramesScenes/MainFrame.tscn";
         public const string DefaultFramePath = "res://Scenes/FramesScenes/Frame.tscn";
         public const string ClientVersion = "0.6.0";
 

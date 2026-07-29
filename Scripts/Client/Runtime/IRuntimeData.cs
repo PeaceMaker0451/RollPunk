@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     public interface IRuntimeData
     {

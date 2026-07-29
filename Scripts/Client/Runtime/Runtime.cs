@@ -13,7 +13,7 @@ using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     internal enum RollPunkState
     {
@@ -22,7 +22,7 @@ namespace RollPunk.Client.Runtime
         Session
     }
     
-    internal class RollPunkRuntime
+    internal class Runtime
     {
         private MainMenuController _mainMenuController;
         private SessionViewController _sessionViewController;
@@ -45,7 +45,7 @@ namespace RollPunk.Client.Runtime
         public RollPunkState State { get; private set; }
         public IReadOnlyList<Mod> ReadedMods => _mods;
 
-        public RollPunkRuntime()
+        public Runtime()
         {
             _mods = _modReader.ReadMods(ClientConfig.ModsPaths);
 
@@ -55,9 +55,9 @@ namespace RollPunk.Client.Runtime
             entityFactory.RegisterLineFields();
             entityFactory.RegisterRules();
 
-            LuaErrorsHandler.ErrorLogged += (error) => _ = Client.Instance.FormsManager.Dialogs.ShowInformation("LuaError", error);
+            LuaErrorsHandler.ErrorLogged += (error) => _ = ClientRoot.FormsManager.Dialogs.ShowInformation("LuaError", error);
 
-            Guid clientId = Client.Instance.SettingsManager.LoadSettings().ClientID;
+            Guid clientId = ClientRoot.SettingsManager.LoadSettings().ClientID;
             Guid? overridedGuid = TryOverrideGuid();
 
             if (overridedGuid != null)
@@ -75,9 +75,9 @@ namespace RollPunk.Client.Runtime
         public void StartSession(IReadOnlyList<Mod> mods)
         {
             Session = new ClientSession(_runtimeData, mods);
-            Session.CreatePlayer(Client.Instance.SettingsManager.LoadSettings().Name);
+            Session.CreatePlayer(ClientRoot.SettingsManager.LoadSettings().Name);
 
-            Session.APIInjector.AddGlobalAPI(Client.Instance.FormsManager.GetAPI());
+            Session.APIInjector.AddGlobalAPI(ClientRoot.FormsManager.GetAPI());
             Session.InitializeSession();
             SetState(RollPunkState.Session);
         }
@@ -94,16 +94,16 @@ namespace RollPunk.Client.Runtime
 
             try
             {
-                TcpClient client = new(adressParts[0], Convert.ToInt32(adressParts[1]), Client.Instance.ThreadManager.ThreadManager);
+                TcpClient client = new(adressParts[0], Convert.ToInt32(adressParts[1]), ClientRoot.ThreadManager.ThreadManager);
 
                 client.ReceivedWelcome += (message) =>
                 {
                     RPDebug.Log($"Сервер передал нам: {message}");
-                    client.SendClientData(Client.Instance.SettingsManager.LoadSettings().Name, _runtimeData.ClientID);
+                    client.SendClientData(ClientRoot.SettingsManager.LoadSettings().Name, _runtimeData.ClientID);
 
                     Session = new ClientSession(_runtimeData, mods, client);
 
-                    Session.APIInjector.AddGlobalAPI(Client.Instance.FormsManager.GetAPI());
+                    Session.APIInjector.AddGlobalAPI(ClientRoot.FormsManager.GetAPI());
                     SetState(RollPunkState.Session);
                 };
 
@@ -130,7 +130,7 @@ namespace RollPunk.Client.Runtime
         private void CreateControllers()
         {
             _mainMenuController = new MainMenuController(this);
-            _mainMenuHandle = Client.Instance.FormsManager.ShowController(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
+            _mainMenuHandle = ClientRoot.FormsManager.ShowController(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
             
             CreateConsole();
         }
@@ -145,7 +145,7 @@ namespace RollPunk.Client.Runtime
                     if (_sessionViewController == null)
                     {
                         _sessionViewController = new SessionViewController(_controlsConstructor);
-                        _gameViewHandle = Client.Instance.FormsManager.ShowController(_sessionViewController, FormDisplayMode.MainTab, 1);
+                        _gameViewHandle = ClientRoot.FormsManager.ShowController(_sessionViewController, FormDisplayMode.MainTab, 1);
                         _sessionViewController.SetSession(Session);
                     }
                     break;
@@ -159,7 +159,7 @@ namespace RollPunk.Client.Runtime
         {
             if (_gameViewHandle != null)
             {
-                Client.Instance.FormsManager.CloseForm(_gameViewHandle);
+                ClientRoot.FormsManager.CloseForm(_gameViewHandle);
                 _gameViewHandle = null;
             }
             _sessionViewController = null;
@@ -169,8 +169,8 @@ namespace RollPunk.Client.Runtime
         {
             if (_consoleController == null)
             {
-                _consoleController = new Scripts.Client.Forms.ConsoleController(Client.Instance.Console);
-                _consoleHandle = Client.Instance.FormsManager.ShowController(_consoleController, FormDisplayMode.NewWindow);
+                _consoleController = new Scripts.Client.Forms.ConsoleController(ClientRoot.Console);
+                _consoleHandle = ClientRoot.FormsManager.ShowController(_consoleController, FormDisplayMode.NewWindow);
             }
         }
 

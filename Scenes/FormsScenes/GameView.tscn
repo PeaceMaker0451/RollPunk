@@ -1,48 +1,126 @@
 [gd_scene format=3 uid="uid://dt2tx3ufddnwx"]
 
 [ext_resource type="Script" uid="uid://6k78ibynl0uu" path="res://Scripts/Client/Forms/GameView/GameView.cs" id="1_6vfg8"]
+[ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="2_38wue"]
 [ext_resource type="Script" uid="uid://o4n6i8wxulbm" path="res://Scripts/Client/Forms/GameView/FieldsTree.cs" id="2_e3q4u"]
-[ext_resource type="Texture2D" uid="uid://b86fx5ev3h7qw" path="res://Sprites/logo.png" id="2_g2j63"]
 [ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="3_1rd3g"]
-[ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="3_b35ok"]
-[ext_resource type="Texture2D" uid="uid://bwtl08omfr3hw" path="res://Sprites/exitKill.png" id="5_38wue"]
+[ext_resource type="Texture2D" uid="uid://fceqmjp4ywfd" path="res://Sprites/Data.png" id="3_e3q4u"]
+[ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_li2fu"]
+[ext_resource type="Texture2D" uid="uid://cgwwvw6miydtl" path="res://Sprites/Entity.png" id="4_b35ok"]
+[ext_resource type="VideoStream" uid="uid://b82k1625grhfw" path="res://Video/0001-0120.ogv" id="4_li2fu"]
+[ext_resource type="Texture2D" uid="uid://02i5muy0545v" path="res://Sprites/Container.png" id="5_38wue"]
 
 [node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsTree", "EntityView")]
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1382.0
-offset_bottom = 761.0
+offset_right = 1501.0
+offset_bottom = 874.0
 script = ExtResource("1_6vfg8")
-_fieldsTree = NodePath("BoxContainer/VBoxContainer/ItemList")
-EntityView = NodePath("BoxContainer/Entity")
+_fieldsTree = NodePath("MarginContainer2/PanelContainer/VBoxContainer/ItemList")
+EntityView = NodePath("MarginContainer/Panel/Entity")
 Title = "Игра"
 
-[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
+[node name="Background" type="Control" parent="." unique_id=1802422318 node_paths=PackedStringArray("_videoPlayer")]
+self_modulate = Color(0.114897, 0.114897, 0.114897, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_38wue")
+_videoPlayer = NodePath("TextureRect/VideoStreamPlayer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer" unique_id=1101386917]
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1697440545]
+modulate = Color(0.54497427, 0.5449743, 0.5449741, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_li2fu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Background/TextureRect" unique_id=1209946512]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_li2fu")
+autoplay = true
+expand = true
+loop = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=462990482]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -680.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer" unique_id=1312435497]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="BoxContainer/VBoxContainer" unique_id=382955272]
+[node name="Entity" parent="MarginContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=662108786]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2" unique_id=79796802]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer" unique_id=1101386917]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=382955272]
 layout_mode = 2
 text = "Поля сессии"
 
-[node name="ItemList" type="Tree" parent="BoxContainer/VBoxContainer" unique_id=523997800]
+[node name="ItemList" type="Tree" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=523997800]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_e3q4u")
-_defaultFieldIcon = ExtResource("5_38wue")
-_entityFieldIcon = ExtResource("2_g2j63")
-_containerFieldIcon = ExtResource("3_b35ok")
-_maxIconWidth = 16
+_defaultFieldIcon = ExtResource("3_e3q4u")
+_entityFieldIcon = ExtResource("4_b35ok")
+_containerFieldIcon = ExtResource("5_38wue")
+_maxIconWidth = 24
 
-[node name="Entity" parent="BoxContainer" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
+[node name="Label2" type="Label" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=1515892355]
 layout_mode = 2
+text = "Список игроков"
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

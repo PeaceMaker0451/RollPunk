@@ -1,6 +1,6 @@
 ﻿using NetcodeCommon;
 using RollPunk.AccessPolicy;
-using RollPunk.Client.Runtime.Sessions;
+using RollPunk.Client.Game.Sessions;
 using RollPunk.ClientNetcode;
 using RollPunk.ClientSide.Runtime;
 using RollPunk.Debug;
@@ -15,7 +15,7 @@ using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
 
-namespace RollPunk.Client.Runtime
+namespace RollPunk.Client.Game
 {
     public class ClientSession : Session, IDisposable, IAPIHandler
     {

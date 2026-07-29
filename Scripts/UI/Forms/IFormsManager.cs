@@ -8,13 +8,11 @@ namespace RollPunk.Client.Forms
     public interface IFormsManager : IAPIHandler
     {
         // Основные операции
-        IFormHandle ShowInNewWindow(string formPath);
-        IFormHandle ShowInMainTab(string formPath, int priority = 0);
         T GetForm<T>(IFormHandle handle) where T : Form;
         
         // Работа с программно созданными формами
         IFormHandle ShowForm(Form form, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0);
-        IFormHandle ShowDialog(Form dialog, bool modal = true, bool alwaysOnTop = true);
+        IFormHandle ShowForm(string path, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0);
         
         // Перемещение между контейнерами
         void MoveToNewWindow(IFormHandle handle);
@@ -22,10 +20,11 @@ namespace RollPunk.Client.Forms
         
         // Управление
         void CloseForm(IFormHandle handle);
-        
+
         // Работа с контроллерами
-        IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0) 
+        IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0)
             where T : IFormController;
+
         T GetController<T>(IFormHandle handle) where T : class, IFormController;
         
         // Диалоги
@@ -54,8 +53,8 @@ namespace RollPunk.Client.Forms
 
     public interface IDialogFactory
     {
-        Task<string> ShowStringInput(string title, string placeholder = "");
-        Task<int?> ShowIntInput(string title, int? defaultValue = null);
+        Task<string> ShowStringInput(string title, string message = "", string placeholder = "");
+        Task<int?> ShowIntInput(string title, string message = "", int? defaultValue = null);
         Task ShowInformation(string title, string message);
         Task<bool> ShowConfirmation(string title, string message);
     }

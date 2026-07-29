@@ -16,7 +16,7 @@ namespace RollPunk.Client.Forms
 		{
 			base._Ready();
 			
-			Client.Instance.Console.ConsoleUpdated += AddTextToConsole;
+			ClientRoot.Console.ConsoleUpdated += AddTextToConsole;
 			sendCommandButton.Pressed += SendCommandButton_Pressed;
 			consoleWriteLine.TextSubmitted += ConsoleWriteLine_TextSubmitted;
 			UpdateConsole();
@@ -38,7 +38,7 @@ namespace RollPunk.Client.Forms
 		{
 			try
 			{
-				string result = Client.Instance.CommandManager.ExecuteCommandAsync(command).Result;
+				string result = ClientRoot.CommandManager.ExecuteCommandAsync(command).Result;
 				RPDebug.Log($"{command} =>\n{result}");
 			}
 			catch (Exception e)
@@ -56,7 +56,7 @@ namespace RollPunk.Client.Forms
 
 		private void UpdateConsole()
 		{
-			consoleField.Text = Client.Instance.Console.ConsoleBuffer.ToString();
+			consoleField.Text = ClientRoot.Console.ConsoleBuffer.ToString();
 		}
 
 		private void AddTextToConsole(string text)

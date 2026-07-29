@@ -17,7 +17,7 @@ public partial class Program : Node
         }
 		else
 		{
-			Client client = new(this);
+            RollPunk.Client.ClientRoot client = new(this);
         }
 	}
 }
