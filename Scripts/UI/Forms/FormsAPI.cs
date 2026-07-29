@@ -37,7 +37,7 @@ namespace RollPunk.Client.Forms
                     cancelText = table.Get("cancelText").CastToString() ?? cancelText;
                 }
 
-                var result = await _formsManager.Dialogs.ShowStringInput(title, "", placeholder, allowCancel, new Godot.Vector2(minWidth, minHeight), okText, cancelText);
+                var result = await _formsManager.Dialogs.ShowStringInput(title, message, placeholder, allowCancel, new Godot.Vector2(minWidth, minHeight), okText, cancelText);
 
                 if (callback.IsNil() == false && callback.Type == DataType.Function)
                 {
@@ -78,7 +78,7 @@ namespace RollPunk.Client.Forms
                     cancelText = table.Get("cancelText").CastToString() ?? cancelText;
                 }
 
-                var result = await _formsManager.Dialogs.ShowIntInput(title, "", defaultValue, minValue, maxValue, step, allowCancel, new Godot.Vector2(minWidth, minHeight), okText, cancelText);
+                var result = await _formsManager.Dialogs.ShowIntInput(title, message, defaultValue, minValue, maxValue, step, allowCancel, new Godot.Vector2(minWidth, minHeight), okText, cancelText);
 
                 if (callback.IsNil() == false && callback.Type == DataType.Function)
                 {
