@@ -13,9 +13,11 @@ namespace RollPunk.Client.Forms
             _formsManager = formsManager;
         }
 
-        public async Task<string> ShowStringInput(string title, string message = "", string placeholder = "")
+        public async Task<DialogResult<string>> ShowStringInput(string title, string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(350, 150);
 
             LineEdit textBox = new LineEdit();
             RichTextLabel text = new RichTextLabel();
@@ -23,52 +25,84 @@ namespace RollPunk.Client.Forms
             container.AddChild(textBox);
 
             textBox.CustomMinimumSize = new Vector2(300, 0);
-            textBox.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
+            textBox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             textBox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             textBox.PlaceholderText = placeholder;
 
-            text.Text = message;
+            text.Text = "";
             text.CustomMinimumSize = new Vector2(300, 0);
-            text.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
+            text.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             text.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             text.FitContent = true;
 
-            var continueButton = CreateButton(buttonContainer, "Ок");
-            var cancelButton = CreateButton(buttonContainer, "Отмена");
+            var continueButton = CreateButton(buttonContainer, okButtonText);
+            Button cancelButton = null;
+            if (allowCancel)
+                cancelButton = CreateButton(buttonContainer, cancelButtonText);
 
             string result = null;
-            bool completed = false;
+            bool? completed = null;
 
             continueButton.Pressed += () => { result = textBox.Text; completed = true; };
-            cancelButton.Pressed += () => completed = true;
+            if (allowCancel)
+                cancelButton.Pressed += () => completed = false;
 
             var handle = ShowDialog(dialogue);
 
-            while (!completed)
+            while (completed == null)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
             _formsManager.CloseForm(handle);
-            return result;
+            return new DialogResult<string>(completed == true, result);
         }
 
-        public async Task<int?> ShowIntInput(string title, string message = "", int? defaultValue = null)
-        {
-            string defaultText = defaultValue?.ToString() ?? "";
-            string result = await ShowStringInput(title, message: message, placeholder: defaultText);
-            
-            if (string.IsNullOrEmpty(result))
-                return null;
-                
-            if (int.TryParse(result, out int value))
-                return value;
-                
-            return null;
-        }
-
-        public async Task ShowInformation(string title, string message)
+        public async Task<DialogResult<int?>> ShowIntInput(string title, int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
-            dialogue.Size = new Vector2(600, 300);
+
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(300, 130);
+
+            Label messageLabel = new Label();
+            container.AddChild(messageLabel);
+            messageLabel.Text = "";
+            messageLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            messageLabel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+
+            SpinBox spinBox = new SpinBox();
+            container.AddChild(spinBox);
+            spinBox.CustomMinimumSize = new Vector2(100, 0);
+            spinBox.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
+            spinBox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            spinBox.MinValue = minValue ?? int.MinValue;
+            spinBox.MaxValue = maxValue ?? int.MaxValue;
+            spinBox.Step = step;
+            spinBox.Value = defaultValue ?? 0;
+
+            var continueButton = CreateButton(buttonContainer, okButtonText);
+            Button cancelButton = null;
+            if (allowCancel)
+                cancelButton = CreateButton(buttonContainer, cancelButtonText);
+
+            int? result = null;
+            bool? completed = null;
+
+            continueButton.Pressed += () => { result = (int)spinBox.Value; completed = true; };
+            if (allowCancel)
+                cancelButton.Pressed += () => completed = false;
+
+            var handle = ShowDialog(dialogue);
+
+            while (completed == null)
+                await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
+
+            _formsManager.CloseForm(handle);
+            return new DialogResult<int?>(completed == true, result);
+        }
+
+        public async Task ShowInformation(string title, string message, Vector2? minSize = null, bool allowCancel = true, string okButtonText = "Продолжить")
+        {
+            var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 250);
 
             ScrollContainer scrollContainer = new ScrollContainer();
             container.AddChild(scrollContainer);
@@ -87,7 +121,7 @@ namespace RollPunk.Client.Forms
             text.ScrollActive = false;
             text.SelectionEnabled = true;
 
-            var continueButton = CreateButton(buttonContainer, "Продолжить");
+            var continueButton = CreateButton(buttonContainer, okButtonText);
 
             bool completed = false;
             continueButton.Pressed += () => completed = true;
@@ -100,7 +134,7 @@ namespace RollPunk.Client.Forms
             _formsManager.CloseForm(handle);
         }
 
-        public async Task<bool> ShowConfirmation(string title, string message)
+        public async Task<DialogResult<bool>> ShowConfirmation(string title, string message, bool allowCancel = true, Vector2? minSize = null, string yesButtonText = "Да", string noButtonText = "Нет")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
@@ -110,13 +144,16 @@ namespace RollPunk.Client.Forms
             messageLabel.HorizontalAlignment = HorizontalAlignment.Center;
             messageLabel.VerticalAlignment = VerticalAlignment.Center;
 
-            var yesButton = CreateButton(buttonContainer, "Да");
-            var noButton = CreateButton(buttonContainer, "Нет");
+            var yesButton = CreateButton(buttonContainer, yesButtonText);
+            Button noButton = null;
+            if (allowCancel)
+                noButton = CreateButton(buttonContainer, noButtonText);
 
             bool? result = null;
 
             yesButton.Pressed += () => result = true;
-            noButton.Pressed += () => result = false;
+            if (allowCancel)
+                noButton.Pressed += () => result = false;
 
             var handle = ShowDialog(dialogue);
 
@@ -124,7 +161,7 @@ namespace RollPunk.Client.Forms
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
             _formsManager.CloseForm(handle);
-            return result.Value;
+            return new DialogResult<bool>(result == true, result == true);
         }
 
         private async Task<(Form, Container, Container)> CreateBaseDialog(string title)
