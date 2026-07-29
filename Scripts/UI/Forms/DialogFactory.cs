@@ -13,27 +13,45 @@ namespace RollPunk.Client.Forms
             _formsManager = formsManager;
         }
 
-        public async Task<DialogResult<string>> ShowStringInput(string title, string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
+        public async Task<DialogResult<string>> ShowStringInput(string title, string message = "", string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
             dialogue.CustomMinimumSize = minSize ?? new Vector2(350, 150);
 
-            LineEdit textBox = new LineEdit();
-            RichTextLabel text = new RichTextLabel();
-            container.AddChild(text);
-            container.AddChild(textBox);
+            PanelContainer panel = new PanelContainer();
+            container.AddChild(panel);
+            panel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            panel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
 
+            MarginContainer margin = new MarginContainer();
+            panel.AddChild(margin);
+            margin.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            margin.SizeFlags.Vertical = Control.SizeFlags.ShrinkCenter;
+            margin.AddThemeConstantOverride("margin_left", 10);
+            margin.AddThemeConstantOverride("margin_right", 10);
+            margin.AddThemeConstantOverride("margin_top", 10);
+            margin.AddThemeConstantOverride("margin_bottom", 10);
+
+            VBoxContainer vbox = new VBoxContainer();
+            margin.AddChild(vbox);
+            vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            vbox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            vbox.Separation = 6;
+
+            RichTextLabel text = new RichTextLabel();
+            vbox.AddChild(text);
+            text.Text = message;
+            text.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            text.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            text.FitContent = true;
+
+            LineEdit textBox = new LineEdit();
+            vbox.AddChild(textBox);
             textBox.CustomMinimumSize = new Vector2(300, 0);
             textBox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             textBox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             textBox.PlaceholderText = placeholder;
-
-            text.Text = "";
-            text.CustomMinimumSize = new Vector2(300, 0);
-            text.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-            text.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
-            text.FitContent = true;
 
             var continueButton = CreateButton(buttonContainer, okButtonText);
             Button cancelButton = null;
@@ -56,20 +74,41 @@ namespace RollPunk.Client.Forms
             return new DialogResult<string>(completed == true, result);
         }
 
-        public async Task<DialogResult<int?>> ShowIntInput(string title, int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
+        public async Task<DialogResult<int?>> ShowIntInput(string title, string message = "", int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
             dialogue.CustomMinimumSize = minSize ?? new Vector2(300, 130);
 
-            Label messageLabel = new Label();
-            container.AddChild(messageLabel);
-            messageLabel.Text = "";
-            messageLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-            messageLabel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            PanelContainer panel = new PanelContainer();
+            container.AddChild(panel);
+            panel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            panel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+
+            MarginContainer margin = new MarginContainer();
+            panel.AddChild(margin);
+            margin.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            margin.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            margin.AddThemeConstantOverride("margin_left", 10);
+            margin.AddThemeConstantOverride("margin_right", 10);
+            margin.AddThemeConstantOverride("margin_top", 10);
+            margin.AddThemeConstantOverride("margin_bottom", 10);
+
+            VBoxContainer vbox = new VBoxContainer();
+            margin.AddChild(vbox);
+            vbox.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            vbox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            vbox.Separation = 6;
+
+            RichTextLabel text = new RichTextLabel();
+            vbox.AddChild(text);
+            text.Text = message;
+            text.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            text.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            text.FitContent = true;
 
             SpinBox spinBox = new SpinBox();
-            container.AddChild(spinBox);
+            vbox.AddChild(spinBox);
             spinBox.CustomMinimumSize = new Vector2(100, 0);
             spinBox.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
             spinBox.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
@@ -169,14 +208,25 @@ namespace RollPunk.Client.Forms
             Form dialogue = new Form(title);
             dialogue.CustomMinimumSize = new Vector2(350, 150);
 
-            MarginContainer marginContainer = new();
-            dialogue.AddChild(marginContainer);
+            PanelContainer panelContainer = new PanelContainer();
+            dialogue.AddChild(panelContainer);
+            panelContainer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            panelContainer.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+
+            MarginContainer marginContainer = new MarginContainer();
+            panelContainer.AddChild(marginContainer);
             marginContainer.Ready += () => marginContainer.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
+            marginContainer.AddThemeConstantOverride("margin_left", 10);
+            marginContainer.AddThemeConstantOverride("margin_right", 10);
+            marginContainer.AddThemeConstantOverride("margin_top", 10);
+            marginContainer.AddThemeConstantOverride("margin_bottom", 10);
 
-            VBoxContainer upperLayoutContainer = new();
+            VBoxContainer upperLayoutContainer = new VBoxContainer();
             marginContainer.AddChild(upperLayoutContainer);
+            upperLayoutContainer.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            upperLayoutContainer.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
 
-            BoxContainer container = new();
+            BoxContainer container = new BoxContainer();
             upperLayoutContainer.AddChild(container);
             container.Vertical = true;
             container.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
@@ -184,9 +234,9 @@ namespace RollPunk.Client.Forms
             container.Alignment = BoxContainer.AlignmentMode.Center;
             container.AddThemeConstantOverride("separation", 10);
 
-            HBoxContainer buttonsContainer = new();
+            HBoxContainer buttonsContainer = new HBoxContainer();
             upperLayoutContainer.AddChild(buttonsContainer);
-            buttonsContainer.CustomMinimumSize = new(0, 30);
+            buttonsContainer.CustomMinimumSize = new Vector2(0, 30);
             buttonsContainer.Alignment = BoxContainer.AlignmentMode.Center;
 
             return (dialogue, container, buttonsContainer);
