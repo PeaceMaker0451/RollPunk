@@ -11,10 +11,10 @@ namespace RollPunk.Scripts.Client.Settings
                 "Введи свой игровой ник. Его будут видеть другие игроки.\n" +
                 "(Интерфейса для изменения имени сейчас нет, так что пиши правильно с первого раза!)";
             
-            string name = await ClientRoot.FormsManager.Dialogs.ShowStringInput(title, message);
+            var result = await ClientRoot.FormsManager.Dialogs.ShowStringInput(title, message, false);
 
             var settings = ClientRoot.SettingsManager.LoadSettings();
-            settings.Name = name;
+            settings.Name = result.Value;
             ClientRoot.SettingsManager.SaveSettings(settings);
         }
     }

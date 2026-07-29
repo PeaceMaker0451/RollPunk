@@ -30,7 +30,7 @@ namespace RollPunk.Client.Forms
                 {
                     var table = optionsTable.Table;
                     placeholder = table.Get("placeholder").CastToString() ?? placeholder;
-                    allowCancel = table.Get("allowCancel").CastToBool(true);
+                    allowCancel = table.Get("allowCancel").CastToBool();
                     minWidth = (int)(table.Get("minWidth").CastToNumber() ?? minWidth);
                     minHeight = (int)(table.Get("minHeight").CastToNumber() ?? minHeight);
                     okText = table.Get("okText").CastToString() ?? okText;
@@ -68,7 +68,7 @@ namespace RollPunk.Client.Forms
                 {
                     var table = optionsTable.Table;
                     defaultValue = (int?)table.Get("defaultValue").CastToNumber();
-                    allowCancel = table.Get("allowCancel").CastToBool(true);
+                    allowCancel = table.Get("allowCancel").CastToBool();
                     minValue = (int)(table.Get("minValue").CastToNumber() ?? minValue);
                     maxValue = (int)(table.Get("maxValue").CastToNumber() ?? maxValue);
                     step = (int)(table.Get("step").CastToNumber() ?? step);
@@ -105,7 +105,7 @@ namespace RollPunk.Client.Forms
                 {
                     var table = optionsTable.Table;
                     message = table.Get("message").CastToString() ?? message;
-                    allowCancel = table.Get("allowCancel").CastToBool(true);
+                    allowCancel = table.Get("allowCancel").CastToBool();
                     minWidth = (int)(table.Get("minWidth").CastToNumber() ?? minWidth);
                     minHeight = (int)(table.Get("minHeight").CastToNumber() ?? minHeight);
                     okText = table.Get("okText").CastToString() ?? okText;
@@ -139,7 +139,7 @@ namespace RollPunk.Client.Forms
                 {
                     var table = optionsTable.Table;
                     message = table.Get("message").CastToString() ?? message;
-                    allowCancel = table.Get("allowCancel").CastToBool(true);
+                    allowCancel = table.Get("allowCancel").CastToBool();
                     minWidth = (int)(table.Get("minWidth").CastToNumber() ?? minWidth);
                     minHeight = (int)(table.Get("minHeight").CastToNumber() ?? minHeight);
                     yesText = table.Get("yesText").CastToString() ?? yesText;
