@@ -14,14 +14,14 @@ namespace RollPunk.Client
     {
         Main,
         EnterSession,
-        CreateSession,
+        Settings,
     }
 
     internal partial class MainMenu : Form
     {
         [Export] private MainSubMenu _mainMenu;
         [Export] private EnterSessionSubMenu _enterMenu;
-        [Export] private MainSubMenu _createMenu;
+        [Export] private SettingsSubMenu _settingsMenu;
         
         [Export] private RichTextLabel _motdLabel;
         [Export] private RichTextLabel _updateLogsLabel;
@@ -48,6 +48,8 @@ namespace RollPunk.Client
             _enterMenu.Initialize(this);
             _enterMenu.EnterSessionRequested += (adress) => EnterSessionRequested?.Invoke(adress);
 
+            _settingsMenu.Initialize(this);
+
             SetMenu(MainMenuTab.Main);
             
             // Сначала показываем кешированные данные или заглушки
@@ -68,15 +70,15 @@ namespace RollPunk.Client
             switch (tab)
             {
                 case (MainMenuTab.Main):
-                    _mainMenu.Show();
+                    _mainMenu.Open();
                     break;
 
                 case (MainMenuTab.EnterSession):
-                    _enterMenu.Show();
+                    _enterMenu.Open();
                     break;
 
-                case (MainMenuTab.CreateSession):
-                    _mainMenu.Show();
+                case (MainMenuTab.Settings):
+                    _settingsMenu.Open();
                     break;
 
                 default:
@@ -99,6 +101,7 @@ namespace RollPunk.Client
         {
             _mainMenu.Hide();
             _enterMenu.Hide();
+            _settingsMenu.Hide();
         }
 
         private void ShowInitialContent()

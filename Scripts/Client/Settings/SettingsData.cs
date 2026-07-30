@@ -19,8 +19,8 @@ namespace RollPunk.Client.Settings
 
         public void Validate()
         {
-            FormsScale = Mathf.Clamp(FormsScale, 0, 10);
-            FontSize = Mathf.Clamp(FontSize, 0, 40);
+            FormsScale = Mathf.Clamp(FormsScale, 0.75f, 10);
+            FontSize = Mathf.Clamp(FontSize, 2, 40);
         }
     }
 }

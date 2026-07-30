@@ -11,5 +11,8 @@ namespace RollPunk.Client
         {
             Menu = menu;
         }
+
+        public void Open() { OnOpen(); this.Show(); }
+        protected virtual void OnOpen() { }
     }
 }

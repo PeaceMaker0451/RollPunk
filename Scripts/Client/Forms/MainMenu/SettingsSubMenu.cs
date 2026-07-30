@@ -1,6 +1,5 @@
 using Godot;
 using RollPunk.Client.Settings;
-using System;
 
 namespace RollPunk.Client
 {
@@ -18,7 +17,11 @@ namespace RollPunk.Client
 
         public override void _Ready()
         {
-            _returnButton.Pressed += () => Menu.SetMenu(MainMenuTab.Main);
+            _returnButton.Pressed += () =>
+            {
+                SaveSettings();
+                Menu.SetMenu(MainMenuTab.Main);
+            };
 
             LoadSettings();
         }
@@ -30,8 +33,8 @@ namespace RollPunk.Client
             _nameField.Text = _settingsData.Name;
             _fontSizeSpinBox.Value = _settingsData.FontSize;
             _formScaleSpinBox.Value = _settingsData.FormsScale;
-            _smoothWindowResizingCheckBox.Pressed = _settingsData.SmoothWindowResizing;
-            _waitForResizeCheckBox.Pressed = _settingsData.WaitForResizeToChangeWindow;
+            _smoothWindowResizingCheckBox.ButtonPressed = _settingsData.SmoothWindowResizing;
+            _waitForResizeCheckBox.ButtonPressed = _settingsData.WaitForResizeToChangeWindow;
             _clientIdLabel.Text = _settingsData.ClientID.ToString();
         }
 
@@ -40,10 +43,15 @@ namespace RollPunk.Client
             _settingsData.Name = _nameField.Text;
             _settingsData.FontSize = (int)_fontSizeSpinBox.Value;
             _settingsData.FormsScale = (float)_formScaleSpinBox.Value;
-            _settingsData.SmoothWindowResizing = _smoothWindowResizingCheckBox.Pressed;
-            _settingsData.WaitForResizeToChangeWindow = _waitForResizeCheckBox.Pressed;
+            _settingsData.SmoothWindowResizing = _smoothWindowResizingCheckBox.ButtonPressed;
+            _settingsData.WaitForResizeToChangeWindow = _waitForResizeCheckBox.ButtonPressed;
 
             ClientRoot.SettingsManager.SaveSettings(_settingsData);
+        }
+
+        protected override void OnOpen()
+        {
+            LoadSettings();
         }
     }
 }

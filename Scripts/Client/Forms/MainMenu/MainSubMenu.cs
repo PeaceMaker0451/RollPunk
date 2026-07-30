@@ -9,37 +9,39 @@ namespace RollPunk.Client
         [Export] Button _enterSessionButton;
         [Export] Button _exitSessionButton;
         [Export] Button _settingsButton;
-        [Export] Button _modManagerButton;
-        [Export] Button _exitButton;
+        //[Export] Button _modManagerButton;
+        //[Export] Button _exitButton;
 
         public event Action CreateSessionPressed;
         public event Action ExitSessionPressed;
-        public event Action SettingsPressed;
-        public event Action ModManagerPressed;
-        public event Action ExitPressed;
+        //public event Action SettingsPressed;
+        //public event Action ModManagerPressed;
+        //public event Action ExitPressed;
 
         public override void _Ready()
         {
             _createSessionButton.Pressed += () => CreateSessionPressed?.Invoke();
             _enterSessionButton.Pressed += () => Menu.SetMenu(MainMenuTab.EnterSession);
             _exitSessionButton.Pressed += () => ExitSessionPressed?.Invoke();
-            _settingsButton.Pressed += () => SettingsPressed?.Invoke();
-            _modManagerButton.Pressed += () => ModManagerPressed?.Invoke();
-            _exitButton.Pressed += () => ExitPressed?.Invoke();
+            _settingsButton.Pressed += () => Menu.SetMenu(MainMenuTab.Settings);
+            //_modManagerButton.Pressed += () => ModManagerPressed?.Invoke();
+            //_exitButton.Pressed += () => ExitPressed?.Invoke();
         }
 
         public void SetInSession(bool isInSession)
         {
             if(isInSession)
             {
-                _modManagerButton.Disabled = true;
+                //_modManagerButton.Disabled = true;
+                _enterSessionButton.Disabled = true;
                 _createSessionButton.Disabled = true;
                 _settingsButton.Disabled = true;
                 _exitSessionButton.Visible = true;
             }
             else
             {
-                _modManagerButton.Disabled = false;
+                //_modManagerButton.Disabled = false;
+                _enterSessionButton.Disabled = false;
                 _createSessionButton.Disabled = false;
                 _settingsButton.Disabled = false;
                 _exitSessionButton.Visible = false;
