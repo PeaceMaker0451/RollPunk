@@ -14,6 +14,7 @@ namespace RollPunk.Client.Settings
             {
                 Version = ClientConfig.ClientVersion,
                 FormsScale = 1,
+                FontSize = 12,
                 OneScreenMode = false,
                 SmoothWindowResizing = true,
                 WaitForResizeToChangeWindow = true,

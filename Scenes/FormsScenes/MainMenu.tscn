@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://56cxr40p3sm0" path="res://Scripts/Client/Forms/MainMenu/MainSubMenu.cs" id="3_2aawn"]
 [ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="3_p1iy4"]
 [ext_resource type="PackedScene" uid="uid://coxmfns81m0gj" path="res://Scenes/Other/rollpunkLogo.tscn" id="4_slnmx"]
-[ext_resource type="Shader" uid="uid://d0w7fiqksxcwp" path="res://Shaders/LiquidGlass.gdshader" id="8_7bgxm"]
 [ext_resource type="Shader" uid="uid://bg5juswfbpk3j" path="res://Shaders/SphereProjection.gdshader" id="8_soisg"]
 [ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="9_7bgxm"]
+[ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="9_cuf7w"]
 [ext_resource type="Script" uid="uid://dn1wwtr5nmgfw" path="res://Scripts/UI/CopyableRichTextLabel.cs" id="10_soisg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whksc"]
@@ -18,21 +18,6 @@ content_margin_top = 5.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
 bg_color = Color(1, 0.19, 0.19, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8673"]
-shader = ExtResource("8_7bgxm")
-shader_parameter/blur = 2.76800013148
-shader_parameter/warp_intensity = 0.2450000116375
-shader_parameter/strength_x = 12.0
-shader_parameter/strength_y = 12.0
-shader_parameter/offset_x = 0.0
-shader_parameter/offset_y = 0.0
-shader_parameter/corner_radius = 0.0990000047025
-shader_parameter/edge_smoothness = 3.0
-shader_parameter/tint = Color(0, 0, 0, 0.38039216)
-shader_parameter/edge_highlight = Color(0.65012825, 0.6501283, 0.65012825, 0.19215687)
-shader_parameter/edge_width = 10.0
-shader_parameter/chromatic_strength = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cuf7w"]
 shader = ExtResource("8_soisg")
@@ -357,7 +342,7 @@ size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1008185642]
 z_index = 1
-material = SubResource("ShaderMaterial_d8673")
+material = ExtResource("9_cuf7w")
 layout_mode = 2
 
 [node name="MotdText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer" unique_id=336505649]
@@ -378,7 +363,7 @@ layout_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1563644658]
 z_index = 1
-material = SubResource("ShaderMaterial_d8673")
+material = ExtResource("9_cuf7w")
 layout_mode = 2
 
 [node name="UpdateLog" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=1622916374]
@@ -414,7 +399,7 @@ expand_mode = 1
 
 [node name="PanelContainer3" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1282397580]
 z_index = 1
-material = SubResource("ShaderMaterial_d8673")
+material = ExtResource("9_cuf7w")
 custom_maximum_size = Vector2(-1, 135.04)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -439,7 +424,7 @@ layout_mode = 2
 
 [node name="PanelContainer3" type="PanelContainer" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer" unique_id=741489608]
 z_index = 1
-material = SubResource("ShaderMaterial_d8673")
+material = ExtResource("9_cuf7w")
 layout_mode = 2
 
 [node name="VersionText" type="RichTextLabel" parent="Background/HBoxContainer/RightPart/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer3" unique_id=1929207100]

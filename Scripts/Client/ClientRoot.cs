@@ -7,6 +7,7 @@ using RollPunk.ClientNetcode;
 using RollPunk.Debug;
 using RollPunk.Modding;
 using RollPunk.Scripts.Client.Settings;
+using RollPunk.Scripts.UI;
 using RollPunk.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace RollPunk.Client
         private ClientConsole _console = new ClientConsole();
 
         private SettingsManager _settingsManager;
+        private RuntimeSettingsApplier _settingsApplier;
         private CommandManager _commandManager = new CommandManager();
 
         private FramesHost _framesManager;
@@ -52,7 +54,7 @@ namespace RollPunk.Client
 
             RPDebug.Logged += (log) => _console.ConsoleLog(log);
             LuaErrorsHandler.ErrorLogged += RPDebug.Log;
-            
+
             if (Instance != null)
                 throw new InvalidOperationException("Client is not null!!");
 
@@ -62,10 +64,7 @@ namespace RollPunk.Client
 
             AddCommands(_commandManager);
 
-            _settingsManager = new SettingsManager(new ClientSettingsStorage(), ClientConfig.ClientVersion);
-
-            var settings = _settingsManager.LoadSettings();
-            _settingsManager.SaveSettings(settings);
+            SettingsData settings = SetupSettings();
 
             _framesManager = new(_rootNode, settings.FormsScale, settings.OneScreenMode, settings.SmoothWindowResizing, settings.WaitForResizeToChangeWindow, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
             _formsLoader = new();
@@ -79,8 +78,26 @@ namespace RollPunk.Client
 
             _runtime = new Runtime();
 
+
+
             FastSettingsAsker asker = new();
             asker.AskUserName();
+        }
+
+        private SettingsData SetupSettings()
+        {
+            _settingsManager = new SettingsManager(new ClientSettingsStorage(), ClientConfig.ClientVersion);
+            _settingsApplier = new(new SettingsApplier[]
+            {
+                new FontSizeSettingsChanger(),
+            });
+
+            _settingsManager.SettingsSaved += (settings) => _settingsApplier.UpdateRuntime();
+
+            var settings = _settingsManager.LoadSettings();
+            _settingsManager.SaveSettings(settings);
+
+            return settings;
         }
 
         private void AddCommands(CommandManager commandManager)

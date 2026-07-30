@@ -8,6 +8,8 @@ namespace RollPunk.Client.Settings
         private readonly ISettingsStorage _storage;
         private readonly string _currentSettingsVersion;
 
+        public event Action<SettingsData> SettingsSaved;
+
         public SettingsManager(ISettingsStorage storage, string currentSettingsVersion)
         {
             _storage = storage;
@@ -22,7 +24,7 @@ namespace RollPunk.Client.Settings
             if (settings.Version != _currentSettingsVersion)
                 MigrateSettings(settings);
 
-
+            settings.Validate();
 
             return settings;
         }
@@ -31,6 +33,7 @@ namespace RollPunk.Client.Settings
         {
             settings.Version = _currentSettingsVersion;
             _storage.SaveSettings(settings);
+            SettingsSaved?.Invoke(settings);
         }
 
         private void MigrateSettings(SettingsData settings) { }

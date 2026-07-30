@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dj1vnvm1y7noc"]
+
+[ext_resource type="Shader" uid="uid://d0w7fiqksxcwp" path="res://Shaders/LiquidGlass.gdshader" id="1_5hix8"]
+
+[resource]
+shader = ExtResource("1_5hix8")
+shader_parameter/blur = 1.9330000918175
+shader_parameter/warp_intensity = 0.30000001425
+shader_parameter/strength_x = 6.030000286425
+shader_parameter/strength_y = 6.0290002863775
+shader_parameter/offset_x = 4.7499999933364734e-08
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 0.0
+shader_parameter/edge_smoothness = 3.0
+shader_parameter/tint = Color(0, 0, 0, 0.38039216)
+shader_parameter/edge_highlight = Color(0.65012825, 0.6501283, 0.65012825, 0.19215687)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0

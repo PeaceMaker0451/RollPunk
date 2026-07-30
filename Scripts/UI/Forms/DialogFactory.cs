@@ -18,6 +18,7 @@ namespace RollPunk.Client.Forms
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
             dialogue.CustomMinimumSize = minSize ?? new Vector2(350, 150);
+            dialogue.CustomMaximumSize = minSize ?? new Vector2(350, 150);
 
             PanelContainer panel = new PanelContainer();
             container.AddChild(panel);
@@ -79,7 +80,8 @@ namespace RollPunk.Client.Forms
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
 
-            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 250);
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 220);
+            dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 220);
 
             PanelContainer panel = new PanelContainer();
             container.AddChild(panel);
@@ -144,6 +146,7 @@ namespace RollPunk.Client.Forms
         {
             var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
             dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 300);
+            dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 300);
 
             Vector2 textBoxMinSizeOffset = new(50, 80);
 
@@ -214,6 +217,7 @@ namespace RollPunk.Client.Forms
         {
             Form dialogue = new Form(title);
             dialogue.CustomMinimumSize = new Vector2(450, 200);
+            dialogue.CustomMaximumSize = new Vector2(450, 200);
             Vector2 panelMinSize = new Vector2(350, 150);
 
             CenterContainer centerContainer = new CenterContainer();

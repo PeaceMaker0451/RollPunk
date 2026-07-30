@@ -11,6 +11,7 @@ namespace RollPunk.Client.Settings
         [JsonProperty] public string Name;
 
         [JsonProperty] public float FormsScale;
+        [JsonProperty] public int FontSize;
         [JsonProperty] public bool OneScreenMode;
         [JsonProperty] public bool SmoothWindowResizing;
         [JsonProperty] public bool WaitForResizeToChangeWindow;
@@ -19,6 +20,7 @@ namespace RollPunk.Client.Settings
         public void Validate()
         {
             FormsScale = Mathf.Clamp(FormsScale, 0, 10);
+            FontSize = Mathf.Clamp(FontSize, 0, 40);
         }
     }
 }
