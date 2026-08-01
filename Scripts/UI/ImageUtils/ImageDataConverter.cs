@@ -6,14 +6,28 @@ namespace RollPunk.UI.ImageUtils
     /// <summary>
     /// Конвертер для работы с данными изображений
     /// </summary>
-    public static class ImageDataConverter
+    public class ImageDataConverter
     {
+        private readonly ImageValidator _validator;
+        private readonly ImageResizer _resizer;
+        
+        /// <summary>
+        /// Создает новый экземпляр конвертера изображений
+        /// </summary>
+        /// <param name="validator">Валидатор для проверки изображений</param>
+        /// <param name="resizer">Резайзер для изменения размера изображений</param>
+        public ImageDataConverter(ImageValidator validator, ImageResizer resizer)
+        {
+            _validator = validator ?? throw new ArgumentNullException(nameof(validator));
+            _resizer = resizer ?? throw new ArgumentNullException(nameof(resizer));
+        }
+        
         /// <summary>
         /// Конвертирует изображение Godot в массив байтов PNG
         /// </summary>
         /// <param name="image">Изображение для конвертации</param>
         /// <returns>Массив байтов PNG или null при ошибке</returns>
-        public static byte[] ImageToBytes(Image image)
+        public byte[] ImageToBytes(Image image)
         {
             if (image == null)
                 return null;
@@ -34,7 +48,7 @@ namespace RollPunk.UI.ImageUtils
         /// </summary>
         /// <param name="imageData">Данные изображения в формате PNG</param>
         /// <returns>Изображение Godot или null при ошибке</returns>
-        public static Image BytesToImage(byte[] imageData)
+        public Image BytesToImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0)
                 return null;
@@ -64,7 +78,7 @@ namespace RollPunk.UI.ImageUtils
         /// </summary>
         /// <param name="imageData">Данные изображения в формате PNG</param>
         /// <returns>Текстура или null при ошибке</returns>
-        public static ImageTexture BytesToTexture(byte[] imageData)
+        public ImageTexture BytesToTexture(byte[] imageData)
         {
             var image = BytesToImage(imageData);
             if (image == null)
@@ -88,12 +102,12 @@ namespace RollPunk.UI.ImageUtils
         /// <param name="filePath">Путь к файлу изображения</param>
         /// <param name="errorMessage">Сообщение об ошибке</param>
         /// <returns>Массив байтов PNG или null при ошибке</returns>
-        public static byte[] LoadImageFileToBytes(string filePath, out string errorMessage)
+        public byte[] LoadImageFileToBytes(string filePath, out string errorMessage)
         {
             errorMessage = string.Empty;
             
             // Валидация файла
-            if (!ImageValidator.ValidateImageFile(filePath, out errorMessage))
+            if (!_validator.ValidateImageFile(filePath, out errorMessage))
                 return null;
             
             try
@@ -109,7 +123,7 @@ namespace RollPunk.UI.ImageUtils
                 }
                 
                 // Изменяем размер
-                var resizedImage = ImageResizer.ResizeImage(image);
+                var resizedImage = _resizer.ResizeImage(image);
                 
                 // Конвертируем в байты
                 var imageData = ImageToBytes(resizedImage);

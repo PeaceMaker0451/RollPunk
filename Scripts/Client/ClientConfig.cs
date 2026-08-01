@@ -17,5 +17,13 @@ namespace RollPunk.Client
             "res://Mods/",
             "user://Mods/"
         };
+
+        // Настройки для работы с изображениями
+        public static class ImageSettings
+        {
+            public const int MaxDimension = 1024;
+            public const long MaxFileSizeBytes = 50 * 1024 * 1024; // 50MB
+            public const int MaxValidationDimension = 8192;
+        }
     }
 }

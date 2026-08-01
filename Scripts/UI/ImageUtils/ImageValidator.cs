@@ -7,10 +7,21 @@ namespace RollPunk.UI.ImageUtils
     /// <summary>
     /// Валидатор изображений для проверки файлов перед загрузкой
     /// </summary>
-    public static class ImageValidator
+    public class ImageValidator
     {
-        private const long MaxFileSizeBytes = 50 * 1024 * 1024; // 50MB максимальный размер файла
-        private const int MaxDimension = 8192; // Максимальное разрешение по любой стороне
+        private readonly long _maxFileSizeBytes;
+        private readonly int _maxDimension;
+        
+        /// <summary>
+        /// Создает новый экземпляр валидатора изображений
+        /// </summary>
+        /// <param name="maxFileSizeBytes">Максимальный размер файла в байтах</param>
+        /// <param name="maxDimension">Максимальное разрешение по любой стороне</param>
+        public ImageValidator(long maxFileSizeBytes, int maxDimension)
+        {
+            _maxFileSizeBytes = maxFileSizeBytes;
+            _maxDimension = maxDimension;
+        }
         
         /// <summary>
         /// Проверяет, можно ли безопасно загрузить файл изображения
@@ -18,7 +29,7 @@ namespace RollPunk.UI.ImageUtils
         /// <param name="filePath">Путь к файлу</param>
         /// <param name="errorMessage">Сообщение об ошибке, если валидация не прошла</param>
         /// <returns>true если файл можно загружать</returns>
-        public static bool ValidateImageFile(string filePath, out string errorMessage)
+        public bool ValidateImageFile(string filePath, out string errorMessage)
         {
             errorMessage = string.Empty;
             
@@ -33,9 +44,9 @@ namespace RollPunk.UI.ImageUtils
                 
                 // Проверка размера файла
                 var fileInfo = new FileInfo(filePath);
-                if (fileInfo.Length > MaxFileSizeBytes)
+                if (fileInfo.Length > _maxFileSizeBytes)
                 {
-                    errorMessage = $"Файл слишком большой. Максимальный размер: {MaxFileSizeBytes / (1024 * 1024)}MB";
+                    errorMessage = $"Файл слишком большой. Максимальный размер: {_maxFileSizeBytes / (1024 * 1024)}MB";
                     return false;
                 }
                 
@@ -50,9 +61,9 @@ namespace RollPunk.UI.ImageUtils
                 }
                 
                 // Проверка разрешения
-                if (image.GetWidth() > MaxDimension || image.GetHeight() > MaxDimension)
+                if (image.GetWidth() > _maxDimension || image.GetHeight() > _maxDimension)
                 {
-                    errorMessage = $"Изображение слишком большое. Максимальное разрешение: {MaxDimension}x{MaxDimension}";
+                    errorMessage = $"Изображение слишком большое. Максимальное разрешение: {_maxDimension}x{_maxDimension}";
                     return false;
                 }
                 
@@ -78,7 +89,7 @@ namespace RollPunk.UI.ImageUtils
         /// <param name="image">Изображение для проверки</param>
         /// <param name="errorMessage">Сообщение об ошибке</param>
         /// <returns>true если изображение валидно</returns>
-        public static bool ValidateImage(Image image, out string errorMessage)
+        public bool ValidateImage(Image image, out string errorMessage)
         {
             errorMessage = string.Empty;
             
@@ -94,9 +105,9 @@ namespace RollPunk.UI.ImageUtils
                 return false;
             }
             
-            if (image.GetWidth() > MaxDimension || image.GetHeight() > MaxDimension)
+            if (image.GetWidth() > _maxDimension || image.GetHeight() > _maxDimension)
             {
-                errorMessage = $"Изображение слишком большое. Максимальное разрешение: {MaxDimension}x{MaxDimension}";
+                errorMessage = $"Изображение слишком большое. Максимальное разрешение: {_maxDimension}x{_maxDimension}";
                 return false;
             }
             
