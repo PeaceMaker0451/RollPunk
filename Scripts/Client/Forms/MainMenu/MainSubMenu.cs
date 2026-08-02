@@ -9,7 +9,7 @@ namespace RollPunk.Client
         [Export] Button _enterSessionButton;
         [Export] Button _exitSessionButton;
         [Export] Button _settingsButton;
-        //[Export] Button _modManagerButton;
+        [Export] Button _modManagerButton;
         //[Export] Button _exitButton;
 
         public event Action CreateSessionPressed;
@@ -24,7 +24,7 @@ namespace RollPunk.Client
             _enterSessionButton.Pressed += () => Menu.SetMenu(MainMenuTab.EnterSession);
             _exitSessionButton.Pressed += () => ExitSessionPressed?.Invoke();
             _settingsButton.Pressed += () => Menu.SetMenu(MainMenuTab.Settings);
-            //_modManagerButton.Pressed += () => ModManagerPressed?.Invoke();
+            _modManagerButton.Pressed += () => Menu.SetMenu(MainMenuTab.ModMenu);
             //_exitButton.Pressed += () => ExitPressed?.Invoke();
         }
 

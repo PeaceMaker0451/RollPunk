@@ -1,5 +1,5 @@
 {
-    "Type": "rulepack",
+    "Id": "peacemkr_png.red_custom",
     "Name": "CyberpunkRED Custom",
     "Description": "Default \"CP-like\" rules of RollPunk writed in lua",
     "Version": "0.5.1",

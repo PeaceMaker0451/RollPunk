@@ -1,7 +1,6 @@
 using Godot;
-using RollPunk.Client.Forms;
-using RollPunk.Client.Game;
 using RollPunk.Debug;
+using RollPunk.Modding;
 using RollPunk.Scripts.Client.Forms.MainMenu;
 using RollPunk.UI.Forms;
 using System;
@@ -16,6 +15,7 @@ namespace RollPunk.Client
         Main,
         EnterSession,
         Settings,
+        ModMenu
     }
 
     internal partial class MainMenu : Form
@@ -35,14 +35,12 @@ namespace RollPunk.Client
         public event Action<string> EnterSessionRequested;
         public event Action ExitSessionRequested;
 
-        public override void _Ready()
-        {
-            base._Ready();
-            Initialize();
-        }
+        public IReadOnlyModsContainer Mods {  get; private set; }
 
-        public async void Initialize()
+        public async void Initialize(IReadOnlyModsContainer mods)
         {
+            Mods = mods;
+            
             _mainMenu.Initialize(this);
             _mainMenu.CreateSessionPressed += () => CreateSessionRequested?.Invoke();
             _mainMenu.ExitSessionPressed += () => ExitSessionRequested?.Invoke();
@@ -84,6 +82,10 @@ namespace RollPunk.Client
                     _settingsMenu.Open();
                     break;
 
+                case (MainMenuTab.ModMenu):
+                    _modsMenu.Open();
+                    break;
+
                 default:
                     RPDebug.LogError($"Menu for this button is not exists yet - {tab}");
                     break;
@@ -103,6 +105,7 @@ namespace RollPunk.Client
             _mainMenu.Hide();
             _enterMenu.Hide();
             _settingsMenu.Hide();
+            _modsMenu.Hide();
         }
 
         private void ShowInitialContent()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csq6jb34oluat"]
 
-[ext_resource type="Script" uid="uid://c6inefrv8xsys" path="res://Scripts/UI/ModDataControl.cs" id="1_hom68"]
+[ext_resource type="Script" uid="uid://dm06l41ebro4y" path="res://Scripts/UI/Mods/ModDataControl.cs" id="1_hom68"]
 [ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="1_m2j31"]
 
 [node name="Control" type="PanelContainer" unique_id=747175730 node_paths=PackedStringArray("_title", "_description", "_author", "_version", "_icon", "_checkBox")]
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = -51.5
-offset_right = -395.0
+offset_right = -487.0
 offset_bottom = -575.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -51,6 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "ModTitle"
+text_overrun_behavior = 1
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/BoxContainer/BoxContainer2/HBoxContainer" unique_id=1827316467]
 layout_mode = 2
@@ -59,7 +60,7 @@ icon_alignment = 1
 [node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/BoxContainer/BoxContainer2" unique_id=1163101298]
 layout_mode = 2
 folded = true
-title = "Description"
+title = "Описание"
 
 [node name="BoxContainer" type="BoxContainer" parent="MarginContainer/BoxContainer/BoxContainer2/FoldableContainer" unique_id=837425537]
 visible = false

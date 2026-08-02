@@ -30,11 +30,13 @@ namespace RollPunk.UI
 
         public void WriteModData(ModMetadata mod, bool active)
         {
-            _title.Text = $"{mod.Name} - {mod.Author}";
+            _title.Text = $"{mod.Name}";
 
             _description.Text = mod.Description;
             _author.Text = mod.Author;
             _version.Text = mod.Version;
+
+            SetChecked(active);
         }
 
         public void SetChecked(bool marked)

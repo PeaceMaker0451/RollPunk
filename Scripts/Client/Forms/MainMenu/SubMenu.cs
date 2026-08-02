@@ -1,5 +1,7 @@
 ﻿using Godot;
 using RollPunk.Client.Game;
+using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RollPunk.Client
 {
@@ -10,7 +12,10 @@ namespace RollPunk.Client
         public void Initialize(MainMenu menu)
         {
             Menu = menu;
+            OnInitialize();
         }
+
+        protected virtual void OnInitialize() { }
 
         public void Open() { OnOpen(); this.Show(); }
         protected virtual void OnOpen() { }

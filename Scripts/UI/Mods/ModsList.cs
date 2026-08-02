@@ -1,4 +1,5 @@
 ﻿using Godot;
+using RollPunk.Debug;
 using RollPunk.Modding;
 using RollPunk.UI;
 using System;
@@ -6,13 +7,15 @@ using System.Collections.Generic;
 
 namespace RollPunk.Scripts.UI.Mods
 {
-    public partial class ModsList : HBoxContainer
+    public partial class ModsList : VBoxContainer
     {
         private const string s_modControlScenePath = "res://Scenes/Mods/ModData.tscn";
 
         private Dictionary<Mod, ModDataControl> _modControls;
 
         public event Action<Mod, bool> ModChecked;
+
+        public IReadOnlyDictionary<Mod, ModDataControl> ModControls => _modControls;
 
         public void SetModList(IEnumerable<Mod> mods)
         {
@@ -28,8 +31,11 @@ namespace RollPunk.Scripts.UI.Mods
             
             foreach (Mod mod in mods)
             {
-                ModDataControl dataControl = GD.Load<ModDataControl>(s_modControlScenePath);
+                var scene = GD.Load<PackedScene>(s_modControlScenePath);
+                ModDataControl dataControl = (ModDataControl)scene.Instantiate();
+                AddChild(dataControl);
 
+                RPDebug.Log($"Показываем моды {mod.GetModInfo()}");
                 dataControl.WriteModData(mod.modData, true);
                 _modControls.Add(mod, dataControl);
 

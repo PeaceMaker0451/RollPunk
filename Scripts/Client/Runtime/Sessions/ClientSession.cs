@@ -104,7 +104,7 @@ namespace RollPunk.Client.Game
             return _api;
         }
 
-        private void LoadMods(IReadOnlyList<Mod> modsToLoad)
+        private void LoadMods(IReadOnlyCollection<Mod> modsToLoad)
         {
             RPDebug.Log($"[color=bisque]Loading Mods...[/color]");
 

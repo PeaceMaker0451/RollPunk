@@ -12,8 +12,9 @@
 [ext_resource type="Shader" uid="uid://bg5juswfbpk3j" path="res://Shaders/SphereProjection.gdshader" id="8_soisg"]
 [ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="9_7bgxm"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="9_cuf7w"]
+[ext_resource type="Script" uid="uid://btmuv2xpfxqbt" path="res://Scripts/Client/Forms/MainMenu/ModsSubMenu.cs" id="10_dctrf"]
 [ext_resource type="Script" uid="uid://dn1wwtr5nmgfw" path="res://Scripts/UI/CopyableRichTextLabel.cs" id="10_soisg"]
-[ext_resource type="PackedScene" uid="uid://csq6jb34oluat" path="res://Scenes/Mods/ModData.tscn" id="14_itjeq"]
+[ext_resource type="Script" uid="uid://d0ik0uw6108vp" path="res://Scripts/UI/Mods/ModsList.cs" id="11_dat1h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whksc"]
 content_margin_left = 8.0
@@ -33,7 +34,7 @@ shader_parameter/rotation_offset_x = 0.0
 shader_parameter/rotation_offset_y = 0.0
 shader_parameter/rotation_offset_z = 0.0
 
-[node name="MainForm" type="Control" unique_id=194105810 node_paths=PackedStringArray("_mainMenu", "_enterMenu", "_settingsMenu", "_motdLabel", "_updateLogsLabel", "_authorsLabel", "_versionLabel")]
+[node name="MainForm" type="Control" unique_id=194105810 node_paths=PackedStringArray("_mainMenu", "_enterMenu", "_settingsMenu", "_modsMenu", "_motdLabel", "_updateLogsLabel", "_authorsLabel", "_versionLabel")]
 custom_minimum_size = Vector2(950, 529)
 propagate_maximum_size = true
 layout_mode = 3
@@ -44,6 +45,7 @@ script = ExtResource("1_v0jhx")
 _mainMenu = NodePath("Background/Menu/LeftContent/MainMenu")
 _enterMenu = NodePath("Background/Menu/LeftContent/EnterSession")
 _settingsMenu = NodePath("Background/Menu/LeftContent/Settings")
+_modsMenu = NodePath("Background/Menu/LeftContent/ModMenu")
 _motdLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer/MotdText")
 _updateLogsLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer2/UpdateLog")
 _authorsLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3/Authors")
@@ -96,7 +98,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftContent" type="MarginContainer" parent="Background/Menu" unique_id=1772207851]
-custom_minimum_size = Vector2(356.555, 0)
+custom_minimum_size = Vector2(356, 0)
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -108,6 +110,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="EnterSession" type="Control" parent="Background/Menu/LeftContent" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
+visible = false
 layout_mode = 2
 script = ExtResource("2_tf62t")
 _returnButton = NodePath("ContentBoxContainer/BackButton")
@@ -271,7 +274,7 @@ layout_mode = 2
 text = "userID"
 fit_content = true
 
-[node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton")]
+[node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton")]
 visible = false
 layout_mode = 2
 script = ExtResource("3_2aawn")
@@ -279,6 +282,7 @@ _createSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/CreateS
 _enterSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/EnterSessionButton")
 _exitSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/LeaveSessionButton")
 _settingsButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/SettingsButton")
+_modManagerButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/ModManagerButton")
 
 [node name="VBox" type="VBoxContainer" parent="Background/Menu/LeftContent/MainMenu" unique_id=496544935]
 layout_mode = 1
@@ -335,7 +339,6 @@ size_flags_horizontal = 0
 text = "Настройки"
 
 [node name="ModManagerButton" type="Button" parent="Background/Menu/LeftContent/MainMenu/VBox/ButtonsMarginContainer/ButtonsList" unique_id=1428824015]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Менеджер модов"
@@ -351,6 +354,42 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Выйти"
+
+[node name="ModMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=591811003 node_paths=PackedStringArray("_returnButton", "_modList")]
+visible = false
+layout_mode = 2
+script = ExtResource("10_dctrf")
+_returnButton = NodePath("ContentBoxContainer/BackButton")
+_modList = NodePath("ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/ScrollContainer/ModList")
+
+[node name="ContentBoxContainer" parent="Background/Menu/LeftContent/ModMenu" unique_id=2104044540 instance=ExtResource("6_cuf7w")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 374.0
+offset_bottom = 519.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Title" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer" parent_id_path=PackedInt32Array(2104044540, 396060386) index="0" unique_id=1375492535]
+text = "Менеджер модов"
+
+[node name="Subtitle" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer" parent_id_path=PackedInt32Array(2104044540, 396060386) index="1" unique_id=1936270348]
+text = "Что, скучно без модов?"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content" parent_id_path=PackedInt32Array(2104044540, 244144446) index="0" unique_id=1844043110]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ModList" type="VBoxContainer" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/ScrollContainer" unique_id=1338577914]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("11_dat1h")
 
 [node name="RightContent" type="Control" parent="Background/Menu" unique_id=1715125138]
 custom_minimum_size = Vector2(568.94, 0)
@@ -490,23 +529,6 @@ offset_bottom = 14.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1408453160]
-visible = false
-layout_mode = 0
-offset_left = 12.0
-offset_top = 20.0
-offset_right = 369.0
-offset_bottom = 325.0
-vertical = true
-
-[node name="Control" parent="BoxContainer" unique_id=747175730 instance=ExtResource("14_itjeq")]
-layout_mode = 2
-
-[node name="Control2" parent="BoxContainer" unique_id=1181080706 instance=ExtResource("14_itjeq")]
-layout_mode = 2
-
-[node name="Control3" parent="BoxContainer" unique_id=2111897438 instance=ExtResource("14_itjeq")]
-layout_mode = 2
-
 [editable path="Background/Menu/LeftContent/EnterSession/ContentBoxContainer"]
 [editable path="Background/Menu/LeftContent/Settings/ContentBoxContainer"]
+[editable path="Background/Menu/LeftContent/ModMenu/ContentBoxContainer"]
