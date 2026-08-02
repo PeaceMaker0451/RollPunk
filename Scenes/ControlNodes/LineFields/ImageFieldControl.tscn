@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://d2ixvvvvvvvv"]
+
+[ext_resource type="Script" uid="uid://bk7254v5gn6m6" path="res://Scripts/UIFields/FieldControls/LineFields/ImageFieldControl.cs" id="1_y6une"]
+[ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="2_8bcgk"]
+[ext_resource type="Texture2D" uid="uid://dmkekjmdrl14e" path="res://Sprites/PlayerPicPlaceHolder.png" id="2_wepar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6une"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.046, 0.046, 0.05, 0.89411765)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.1882353, 0.1882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.08468998, 0.08468991, 0.08468992, 0.7647059)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqqax"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[node name="ImageFieldControl" type="MarginContainer" unique_id=71512943 node_paths=PackedStringArray("_imageDisplay", "_hoverContainer", "_loadButton", "_clearButton", "_defaultImage")]
+z_index = 12
+offset_right = 264.0
+offset_bottom = 266.0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_y6une")
+_imageDisplay = NodePath("VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay")
+_hoverContainer = NodePath("VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer")
+_loadButton = NodePath("VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer/HBoxContainer/LoadButton")
+_clearButton = NodePath("VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer/HBoxContainer/ClearButton")
+_defaultImage = NodePath("VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/DefaultImage")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=933916326]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1185281606]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y6une")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2" unique_id=725638578]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dqqax")
+
+[node name="ImageDisplay" type="TextureRect" parent="VBoxContainer/PanelContainer2/PanelContainer" unique_id=795276374]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+texture = ExtResource("2_8bcgk")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DefaultImage" type="TextureRect" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay" unique_id=417048422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_wepar")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay" unique_id=2081120950]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HoverButtonContainer" type="Control" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay" unique_id=137205058]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="BoxContainer" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer" unique_id=144885644]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -60.005005
+offset_right = -5.0
+offset_bottom = -6.005005
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+vertical = true
+
+[node name="LoadButton" type="Button" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer/HBoxContainer" unique_id=1012028367]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Загрузить"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/PanelContainer2/PanelContainer/ImageDisplay/HoverButtonContainer/HBoxContainer" unique_id=1698489214]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Отчистить"

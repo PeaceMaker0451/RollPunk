@@ -2,24 +2,27 @@
 
 [ext_resource type="Script" uid="uid://6k78ibynl0uu" path="res://Scripts/Client/Forms/GameView/GameView.cs" id="1_6vfg8"]
 [ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="2_38wue"]
-[ext_resource type="Script" uid="uid://o4n6i8wxulbm" path="res://Scripts/Client/Forms/GameView/FieldsTree.cs" id="2_e3q4u"]
 [ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="3_1rd3g"]
-[ext_resource type="Texture2D" uid="uid://fceqmjp4ywfd" path="res://Sprites/Data.png" id="3_e3q4u"]
 [ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_li2fu"]
 [ext_resource type="Texture2D" uid="uid://cgwwvw6miydtl" path="res://Sprites/Entity.png" id="4_b35ok"]
 [ext_resource type="VideoStream" uid="uid://c7dem0utlpipp" path="res://Video/Background2.ogv" id="4_li2fu"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="5_8idhc"]
-[ext_resource type="Texture2D" uid="uid://02i5muy0545v" path="res://Sprites/Container.png" id="5_38wue"]
+[ext_resource type="Script" uid="uid://bromkehumtcy3" path="res://Scripts/Client/Forms/GameView/FieldsList.cs" id="7_1qbio"]
+[ext_resource type="Texture2D" uid="uid://dmkekjmdrl14e" path="res://Sprites/PlayerPicPlaceHolder.png" id="11_umbsp"]
+[ext_resource type="Script" uid="uid://ot4kkm2jkhew" path="res://Scripts/UI/PlayerList.cs" id="12_7uva4"]
+[ext_resource type="Texture2D" uid="uid://b86fx5ev3h7qw" path="res://Sprites/logo.png" id="12_fekk2"]
+[ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="13_n5w6t"]
 
-[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsTree", "EntityView")]
+[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "EntityView")]
 custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1501.0
 offset_bottom = 874.0
 script = ExtResource("1_6vfg8")
-_fieldsTree = NodePath("MarginContainer2/PanelContainer/VBoxContainer/ItemList")
-EntityView = NodePath("MarginContainer/Panel/Entity")
+_fieldsList = NodePath("MarginContainer2/PanelContainer/VBoxContainer/ItemList")
+_playersList = NodePath("MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer/ItemList2")
+EntityView = NodePath("MarginContainer/FoldableContainer/Panel/Entity")
 Title = "Игра"
 
 [node name="Background" type="Control" parent="." unique_id=1802422318 node_paths=PackedStringArray("_videoPlayer")]
@@ -64,7 +67,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -680.0
+offset_left = -213.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -72,13 +75,17 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="PanelContainer" parent="MarginContainer" unique_id=1312435497]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer" unique_id=639318572]
+layout_mode = 2
+title = "Инспектор"
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/FoldableContainer" unique_id=1312435497]
 z_index = 1
 material = ExtResource("5_8idhc")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Entity" parent="MarginContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
+[node name="Entity" parent="MarginContainer/FoldableContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=662108786]
@@ -107,19 +114,29 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Поля сессии"
 
-[node name="ItemList" type="Tree" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=523997800]
+[node name="ItemList" type="ItemList" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=519707840]
 layout_mode = 2
 size_flags_vertical = 3
-hide_root = true
-script = ExtResource("2_e3q4u")
-_defaultFieldIcon = ExtResource("3_e3q4u")
+fixed_icon_size = Vector2i(24, 24)
+script = ExtResource("7_1qbio")
 _entityFieldIcon = ExtResource("4_b35ok")
-_containerFieldIcon = ExtResource("5_38wue")
-_maxIconWidth = 24
 
-[node name="Label2" type="Label" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=1515892355]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=1564161436]
 layout_mode = 2
-text = "Список игроков"
+title = "Список игроков"
+
+[node name="ItemList2" type="ItemList" parent="MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer" unique_id=1972589009]
+layout_mode = 2
+auto_height = true
+item_count = 3
+fixed_icon_size = Vector2i(24, 24)
+item_0/text = "peacemkr_png"
+item_0/icon = ExtResource("11_umbsp")
+item_1/text = "lina"
+item_1/icon = ExtResource("12_fekk2")
+item_2/text = "Gardener"
+item_2/icon = ExtResource("13_n5w6t")
+script = ExtResource("12_7uva4")
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
 visible = false

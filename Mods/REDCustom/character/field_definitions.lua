@@ -20,6 +20,12 @@ FieldDefinitions.Groups = {
         type = "FieldsGroup",
         additional_data = { container_type = "HFlow", label_visible = true }
     },
+    image_and_character_group = {
+        name = "ImageGroup",
+        visible_name = "Персонаж",
+        type = "FieldsGroup",
+        additional_data = { container_type = "HBox", label_visible = false }
+    },
     character_group = {
         name = "CharacterGroup",
         visible_name = "Персонаж",
@@ -45,7 +51,7 @@ FieldDefinitions.Groups = {
             container_type = "Scroll",
             vertical_scroll = true,
             horizontal_scroll = false,
-            label_visible = true
+            label_visible = false
         }
     },
     skills_group = {
@@ -77,6 +83,13 @@ FieldDefinitions.Stats = {
 
 -- Общие поля персонажа
 FieldDefinitions.Common = {
+    character_image = {
+        name = "CharacterImage",
+        visible_name = "Изображение",
+        type = "ImageField",
+        line_priority = 102,
+        additional_data = { display_width = 140, display_height = 190, fit_mode = "cover" }
+    },
     name = {
         name = "Name",
         type = "StringField",
@@ -172,6 +185,7 @@ FieldDefinitions.Health = {
         view_access_level = 0,
         edit_access_level = 2,
         line_priority = 51,
+        additional_data = { vertical = true }
     }
 }
 
@@ -199,7 +213,7 @@ FieldDefinitions.Psycho = {
         view_access_level = 0,
         edit_access_level = 3,
         line_priority = 50,
-        additional_data = { show_max = true },
+        additional_data = { show_max = true, vertical = true },
     },
     humanity_loss = {
         name = "HumanityLoss",

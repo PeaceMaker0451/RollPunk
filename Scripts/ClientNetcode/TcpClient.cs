@@ -23,6 +23,7 @@ namespace RollPunk.ClientNetcode
         public event Action<SessionPatch> ReceivedSessionPatch;
         public event Action<SessionState> ReceivedSessionState;
         public event Action SessionInitializeRequest;
+        public event Action<Exception> ConnectionErrored;
 
         public TcpClient(string ip, int port, ThreadManager threadManager)
         {
@@ -41,6 +42,7 @@ namespace RollPunk.ClientNetcode
             };
 
             Tcp = new(_packetHandlers, threadManager);
+            Tcp.ConnectionErrored += (ex) => ConnectionErrored?.Invoke(ex);
         }
 
         public void ConnectToServer()
@@ -109,6 +111,8 @@ namespace RollPunk.ClientNetcode
 
             private IReadOnlyDictionary<int, Action<Packet>> _packetHandlers;
             private ThreadManager _threadManager;
+
+            public event Action<Exception> ConnectionErrored;
 
             public TcpConnection(IReadOnlyDictionary<int, Action<Packet>> packetHandlers, ThreadManager threadManager)
             {
@@ -182,6 +186,7 @@ namespace RollPunk.ClientNetcode
                 catch (Exception ex)
                 {
                     RPDebug.LogError($"Error receiving TCP Data: {ex}");
+                    ConnectionErrored?.Invoke(ex);
                 }
             }
 

@@ -8,9 +8,9 @@ namespace RollPunk.Modding
 {
     public partial class ModReader
     {
-        public List<Mod> ReadMods(string[] directories)
+        public ModsContainer ReadMods(string[] directories)
         {
-            List<Mod> mods = new List<Mod>();
+            ModsContainer mods = new();
 
             foreach (string directory in directories)
             {
@@ -20,7 +20,7 @@ namespace RollPunk.Modding
                 foreach(Mod mod in readedMods)
                 {
                     if (mod != null)
-                        mods.Add(mod);
+                        mods.AddMod(mod);
                 }
                 
             }
@@ -106,17 +106,13 @@ namespace RollPunk.Modding
 
         private Mod CreateModInstance(string modPath, ModMetadata metadata)
         {
-            switch (metadata.Type.ToLower())
-            {
-                default:
-                    var mod = new Mod(modPath, metadata);
-                    return mod;
-            }
+            var mod = new Mod(modPath, metadata);
+            return mod;
         }
 
         private bool IsValidMetadata(ModMetadata metadata)
         {
-            return !string.IsNullOrEmpty(metadata.Name) && !string.IsNullOrEmpty(metadata.Type);
+            return !string.IsNullOrEmpty(metadata.Name) && !string.IsNullOrEmpty(metadata.Id);
         }
     }
 }

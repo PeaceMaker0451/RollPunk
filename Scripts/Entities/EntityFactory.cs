@@ -45,5 +45,10 @@ namespace RollPunk.Entities
             entity.RandomizeID();
             return entity;
         }
+
+        public void RegisterFields()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

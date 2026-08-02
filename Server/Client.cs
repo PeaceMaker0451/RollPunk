@@ -135,13 +135,14 @@ namespace RollPunk.Server
 
             private void ReceiveCallback(IAsyncResult result)
             {
-                Console.WriteLine($"Пришли данные от клиента {_id}");
+                Console.Write($"Data from client {_id} ");
                 
                 try
                 {
                     int length = _stream.EndRead(result);
-                    
-                    if(length <= 0)
+                    Console.WriteLine($"- {length} byte");
+
+                    if (length <= 0)
                     {
                         RPDebug.Log($"Client {_id} disconnected (length: {length})");
                         Disconnect();

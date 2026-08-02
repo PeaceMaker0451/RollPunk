@@ -4,11 +4,6 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lcxc4"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_l8u5q"]
-line_spacing = 0.0
-font_size = 14
-shadow_size = 0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_62btd"]
 
 [node name="FieldsTable" type="VBoxContainer" unique_id=1169732394 node_paths=PackedStringArray("_fieldContainerRoot", "_titleControl", "_upperSeparator")]
@@ -24,14 +19,11 @@ _upperSeparator = NodePath("HSeparator")
 
 [node name="Title" type="Label" parent="." unique_id=1052788435]
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lcxc4")
 text = "Name"
-label_settings = SubResource("LabelSettings_l8u5q")
 vertical_alignment = 2
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=748266194]
-visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 0

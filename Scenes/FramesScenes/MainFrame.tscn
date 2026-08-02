@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://wetprpt8oi65" path="res://Scripts/UI/QuitButton.cs" id="4_fj07f"]
 [ext_resource type="Texture2D" uid="uid://cksahys8x8i7p" path="res://Sprites/crossWhite.png" id="5_gaaw2"]
 [ext_resource type="Script" uid="uid://dbc2gwptpf5cq" path="res://Scripts/UI/MinimizingButton.cs" id="6_akiog"]
-[ext_resource type="Shader" uid="uid://cyk820o82ujhq" path="res://Shaders/4CornerGradient.gdshader" id="7_cnw5k"]
 [ext_resource type="Theme" uid="uid://biap20igfxrus" path="res://Style/RollPunkMainTheme.tres" id="7_jeni6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oeuo"]
@@ -37,13 +36,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8upgq"]
-shader = ExtResource("7_cnw5k")
-shader_parameter/topleft = Color(0, 0, 0, 1)
-shader_parameter/topright = Color(0.039215688, 0.039215688, 0.050980393, 1)
-shader_parameter/bottomleft = Color(0.121235944, 0.019308986, 0.019311035, 1)
-shader_parameter/bottomright = Color(0.0462593, 0.008084548, 0.008085367, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ug1o"]
 bg_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
@@ -190,7 +182,8 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 33
 
 [node name="ContentPanel" type="PanelContainer" parent="FrameBase/UpperPanel/RedLine/MarginContainer" unique_id=1646537592]
-material = SubResource("ShaderMaterial_8upgq")
+clip_children = 2
+z_index = 100
 clip_contents = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ug1o")

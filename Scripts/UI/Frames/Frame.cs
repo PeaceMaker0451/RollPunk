@@ -153,13 +153,13 @@ namespace RollPunk.UI.Frames
         {
             await AwaitCanChangeForm();
 
-            if (CurrentForm != null)
+            if (CurrentForm != null && IsInstanceValid(CurrentForm))
             {
                 CurrentForm.OnHide();
                 CurrentForm.Hide();
             }
 
-            if (CurrentForm != null && TrySaveSize)
+            if (CurrentForm != null && TrySaveSize && IsInstanceValid(CurrentForm))
                 form.Size = CurrentForm.Size;
 
             CurrentForm = form;

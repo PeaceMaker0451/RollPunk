@@ -1,17 +1,14 @@
 ﻿using Godot;
 using RollPunk.Client.Forms;
 using RollPunk.ClientNetcode;
-using RollPunk.ClientSide.Runtime.UI;
 using RollPunk.Debug;
 using RollPunk.Entities;
-using RollPunk.Fields;
-using RollPunk.HierarchyFields;
 using RollPunk.Modding;
-using RollPunk.Rules;
 using RollPunk.Scripts.Client.Forms;
+using RollPunk.Scripts.Client.Runtime;
+using RollPunk.Scripts.Client.Settings;
 using RollPunk.UIFields;
 using System;
-using System.Collections.Generic;
 
 namespace RollPunk.Client.Game
 {
@@ -27,15 +24,15 @@ namespace RollPunk.Client.Game
         private MainMenuController _mainMenuController;
         private SessionViewController _sessionViewController;
         private ConsoleController _consoleController;
-        
         private IFormHandle _mainMenuHandle;
         private IFormHandle _gameViewHandle;
         private IFormHandle _consoleHandle;
 
         private FieldControlsConstructor _controlsConstructor = new();
+        private EntityFactory _entityFactory;
         
         private ModReader _modReader = new ();
-        private List<Mod> _mods;
+        private ModsContainer _readedMods;
 
         private SessionRuntimeData _runtimeData;
 
@@ -43,18 +40,11 @@ namespace RollPunk.Client.Game
         
         public ClientSession Session { get; private set; }
         public RollPunkState State { get; private set; }
-        public IReadOnlyList<Mod> ReadedMods => _mods;
+        public IReadOnlyModsContainer ReadedMods => _readedMods;
 
         public Runtime()
         {
-            _mods = _modReader.ReadMods(ClientConfig.ModsPaths);
-
-            var entityFactory = new EntityFactory();
-            entityFactory.RegisterFields();
-            entityFactory.RegisterHierarchyFields();
-            entityFactory.RegisterLineFields();
-            entityFactory.RegisterRules();
-
+            _readedMods = _modReader.ReadMods(ClientConfig.ModsPaths);
             LuaErrorsHandler.ErrorLogged += (error) => _ = ClientRoot.FormsManager.Dialogs.ShowInformation("LuaError", error);
 
             Guid clientId = ClientRoot.SettingsManager.LoadSettings().ClientID;
@@ -67,19 +57,16 @@ namespace RollPunk.Client.Game
             }
                 
             _runtimeData = new SessionRuntimeData(clientId);
+
+            _entityFactory = EntityFactoryCreater.Create();
             
             CreateControllers();
             SetState(RollPunkState.Menu);
-
-            //ClientRoot.FormsManager.Dialogs.ShowIntInput("Тест", "какой-то такой типа текст где написано наху вообще эти данные вводить короч");
-            //ClientRoot.FormsManager.Dialogs.ShowInformation("Тест", "Какая-то длииииннная информация о чем-то очень важно, например ошибка там или типа того, хз. как у вас дела? у меня норм. а вот лог короче консоли" +
-            //    "Ранний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nRuntime set state Menu\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nРанний апдейт размера Frame - оффсет - (4, 56) \r\nсчитали как: ((250, 150) - (246, 94))\r\nОКНО БЛЯТЬ РЕАДИ\r\nLoadAuthorsDataAsync - True\r\nLoadConnectionConfigAsync - True\r\nLoadMotdDataAsync - True\r\nLoadUpdateLogsAsync - True\r\nДинамические данные загружены успешно из сети\r\nГлавное меню инициализировано\r\n");
-            //ClientRoot.FormsManager.Dialogs.ShowConfirmation("Тест", "ВЫ УВЕРЕНЫ В ЧЕМ БЫ ТО НИ БЫЛО ВООБЩЕ?? ТОЧНО? Я ЕСЛИ ВЫ ОШИБАЕТЕСЬ? ПОДУМАЙТЕ ХОРОШЕНЬКО");
         }
 
-        public void StartSession(IReadOnlyList<Mod> mods)
+        public void StartSession()
         {
-            Session = new ClientSession(_runtimeData, mods);
+            Session = new ClientSession(_entityFactory, _runtimeData, UserModsLoader.GetUserMods(_readedMods).Mods);
             Session.CreatePlayer(ClientRoot.SettingsManager.LoadSettings().Name);
 
             Session.APIInjector.AddGlobalAPI(ClientRoot.FormsManager.GetAPI());
@@ -87,7 +74,7 @@ namespace RollPunk.Client.Game
             SetState(RollPunkState.Session);
         }
 
-        public bool TryConnectToSession(string adress, IReadOnlyList<Mod> mods)
+        public bool TryConnectToSession(string adress)
         {
             var adressParts = adress.Split(new char[] { ':' });
             
@@ -106,11 +93,13 @@ namespace RollPunk.Client.Game
                     RPDebug.Log($"Сервер передал нам: {message}");
                     client.SendClientData(ClientRoot.SettingsManager.LoadSettings().Name, _runtimeData.ClientID);
 
-                    Session = new ClientSession(_runtimeData, mods, client);
+                    Session = new ClientSession(_entityFactory, _runtimeData, UserModsLoader.GetUserMods(_readedMods).Mods, client);
 
                     Session.APIInjector.AddGlobalAPI(ClientRoot.FormsManager.GetAPI());
                     SetState(RollPunkState.Session);
                 };
+
+                client.ConnectionErrored += (ex) => ClientRoot.ThreadManager.ExecuteOnMainThread(KillSession);
 
                 client.ConnectToServer();
             }

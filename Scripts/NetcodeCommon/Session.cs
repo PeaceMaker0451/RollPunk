@@ -13,11 +13,16 @@ namespace NetcodeCommon
         protected FieldsRegistry FieldsRegistry;
 
         private Dictionary<Guid, Player> _players;
-        public IReadOnlyDictionary<Guid, Player> Players => _players;
 
         protected EntityFactory EntityFactory;
 
         protected FieldsHierarchyReconstructor HierarchyReconstructor;
+
+
+        public event Action<Guid> PlayerAdded;
+        public event Action<Guid> PlayerRemoved;
+
+        public IReadOnlyDictionary<Guid, Player> Players => _players;
 
         public Session(EntityFactory entityFactory)
         {
@@ -51,11 +56,11 @@ namespace NetcodeCommon
                 if (_players.ContainsKey(pendingPlayer.Key))
                     updater.UpdateEntity(_players[pendingPlayer.Key], pendingPlayer.Value);
                 else
-                    _players.Add(pendingPlayer.Key, new Player(pendingPlayer.Value));
+                    AddPlayer(pendingPlayer.Key, new Player(pendingPlayer.Value));
             }
 
             foreach (var removedPlayer in patch.RemovePlayers)
-                _players.Remove(removedPlayer);
+                RemovePlayer(removedPlayer);
         }
 
         public virtual SessionState GetState()
@@ -81,9 +86,7 @@ namespace NetcodeCommon
                 throw new InvalidOperationException($"Player for Client {clientId} already exists");
 
             Player player = new(name, new Guid(), isAdmin);
-            _players.Add(clientId, player);
-
-            return player;
+            return AddPlayer(clientId, player);
         }
 
         public virtual Player RemovePlayer(Guid clientId)
@@ -93,6 +96,8 @@ namespace NetcodeCommon
 
             Player removedPlayer = _players[clientId];
             _players.Remove(clientId);
+
+            PlayerRemoved?.Invoke(clientId);
             return removedPlayer;
         }
 
@@ -104,7 +109,15 @@ namespace NetcodeCommon
             _players.Clear();
 
             foreach(var player in state.Players)
-                _players.Add(player.Key, new(player.Value));
+                AddPlayer(player.Key, new(player.Value));
+        }
+
+        private Player AddPlayer(Guid clientId, Player player)
+        {
+            _players.Add(clientId, player);
+
+            PlayerAdded?.Invoke(clientId);
+            return player;
         }
 
         private void ApplyFields(List<FieldState> fields)

@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace RollPunk.Client.Settings
 {
@@ -16,6 +17,8 @@ namespace RollPunk.Client.Settings
         [JsonProperty] public bool SmoothWindowResizing;
         [JsonProperty] public bool WaitForResizeToChangeWindow;
         [JsonProperty] public Guid ClientID;
+
+        [JsonProperty] public List<string> DisabledMods;
 
         public void Validate()
         {

@@ -4,10 +4,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dkj0c"]
 
-[node name="Entity" type="Panel" unique_id=2045114759 node_paths=PackedStringArray("_fieldsContainer", "_id", "_name", "_saveButton")]
-custom_minimum_size = Vector2(630, 200)
+[node name="Entity" type="PanelContainer" unique_id=1037152326 node_paths=PackedStringArray("_fieldsContainer", "_id", "_name", "_saveButton")]
+custom_minimum_size = Vector2(400, 200)
 clip_contents = true
-offset_right = 550.0
+offset_right = 400.0
 offset_bottom = 200.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dkj0c")
 script = ExtResource("1_1jb75")
@@ -19,12 +19,7 @@ Title = "Лист сущности"
 resizable = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1393804762]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=134404647]
 layout_mode = 2

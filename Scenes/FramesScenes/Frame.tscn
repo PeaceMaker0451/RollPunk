@@ -90,7 +90,7 @@ script = ExtResource("2_4gv6g")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 33.0
+offset_bottom = 34.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -168,6 +168,8 @@ theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 10
 
 [node name="ContentPanel" type="PanelContainer" parent="FrameBase/UpperPanel/RedLine/MarginContainer" unique_id=1646537592]
+clip_children = 2
+z_index = 100
 material = SubResource("ShaderMaterial_8upgq")
 clip_contents = true
 layout_mode = 2

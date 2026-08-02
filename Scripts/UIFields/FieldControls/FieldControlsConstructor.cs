@@ -16,6 +16,7 @@ namespace RollPunk.UIFields
         private const string s_boolFieldControlScene = "res://Scenes/ControlNodes/LineFields/BoolFieldControl.tscn";
         private const string s_ruleFieldControlScene = "res://Scenes/ControlNodes/LineFields/RuleFieldControl.tscn";
         private const string s_fieldsTableControlScene = "res://Scenes/ControlNodes/FieldsTable.tscn";
+        private const string s_imageFieldControlScene = "res://Scenes/ControlNodes/LineFields/ImageFieldControl.tscn";
 
         public FieldControlsConstructor()
         {
@@ -25,7 +26,8 @@ namespace RollPunk.UIFields
                 {typeof(IntField), CreateIntFieldControl},
                 {typeof(BoolField), CreateBoolFieldControl},
                 {typeof(RuleField), CreateRuleFieldControl},
-                {typeof(FieldsGroup), CreateFieldsGroupFieldControl}
+                {typeof(FieldsGroup), CreateFieldsGroupFieldControl},
+                {typeof(ImageField), CreateImageFieldControl}
             };
         }
 
@@ -105,6 +107,17 @@ namespace RollPunk.UIFields
 
             FieldsTableControl fieldControl = (FieldsTableControl)CreateFieldControlInstance(s_fieldsTableControlScene, field);
             fieldControl.Initialize((FieldsGroup)field, this);
+
+            return fieldControl;
+        }
+
+        private FieldControl CreateImageFieldControl(Field field)
+        {
+            if (field is not ImageField)
+                throw new InvalidOperationException("Wrong field type");
+
+            ImageFieldControl fieldControl = (ImageFieldControl)CreateFieldControlInstance(s_imageFieldControlScene, field);
+            fieldControl.Initialize((ImageField)field);
 
             return fieldControl;
         }

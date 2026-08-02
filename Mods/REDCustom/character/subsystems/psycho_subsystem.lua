@@ -131,7 +131,7 @@ function PsychoSubsystem.create(character)
     local character_group = character.getField(FieldDefs.Groups.character_group.name)
     local action_group = character.getField(FieldDefs.Groups.action_group.name)
     
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Psycho.humanity)
+    FieldsServices.createAndChild(character_group, FieldDefs.Psycho.humanity)
     FieldsServices.createAndChild(parameters_group, FieldDefs.Psycho.humanity_loss)
     FieldsServices.createAndChild(parameters_group, FieldDefs.Psycho.humanity_max_loss)
     FieldsServices.createAndChild(character_group, FieldDefs.Psycho.psycho_points)

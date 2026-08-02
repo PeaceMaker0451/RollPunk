@@ -35,7 +35,7 @@ namespace RollPunk.ClientNetcode
                 packet.Write(data);
 
                 RPDebug.Log($"[color=web_purple]Отправляем патч сессии..." +
-                    $"\n{data}[/color]");
+                    $" ({data.Length})[/color]");
                 SendTcpData(packet);
             }
         }

@@ -35,7 +35,7 @@ namespace RollPunk.Client
                 //_modManagerButton.Disabled = true;
                 _enterSessionButton.Disabled = true;
                 _createSessionButton.Disabled = true;
-                _settingsButton.Disabled = true;
+                //_settingsButton.Disabled = true;
                 _exitSessionButton.Visible = true;
             }
             else
@@ -43,7 +43,7 @@ namespace RollPunk.Client
                 //_modManagerButton.Disabled = false;
                 _enterSessionButton.Disabled = false;
                 _createSessionButton.Disabled = false;
-                _settingsButton.Disabled = false;
+                //_settingsButton.Disabled = false;
                 _exitSessionButton.Visible = false;
             }
         }

@@ -29,7 +29,8 @@ namespace RollPunk.Modding
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"Mod {modData.Name}");
+            sb.AppendLine($"({modData.Id})");
+            sb.AppendLine($"Mod {modData.Name} by {modData.Author} {modData.Version}");
             sb.AppendLine($"{modData.Description}");
 
             return sb.ToString();

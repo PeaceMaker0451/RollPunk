@@ -50,7 +50,7 @@ namespace RollPunk.Client.Game
 
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; } = new();
 
-        public ClientSession(IRuntimeData runtimeData, IReadOnlyList<Mod> mods, IDataBridge dataBridge = null)
+        public ClientSession(EntityFactory entityFactory, IRuntimeData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
             :base(new EntityFactory())
         {
             _runtimeData = runtimeData;
@@ -60,12 +60,6 @@ namespace RollPunk.Client.Game
 
             ID = Guid.NewGuid();
             RPDebug.Log($"[color=bisque]Session {ID}[/color]");
-
-            EntityFactory.RegisterFields();
-            EntityFactory.RegisterHierarchyFields();
-            EntityFactory.RegisterRules();
-            EntityFactory.RegisterLineFields();
-            EntityFactory.RegisterPlayers();
             
             Serializator = new(EntityFactory, HierarchyReconstructor);
 

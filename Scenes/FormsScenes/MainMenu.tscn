@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cxoxrngcg7qy4" path="res://Sprites/PeaceMakerred1.png" id="9_7bgxm"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="9_cuf7w"]
 [ext_resource type="Script" uid="uid://dn1wwtr5nmgfw" path="res://Scripts/UI/CopyableRichTextLabel.cs" id="10_soisg"]
+[ext_resource type="PackedScene" uid="uid://csq6jb34oluat" path="res://Scenes/Mods/ModData.tscn" id="14_itjeq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whksc"]
 content_margin_left = 8.0
@@ -106,12 +107,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="EnterSession" type="Control" parent="Background/Menu/LeftContent" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton")]
-visible = false
+[node name="EnterSession" type="Control" parent="Background/Menu/LeftContent" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
 layout_mode = 2
 script = ExtResource("2_tf62t")
 _returnButton = NodePath("ContentBoxContainer/BackButton")
-_connectButton = NodePath("VBoxContainer/Button8")
+_connectButton = NodePath("ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2/Button")
+_adressField = NodePath("ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2/LineEdit")
 
 [node name="ContentBoxContainer" parent="Background/Menu/LeftContent/EnterSession" unique_id=293765997 instance=ExtResource("6_cuf7w")]
 layout_mode = 1
@@ -136,6 +137,10 @@ text = "Адрес подключения"
 [node name="LineEdit" type="LineEdit" parent="Background/Menu/LeftContent/EnterSession/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2" unique_id=1954985457]
 layout_mode = 2
 placeholder_text = "xxx.xxx.xxx.xxx:xxx"
+
+[node name="Button" type="Button" parent="Background/Menu/LeftContent/EnterSession/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2" unique_id=2103700736]
+layout_mode = 2
+text = "Подключиться"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/Menu/LeftContent/EnterSession" unique_id=349577375]
 visible = false
@@ -267,6 +272,7 @@ text = "userID"
 fit_content = true
 
 [node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton")]
+visible = false
 layout_mode = 2
 script = ExtResource("3_2aawn")
 _createSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/CreateSessionButton")
@@ -483,6 +489,24 @@ offset_right = -101.0
 offset_bottom = 14.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1408453160]
+visible = false
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 369.0
+offset_bottom = 325.0
+vertical = true
+
+[node name="Control" parent="BoxContainer" unique_id=747175730 instance=ExtResource("14_itjeq")]
+layout_mode = 2
+
+[node name="Control2" parent="BoxContainer" unique_id=1181080706 instance=ExtResource("14_itjeq")]
+layout_mode = 2
+
+[node name="Control3" parent="BoxContainer" unique_id=2111897438 instance=ExtResource("14_itjeq")]
+layout_mode = 2
 
 [editable path="Background/Menu/LeftContent/EnterSession/ContentBoxContainer"]
 [editable path="Background/Menu/LeftContent/Settings/ContentBoxContainer"]

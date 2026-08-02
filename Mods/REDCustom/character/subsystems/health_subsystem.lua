@@ -50,7 +50,7 @@ function HealthSubsystem.create(character)
     local action_group = character.getField(FieldDefs.Groups.action_group.name)
     
     FieldsServices.createAndChild(character_group, FieldDefs.Health.hp)
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Health.armor)
+    FieldsServices.createAndChild(character_group, FieldDefs.Health.armor)
     FieldsServices.createAndChild(action_group, FieldDefs.RuleFields.heal)
     FieldsServices.createAndChild(action_group, FieldDefs.RuleFields.damage)
 end

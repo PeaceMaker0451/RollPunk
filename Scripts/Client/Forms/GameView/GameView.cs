@@ -1,16 +1,22 @@
 using Godot;
+using NetcodeCommon;
 using RollPunk.Client;
 using RollPunk.Client.Forms;
+using RollPunk.Client.Game;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
+using RollPunk.Scripts.UI;
 using RollPunk.UI.Forms;
 using RollPunk.UIFields;
+using System;
 
 namespace RollPunk.ClientSide.Runtime.UI
 {
     internal partial class GameView : Form
     {
-        [Export] private FieldsTree _fieldsTree;
+        [Export] private FieldsList _fieldsList;
+        [Export] private PlayerList _playersList;
+        //[Export] private FieldsTree _fieldsTree;
         [Export] public EntityView EntityView;
 
         public override void _Ready()
@@ -18,16 +24,18 @@ namespace RollPunk.ClientSide.Runtime.UI
             base._Ready();
         }
 
-        public void Initialize(IReadOnlyFieldsContainer fieldsContainer, FieldControlsConstructor fieldControlsConstructor, Serializator serializator)
+        public void Initialize(ClientSession session, FieldControlsConstructor fieldControlsConstructor)
         {
-            _fieldsTree.SetContainer(fieldsContainer);
-            EntityView.Initialize(fieldControlsConstructor, serializator);
+            _fieldsList.SetContainer(session.Entities);
+            EntityView.Initialize(fieldControlsConstructor, session.Serializator);
 
-            _fieldsTree.FieldSelected += (field) =>
+            _fieldsList.FieldSelected += (field) =>
             {
                 if (field is EntityField entityField)
                     EntityView.DisplayField(entityField);
             };
+
+            _playersList.Initialize(session);
         }
     }
 }

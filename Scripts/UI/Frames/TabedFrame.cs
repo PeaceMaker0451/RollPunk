@@ -171,7 +171,7 @@ namespace RollPunk.UI.Frames
 
         private void SortTabsByPriority()
         {
-            var sortedTabs = _tabs.Values.OrderBy(tab => tab.Priority).ToList();
+            var sortedTabs = _tabs.Values.OrderBy(tab => tab.Priority).Reverse().ToList();
 
             foreach (var node in tabButtonsContainer.GetChildren())
                 tabButtonsContainer.RemoveChild(node);
@@ -201,7 +201,7 @@ namespace RollPunk.UI.Frames
 
         private void HideAllForms()
         {
-            if (CurrentForm != null)
+            if (CurrentForm != null && IsInstanceValid(CurrentForm))
                 CurrentForm.Hide();
         }
     }

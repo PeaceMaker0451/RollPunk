@@ -32,14 +32,15 @@ namespace RollPunk.Client.Fields
             _fieldConstructorAPI = new FieldsConstructorAPI(this);
 
             _fieldCreators = new Dictionary<string, Func<Dictionary<string, object>, Field>>
-        {
-            { nameof(BoolField), CreateBoolField },
-            { nameof(RuleField), CreateRuleField },
-            { nameof(StringField), CreateStringField },
-            { nameof(IntField), CreateIntField },
-            { nameof(FieldsGroup), CreateFieldsGroup },
-            { nameof(EntityField), CreateEntityField }
-        };
+            {
+                { nameof(BoolField), CreateBoolField },
+                { nameof(RuleField), CreateRuleField },
+                { nameof(StringField), CreateStringField },
+                { nameof(IntField), CreateIntField },
+                { nameof(FieldsGroup), CreateFieldsGroup },
+                { nameof(EntityField), CreateEntityField },
+                { nameof(ImageField), CreateImageField}
+            };
         }
 
         public Field CreateField(Dictionary<string, object> fieldData)
@@ -124,6 +125,18 @@ namespace RollPunk.Client.Fields
             int viewLevel = GetIntValue(fieldData, VisibleLevelDataFieldName, 0);
 
             return new FieldsGroup(name, visibleName, (PlayerRole)viewLevel, (PlayerRole)editLevel, linePriority, additionalData);
+        }
+
+        private Field CreateImageField(Dictionary<string, object> fieldData)
+        {
+            string name = GetStringValue(fieldData, NameFieldName);
+            string visibleName = GetStringValue(fieldData, VisibleName, name);
+            Dictionary<string, object> additionalData = GetDictionaryValue(fieldData, AdditionalDataFieldName);
+            int linePriority = GetIntValue(fieldData, LinePriorityDataFieldName);
+            int editLevel = GetIntValue(fieldData, EditableLevelDataFieldName, 0);
+            int viewLevel = GetIntValue(fieldData, VisibleLevelDataFieldName, 0);
+
+            return new ImageField(name, visibleName, (PlayerRole)viewLevel, (PlayerRole)editLevel, linePriority: linePriority, additionalData: additionalData);
         }
 
         private Field CreateEntityField(Dictionary<string, object> fieldData)

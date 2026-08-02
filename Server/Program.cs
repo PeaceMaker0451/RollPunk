@@ -4,6 +4,13 @@ using RollPunk.NetcodeCommon;
 using RollPunk.Server;
 
 RPDebug.Logged += (log) => Console.WriteLine(log);
+RPDebug.ErrorLogged += (log) =>
+{
+    var defaultColor = Console.ForegroundColor;
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(log);
+    Console.ForegroundColor = defaultColor;
+};
 
 bool isRunning = true;
 ThreadManager threadManager = new();

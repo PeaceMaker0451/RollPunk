@@ -2,6 +2,7 @@ using Godot;
 using RollPunk.Client.Forms;
 using RollPunk.Client.Game;
 using RollPunk.Debug;
+using RollPunk.Scripts.Client.Forms.MainMenu;
 using RollPunk.UI.Forms;
 using System;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace RollPunk.Client
         [Export] private MainSubMenu _mainMenu;
         [Export] private EnterSessionSubMenu _enterMenu;
         [Export] private SettingsSubMenu _settingsMenu;
+        [Export] private ModsSubMenu _modsMenu;
         
         [Export] private RichTextLabel _motdLabel;
         [Export] private RichTextLabel _updateLogsLabel;
@@ -49,6 +51,7 @@ namespace RollPunk.Client
             _enterMenu.EnterSessionRequested += (adress) => EnterSessionRequested?.Invoke(adress);
 
             _settingsMenu.Initialize(this);
+            _modsMenu.Initialize(this);
 
             SetMenu(MainMenuTab.Main);
             
@@ -90,11 +93,9 @@ namespace RollPunk.Client
         public void SetInSession(bool isInSession)
         {
             _mainMenu.SetInSession(isInSession);
-        }
 
-        public void SetMenuData(string data)
-        {
-
+            if (isInSession)
+                SetMenu(MainMenuTab.Main);
         }
 
         private void DisableAllMenus()

@@ -12,6 +12,7 @@ using RollPunk.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RollPunk.Client
 {
@@ -34,14 +35,13 @@ namespace RollPunk.Client
 
         private GodotThreadManager _threadManager;
 
+        internal static Node Node => Instance._rootNode;
+        
         internal static FileDebugUtils FileDebugUtils => Instance._fileDebugUtils;
         internal static ClientConsole Console => Instance._console;
 
         internal static SettingsManager SettingsManager => Instance._settingsManager;
         internal static CommandManager CommandManager => Instance._commandManager;
-
-        //internal static FramesHost FramesManager => Instance._framesManager;
-        //internal static FormsLoader FormsFactory { get; private set; }
         internal static IFormsManager FormsManager => Instance._formsManager;
         internal static Runtime Runtime => Instance._runtime;
 
@@ -49,32 +49,21 @@ namespace RollPunk.Client
 
         public ClientRoot(Node rootNode)
         {
-            _fileDebugUtils = new FileDebugUtils();
-            rootNode.AddChild(_fileDebugUtils);
-
-            RPDebug.Logged += (log) => _console.ConsoleLog(log);
-            LuaErrorsHandler.ErrorLogged += RPDebug.Log;
-
             if (Instance != null)
                 throw new InvalidOperationException("Client is not null!!");
 
             Instance = this;
-
             _rootNode = rootNode;
 
+            InitializeErrorLogging();
+
+            _fileDebugUtils = new FileDebugUtils();
+            rootNode.AddChild(_fileDebugUtils);
+
             AddCommands(_commandManager);
-
             SettingsData settings = SetupSettings();
-
-            _framesManager = new(_rootNode, settings.FormsScale, settings.OneScreenMode, settings.SmoothWindowResizing, settings.WaitForResizeToChangeWindow, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
-            _formsLoader = new();
-            _formsManager = new Forms.FormsManager(_framesManager, _formsLoader);
-
-            _framesManager.SetMainFrameTitle($"RollPunk {ClientConfig.ClientVersion}");
-
-            _threadManager = new();
-            _rootNode.AddChild(_threadManager);
-            RPDebug.Log($"ThreadManager создан - {_threadManager.Name}");
+            CreateUI(settings);
+            CreateThreadManager();
 
             _runtime = new Runtime();
 
@@ -82,6 +71,33 @@ namespace RollPunk.Client
 
             FastSettingsAsker asker = new();
             asker.AskUserName();
+        }
+
+        private void InitializeErrorLogging()
+        {
+            RPDebug.Logged += (log) => _console.ConsoleLog(log);
+            RPDebug.ErrorLogged += (log) =>
+            {
+                _console.ConsoleLog($"[b][color=firebrick]ERROR: {log}[/color][/b]");
+            };
+
+            LuaErrorsHandler.ErrorLogged += RPDebug.Log;
+        }
+
+        private void CreateUI(SettingsData settings)
+        {
+            _framesManager = new(_rootNode, settings.FormsScale, settings.OneScreenMode, settings.SmoothWindowResizing, settings.WaitForResizeToChangeWindow, ClientConfig.TabedFramePath, ClientConfig.DefaultFramePath);
+            _formsLoader = new();
+            _formsManager = new Forms.FormsManager(_framesManager, _formsLoader);
+
+            _framesManager.SetMainFrameTitle($"RollPunk {ClientConfig.ClientVersion}");
+        }
+
+        private void CreateThreadManager()
+        {
+            _threadManager = new();
+            _rootNode.AddChild(_threadManager);
+            RPDebug.Log($"ThreadManager создан - {_threadManager.Name}");
         }
 
         private SettingsData SetupSettings()

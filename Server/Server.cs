@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RollPunk.Debug;
 using RollPunk.NetcodeCommon;
+using System;
 using System.Net;
 using System.Net.Sockets;
 namespace RollPunk.Server
@@ -58,23 +59,34 @@ namespace RollPunk.Server
 
         public void InitializePlayer(int clientConnectionId, string name, Guid clientId)
         {
-            _clients[clientConnectionId].ClientId = clientId;
-            var player = _session.AddPlayer(clientId, name);
-
-            SessionPatch newPlayerPatch = new()
+            if (_clients.Where(client => client.Value.ClientId == clientId).Any())
             {
-                PendingPlayers = new() { { clientId, player.GetState() } }
-            };
-
-            if (_session.SessionInitialized == false)
-            {
-                _send.SendInitializeSessionRequest(clientConnectionId);
-                _session.SetSessionInitialized();
+                RPDebug.LogError($"Client with ClientID {clientId} already exists - disconnecting..");
+                _clients[clientConnectionId].Tcp.Disconnect();
+                return;
             }
-            else
-                _send.SendSessionState(clientConnectionId, _session.GetState());
 
-            _send.SendSessionPatch(newPlayerPatch);
+            _clients[clientConnectionId].ClientId = clientId;
+
+            _threadManager.ExecuteOnMainThread(() =>
+            {
+                var player = _session.AddPlayer(clientId, name);
+
+                SessionPatch newPlayerPatch = new()
+                {
+                    PendingPlayers = new() { { clientId, player.GetState() } }
+                };
+
+                if (_session.SessionInitialized == false)
+                {
+                    _send.SendInitializeSessionRequest(clientConnectionId);
+                    _session.SetSessionInitialized();
+                }
+                else
+                    _send.SendSessionState(clientConnectionId, _session.GetState());
+
+                _send.SendSessionPatch(newPlayerPatch);
+            });
         }
 
         public void ApplySessionPatch(int fromClient, SessionPatch sessionPatch)
@@ -93,21 +105,28 @@ namespace RollPunk.Server
             if (!_clients.ContainsKey(clientId) || _clients[clientId].ClientId == Guid.Empty)
                 return;
 
-            RPDebug.Log($"Client {clientId} ({_clients[clientId].ClientId}) disconnected");
-
-            var removedPlayer = _session.RemovePlayer(_clients[clientId].ClientId);
-            if (removedPlayer != null)
-            {
-                SessionPatch disconnectPatch = new()
-                {
-                    RemovePlayers = new() { _clients[clientId].ClientId }
-                };
-
-                _send.SendSessionPatch(disconnectPatch);
-            }
-
-            // Очищаем слот клиента для новых подключений
+            var guid = _clients[clientId].ClientId;
             _clients[clientId].ClientId = Guid.Empty;
+
+            _threadManager.ExecuteOnMainThread(() =>
+            {
+                var removedPlayer = _session.RemovePlayer(guid);
+                if (removedPlayer != null)
+                {
+                    SessionPatch disconnectPatch = new()
+                    {
+                        RemovePlayers = new() { guid }
+                    };
+
+                    _send.SendSessionPatch(disconnectPatch);
+                }
+                else
+                {
+                    RPDebug.LogError($"Client {guid} not removed!");
+                }
+
+                RPDebug.Log($"Client {clientId} ({guid}) disconnected");
+            });
         }
 
         private void TCPConnectCallback(IAsyncResult result)
@@ -126,7 +145,7 @@ namespace RollPunk.Server
                 }
             }
 
-            RPDebug.DebugLog($"{client.Client.RemoteEndPoint} - failed to connect: server is full!");
+            RPDebug.LogError($"{client.Client.RemoteEndPoint} - failed to connect: server is full!");
         }
 
         private void InitializeServerData()
