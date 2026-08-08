@@ -1,6 +1,7 @@
 ﻿using NetcodeCommon;
 using Newtonsoft.Json;
 using RollPunk.Debug;
+using RollPunk.Logs;
 using RollPunk.NetcodeCommon;
 using System.Net;
 using System.Net.Sockets;
@@ -61,9 +62,13 @@ namespace RollPunk.Server
             _clients[clientConnectionId].ClientId = clientId;
             var player = _session.AddPlayer(clientId, name);
 
+            Event log = new("Server", SourceType.System, $"{name} connected!", DateTime.UtcNow);
+            _session.AddLog(log);
+
             SessionPatch newPlayerPatch = new()
             {
-                PendingPlayers = new() { { clientId, player.GetState() } }
+                PendingPlayers = new() { { clientId, player.GetState() } },
+                PendingLogs = new() { log.GetState()}
             };
 
             if (_session.SessionInitialized == false)
@@ -98,9 +103,13 @@ namespace RollPunk.Server
             var removedPlayer = _session.RemovePlayer(_clients[clientId].ClientId);
             if (removedPlayer != null)
             {
+                Event log = new Event("Server", SourceType.System, $"{removedPlayer.Name} disconnected!", DateTime.UtcNow);
+                _session.AddLog(log);
+
                 SessionPatch disconnectPatch = new()
                 {
-                    RemovePlayers = new() { _clients[clientId].ClientId }
+                    RemovePlayers = new() { _clients[clientId].ClientId },
+                    PendingLogs = new() { log.GetState() }
                 };
 
                 _send.SendSessionPatch(disconnectPatch);

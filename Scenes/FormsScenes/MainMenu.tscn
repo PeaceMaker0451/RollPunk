@@ -106,12 +106,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="EnterSession" type="Control" parent="Background/Menu/LeftContent" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton")]
-visible = false
+[node name="EnterSession" type="Control" parent="Background/Menu/LeftContent" unique_id=1565525201 node_paths=PackedStringArray("_returnButton", "_connectButton", "_adressField")]
 layout_mode = 2
 script = ExtResource("2_tf62t")
 _returnButton = NodePath("ContentBoxContainer/BackButton")
-_connectButton = NodePath("VBoxContainer/Button8")
+_connectButton = NodePath("ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2/Button8")
+_adressField = NodePath("ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2/LineEdit")
 
 [node name="ContentBoxContainer" parent="Background/Menu/LeftContent/EnterSession" unique_id=293765997 instance=ExtResource("6_cuf7w")]
 layout_mode = 1
@@ -136,6 +136,12 @@ text = "Адрес подключения"
 [node name="LineEdit" type="LineEdit" parent="Background/Menu/LeftContent/EnterSession/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2" unique_id=1954985457]
 layout_mode = 2
 placeholder_text = "xxx.xxx.xxx.xxx:xxx"
+
+[node name="Button8" type="Button" parent="Background/Menu/LeftContent/EnterSession/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content/Control2" unique_id=1136034322]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Присоедениться к сессии"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/Menu/LeftContent/EnterSession" unique_id=349577375]
 visible = false
@@ -163,12 +169,6 @@ fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="Background/Menu/LeftContent/EnterSession/VBoxContainer" unique_id=432191113]
 layout_mode = 2
-
-[node name="Button8" type="Button" parent="Background/Menu/LeftContent/EnterSession/VBoxContainer" unique_id=1136034322]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Присоедениться к сессии"
 
 [node name="BackButton" type="Button" parent="Background/Menu/LeftContent/EnterSession" unique_id=391826838]
 visible = false
@@ -267,6 +267,7 @@ text = "userID"
 fit_content = true
 
 [node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton")]
+visible = false
 layout_mode = 2
 script = ExtResource("3_2aawn")
 _createSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/CreateSessionButton")

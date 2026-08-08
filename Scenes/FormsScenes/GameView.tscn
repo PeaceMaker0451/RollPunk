@@ -10,8 +10,10 @@
 [ext_resource type="VideoStream" uid="uid://c7dem0utlpipp" path="res://Video/Background2.ogv" id="4_li2fu"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="5_8idhc"]
 [ext_resource type="Texture2D" uid="uid://02i5muy0545v" path="res://Sprites/Container.png" id="5_38wue"]
+[ext_resource type="Script" uid="uid://bpi0ker2gq7hu" path="res://Scripts/UI/SessionConsole/SessionEventConsole.cs" id="11_7uva4"]
+[ext_resource type="Script" uid="uid://d0w5ie5fxsbm" path="res://Scripts/UI/SessionConsole/EventConsole.cs" id="12_umbsp"]
 
-[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsTree", "EntityView")]
+[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsTree", "_console", "EntityView")]
 custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
@@ -19,6 +21,7 @@ offset_right = 1501.0
 offset_bottom = 874.0
 script = ExtResource("1_6vfg8")
 _fieldsTree = NodePath("MarginContainer2/PanelContainer/VBoxContainer/ItemList")
+_console = NodePath("Control2")
 EntityView = NodePath("MarginContainer/Panel/Entity")
 Title = "Игра"
 
@@ -80,6 +83,7 @@ size_flags_horizontal = 3
 
 [node name="Entity" parent="MarginContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
 layout_mode = 2
+resizable = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=662108786]
 layout_mode = 1
@@ -123,6 +127,34 @@ text = "Список игроков"
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="." unique_id=2008658306 node_paths=PackedStringArray("_eventConsole")]
+z_index = 127
+anchors_preset = 0
+offset_left = 365.0
+offset_top = 224.0
+offset_right = 887.0
+offset_bottom = 562.0
+script = ExtResource("11_7uva4")
+_eventConsole = NodePath("Control")
+
+[node name="Control" type="Control" parent="Control2" unique_id=2074289148 node_paths=PackedStringArray("_text")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_umbsp")
+_text = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control2/Control" unique_id=1722945815]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

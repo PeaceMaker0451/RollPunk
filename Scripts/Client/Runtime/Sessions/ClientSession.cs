@@ -44,7 +44,7 @@ namespace RollPunk.Client.Game
 
         public Serializator Serializator { get; private set; }
 
-        public FieldsContainer<EntityField> Entities => Fields;
+        public FieldsContainer<EntityField> Entities => FieldsContainer;
         public EntityContainer<Rule> Rules { get; private set; } = new();
         public IReadOnlyFieldRegistry Registry => base.FieldsRegistry;
 
@@ -148,7 +148,7 @@ namespace RollPunk.Client.Game
 
         private void InitializeFieldsContainer()
         {
-            Fields.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
+            FieldsContainer.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
 
             _entityValidator = new(FieldsRegistry, _hooker, _mutationCatcher);
             _entityInitializer = new(FieldsRegistry, _hooker, _mutationCatcher);
@@ -158,7 +158,7 @@ namespace RollPunk.Client.Game
         {
             RPDebug.Log($"[color=bisque]Network initializing...[/color]");
 
-            _mutationCatcher = new(FieldsRegistry, _dataBridge);
+            _mutationCatcher = new(this, _dataBridge);
 
             _dataBridge.ReceivedSessionPatch += ApplySessionPatch;
             _dataBridge.ReceivedSessionState += ApplyState;

@@ -13,6 +13,7 @@
     <Compile Remove="Scripts\Debug\**" />
     <Compile Remove="Scripts\Fields\**" />
     <Compile Remove="Scripts\HierarchyFields\**" />
+    <Compile Remove="Scripts\Logs\**" />
     <Compile Remove="Scripts\Modding\**" />
     <Compile Remove="Scripts\NetcodeCommon\**" />
     <Compile Remove="Scripts\Players\**" />
@@ -29,6 +30,7 @@
     <EmbeddedResource Remove="Scripts\Debug\**" />
     <EmbeddedResource Remove="Scripts\Fields\**" />
     <EmbeddedResource Remove="Scripts\HierarchyFields\**" />
+    <EmbeddedResource Remove="Scripts\Logs\**" />
     <EmbeddedResource Remove="Scripts\Modding\**" />
     <EmbeddedResource Remove="Scripts\NetcodeCommon\**" />
     <EmbeddedResource Remove="Scripts\Players\**" />
@@ -49,6 +51,7 @@
     <ProjectReference Include="Scripts\Entities\Entities.csproj" />
     <ProjectReference Include="Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="Scripts\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="Scripts\Logs\Logs.csproj" />
     <ProjectReference Include="Scripts\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 </Project>

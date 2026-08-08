@@ -10,6 +10,9 @@ namespace RollPunk.Fields
         public event Action<Field> Updated;
         public event Action<Field> Changed;
 
+        public event Action<Field> FieldAdded;
+        public event Action<Field> FieldRemoved;
+
         public IReadOnlyCollection<Field> Fields { get; }
         public IReadOnlyDictionary<Guid, Field> FieldsDictionary { get; }
 

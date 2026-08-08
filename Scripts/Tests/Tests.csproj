@@ -22,7 +22,6 @@
     <ProjectReference Include="..\AccessPolicy\AccessPolicy.csproj" />
     <ProjectReference Include="..\ClientNetcode\ClientNetcode.csproj" />
     <ProjectReference Include="..\CommandsSystem\CommandsSystem.csproj" />
-    <ProjectReference Include="..\Debug\Debug.csproj" />
     <ProjectReference Include="..\Fields\Fields.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />

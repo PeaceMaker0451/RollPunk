@@ -12,10 +12,10 @@
     <ProjectReference Include="..\RollPunk.csproj" />
     <ProjectReference Include="..\Scripts\AccessPolicy\AccessPolicy.csproj" />
     <ProjectReference Include="..\Scripts\CommandsSystem\CommandsSystem.csproj" />
-    <ProjectReference Include="..\Scripts\Debug\Debug.csproj" />
     <ProjectReference Include="..\Scripts\Entities\Entities.csproj" />
     <ProjectReference Include="..\Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="..\Scripts\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Scripts\Logs\Logs.csproj" />
     <ProjectReference Include="..\Scripts\Modding\Modding.csproj" />
     <ProjectReference Include="..\Scripts\NetcodeCommon\NetcodeCommon.csproj" />
     <ProjectReference Include="..\Scripts\Players\Players.csproj" />

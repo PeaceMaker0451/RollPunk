@@ -34,7 +34,7 @@ namespace RollPunk.Client.Forms
 
             GD.Print($"{View} | {_session.Entities} | {_constructor} | {session.Serializator}");
             
-            View.Initialize(_session.Entities, _constructor, session.Serializator);
+            View.Initialize(_session, _constructor, session.Serializator);
 
             View.EntityView.SetViewRule((lineField) =>
             {

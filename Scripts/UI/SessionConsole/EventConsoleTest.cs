@@ -1,4 +1,5 @@
 using Godot;
+using RollPunk.Logs;
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace RollPunk.Scripts.UI.SessionConsole
 {
 	internal partial class EventConsoleTest : Node
 	{
-		[Export] SessionEventConsole _console;
+		[Export] EventConsole _console;
 
 		public override void _Ready()
 		{
