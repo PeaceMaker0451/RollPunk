@@ -2,6 +2,7 @@
 using RollPunk.ClientNetcode;
 using RollPunk.Debug;
 using RollPunk.Fields;
+using RollPunk.Logs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +12,27 @@ namespace RollPunk.Client.Game
 {
     internal class MutationCatcher
     {
+        private Session _session;
         private IDataBridge _dataBridge;
-        private FieldsRegistry _registry;
+        private IReadOnlyFieldRegistry _registry;
 
-        private HashSet<Guid> _pending = new();
-        private HashSet<Guid> _added = new();
-        private HashSet<Guid> _removed = new();
+        private HashSet<Guid> _fieldChanged = new();
+        private HashSet<Guid> _fieldAdded = new();
+        private HashSet<Guid> _fieldRemoved = new();
+        private List<Event> _pendingLogs = new();
         private bool _isSendingBlocked = false;
         private bool _isChangesIgnoring = false;
 
-        public MutationCatcher(FieldsRegistry registry, IDataBridge dataBridge = null)
+        public MutationCatcher(Session session, IDataBridge dataBridge = null)
         {
+            _session = session;
             _dataBridge = dataBridge;
-            _registry = registry;
+            _registry = session.Registry;
 
             _registry.Changed += OnFieldChanged;
             _registry.FieldAdded += OnFieldAdded;
             _registry.FieldRemoved += OnFieldRemoved;
+            _session.LogAdded += OnLogAdded;
         }
 
         public void BlockSending() => _isSendingBlocked = true;
@@ -38,11 +43,11 @@ namespace RollPunk.Client.Game
 
         public void Flush()
         {
-            if (_pending.Count == 0 && _removed.Count == 0 && _added.Count == 0) return;
+            if (_fieldChanged.Count == 0 && _fieldRemoved.Count == 0 && _fieldAdded.Count == 0) return;
 
-            var changes = _pending.Select(id => _registry.FieldsDictionary[id]);
-            var adds = _added.Select(id => _registry.FieldsDictionary[id]);
-            var deletions = _removed.ToList();
+            var changes = _fieldChanged.Select(id => _registry.FieldsDictionary[id]);
+            var adds = _fieldAdded.Select(id => _registry.FieldsDictionary[id]);
+            var deletions = _fieldRemoved.ToList();
 
             SessionPatch patch = new SessionPatch();
 
@@ -55,12 +60,15 @@ namespace RollPunk.Client.Game
             foreach (var fieldId in deletions)
                 patch.RemoveFields.Add(fieldId);
 
+            foreach (var log in _pendingLogs)
+                patch.PendingLogs.Add(log.GetState());
+
             // лог
             StringBuilder sb = new StringBuilder();
             sb.Append("[color=deep_sky_blue]SessionDelta sended:");
-            foreach (var change in _pending)
+            foreach (var change in _fieldChanged)
                 sb.Append($"\n{change.ToString()}");
-            foreach (var del in _removed)
+            foreach (var del in _fieldRemoved)
                 sb.Append($"\nDeleted: {del}");
             sb.Append("[/color]");
             RPDebug.Log(sb.ToString());
@@ -69,9 +77,9 @@ namespace RollPunk.Client.Game
             if (_dataBridge != null)
                 _dataBridge.SendSessionPatch(patch);
 
-            _pending.Clear();
-            _removed.Clear();
-            _added.Clear();
+            _fieldChanged.Clear();
+            _fieldRemoved.Clear();
+            _fieldAdded.Clear();
         }
 
         private void OnFieldRemoved(Field field)
@@ -81,8 +89,8 @@ namespace RollPunk.Client.Game
 
             void MarkDeleted(Field f)
             {
-                _pending.Remove(f.ID);
-                _removed.Add(f.ID);
+                _fieldChanged.Remove(f.ID);
+                _fieldRemoved.Add(f.ID);
 
                 foreach (var innerField in field.Fields)
                     MarkDeleted(innerField);
@@ -100,7 +108,7 @@ namespace RollPunk.Client.Game
             if (_isChangesIgnoring)
                 return;
 
-            _pending.Add(field.ID);
+            _fieldChanged.Add(field.ID);
             RPDebug.Log($"[color=deep_sky_blue]Field changed catched {field.Name} ({field.ID})[/color]");
 
             if (_isSendingBlocked == false)
@@ -112,11 +120,16 @@ namespace RollPunk.Client.Game
             if (_isChangesIgnoring)
                 return;
             
-            _added.Add(field.ID);
+            _fieldAdded.Add(field.ID);
             RPDebug.Log($"[color=deep_sky_blue]Field added catched {field.Name} ({field.ID})[/color]");
 
             if (_isSendingBlocked == false)
                 Flush();
+        }
+
+        private void OnLogAdded(Logs.Event log)
+        {
+            _pendingLogs.Add(log);
         }
     }
 }

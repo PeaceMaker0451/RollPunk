@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://csqfp4d18l1l8"]
+
+[ext_resource type="Script" uid="uid://bpgfbuuqtr28i" path="res://Scripts/UI/SessionConsole/SessionEventConsole.cs" id="1_mgbgu"]
+[ext_resource type="Script" uid="uid://dkc1lvd3uko36" path="res://Scripts/UI/SessionConsole/EventConsoleTest.cs" id="2_rmf60"]
+
+[node name="Control" type="ColorRect" unique_id=1095896063 node_paths=PackedStringArray("_text")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_mgbgu")
+_text = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=385501934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+bbcode_enabled = true
+text = "dwqdqdqwd"
+fit_content = true
+threaded = true
+
+[node name="Control" type="Control" parent="." unique_id=176829612 node_paths=PackedStringArray("_console")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_rmf60")
+_console = NodePath("..")

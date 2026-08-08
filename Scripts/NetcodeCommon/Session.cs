@@ -1,6 +1,7 @@
 ﻿using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
+using RollPunk.Logs;
 using RollPunk.Players;
 using System;
 using System.Collections.Generic;
@@ -9,29 +10,40 @@ namespace NetcodeCommon
 {
     public class Session
     {
-        protected FieldsContainer<EntityField> Fields;
+        private Dictionary<Guid, Player> _players;
+        private List<Event> _sessionLog;
+
+        protected FieldsContainer<EntityField> FieldsContainer;
         protected FieldsRegistry FieldsRegistry;
 
-        private Dictionary<Guid, Player> _players;
-
         protected EntityFactory EntityFactory;
-
         protected FieldsHierarchyReconstructor HierarchyReconstructor;
-
 
         public event Action<Guid> PlayerAdded;
         public event Action<Guid> PlayerRemoved;
+        public event Action<Event> LogAdded;
+        public event Action StateInserted;
 
         public IReadOnlyDictionary<Guid, Player> Players => _players;
+        public IReadOnlyFieldRegistry Registry => FieldsRegistry;
+        public IReadOnlyFieldsContainer Fields => FieldsContainer;
+        public IReadOnlyList<Event> Logs => _sessionLog;
 
         public Session(EntityFactory entityFactory)
         {
             EntityFactory = entityFactory;
             HierarchyReconstructor = new(EntityFactory);
 
-            Fields = new();
-            FieldsRegistry = new(Fields);
+            FieldsContainer = new();
+            FieldsRegistry = new(FieldsContainer);
             _players = new();
+            _sessionLog = new();
+        }
+
+        public void AddLog(Event log)
+        {
+            _sessionLog.Add(log);
+            LogAdded?.Invoke(log);
         }
 
         public virtual void ApplySessionPatch(SessionPatch patch)
@@ -45,11 +57,11 @@ namespace NetcodeCommon
                 if (field.Parent != null)
                     field.Parent.RemoveField(field);
                 else
-                    Fields.RemoveField(field);
+                    FieldsContainer.RemoveField(field);
             }
 
             foreach (var pendingField in patch.PendingFields)
-                HierarchyReconstructor.ApplyFieldState(pendingField, Fields, null, FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(pendingField, FieldsContainer, null, FieldsRegistry);
 
             foreach (var pendingPlayer in patch.PendingPlayers)
             {
@@ -61,13 +73,16 @@ namespace NetcodeCommon
 
             foreach (var removedPlayer in patch.RemovePlayers)
                 RemovePlayer(removedPlayer);
+
+            foreach (var pendingLog in patch.PendingLogs)
+                AddLog(new(pendingLog));
         }
 
         public virtual SessionState GetState()
         {
             SessionState state = new()
             {
-                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(Fields.Fields),
+                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(FieldsContainer.Fields),
                 Players = new Dictionary<Guid, EntityState>()
             };
 
@@ -76,6 +91,9 @@ namespace NetcodeCommon
             {
                 state.Players.Add(player.Key, player.Value.GetState());
             }
+
+            foreach (var log in _sessionLog)
+                state.Logs.Add(log.GetState());
 
             return state;
         }
@@ -107,9 +125,14 @@ namespace NetcodeCommon
             ApplyFields(fields);
 
             _players.Clear();
-
             foreach(var player in state.Players)
                 AddPlayer(player.Key, new(player.Value));
+
+            _sessionLog.Clear();
+            foreach (var log in state.Logs)
+                AddLog(new(log));
+
+            StateInserted?.Invoke();
         }
 
         private Player AddPlayer(Guid clientId, Player player)
@@ -136,7 +159,7 @@ namespace NetcodeCommon
                 HandleFieldState(fieldState);
 
             foreach (var fieldState in fields)
-                HierarchyReconstructor.ApplyFieldState(fieldState, Fields, fieldsRegistry: FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(fieldState, FieldsContainer, fieldsRegistry: FieldsRegistry);
 
             foreach (var field in FieldsRegistry.Fields)
             {
@@ -145,7 +168,7 @@ namespace NetcodeCommon
                     if (field.Parent != null)
                         field.Parent.RemoveField(field);
                     else
-                        Fields.RemoveField(field);
+                        FieldsContainer.RemoveField(field);
                 }
             }
         }
