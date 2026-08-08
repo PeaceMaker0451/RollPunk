@@ -51,7 +51,7 @@ namespace RollPunk.Client.Game
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; } = new();
 
         public ClientSession(EntityFactory entityFactory, IRuntimeData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
-            :base(new EntityFactory())
+            :base(entityFactory)
         {
             _runtimeData = runtimeData;
             RPDebug.Log($"[color=bisque]Creating session...[/color]");

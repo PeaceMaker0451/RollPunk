@@ -51,6 +51,7 @@ _updateLogsLabel = NodePath("Background/Menu/RightContent/MarginContainer/Scroll
 _authorsLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3/Authors")
 _versionLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer3/VersionText")
 Title = "Главное меню"
+resizable = null
 
 [node name="Background" type="Control" parent="." unique_id=663389259 node_paths=PackedStringArray("_videoPlayer")]
 self_modulate = Color(0.114897, 0.114897, 0.114897, 1)

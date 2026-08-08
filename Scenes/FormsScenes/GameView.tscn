@@ -8,21 +8,24 @@
 [ext_resource type="VideoStream" uid="uid://c7dem0utlpipp" path="res://Video/Background2.ogv" id="4_li2fu"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="5_8idhc"]
 [ext_resource type="Script" uid="uid://bromkehumtcy3" path="res://Scripts/Client/Forms/GameView/FieldsList.cs" id="7_1qbio"]
+[ext_resource type="Script" uid="uid://bpi0ker2gq7hu" path="res://Scripts/UI/SessionConsole/SessionEventConsole.cs" id="11_7uva4"]
 [ext_resource type="Texture2D" uid="uid://dmkekjmdrl14e" path="res://Sprites/PlayerPicPlaceHolder.png" id="11_umbsp"]
 [ext_resource type="Script" uid="uid://ot4kkm2jkhew" path="res://Scripts/UI/PlayerList.cs" id="12_7uva4"]
 [ext_resource type="Texture2D" uid="uid://b86fx5ev3h7qw" path="res://Sprites/logo.png" id="12_fekk2"]
+[ext_resource type="Script" uid="uid://d0w5ie5fxsbm" path="res://Scripts/UI/SessionConsole/EventConsole.cs" id="12_umbsp"]
 [ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="13_n5w6t"]
 
-[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "EntityView")]
+[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "_console", "EntityView")]
 custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1501.0
 offset_bottom = 874.0
 script = ExtResource("1_6vfg8")
-_fieldsList = NodePath("MarginContainer2/PanelContainer/VBoxContainer/ItemList")
-_playersList = NodePath("MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer/ItemList2")
-EntityView = NodePath("MarginContainer/FoldableContainer/Panel/Entity")
+_fieldsList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ItemList")
+_playersList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer/ItemList2")
+_console = NodePath("HBoxContainer/MarginContainer3")
+EntityView = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/Entity")
 Title = "Игра"
 
 [node name="Background" type="Control" parent="." unique_id=1802422318 node_paths=PackedStringArray("_videoPlayer")]
@@ -61,71 +64,50 @@ autoplay = true
 expand = true
 loop = true
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=462990482]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1850323433]
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -213.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -10
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=662108786]
+layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer" unique_id=639318572]
-layout_mode = 2
-title = "Инспектор"
-
-[node name="Panel" type="PanelContainer" parent="MarginContainer/FoldableContainer" unique_id=1312435497]
-z_index = 1
-material = ExtResource("5_8idhc")
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Entity" parent="MarginContainer/FoldableContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=662108786]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 300.0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2" unique_id=79796802]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/MarginContainer2" unique_id=79796802]
 z_index = 1
 material = ExtResource("5_8idhc")
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer" unique_id=1101386917]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/PanelContainer" unique_id=1101386917]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=382955272]
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=382955272]
 layout_mode = 2
 text = "Поля сессии"
 
-[node name="ItemList" type="ItemList" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=519707840]
+[node name="ItemList" type="ItemList" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=519707840]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 3
 fixed_icon_size = Vector2i(24, 24)
 script = ExtResource("7_1qbio")
 _entityFieldIcon = ExtResource("4_b35ok")
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer2/PanelContainer/VBoxContainer" unique_id=1564161436]
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=1564161436]
 layout_mode = 2
 title = "Список игроков"
 
-[node name="ItemList2" type="ItemList" parent="MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer" unique_id=1972589009]
+[node name="ItemList2" type="ItemList" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer" unique_id=1972589009]
 layout_mode = 2
 auto_height = true
 item_count = 3
@@ -137,6 +119,57 @@ item_1/icon = ExtResource("12_fekk2")
 item_2/text = "Gardener"
 item_2/icon = ExtResource("13_n5w6t")
 script = ExtResource("12_7uva4")
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer" unique_id=1571269164 node_paths=PackedStringArray("_eventConsole")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("11_7uva4")
+_eventConsole = NodePath("Control")
+
+[node name="Control" type="PanelContainer" parent="HBoxContainer/MarginContainer3" unique_id=1431695072 node_paths=PackedStringArray("_text")]
+z_index = 10
+material = ExtResource("5_8idhc")
+layout_mode = 2
+script = ExtResource("12_umbsp")
+_text = NodePath("ScrollContainer/RichTextLabel")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer3/Control" unique_id=145498359]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer3/Control/ScrollContainer" unique_id=1074806492]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=462990482]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/MarginContainer" unique_id=639318572]
+layout_mode = 2
+title = "Инспектор"
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/MarginContainer/FoldableContainer" unique_id=1312435497]
+z_index = 1
+material = ExtResource("5_8idhc")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Entity" parent="HBoxContainer/MarginContainer/FoldableContainer/Panel" unique_id=1881810262 instance=ExtResource("3_1rd3g")]
+layout_mode = 2
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
 visible = false

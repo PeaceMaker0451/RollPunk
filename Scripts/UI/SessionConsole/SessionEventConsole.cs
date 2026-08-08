@@ -17,6 +17,7 @@ namespace RollPunk.Scripts.UI.SessionConsole
             session.StateInserted += InsertLogs;
 
             InsertLogs();
+            _eventConsole.AddLog(new("Console", Logs.SourceType.System, "Это консоль сессии. Здесь будет разная информация о происходящем в игре", System.DateTime.UtcNow));
         }
 
         private void InsertLogs()
