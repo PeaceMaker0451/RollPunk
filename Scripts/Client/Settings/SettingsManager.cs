@@ -31,6 +31,7 @@ namespace RollPunk.Client.Settings
 
         public void SaveSettings(SettingsData settings)
         {
+            settings.Validate();
             settings.Version = _currentSettingsVersion;
             _storage.SaveSettings(settings);
             SettingsSaved?.Invoke(settings);

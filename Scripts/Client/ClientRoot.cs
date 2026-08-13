@@ -12,7 +12,6 @@ using RollPunk.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RollPunk.Client
 {
@@ -66,11 +65,6 @@ namespace RollPunk.Client
             CreateThreadManager();
 
             _runtime = new Runtime();
-
-
-
-            FastSettingsAsker asker = new();
-            asker.AskUserName();
         }
 
         private void InitializeErrorLogging()
@@ -112,6 +106,12 @@ namespace RollPunk.Client
 
             var settings = _settingsManager.LoadSettings();
             _settingsManager.SaveSettings(settings);
+
+            if(string.IsNullOrEmpty(settings.Name) || string.IsNullOrWhiteSpace(settings.Name))
+            {
+                FastSettingsAsker asker = new();
+                asker.AskUserName();
+            }
 
             return settings;
         }

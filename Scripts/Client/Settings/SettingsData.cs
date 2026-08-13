@@ -24,6 +24,9 @@ namespace RollPunk.Client.Settings
         {
             FormsScale = Mathf.Clamp(FormsScale, 0.75f, 10);
             FontSize = Mathf.Clamp(FontSize, 2, 40);
+
+            if(string.IsNullOrEmpty(Name) == false && Name.Length < 3)
+                Name = string.Empty;
             
             if(DisabledMods == null)
                 DisabledMods = new();
