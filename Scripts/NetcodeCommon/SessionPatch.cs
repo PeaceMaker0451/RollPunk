@@ -15,6 +15,9 @@ namespace NetcodeCommon
         [JsonProperty] public Dictionary<Guid, EntityState> PendingPlayers = new();
         [JsonProperty] public List<Guid> RemovePlayers = new();
 
+        [JsonProperty] public Dictionary<Guid, EntityState> PendingOwnerships = new();
+        [JsonProperty] public List<Guid> RemoveOwnerships = new();
+
         [JsonProperty] public List<EntityState> PendingLogs = new();
     }
 }

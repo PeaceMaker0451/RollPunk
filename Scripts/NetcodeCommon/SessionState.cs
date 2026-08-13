@@ -12,5 +12,6 @@ namespace NetcodeCommon
         [JsonProperty] public List<FieldState> Fields = new();
         [JsonProperty] public List<EntityState> Logs = new();
         [JsonProperty] public Dictionary<Guid, EntityState> Players = new();
+        [JsonProperty] public Dictionary<Guid, EntityState> Ownerships = new();
     }
 }

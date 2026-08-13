@@ -1,82 +1,109 @@
-﻿using RollPunk.HierarchyFields;
+using RollPunk.HierarchyFields;
 using RollPunk.Players;
+using RollPunk.Entities;
 
 namespace RollPunk.AccessPolicy
 {
     public class EntityFieldsOwnersRegistry
     {
-        private Dictionary<Guid, EntityOwnerRecord> _owners = new();
+        private EntityContainer<EntityOwnership> _ownerships;
+        private Dictionary<Guid, EntityOwnership> _entityFieldIdIndex = new();
+
+        public EntityFieldsOwnersRegistry(EntityContainer<EntityOwnership> ownerships)
+        {
+            _ownerships = ownerships;
+            
+            // Инициализируем индекс существующими данными
+            foreach (var ownership in _ownerships.Objects)
+                _entityFieldIdIndex[ownership.EntityFieldId] = ownership;
+
+            // Подписываемся на изменения для поддержания индекса
+            _ownerships.Added += OnOwnershipAdded;
+            _ownerships.Removed += OnOwnershipRemoved;
+        }
 
         public void AddEntityOwner(EntityField entity, Player player)
         {
-            EnsureOwnerRecordExists(entity);
-
-            _owners[entity.ID].OwnerIds.Add(player.ID);
+            var ownership = EnsureOwnershipExists(entity);
+            ownership.OwnerIds.Add(player.ID);
         }
 
         public bool IsOwneredByPlayer(EntityField entity, Player player)
         {
-            ThrowExceptionIfOwnerRecordNotExist(entity);
-            var record = _owners[entity.ID];
+            var ownership = GetOwnership(entity.ID);
+            if (ownership == null)
+                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            return record.OwnerIds.Contains(player.ID);
+            return ownership.OwnerIds.Contains(player.ID);
         }
 
         public void RemoveEntityOwner(EntityField entity, Player player)
         {
-            ThrowExceptionIfOwnerRecordNotExist(entity);
-            var record = _owners[entity.ID];
+            var ownership = GetOwnership(entity.ID);
+            if (ownership == null)
+                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            if (IsOwneredByPlayer(entity, player) == false)
+            if (!ownership.OwnerIds.Contains(player.ID))
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) is not ownered by player {player.Name} ({player.ID})");
 
-            record.OwnerIds.Remove(player.ID);
+            ownership.OwnerIds.Remove(player.ID);
         }
 
         public void AddEntityTeam(EntityField entity, Guid team)
         {
-            EnsureOwnerRecordExists(entity);
-            _owners[entity.ID].TeamIds.Add(team);
+            var ownership = EnsureOwnershipExists(entity);
+            ownership.TeamIds.Add(team);
         }
 
         public void RemoveEntityTeam(EntityField entity, Guid team)
         {
-            EnsureOwnerRecordExists(entity);
-            _owners[entity.ID].TeamIds.Remove(team);
+            var ownership = EnsureOwnershipExists(entity);
+            ownership.TeamIds.Remove(team);
         }
 
         public PlayerRole GetRelativePlayerRole(EntityField entity, Player player)
         {
-            EnsureOwnerRecordExists(entity);
+            var ownership = GetOwnership(entity.ID);
+            if (ownership == null)
+                return PlayerRole.All;
 
             if (player.IsAdmin)
                 return PlayerRole.Admin;
 
-            if (_owners[entity.ID].OwnerIds.Contains(player.ID))
+            if (ownership.OwnerIds.Contains(player.ID))
                 return PlayerRole.Owner;
 
-            if (player.TeamId != null && _owners[entity.ID].TeamIds.Contains((Guid)player.TeamId))
+            if (player.TeamId != null && ownership.TeamIds.Contains((Guid)player.TeamId))
                 return PlayerRole.Team;
 
             return PlayerRole.All;
         }
 
-        private void EnsureOwnerRecordExists(EntityField entity)
+        public EntityOwnership GetOwnership(Guid entityFieldId)
         {
-            if (_owners.ContainsKey(entity.ID) == false)
-                _owners.Add(entity.ID, new EntityOwnerRecord());
+            _entityFieldIdIndex.TryGetValue(entityFieldId, out var ownership);
+            return ownership;
         }
 
-        private void ThrowExceptionIfOwnerRecordNotExist(EntityField entity)
+        private EntityOwnership EnsureOwnershipExists(EntityField entity)
         {
-            if (_owners.ContainsKey(entity.ID) == false)
-                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
+            var ownership = GetOwnership(entity.ID);
+            if (ownership == null)
+            {
+                ownership = new EntityOwnership(entity.ID, $"Ownership_{entity.Name}");
+                _ownerships.Add(ownership);
+            }
+            return ownership;
         }
 
-        internal class EntityOwnerRecord
+        private void OnOwnershipAdded(EntityOwnership ownership)
         {
-            public HashSet<Guid> OwnerIds { get; } = new();
-            public HashSet<Guid> TeamIds { get; } = new();
+            _entityFieldIdIndex[ownership.EntityFieldId] = ownership;
+        }
+
+        private void OnOwnershipRemoved(EntityOwnership ownership)
+        {
+            _entityFieldIdIndex.Remove(ownership.EntityFieldId);
         }
     }
 }

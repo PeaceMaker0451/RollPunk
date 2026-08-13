@@ -35,6 +35,7 @@ namespace RollPunk.Client.Game
 
         private IDataBridge _dataBridge;
         private MutationCatcher _mutationCatcher;
+        private OwnershipIntegrityManager _ownershipManager;
 
         public Guid ID { get; private set; }
 
@@ -48,7 +49,7 @@ namespace RollPunk.Client.Game
         public EntityContainer<Rule> Rules { get; private set; } = new();
         public IReadOnlyFieldRegistry Registry => base.FieldsRegistry;
 
-        public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; } = new();
+        public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; }
 
         public ClientSession(EntityFactory entityFactory, IRuntimeData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
             :base(entityFactory)
@@ -71,6 +72,7 @@ namespace RollPunk.Client.Game
 
             LoadMods(mods);
             InitializeFieldsContainer();
+            InitializeOwnershipSystem();
             APIInjector.AddGlobalAPI(GetAPI());
         }
 
@@ -164,10 +166,12 @@ namespace RollPunk.Client.Game
             _mutationCatcher.StartIgnore();
             _entityValidator.StartIgnore();
             _entityInitializer.StartIgnore();
+            _ownershipManager.StartIgnore();
             base.ApplySessionPatch(patch);
             _mutationCatcher.StopIgnore();
             _entityValidator.StopIgnore();
             _entityInitializer.StopIgnore();
+            _ownershipManager.StopIgnore();
         }
 
         public override void ApplyState(SessionState state)
@@ -175,10 +179,18 @@ namespace RollPunk.Client.Game
             _mutationCatcher.StartIgnore();
             _entityValidator.StartIgnore();
             _entityInitializer.StartIgnore();
+            _ownershipManager.StartIgnore();
             base.ApplyState(state);
             _mutationCatcher.StopIgnore();
             _entityValidator.StopIgnore();
             _entityInitializer.StopIgnore();
+            _ownershipManager.StopIgnore();
+        }
+
+        private void InitializeOwnershipSystem()
+        {
+            OwnersRegistry = new EntityFieldsOwnersRegistry(Ownerships);
+            _ownershipManager = new OwnershipIntegrityManager(this);
         }
     }
 }

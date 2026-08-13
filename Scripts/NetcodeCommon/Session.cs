@@ -15,6 +15,8 @@ namespace NetcodeCommon
 
         protected FieldsContainer<EntityField> FieldsContainer;
         protected FieldsRegistry FieldsRegistry;
+        
+        public EntityContainer<EntityOwnership> Ownerships { get; private set; } = new();
 
         protected EntityFactory EntityFactory;
         protected FieldsHierarchyReconstructor HierarchyReconstructor;
@@ -74,6 +76,22 @@ namespace NetcodeCommon
             foreach (var removedPlayer in patch.RemovePlayers)
                 RemovePlayer(removedPlayer);
 
+            foreach (var pendingOwnership in patch.PendingOwnerships)
+            {
+                var existingOwnership = Ownerships.GetByID(pendingOwnership.Key);
+                if (existingOwnership != null)
+                    updater.UpdateEntity(existingOwnership, pendingOwnership.Value);
+                else
+                    Ownerships.Add(new EntityOwnership(pendingOwnership.Value));
+            }
+
+            foreach (var removedOwnership in patch.RemoveOwnerships)
+            {
+                var ownership = Ownerships.GetByID(removedOwnership);
+                if (ownership != null)
+                    Ownerships.Remove(ownership);
+            }
+
             foreach (var pendingLog in patch.PendingLogs)
                 AddLog(new(pendingLog));
         }
@@ -83,13 +101,20 @@ namespace NetcodeCommon
             SessionState state = new()
             {
                 Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(FieldsContainer.Fields),
-                Players = new Dictionary<Guid, EntityState>()
+                Players = new Dictionary<Guid, EntityState>(),
+                Ownerships = new Dictionary<Guid, EntityState>()
             };
 
             // Добавляем игроков в состояние
             foreach (var player in _players)
             {
                 state.Players.Add(player.Key, player.Value.GetState());
+            }
+
+            // Добавляем владения в состояние
+            foreach (var ownership in Ownerships.Objects)
+            {
+                state.Ownerships.Add(ownership.ID, ownership.GetState());
             }
 
             foreach (var log in _sessionLog)
@@ -127,6 +152,10 @@ namespace NetcodeCommon
             _players.Clear();
             foreach(var player in state.Players)
                 AddPlayer(player.Key, new(player.Value));
+
+            Ownerships.Clear();
+            foreach (var ownership in state.Ownerships)
+                Ownerships.Add(new EntityOwnership(ownership.Value));
 
             _sessionLog.Clear();
             foreach (var log in state.Logs)
