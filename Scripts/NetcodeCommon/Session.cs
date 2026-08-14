@@ -77,20 +77,11 @@ namespace NetcodeCommon
             foreach (var removedPlayer in patch.RemovePlayers)
                 RemovePlayer(removedPlayer);
 
-            foreach (var pendingOwnership in patch.PendingOwnerships)
-            {
-                var existingOwnership = Ownerships.GetByID(pendingOwnership.Key);
-                if (existingOwnership != null)
-                    updater.UpdateEntity(existingOwnership, pendingOwnership.Value);
-                else
-                    Ownerships.Add(new EntityOwnership(pendingOwnership.Value));
-            }
+            Ownerships.UpdateFromState(patch.PendingOwnerships);
 
             foreach (var removedOwnership in patch.RemoveOwnerships)
             {
-                var ownership = Ownerships.GetByID(removedOwnership);
-                if (ownership != null)
-                    Ownerships.Remove(ownership);
+                Ownerships.Remove(removedOwnership);
             }
 
             foreach (var pendingLog in patch.PendingLogs)
