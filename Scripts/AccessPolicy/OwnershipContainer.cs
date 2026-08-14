@@ -28,6 +28,7 @@ namespace RollPunk.AccessPolicy
                 throw new InvalidOperationException($"Ownership with ID {ownership.ID} already exists");
 
             _ownerships.Add(ownership.ID, ownership);
+            SubscribeToOwnershipChanges(ownership);
             Added?.Invoke(ownership);
         }
 
@@ -35,6 +36,7 @@ namespace RollPunk.AccessPolicy
         {
             if (_ownerships.TryGetValue(id, out EntityOwnership ownership))
             {
+                UnsubscribeFromOwnershipChanges(ownership);
                 _ownerships.Remove(id);
                 Removed?.Invoke(ownership);
                 return true;
@@ -54,10 +56,19 @@ namespace RollPunk.AccessPolicy
                 Remove(ownership);
         }
 
-        public void NotifyChanged(EntityOwnership ownership)
+        private void SubscribeToOwnershipChanges(EntityOwnership ownership)
         {
-            if (_ownerships.ContainsKey(ownership.ID))
-                Changed?.Invoke(ownership);
+            ownership.Changed += OnOwnershipChanged;
+        }
+
+        private void UnsubscribeFromOwnershipChanges(EntityOwnership ownership)
+        {
+            ownership.Changed -= OnOwnershipChanged;
+        }
+
+        private void OnOwnershipChanged(EntityOwnership ownership)
+        {
+            Changed?.Invoke(ownership);
         }
 
         public void UpdateFromState(Dictionary<Guid, EntityState> ownershipStates)

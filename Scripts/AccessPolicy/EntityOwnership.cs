@@ -13,6 +13,8 @@ namespace RollPunk.AccessPolicy
         public HashSet<Guid> OwnerIds { get; private set; } = new();
         public HashSet<Guid> TeamIds { get; private set; } = new();
 
+        public event Action<EntityOwnership> Changed;
+
         public EntityOwnership(Guid entityFieldId, string name = "") : base(name)
         {
             EntityFieldId = entityFieldId;
@@ -34,6 +36,45 @@ namespace RollPunk.AccessPolicy
             Set(payload, nameof(EntityFieldId), EntityFieldId);
             Set(payload, nameof(OwnerIds), OwnerIds);
             Set(payload, nameof(TeamIds), TeamIds);
+        }
+
+        public void AddOwner(Guid ownerId)
+        {
+            OwnerIds.Add(ownerId);
+            OnChanged();
+        }
+
+        public void RemoveOwner(Guid ownerId)
+        {
+            OwnerIds.Remove(ownerId);
+            OnChanged();
+        }
+
+        public bool HasOwner(Guid ownerId)
+        {
+            return OwnerIds.Contains(ownerId);
+        }
+
+        public void AddTeam(Guid teamId)
+        {
+            TeamIds.Add(teamId);
+            OnChanged();
+        }
+
+        public void RemoveTeam(Guid teamId)
+        {
+            TeamIds.Remove(teamId);
+            OnChanged();
+        }
+
+        public bool HasTeam(Guid teamId)
+        {
+            return TeamIds.Contains(teamId);
+        }
+
+        private void OnChanged()
+        {
+            Changed?.Invoke(this);
         }
     }
 }

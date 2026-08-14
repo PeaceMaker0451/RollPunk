@@ -25,7 +25,7 @@ namespace RollPunk.AccessPolicy
         public void AddEntityOwner(EntityField entity, Player player)
         {
             var ownership = EnsureOwnershipExists(entity);
-            ownership.OwnerIds.Add(player.ClientId);
+            ownership.AddOwner(player.ClientId);
         }
 
         public bool IsOwneredByPlayer(EntityField entity, Player player)
@@ -34,7 +34,7 @@ namespace RollPunk.AccessPolicy
             if (ownership == null)
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            return ownership.OwnerIds.Contains(player.ClientId);
+            return ownership.HasOwner(player.ClientId);
         }
 
         public void RemoveEntityOwner(EntityField entity, Player player)
@@ -43,22 +43,22 @@ namespace RollPunk.AccessPolicy
             if (ownership == null)
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            if (!ownership.OwnerIds.Contains(player.ClientId))
+            if (!ownership.HasOwner(player.ClientId))
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) is not ownered by player {player.Name} ({player.ClientId})");
 
-            ownership.OwnerIds.Remove(player.ClientId);
+            ownership.RemoveOwner(player.ClientId);
         }
 
         public void AddEntityTeam(EntityField entity, Guid team)
         {
             var ownership = EnsureOwnershipExists(entity);
-            ownership.TeamIds.Add(team);
+            ownership.AddTeam(team);
         }
 
         public void RemoveEntityTeam(EntityField entity, Guid team)
         {
             var ownership = EnsureOwnershipExists(entity);
-            ownership.TeamIds.Remove(team);
+            ownership.RemoveTeam(team);
         }
 
         public PlayerRole GetRelativePlayerRole(EntityField entity, Player player)
@@ -70,10 +70,10 @@ namespace RollPunk.AccessPolicy
             if (player.IsAdmin)
                 return PlayerRole.Admin;
 
-            if (ownership.OwnerIds.Contains(player.ClientId))
+            if (ownership.HasOwner(player.ClientId))
                 return PlayerRole.Owner;
 
-            if (player.TeamId != null && ownership.TeamIds.Contains((Guid)player.TeamId))
+            if (player.TeamId != null && ownership.HasTeam((Guid)player.TeamId))
                 return PlayerRole.Team;
 
             return PlayerRole.All;
