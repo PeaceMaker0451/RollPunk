@@ -25,7 +25,7 @@ namespace RollPunk.AccessPolicy
         public void AddEntityOwner(EntityField entity, Player player)
         {
             var ownership = EnsureOwnershipExists(entity);
-            ownership.OwnerIds.Add(player.ID);
+            ownership.OwnerIds.Add(player.ClientId);
         }
 
         public bool IsOwneredByPlayer(EntityField entity, Player player)
@@ -34,7 +34,7 @@ namespace RollPunk.AccessPolicy
             if (ownership == null)
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            return ownership.OwnerIds.Contains(player.ID);
+            return ownership.OwnerIds.Contains(player.ClientId);
         }
 
         public void RemoveEntityOwner(EntityField entity, Player player)
@@ -43,10 +43,10 @@ namespace RollPunk.AccessPolicy
             if (ownership == null)
                 throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
 
-            if (!ownership.OwnerIds.Contains(player.ID))
-                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) is not ownered by player {player.Name} ({player.ID})");
+            if (!ownership.OwnerIds.Contains(player.ClientId))
+                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) is not ownered by player {player.Name} ({player.ClientId})");
 
-            ownership.OwnerIds.Remove(player.ID);
+            ownership.OwnerIds.Remove(player.ClientId);
         }
 
         public void AddEntityTeam(EntityField entity, Guid team)
@@ -70,7 +70,7 @@ namespace RollPunk.AccessPolicy
             if (player.IsAdmin)
                 return PlayerRole.Admin;
 
-            if (ownership.OwnerIds.Contains(player.ID))
+            if (ownership.OwnerIds.Contains(player.ClientId))
                 return PlayerRole.Owner;
 
             if (player.TeamId != null && ownership.TeamIds.Contains((Guid)player.TeamId))
