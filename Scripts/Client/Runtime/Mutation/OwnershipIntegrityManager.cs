@@ -1,8 +1,7 @@
+using RollPunk.AccessPolicy;
 using RollPunk.HierarchyFields;
-using RollPunk.Client.Game;
-using System;
 
-namespace RollPunk.AccessPolicy
+namespace RollPunk.Client.Game
 {
     internal class OwnershipIntegrityManager
     {
