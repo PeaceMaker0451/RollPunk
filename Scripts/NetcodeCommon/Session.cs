@@ -17,7 +17,7 @@ namespace NetcodeCommon
         protected FieldsContainer<EntityField> FieldsContainer;
         protected FieldsRegistry FieldsRegistry;
         
-        public EntityContainer<EntityOwnership> Ownerships { get; private set; } = new();
+        public OwnershipContainer Ownerships { get; private set; } = new();
 
         protected EntityFactory EntityFactory;
         protected FieldsHierarchyReconstructor HierarchyReconstructor;
@@ -113,10 +113,7 @@ namespace NetcodeCommon
             }
 
             // Добавляем владения в состояние
-            foreach (var ownership in Ownerships.Objects)
-            {
-                state.Ownerships.Add(ownership.ID, ownership.GetState());
-            }
+            state.Ownerships = Ownerships.GetStates();
 
             foreach (var log in _sessionLog)
                 state.Logs.Add(log.GetState());
@@ -155,8 +152,7 @@ namespace NetcodeCommon
                 AddPlayer(player.Key, new(player.Value));
 
             Ownerships.Clear();
-            foreach (var ownership in state.Ownerships)
-                Ownerships.Add(new EntityOwnership(ownership.Value));
+            Ownerships.UpdateFromState(state.Ownerships);
 
             _sessionLog.Clear();
             foreach (var log in state.Logs)

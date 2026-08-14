@@ -162,7 +162,7 @@ namespace RollPunk.Client.Game
             _pendingLogs.Add(log);
         }
 
-        private void OnOwnershipAdded(RollPunk.AccessPolicy.EntityOwnership ownership)
+        private void OnOwnershipAdded(EntityOwnership ownership)
         {
             if (_isChangesIgnoring)
                 return;
@@ -174,7 +174,7 @@ namespace RollPunk.Client.Game
                 Flush();
         }
 
-        private void OnOwnershipRemoved(RollPunk.AccessPolicy.EntityOwnership ownership)
+        private void OnOwnershipRemoved(EntityOwnership ownership)
         {
             if (_isChangesIgnoring)
                 return;
@@ -187,7 +187,7 @@ namespace RollPunk.Client.Game
                 Flush();
         }
 
-        private void OnOwnershipChanged(RollPunk.AccessPolicy.EntityOwnership ownership)
+        private void OnOwnershipChanged(EntityOwnership ownership)
         {
             if (_isChangesIgnoring)
                 return;

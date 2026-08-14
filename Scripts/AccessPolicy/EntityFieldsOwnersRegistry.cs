@@ -6,10 +6,10 @@ namespace RollPunk.AccessPolicy
 {
     public class EntityFieldsOwnersRegistry
     {
-        private EntityContainer<EntityOwnership> _ownerships;
+        private OwnershipContainer _ownerships;
         private Dictionary<Guid, EntityOwnership> _entityFieldIdIndex = new();
 
-        public EntityFieldsOwnersRegistry(EntityContainer<EntityOwnership> ownerships)
+        public EntityFieldsOwnersRegistry(OwnershipContainer ownerships)
         {
             _ownerships = ownerships;
             
