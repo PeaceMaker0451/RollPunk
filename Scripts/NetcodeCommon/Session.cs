@@ -6,6 +6,7 @@ using RollPunk.Players;
 using RollPunk.AccessPolicy;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace NetcodeCommon
 {
@@ -117,7 +118,10 @@ namespace NetcodeCommon
             if(_players.ContainsKey(clientId))
                 throw new InvalidOperationException($"Player for Client {clientId} already exists");
 
-            Player player = new(name, new Guid(), isAdmin);
+            if(clientId == Guid.Empty)
+                throw new InvalidOperationException($"Client ID is empty!");
+
+            Player player = new(name, clientId, isAdmin);
             return AddPlayer(clientId, player);
         }
 
@@ -150,6 +154,56 @@ namespace NetcodeCommon
                 AddLog(new(log));
 
             StateInserted?.Invoke();
+        }
+
+        public string GetSessionData()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"Players:");
+
+            foreach (var player in _players.Values)
+                stringBuilder.AppendLine($"- {player.Name} [{player.ClientId}]");
+
+            stringBuilder.AppendLine($"Fields:");
+
+            foreach (var field in FieldsContainer.Fields)
+            {
+                stringBuilder.AppendLine($"- {field.Name} [{field.ID}] ({field.Fields.Count} children)");
+
+                if(field is EntityField entityField)
+                {
+                    EntityOwnership record;
+
+                    foreach(var entityOwnership in Ownerships.Objects)
+                    {
+                        if(entityOwnership.EntityFieldId == entityField.ID)
+                        {
+                            foreach(var ownerId in entityOwnership.OwnerIds)
+                            {
+                                if (_players.TryGetValue(ownerId, out var owner))
+                                    stringBuilder.AppendLine($"\\_ {owner.Name} [{owner.ClientId}]");
+                                else
+                                    stringBuilder.AppendLine($"\\_ unknown player [{ownerId}]");
+                            }
+                        }
+                    }    
+                }
+            }
+
+            stringBuilder.AppendLine($"Events:");
+
+            foreach (var eventRecord in _sessionLog)
+                stringBuilder.AppendLine($"- {eventRecord.Name} - {eventRecord.Data}");
+
+            stringBuilder.AppendLine($"OwnershipRecords:");
+
+            foreach (var ownerRecord in Ownerships.Objects)
+            {
+                stringBuilder.AppendLine($"{ownerRecord.EntityFieldId} - ({string.Join(',', ownerRecord.OwnerIds)}) [{ownerRecord.ID}] ");
+            }
+
+            return stringBuilder.ToString();
         }
 
         private Player AddPlayer(Guid clientId, Player player)

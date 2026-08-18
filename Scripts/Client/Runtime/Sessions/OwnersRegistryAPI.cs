@@ -7,6 +7,7 @@ namespace RollPunk.AccessPolicy
     public class OwnersRegistryAPI : API
     {
         private EntityFieldsOwnersRegistry _registry;
+        
         public OwnersRegistryAPI(EntityFieldsOwnersRegistry registry)
         {
             _registry = registry;

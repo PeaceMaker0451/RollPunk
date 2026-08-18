@@ -1,4 +1,5 @@
 ﻿using NetcodeCommon;
+using RollPunk.AccessPolicy;
 using RollPunk.ClientNetcode;
 using RollPunk.Debug;
 using RollPunk.Fields;
@@ -53,6 +54,8 @@ namespace RollPunk.Client.Game
 
         public void Flush()
         {
+            RPDebug.Log($"[color=deep_sky_blue]SessionData: \n{_session.GetSessionData()}[/color]");
+            
             if (_fieldChanged.Count == 0 && _fieldRemoved.Count == 0 && _fieldAdded.Count == 0 && 
                 _ownershipChanged.Count == 0 && _ownershipRemoved.Count == 0 && _ownershipAdded.Count == 0) return;
 

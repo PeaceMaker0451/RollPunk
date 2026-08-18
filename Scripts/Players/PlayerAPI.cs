@@ -9,7 +9,7 @@ namespace RollPunk.Players
         private readonly Player _player;
 
         public string name => _player.Name;
-        public string player_id => _player.PlayerID.ToString();
+        public string player_id => _player.ClientId.ToString();
         public string team_id => _player.TeamId == null ? null: _player.TeamId.ToString();
         public bool is_admin => _player.IsAdmin;
 

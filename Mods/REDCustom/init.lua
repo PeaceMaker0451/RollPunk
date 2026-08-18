@@ -7,7 +7,7 @@ local function _createCharacter()
     RollPunkAPI.log("[color=deep_pink]ADDING CHARACTER TO SESSION!!![/color]")
 
     UpdateSubsystem.setStatsUpdatePoints(character_field, 115, false)
-    UpdateSubsystem.setSkillUpdatePoints(character_field, 150, false)
+    UpdateSubsystem.setSkillUpdatePoints(character_field, 75, false)
 
     SessionAPI.addEntityField(character_field)
     SessionAPI.OwnersRegistry.setEntityOwner(character_field, SessionAPI.current_player)

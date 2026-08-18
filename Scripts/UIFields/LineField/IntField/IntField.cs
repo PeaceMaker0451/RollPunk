@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Godot;
+using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
 using System;
@@ -15,10 +16,10 @@ namespace RollPunk.UIFields
         public int MaxValue { get; private set; }
         public int Value { get; private set; }
 
-        public IntField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, int value = 0, int minValue = 0, int maxValue = 100, int linePriority = 0, Dictionary<string, object> additionalData = null)
+        public IntField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, int value = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int linePriority = 0, Dictionary<string, object> additionalData = null)
         : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(IntFieldAPI), linePriority, additionalData)
         {
-            Value = value;
+            Value = Mathf.Clamp(value, minValue, maxValue);
             MaxValue = maxValue;
             MinValue = minValue;
         }

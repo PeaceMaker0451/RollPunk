@@ -56,8 +56,6 @@ namespace RollPunk.Client.Game
         {
             _runtimeData = runtimeData;
             RPDebug.Log($"[color=bisque]Creating session...[/color]");
-            
-            _api = new(this);
 
             ID = Guid.NewGuid();
             RPDebug.Log($"[color=bisque]Session {ID}[/color]");
@@ -73,6 +71,8 @@ namespace RollPunk.Client.Game
             LoadMods(mods);
             InitializeFieldsContainer();
             InitializeOwnershipSystem();
+
+            _api = new(this);
             APIInjector.AddGlobalAPI(GetAPI());
         }
 

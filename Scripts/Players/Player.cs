@@ -13,12 +13,12 @@ namespace RollPunk.Players
         
         public bool IsAdmin { get; private set; }
         public Guid? TeamId { get; private set; }
-        public Guid PlayerID { get; private set; }
+        public Guid ClientId { get; private set; }
 
-        public Player(string name, Guid playerID, bool isAdmin): base (name)
+        public Player(string name, Guid clientId, bool isAdmin): base (name)
         {
             _api = new PlayerAPI(this);
-            PlayerID = playerID;
+            ClientId = clientId;
             IsAdmin = isAdmin;
         }
 
@@ -32,10 +32,10 @@ namespace RollPunk.Players
             IsAdmin = Get<bool>(payload, nameof(IsAdmin));
             
             // Безопасный парсинг PlayerID
-            string playerIdStr = Get<string>(payload, nameof(PlayerID));
+            string playerIdStr = Get<string>(payload, nameof(ClientId));
             if (!Guid.TryParse(playerIdStr, out Guid parsedPlayerId))
                 throw new InvalidOperationException($"Invalid PlayerID format: {playerIdStr}");
-            PlayerID = parsedPlayerId;
+            ClientId = parsedPlayerId;
             
             // Безопасный парсинг TeamId
             string teamID = Get<string>(payload, nameof(TeamId));
@@ -50,7 +50,7 @@ namespace RollPunk.Players
         protected override void WritePayload(Dictionary<string, JToken> payload)
         {
             payload[nameof(IsAdmin)] = IsAdmin;
-            payload[nameof(PlayerID)] = PlayerID.ToString();
+            payload[nameof(ClientId)] = ClientId.ToString();
             payload[nameof(TeamId)] = TeamId == null? string.Empty : TeamId.ToString();
         }
 

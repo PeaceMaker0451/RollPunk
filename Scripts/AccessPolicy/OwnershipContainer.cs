@@ -1,7 +1,4 @@
 using RollPunk.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RollPunk.AccessPolicy
 {
@@ -81,7 +78,6 @@ namespace RollPunk.AccessPolicy
                 if (existingOwnership != null)
                 {
                     updater.UpdateEntity(existingOwnership, ownershipState.Value);
-                    NotifyChanged(existingOwnership);
                 }
                 else
                 {

@@ -36,7 +36,7 @@ internal partial class EntityView : Form
                 return;
 
             var data = _serializator.SerializeFieldTree(_entity);
-            RollPunk.Client.ClientRoot.FileDebugUtils.SaveStringWithDialog(data);
+            ClientRoot.FileDebugUtils.SaveStringWithDialog(data);
         };
     }
     
