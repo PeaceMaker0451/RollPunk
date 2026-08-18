@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RollPunk.Client
 {
-    internal class FramesHost
+    internal class FramesHost : IFramesHost
     {
         private readonly string _tabedFramePath;
         private readonly string _framePath;
@@ -25,6 +25,17 @@ namespace RollPunk.Client
 
         public TabedFrame MainFrame { get; private set; }
         public IReadOnlyList<Frame> SubFrames => _subFrames;
+
+        public IEnumerable<Frame> OpenFrames
+        {
+            get
+            {
+                if (MainFrame != null)
+                    yield return MainFrame;
+                foreach (var f in _subFrames)
+                    yield return f;
+            }
+        }
 
         public FramesHost(Node rootNode, float scale, bool oneScreenMode, bool smoothResizing, bool waitForReaizeEnd, string tabedFramePath, string defFramePath)
         {
@@ -49,33 +60,24 @@ namespace RollPunk.Client
             MainFrame.SetTitle(title);
         }
 
-        public Frame OpenInNewFrame(Form form, bool alwaysOnTop = false)
+        public Frame OpenFrame(Form form, bool alwaysOnTop = false)
         {
-            var frame = _framesFactory.LoadFrame(_framePath);
-            Window window = null;
-
-            if(_oneScreenMode)
-                _rootNode.AddChild(frame);
-            else
-                window = _windowsManager.CreateNewWindowForFrame(frame);
-
+            if (form == null) throw new ArgumentNullException(nameof(form));
+            var frame = CreateFrame(alwaysOnTop);
             frame.SetForm(form);
             frame.SetTitle(form.Title);
-
-            frame.SetScaleFactor(_scale);
-            frame.WaitForResizeToChangeForm = _waitForReaizeEnd;
-            frame.SmoothResizing = _smoothResizing;
-            
-            if(window.IsNodeReady() == false)
-                window.Ready += () => OnWindowReady(window, alwaysOnTop);
-            else
-            {
-                GD.Print("ОКНО БЛЯТЬ РЕАДИ");
-                OnWindowReady(window, alwaysOnTop);
-            }
-
-            _subFrames.Add(frame);
             return frame;
+        }
+
+        public Frame OpenEmptyFrame(bool alwaysOnTop = false)
+        {
+            return CreateFrame(alwaysOnTop);
+        }
+
+        // Устаревшая перегрузка для существующих потребителей. Будет удалена после миграции.
+        public Frame OpenInNewFrame(Form form, bool alwaysOnTop = false)
+        {
+            return OpenFrame(form, alwaysOnTop);
         }
 
         public void CloseFrame(Frame frame)
@@ -92,6 +94,32 @@ namespace RollPunk.Client
                 frame.GetWindow().QueueFree();
             else
                 frame.QueueFree();
+        }
+
+        private Frame CreateFrame(bool alwaysOnTop)
+        {
+            var frame = _framesFactory.LoadFrame(_framePath);
+            Window window = null;
+
+            if (_oneScreenMode)
+                _rootNode.AddChild(frame);
+            else
+                window = _windowsManager.CreateNewWindowForFrame(frame);
+
+            frame.SetScaleFactor(_scale);
+            frame.WaitForResizeToChangeForm = _waitForReaizeEnd;
+            frame.SmoothResizing = _smoothResizing;
+
+            if (window != null)
+            {
+                if (window.IsNodeReady() == false)
+                    window.Ready += () => OnWindowReady(window, alwaysOnTop);
+                else
+                    OnWindowReady(window, alwaysOnTop);
+            }
+
+            _subFrames.Add(frame);
+            return frame;
         }
 
         private void SetupMainWindow()
