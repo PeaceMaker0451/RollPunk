@@ -4,49 +4,55 @@ using RollPunk.Client.Game;
 using RollPunk.ClientSide.Runtime.UI;
 using RollPunk.HierarchyFields;
 using RollPunk.UIFields;
+using RollPunk.UI.Forms;
 using System;
 
 namespace RollPunk.Client.Forms
 {
-    internal class SessionViewController : IFormController<GameView>
-    {   
+    internal class SessionViewController : IFormPresenter<GameView>
+    {
         private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
-
-        public GameView View { get; private set; }
-        public string FormPath => "res://Scenes/FormsScenes/GameView.tscn";
-
-        public IFormHandle FormHandle { get; private set; }
+        private GameView _view;
 
         public SessionViewController(FieldControlsConstructor constructor)
         {
             _constructor = constructor;
         }
 
-        public void Initialize()
+        public void Attach(GameView form)
         {
-            // Инициализация будет вызвана при установке сессии
+            _view = form;
+
+            if (_session != null)
+                BindSession();
         }
 
         public void SetSession(ClientSession session)
         {
             _session = session;
 
-            GD.Print($"{View} | {_session.Entities} | {_constructor} | {session.Serializator}");
-            
-            View.Initialize(_session, _constructor);
+            if (_view != null)
+                BindSession();
+        }
 
-            View.EntityView.SetViewRule((lineField) =>
+        private void BindSession()
+        {
+            GD.Print($"{_view} | {_session.Entities} | {_constructor} | {_session.Serializator}");
+
+            _view.Initialize(_session, _constructor);
+
+            _view.EntityView.SetViewRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
                     throw new Exception("LineField don't have EntityField Ancestor");
-                
+
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
                 return role >= lineField.ViewAccessLevel;
             });
 
-            View.EntityView.SetEditRule((lineField) =>
+            _view.EntityView.SetEditRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
@@ -55,16 +61,6 @@ namespace RollPunk.Client.Forms
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
                 return role >= lineField.EditAccessLevel;
             });
-        }
-
-        public void SetView(GameView view)
-        {
-            View = view;
-        }
-
-        public void SetFormHandle(IFormHandle handle)
-        {
-            FormHandle = handle;
         }
     }
 }
