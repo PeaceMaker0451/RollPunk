@@ -67,12 +67,12 @@ namespace RollPunk.Client.Forms
             if (allowCancel)
                 cancelButton.Pressed += () => completed = false;
 
-            var handle = ShowDialog(dialogue);
+            ShowDialog(dialogue);
 
             while (completed == null)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
-            _formsManager.CloseForm(handle);
+            dialogue.Close();
             return new DialogResult<string>(completed == true, result);
         }
 
@@ -133,12 +133,12 @@ namespace RollPunk.Client.Forms
             if (allowCancel)
                 cancelButton.Pressed += () => completed = false;
 
-            var handle = ShowDialog(dialogue);
+            ShowDialog(dialogue);
 
             while (completed == null)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
-            _formsManager.CloseForm(handle);
+            dialogue.Close();
             return new DialogResult<int?>(completed == true, result);
         }
 
@@ -173,12 +173,12 @@ namespace RollPunk.Client.Forms
             bool completed = false;
             continueButton.Pressed += () => completed = true;
 
-            var handle = ShowDialog(dialogue);
+            ShowDialog(dialogue);
 
             while (!completed)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
-            _formsManager.CloseForm(handle);
+            dialogue.Close();
         }
 
         public async Task<DialogResult<bool>> ShowConfirmation(string title, string message, bool allowCancel = true, Vector2? minSize = null, string yesButtonText = "Да", string noButtonText = "Нет")
@@ -204,12 +204,12 @@ namespace RollPunk.Client.Forms
             if (allowCancel)
                 noButton.Pressed += () => result = false;
 
-            var handle = ShowDialog(dialogue);
+            ShowDialog(dialogue);
 
             while (result == null)
                 await dialogue.ToSignal(dialogue.GetTree(), SceneTree.SignalName.ProcessFrame);
 
-            _formsManager.CloseForm(handle);
+            dialogue.Close();
             return new DialogResult<bool>(result == true, result == true);
         }
 
@@ -269,9 +269,9 @@ namespace RollPunk.Client.Forms
             return button;
         }
 
-        private IFormHandle ShowDialog(Form dialogue)
+        private void ShowDialog(Form dialogue)
         {
-            return _formsManager.ShowForm(dialogue);
+            _formsManager.Open(dialogue);
         }
     }
 }
