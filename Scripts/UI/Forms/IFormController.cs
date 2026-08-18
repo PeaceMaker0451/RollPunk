@@ -2,28 +2,20 @@ using RollPunk.UI.Forms;
 
 namespace RollPunk.Client.Forms
 {
-    public interface IFormController
+    /// <summary>
+    /// Контроллер (презентер) формы. Знает про домен и связывает его с формой.
+    ///
+    /// Контроллер получает готовую форму через Attach, после чего живёт вместе с ней
+    /// и работает с её публичным API. Никаких SetView/SetFormHandle/Initialize по отдельности —
+    /// вся инициализация выполняется в Attach.
+    /// </summary>
+    /// <typeparam name="TForm">Тип формы, которой управляет контроллер.</typeparam>
+    public interface IFormPresenter<in TForm> where TForm : Form
     {
-        public IFormHandle FormHandle { get; }
-        
-        public void Initialize();
-        public void SetFormHandle(IFormHandle handle);
-    }
-
-    public interface IFormControllerBase : IFormController
-    {
-        public string FormPath { get; }
-        public Form View { get; }
-
-        public void SetView(Form view);
-    }
-
-    public interface IFormController<T> : IFormControllerBase where T : Form
-    {
-        public new T View { get; }
-        Form IFormControllerBase.View => View;
-
-        public void SetView(T view);
-        void IFormControllerBase.SetView(Form view) => SetView((T)view);
+        /// <summary>
+        /// Вызывается менеджером после создания и показа формы.
+        /// Контроллер выполняет здесь всю инициализацию и подписки.
+        /// </summary>
+        void Attach(TForm form);
     }
 }

@@ -18,6 +18,7 @@ namespace RollPunk.Client
         ModMenu
     }
 
+    [FormScene("res://Scenes/FormsScenes/MainMenu.tscn")]
     internal partial class MainMenu : Form
     {
         [Export] private MainSubMenu _mainMenu;

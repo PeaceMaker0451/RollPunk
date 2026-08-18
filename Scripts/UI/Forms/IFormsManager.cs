@@ -1,34 +1,55 @@
 using Godot;
 using RollPunk.Modding.APIs;
 using RollPunk.UI.Forms;
-using System;
+using RollPunk.UI.Frames;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RollPunk.Client.Forms
 {
+    /// <summary>
+    /// Единственная точка создания форм и роутинга их по местам показа.
+    ///
+    /// Типичный сценарий: forms.Open&lt;MyForm&gt;() — получил форму, работаешь с ней напрямую.
+    /// Всё, что касается самой формы как окна (Close, MoveTo..., SetTitle), — на форме.
+    /// Работа с фреймами напрямую (без форм) — через IFramesHost.
+    /// </summary>
     public interface IFormsManager : IAPIHandler
     {
-        // Основные операции
-        T GetForm<T>(IFormHandle handle) where T : Form;
-        
-        // Работа с программно созданными формами
-        IFormHandle ShowForm(Form form, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0);
-        IFormHandle ShowForm(string path, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0);
-        
-        // Перемещение между контейнерами
-        void MoveToNewWindow(IFormHandle handle);
-        void MoveToMainTab(IFormHandle handle, int priority = 0);
-        
-        // Управление
-        void CloseForm(IFormHandle handle);
+        /// <summary>
+        /// Создаёт форму по её типу (сцена берётся из [FormScene]) и показывает.
+        /// </summary>
+        T Open<T>(FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0)
+            where T : Form;
 
-        // Работа с контроллерами
-        IFormHandle ShowController<T>(T controller, FormDisplayMode mode = FormDisplayMode.MainTab, int priority = 0)
-            where T : IFormController;
+        /// <summary>
+        /// Показывает уже созданный инстанс формы. Полезно для форм, собираемых кодом,
+        /// или для форм с нетривиальной инициализацией.
+        /// </summary>
+        T Open<T>(T form, FormDisplayMode mode = FormDisplayMode.NewWindow, int priority = 0)
+            where T : Form;
 
-        T GetController<T>(IFormHandle handle) where T : class, IFormController;
-        
-        // Диалоги
+        /// <summary>
+        /// Показывает форму в заранее подготовленном фрейме.
+        /// Используется в продвинутых сценариях, когда нужно кастомизировать фрейм до показа формы.
+        /// </summary>
+        T OpenIn<T>(Frame frame) where T : Form;
+
+        /// <summary>
+        /// Создаёт форму, привязывает к ней контроллер и показывает.
+        /// </summary>
+        TForm OpenWith<TForm>(IFormPresenter<TForm> presenter,
+                              FormDisplayMode mode = FormDisplayMode.NewWindow,
+                              int priority = 0)
+            where TForm : Form;
+
+        /// <summary>Все открытые формы.</summary>
+        IEnumerable<Form> OpenForms { get; }
+
+        /// <summary>Находит первую открытую форму заданного типа. Null, если такой нет.</summary>
+        T FindOpen<T>() where T : Form;
+
+        /// <summary>Диалоги (сообщения, ввод, подтверждения).</summary>
         IDialogFactory Dialogs { get; }
     }
 
@@ -36,20 +57,6 @@ namespace RollPunk.Client.Forms
     {
         MainTab,
         NewWindow
-    }
-
-    public interface IFormHandle
-    {
-        string Id { get; }
-        bool IsValid { get; }
-        FormLocation Location { get; }
-    }
-
-    public enum FormLocation
-    {
-        NewWindow,
-        MainTab,
-        Closed
     }
 
     public interface IDialogFactory

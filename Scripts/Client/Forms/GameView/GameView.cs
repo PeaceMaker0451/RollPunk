@@ -13,6 +13,7 @@ using System;
 
 namespace RollPunk.ClientSide.Runtime.UI
 {
+    [FormScene("res://Scenes/FormsScenes/GameView.tscn")]
     internal partial class GameView : Form
     {
         [Export] private FieldsList _fieldsList;
