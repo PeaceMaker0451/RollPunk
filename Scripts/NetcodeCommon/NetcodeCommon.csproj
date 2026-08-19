@@ -17,9 +17,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\AccessPolicy\AccessPolicy.csproj" />
 	  <ProjectReference Include="..\Entities\Entities.csproj" />
+	  <ProjectReference Include="..\Events\Events.csproj" />
 	  <ProjectReference Include="..\Fields\Fields.csproj" />
 	  <ProjectReference Include="..\HierarchyFields\HierarchyFields.csproj" />
-	  <ProjectReference Include="..\Logs\Logs.csproj" />
+	  <ProjectReference Include="..\Logs\Events.csproj" />
 	  <ProjectReference Include="..\Players\Players.csproj" />
 	  <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
 	</ItemGroup>

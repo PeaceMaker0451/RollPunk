@@ -11,6 +11,7 @@
     <Compile Remove="Scripts\ClientNetcode\**" />
     <Compile Remove="Scripts\CommandsSystem\**" />
     <Compile Remove="Scripts\Debug\**" />
+    <Compile Remove="Scripts\Events\**" />
     <Compile Remove="Scripts\Fields\**" />
     <Compile Remove="Scripts\HierarchyFields\**" />
     <Compile Remove="Scripts\Logs\**" />
@@ -28,6 +29,7 @@
     <EmbeddedResource Remove="Scripts\ClientNetcode\**" />
     <EmbeddedResource Remove="Scripts\CommandsSystem\**" />
     <EmbeddedResource Remove="Scripts\Debug\**" />
+    <EmbeddedResource Remove="Scripts\Events\**" />
     <EmbeddedResource Remove="Scripts\Fields\**" />
     <EmbeddedResource Remove="Scripts\HierarchyFields\**" />
     <EmbeddedResource Remove="Scripts\Logs\**" />
@@ -49,9 +51,10 @@
     <ProjectReference Include="Scripts\AccessPolicy\AccessPolicy.csproj" />
     <ProjectReference Include="Scripts\ClientNetcode\ClientNetcode.csproj" />
     <ProjectReference Include="Scripts\Entities\Entities.csproj" />
+    <ProjectReference Include="Scripts\Events\Events.csproj" />
     <ProjectReference Include="Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="Scripts\HierarchyFields\HierarchyFields.csproj" />
-    <ProjectReference Include="Scripts\Logs\Logs.csproj" />
+    <ProjectReference Include="Scripts\Logs\Events.csproj" />
     <ProjectReference Include="Scripts\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 </Project>
