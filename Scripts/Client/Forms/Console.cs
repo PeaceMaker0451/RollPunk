@@ -1,4 +1,5 @@
 using Godot;
+using PunkCommandSystem;
 using RollPunk.Debug;
 using RollPunk.Scripts.Client.Forms;
 using RollPunk.UI.Forms;
@@ -6,62 +7,78 @@ using System;
 
 namespace RollPunk.Client.Forms
 {
-	internal partial class Console : Form
+    [FormScene("res://Scenes/FormsScenes/Console.tscn")]
+    internal partial class Console : Form
 	{
-		[Export] Button sendCommandButton;
-		[Export] RichTextLabel consoleField;
-		[Export] LineEdit consoleWriteLine;
+		[Export] Button _sendCommandButton;
+		[Export] RichTextLabel _consoleField;
+		[Export] LineEdit _consoleWriteLine;
 
-		public override void _Ready()
+		private ClientConsole _console;
+		private CommandManager _commandManager;
+
+        public override void _Ready()
+        {
+            _sendCommandButton.Pressed += SendCommandButton_Pressed;
+            _consoleWriteLine.TextSubmitted += ConsoleWriteLine_TextSubmitted;
+        }
+		
+		public void Initialize(ClientConsole console, CommandManager commandManager = null)
 		{
-			base._Ready();
+			if (_console != null)
+				_console.ConsoleUpdated -= AddTextToConsole;
 			
-			ClientRoot.Console.ConsoleUpdated += AddTextToConsole;
-			sendCommandButton.Pressed += SendCommandButton_Pressed;
-			consoleWriteLine.TextSubmitted += ConsoleWriteLine_TextSubmitted;
-			UpdateConsole();
-		}
+			_commandManager = commandManager;
+
+			if(_commandManager == null)
+			{
+				_consoleWriteLine.Visible = false;
+				_sendCommandButton.Visible = false;
+			}
+			
+			_console = console;
+            _console.ConsoleUpdated += AddTextToConsole;
+            UpdateConsole();
+        }
 
 		private void ConsoleWriteLine_TextSubmitted(string newText)
 		{
-			ExecuteCommand(consoleWriteLine.Text);
-			consoleWriteLine.Text = "";
+			ExecuteCommand(_consoleWriteLine.Text);
+			_consoleWriteLine.Text = "";
 		}
 
 		private void SendCommandButton_Pressed()
 		{
-			ExecuteCommand(consoleWriteLine.Text);
-			consoleWriteLine.Text = "";
+			ExecuteCommand(_consoleWriteLine.Text);
+			_consoleWriteLine.Text = "";
 		}
 
 		private void ExecuteCommand(string command)
 		{
 			try
 			{
-				string result = ClientRoot.CommandManager.ExecuteCommandAsync(command).Result;
-				RPDebug.Log($"{command} =>\n{result}");
+				string result = _commandManager.ExecuteCommandAsync(command).Result;
+                AddTextToConsole($"{command} =>\n{result}");
 			}
 			catch (Exception e)
 			{
-                RPDebug.Log($"{command} =>\n{e.Message}");
+                AddTextToConsole($"{command} =>\n{e.Message}");
 			}
-
 		}
 
 		public void UpdateConsoleField(string _consoleField)
 		{
 			this.CallDeferred(nameof(UpdateConsole));
-
 		}
 
 		private void UpdateConsole()
 		{
-			consoleField.Text = ClientRoot.Console.ConsoleBuffer.ToString();
+			_consoleField.Text = _console.ConsoleBuffer;
 		}
 
 		private void AddTextToConsole(string text)
 		{
-			consoleField.CallDeferred("append_text", text);
+			_consoleField.CallDeferred(RichTextLabel.MethodName.AppendText, text);
 		}
 	}
 }

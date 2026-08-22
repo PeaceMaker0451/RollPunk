@@ -4,23 +4,22 @@ using RollPunk.Client.Game;
 using RollPunk.ClientSide.Runtime.UI;
 using RollPunk.HierarchyFields;
 using RollPunk.UIFields;
-using RollPunk.UI.Forms;
 using System;
 
 namespace RollPunk.Client.Forms
 {
-    internal class SessionViewController : IFormPresenter<GameView>
+    internal class SessionViewController : IFormPresenter<SessionView>
     {
         private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
-        private GameView _view;
+        private SessionView _view;
 
         public SessionViewController(FieldControlsConstructor constructor)
         {
             _constructor = constructor;
         }
 
-        public void Attach(GameView form)
+        public void Attach(SessionView form)
         {
             _view = form;
 
@@ -36,13 +35,16 @@ namespace RollPunk.Client.Forms
                 BindSession();
         }
 
+        public void Close()
+        {
+            _view?.Close();
+        }
+
         private void BindSession()
         {
             GD.Print($"{_view} | {_session.Entities} | {_constructor} | {_session.Serializator}");
 
-            _view.Initialize(_session, _constructor);
-
-            _view.EntityView.SetViewRule((lineField) =>
+            _view.SetEntityViewVisibiblityRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
@@ -52,7 +54,7 @@ namespace RollPunk.Client.Forms
                 return role >= lineField.ViewAccessLevel;
             });
 
-            _view.EntityView.SetEditRule((lineField) =>
+            _view.SetEntityViewEditabilityRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
                 if (entity == null)
@@ -61,6 +63,16 @@ namespace RollPunk.Client.Forms
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer);
                 return role >= lineField.EditAccessLevel;
             });
+
+            _view.SetFieldListContainer(_session.Fields);
+            _view.InitializeLogs(_session);
+            _view.InitializePlayerList(_session);
+
+            _view.FieldListFieldSelected += (field) =>
+            {
+                if (field is EntityField entityField)
+                    _view.ShowEntity(entityField);
+            };
         }
     }
 }

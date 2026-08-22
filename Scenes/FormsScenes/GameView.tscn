@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dt2tx3ufddnwx"]
 
-[ext_resource type="Script" uid="uid://6k78ibynl0uu" path="res://Scripts/Client/Forms/GameView/GameView.cs" id="1_6vfg8"]
+[ext_resource type="Script" uid="uid://bojtf2bkd2wtp" path="res://Scripts/Client/Forms/GameView/SessionView.cs" id="1_fekk2"]
 [ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="2_38wue"]
 [ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="3_1rd3g"]
 [ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_li2fu"]
@@ -15,17 +15,17 @@
 [ext_resource type="Script" uid="uid://d0w5ie5fxsbm" path="res://Scripts/UI/SessionConsole/EventConsole.cs" id="12_umbsp"]
 [ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="13_n5w6t"]
 
-[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "_console", "EntityView")]
+[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "_console", "_entityView")]
 custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1501.0
 offset_bottom = 874.0
-script = ExtResource("1_6vfg8")
+script = ExtResource("1_fekk2")
 _fieldsList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ItemList")
 _playersList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer/ItemList2")
 _console = NodePath("HBoxContainer/MarginContainer3")
-EntityView = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/Entity")
+_entityView = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/Entity")
 Title = "Игра"
 
 [node name="Background" type="Control" parent="." unique_id=1802422318 node_paths=PackedStringArray("_videoPlayer")]

@@ -51,7 +51,6 @@ _updateLogsLabel = NodePath("Background/Menu/RightContent/MarginContainer/Scroll
 _authorsLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer3/Authors")
 _versionLabel = NodePath("Background/Menu/RightContent/MarginContainer/ScrollContainer/VBoxContainer/PanelContainer3/VersionText")
 Title = "Главное меню"
-resizable = null
 
 [node name="Background" type="Control" parent="." unique_id=663389259 node_paths=PackedStringArray("_videoPlayer")]
 self_modulate = Color(0.114897, 0.114897, 0.114897, 1)
@@ -276,7 +275,6 @@ text = "userID"
 fit_content = true
 
 [node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton")]
-visible = false
 layout_mode = 2
 script = ExtResource("3_2aawn")
 _createSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/CreateSessionButton")

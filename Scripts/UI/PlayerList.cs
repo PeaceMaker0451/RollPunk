@@ -9,10 +9,10 @@ namespace RollPunk.Scripts.UI
 {
     public partial class PlayerList: ItemList
     {
-        private ClientSession _session;
+        private Session _session;
         private Dictionary<int, Guid> _itemToPlayer;
 
-        public void Initialize(ClientSession session)
+        public void Initialize(Session session)
         {
             _session = session;
             Clear();

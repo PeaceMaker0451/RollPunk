@@ -160,7 +160,7 @@ namespace RollPunk.Client.Game
                 Flush();
         }
 
-        private void OnLogAdded(Logs.Event log)
+        private void OnLogAdded(Event log)
         {
             _pendingLogs.Add(log);
         }

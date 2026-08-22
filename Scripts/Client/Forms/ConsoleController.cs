@@ -1,36 +1,25 @@
+using PunkCommandSystem;
 using RollPunk.Client;
 using RollPunk.Client.Forms;
 
 namespace RollPunk.Scripts.Client.Forms
 {
-    internal class ConsoleController : IFormController<Console>
+    internal class ConsoleController : IFormPresenter<Console>
     {
         private readonly ClientConsole _console;
+        private readonly CommandManager _commandManager;
         private Console _view;
 
-        public Console View => _view;
-        public string FormPath => "res://Scenes/FormsScenes/Console.tscn";
-        public IFormHandle FormHandle { get; private set; }
-
-        public ConsoleController(ClientConsole console)
+        public ConsoleController(ClientConsole console, CommandManager commandManager = null)
         {
             _console = console;
+            _commandManager = commandManager;
         }
 
-        public void Initialize()
+        public void Attach(Console form)
         {
-            // Логика инициализации консоли уже в самой форме Console
-            // Контроллер может добавить дополнительную логику если нужно
-        }
-
-        public void SetView(Console view)
-        {
-            _view = view;
-        }
-
-        public void SetFormHandle(IFormHandle handle)
-        {
-            FormHandle = handle;
+            _view = form;
+            _view.Initialize(_console, _commandManager);
         }
     }
 }

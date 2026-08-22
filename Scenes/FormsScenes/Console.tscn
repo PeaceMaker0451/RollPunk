@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4v62a"]
 
-[node name="Console" type="Control" unique_id=119088831 node_paths=PackedStringArray("sendCommandButton", "consoleField", "consoleWriteLine")]
+[node name="Console" type="Control" unique_id=119088831 node_paths=PackedStringArray("_sendCommandButton", "_consoleField", "_consoleWriteLine")]
 custom_minimum_size = Vector2(500, 500)
 propagate_maximum_size = true
 layout_mode = 3
@@ -15,9 +15,9 @@ anchors_preset = 0
 offset_right = 470.0
 offset_bottom = 437.0
 script = ExtResource("1_gdu3y")
-sendCommandButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
-consoleField = NodePath("ColorRect/VBoxContainer/ConsoleField")
-consoleWriteLine = NodePath("ColorRect/VBoxContainer/HBoxContainer/LineEdit")
+_sendCommandButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
+_consoleField = NodePath("ColorRect/VBoxContainer/ConsoleField")
+_consoleWriteLine = NodePath("ColorRect/VBoxContainer/HBoxContainer/LineEdit")
 Title = "Консоль"
 
 [node name="ColorRect" type="MarginContainer" parent="." unique_id=1261954462]

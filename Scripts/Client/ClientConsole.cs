@@ -9,9 +9,11 @@ namespace RollPunk.Client
 {
     public class ClientConsole
     {
+        private StringBuilder _consoleBuffer = new();
+
         public event Action<string> ConsoleUpdated;
 
-        public StringBuilder ConsoleBuffer {  get; private set; } = new();
+        public string ConsoleBuffer => _consoleBuffer.ToString();
 
         public void ConsoleLog(string log, bool addTime = true)
         {
@@ -22,7 +24,7 @@ namespace RollPunk.Client
             else
                 formattedText = $"\n{log}";
 
-            ConsoleBuffer.Append(formattedText);
+            _consoleBuffer.Append(formattedText);
             ConsoleUpdated?.Invoke(formattedText);
         }
     }

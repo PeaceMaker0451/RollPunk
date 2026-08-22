@@ -24,9 +24,6 @@ namespace RollPunk.Client.Game
         private MainMenuController _mainMenuController;
         private SessionViewController _sessionViewController;
         private ConsoleController _consoleController;
-        private IFormHandle _mainMenuHandle;
-        private IFormHandle _gameViewHandle;
-        private IFormHandle _consoleHandle;
 
         private FieldControlsConstructor _controlsConstructor = new();
         private EntityFactory _entityFactory;
@@ -124,7 +121,7 @@ namespace RollPunk.Client.Game
         private void CreateControllers()
         {
             _mainMenuController = new MainMenuController(this);
-            _mainMenuHandle = ClientRoot.FormsManager.ShowController(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
+            ClientRoot.FormsManager.OpenWith<MainMenu>(_mainMenuController, FormDisplayMode.MainTab, int.MaxValue);
             
             CreateConsole();
         }
@@ -139,7 +136,7 @@ namespace RollPunk.Client.Game
                     if (_sessionViewController == null)
                     {
                         _sessionViewController = new SessionViewController(_controlsConstructor);
-                        _gameViewHandle = ClientRoot.FormsManager.ShowController(_sessionViewController, FormDisplayMode.MainTab, 1);
+                        ClientRoot.FormsManager.OpenWith(_sessionViewController, FormDisplayMode.MainTab, 1);
                         _sessionViewController.SetSession(Session);
                     }
                     break;
@@ -151,11 +148,7 @@ namespace RollPunk.Client.Game
 
         private void CleanupSession()
         {
-            if (_gameViewHandle != null)
-            {
-                ClientRoot.FormsManager.CloseForm(_gameViewHandle);
-                _gameViewHandle = null;
-            }
+            _sessionViewController?.Close();
             _sessionViewController = null;
         }
 
@@ -163,8 +156,8 @@ namespace RollPunk.Client.Game
         {
             if (_consoleController == null)
             {
-                _consoleController = new Scripts.Client.Forms.ConsoleController(ClientRoot.Console);
-                _consoleHandle = ClientRoot.FormsManager.ShowController(_consoleController, FormDisplayMode.MainTab);
+                _consoleController = new ConsoleController(ClientRoot.Console);
+                ClientRoot.FormsManager.OpenWith(_consoleController, FormDisplayMode.MainTab, int.MinValue);
             }
         }
 
