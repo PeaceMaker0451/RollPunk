@@ -28,8 +28,8 @@ namespace RollPunk.ClientSide.Runtime.UI
             
             if (_container != null)
             {
-                _container.ChildAdded -= OnContainerFieldAdded;
-                _container.ChildRemoved -= OnContainerFieldRemoved;
+                _container.FieldAdded -= OnContainerFieldAdded;
+                _container.FieldRemoved -= OnContainerFieldRemoved;
             }
             
             _container = container;
@@ -40,8 +40,8 @@ namespace RollPunk.ClientSide.Runtime.UI
             
             if (_container != null)
             {
-                _container.ChildAdded += OnContainerFieldAdded;
-                _container.ChildRemoved += OnContainerFieldRemoved;
+                _container.FieldAdded += OnContainerFieldAdded;
+                _container.FieldRemoved += OnContainerFieldRemoved;
                 
                 _root = CreateItem();
                 _root.SetText(0, "Fields");
@@ -119,11 +119,11 @@ namespace RollPunk.ClientSide.Runtime.UI
             _updateNameActions[field] = onNameChanged;
 
             Action<Field> onChildAdded = (childField) => OnFieldChildAdded(field, childField);
-            field.ChildAdded += onChildAdded;
+            field.FieldAdded += onChildAdded;
             _childAddedActions[field] = onChildAdded;
 
             Action<Field> onChildRemoved = (childField) => OnFieldChildRemoved(field, childField);
-            field.ChildRemoved += onChildRemoved;
+            field.FieldRemoved += onChildRemoved;
             _childRemovedActions[field] = onChildRemoved;
         }
 
@@ -138,13 +138,13 @@ namespace RollPunk.ClientSide.Runtime.UI
 
             if (_childAddedActions.TryGetValue(field, out var addedAction))
             {
-                field.ChildAdded -= addedAction;
+                field.FieldAdded -= addedAction;
                 _childAddedActions.Remove(field);
             }
 
             if (_childRemovedActions.TryGetValue(field, out var removedAction))
             {
-                field.ChildRemoved -= removedAction;
+                field.FieldRemoved -= removedAction;
                 _childRemovedActions.Remove(field);
             }
         }

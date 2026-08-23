@@ -100,14 +100,14 @@ namespace RollPunk.Fields
 
         private void SubscribeToFieldsUpdates(IFieldsHandler fieldOwner)
         {
-            fieldOwner.ChildAdded += AddField;
-            fieldOwner.ChildRemoved += RemoveField;
+            fieldOwner.FieldAdded += AddField;
+            fieldOwner.FieldRemoved += RemoveField;
         }
 
         private void UnSubscribeFromFieldsUpdates(IFieldsHandler fieldOwner)
         {
-            fieldOwner.ChildAdded -= AddField;
-            fieldOwner.ChildRemoved -= RemoveField;
+            fieldOwner.FieldAdded -= AddField;
+            fieldOwner.FieldRemoved -= RemoveField;
         }
 
         private void SubscribeOnFieldEvents(Field field)
@@ -135,11 +135,11 @@ namespace RollPunk.Fields
 
             Action<Field> onChildAdded = (throwedField) => ChildAdded?.Invoke(throwedField);
             handlers.ChildAdded = onChildAdded;
-            field.ChildAdded += onChildAdded;
+            field.FieldAdded += onChildAdded;
 
             Action<Field> onChildRemoved = (throwedField) => ChildRemoved?.Invoke(field, throwedField);
             handlers.ChildRemoved = onChildRemoved;
-            field.ChildRemoved += onChildRemoved;
+            field.FieldRemoved += onChildRemoved;
 
             Action<Field> onParentChanged = (throwedField) => ParentChanged?.Invoke(field, throwedField);
             handlers.ParentChanged = onParentChanged;
@@ -166,9 +166,9 @@ namespace RollPunk.Fields
             if (handlers.Updated != null)
                 field.Updated -= handlers.Updated;
             if(handlers.ChildAdded != null)
-                field.ChildAdded -= handlers.ChildAdded;
+                field.FieldAdded -= handlers.ChildAdded;
             if (handlers.ChildRemoved != null)
-                field.ChildRemoved -= handlers.ChildRemoved;
+                field.FieldRemoved -= handlers.ChildRemoved;
             if(handlers.ParentChanged != null)
                 field.ParentChanged -= handlers.ParentChanged;
             if(handlers.ParentRemoved != null)

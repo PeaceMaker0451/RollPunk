@@ -1,5 +1,4 @@
 using Godot;
-using RollPunk.Client;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Scripts.UIFields;
@@ -12,39 +11,18 @@ internal partial class EntityView : Form
 {
     [Export] private Container _fieldsContainer;
 
-    [Export] private LineEdit _id;
-    [Export] private LineEdit _name;
-
-    [Export] private Button _saveButton;
-
     private FieldControlsConstructor _controlsConstructor;
     private EntityField _entity;
 	private Dictionary<Field, FieldControl> _controls = new Dictionary<Field, FieldControl>();
-
-    private Serializator _serializator;
 
     private Func<LineField, bool> _viewCheck;
     private Func<LineField, bool> _editCheck;
 
 	public event Action<Field> FieldChanged;
-
-    public override void _Ready()
-    {
-        _saveButton.Pressed += () =>
-        {
-            if (_entity == null)
-                return;
-
-            var data = _serializator.SerializeFieldTree(_entity);
-            ClientRoot.FileDebugUtils.SaveStringWithDialog(data);
-        };
-    }
     
-    public void Initialize(FieldControlsConstructor fieldControlsConstructor, Serializator serializator)
+    public void Initialize(FieldControlsConstructor fieldControlsConstructor)
 	{
         _controlsConstructor = fieldControlsConstructor;
-        _serializator = serializator;
-
     }
 
     public void DisplayField(EntityField entityField)
@@ -53,15 +31,15 @@ internal partial class EntityView : Form
         {
             _entity.DescendantAdded -= OnEntityDescendantAdded;
             _entity.DescendantRemoved -= OnEntityDescendantRemoved;
-            _entity.ChildAdded -= OnEntityDescendantAdded;
-            _entity.ChildRemoved -= OnEntityDescendantRemoved;
+            _entity.FieldAdded -= OnEntityDescendantAdded;
+            _entity.FieldRemoved -= OnEntityDescendantRemoved;
         }
         
         _entity = entityField;
         _entity.DescendantAdded += OnEntityDescendantAdded;
         _entity.DescendantRemoved += OnEntityDescendantRemoved;
-        _entity.ChildAdded += OnEntityDescendantAdded;
-        _entity.ChildRemoved += OnEntityDescendantRemoved;
+        _entity.FieldAdded += OnEntityDescendantAdded;
+        _entity.FieldRemoved += OnEntityDescendantRemoved;
 
         UpdateView();
     }
@@ -95,9 +73,6 @@ internal partial class EntityView : Form
             control.QueueFree();
 
         _controls.Clear();
-
-        _id.Text = _entity.ID.ToString();
-        _name.Text = _entity.Name;
 
         foreach (var field in _entity.Fields)
         {

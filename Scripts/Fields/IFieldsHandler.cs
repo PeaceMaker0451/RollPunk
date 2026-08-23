@@ -5,8 +5,8 @@ namespace RollPunk.Fields
 {
     public interface IFieldsHandler
     {
-        public event Action<Field> ChildAdded;
-        public event Action<Field> ChildRemoved;
+        public event Action<Field> FieldAdded;
+        public event Action<Field> FieldRemoved;
 
         public IReadOnlyList<Field> Fields { get; }
 

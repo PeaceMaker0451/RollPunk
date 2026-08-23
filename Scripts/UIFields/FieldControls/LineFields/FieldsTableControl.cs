@@ -54,7 +54,7 @@ namespace RollPunk.UIFields
             foreach (var innerField in _field.Fields)
                 AddField(innerField);
 
-            _field.ChildAdded += AddField;
+            _field.FieldAdded += AddField;
             AddSubscriptions();
 
             ViewCheckChanged += () =>
@@ -175,7 +175,7 @@ namespace RollPunk.UIFields
 
         protected override void OnExittingTree()
         {
-            _field.ChildAdded -= AddField;
+            _field.FieldAdded -= AddField;
         }
     }
 }

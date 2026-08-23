@@ -19,16 +19,16 @@ namespace RollPunk.ClientSide.Runtime.UI
         {
             if (_container != null)
             {
-                _container.ChildAdded -= OnFieldAdded;
-                _container.ChildRemoved -= OnFieldRemoved;
+                _container.FieldAdded -= OnFieldAdded;
+                _container.FieldRemoved -= OnFieldRemoved;
             }
 
             _container = container;
 
             if (_container != null)
             {
-                _container.ChildAdded += OnFieldAdded;
-                _container.ChildRemoved += OnFieldRemoved;
+                _container.FieldAdded += OnFieldAdded;
+                _container.FieldRemoved += OnFieldRemoved;
 
                 Clear();
                 _indexToField.Clear();

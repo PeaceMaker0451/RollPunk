@@ -64,9 +64,10 @@ namespace RollPunk.Client.Forms
                 return role >= lineField.EditAccessLevel;
             });
 
-            _view.SetFieldListContainer(_session.Fields);
+            _view.SetFieldListContainer(_session.Entities);
             _view.InitializeLogs(_session);
             _view.InitializePlayerList(_session);
+            _view.InitializeEntityView(_constructor);
 
             _view.FieldListFieldSelected += (field) =>
             {

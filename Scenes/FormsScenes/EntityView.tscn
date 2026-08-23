@@ -12,43 +12,12 @@ offset_bottom = 200.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dkj0c")
 script = ExtResource("1_1jb75")
 _fieldsContainer = NodePath("VBoxContainer/ScrollContainer/MarginContainer/CharacterFieldsContainer")
-_id = NodePath("VBoxContainer/HBoxContainer/LineEdit")
-_name = NodePath("VBoxContainer/HBoxContainer/LineEdit2")
-_saveButton = NodePath("VBoxContainer/HBoxContainer/Button")
+_id = NodePath("")
+_name = NodePath("")
+_saveButton = NodePath("")
 Title = "Лист сущности"
-resizable = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1393804762]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=134404647]
-layout_mode = 2
-alignment = 2
-
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=825051649]
-layout_mode = 2
-placeholder_text = "EntityFieldID"
-editable = false
-expand_to_text_length = true
-flat = true
-
-[node name="LineEdit2" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=73312342]
-layout_mode = 2
-placeholder_text = "FieldName"
-editable = false
-expand_to_text_length = true
-flat = true
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1115041956]
-layout_mode = 2
-text = "Export Entity"
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1439259872]
-visible = false
-layout_mode = 2
-text = "Import Entity"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1154105944]
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1000858470]

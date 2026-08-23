@@ -14,6 +14,9 @@ namespace RollPunk.Scripts.UI
 
         public void Initialize(Session session)
         {
+            if(session == null)
+                throw new NullReferenceException(nameof(session));
+            
             _session = session;
             Clear();
             

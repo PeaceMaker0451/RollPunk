@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 namespace RollPunk.Fields
 {
-    public class FieldsContainer<T> : EntityContainer<T>, IReadOnlyFieldsContainer, IFieldsHandler where T : Field
+    public class FieldsContainer<T> : EntityContainer<T>, IReadOnlyFieldsContainer<T>, IFieldsHandler where T : Field
     {
-        public event Action<Field> ChildAdded;
-        public event Action<Field> ChildRemoved;
+        public event Action<Field> FieldAdded;
+        public event Action<Field> FieldRemoved;
 
         public IReadOnlyList<Field> Fields => List;
         public IReadOnlyDictionary<Guid, Field> FieldsDictionary => Dictionary as IReadOnlyDictionary<Guid, Field>;
 
         public FieldsContainer()
         {
-            Added += (field) => ChildAdded?.Invoke(field);
-            Removed += (field) => ChildRemoved?.Invoke(field);
+            Added += (field) => FieldAdded?.Invoke(field);
+            Removed += (field) => FieldRemoved?.Invoke(field);
         }
         
         public void AddField(Field field)

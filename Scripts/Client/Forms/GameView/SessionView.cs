@@ -1,6 +1,7 @@
 using Godot;
 using NetcodeCommon;
 using RollPunk.AccessPolicy;
+using RollPunk.Client;
 using RollPunk.Client.Game;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
@@ -43,7 +44,12 @@ namespace RollPunk.ClientSide.Runtime.UI
 
         public void InitializePlayerList(Session session)
         {
-            _playersList.Initialize(_session);
+            _playersList.Initialize(session);
+        }
+
+        public void InitializeEntityView(FieldControlsConstructor fieldControlsConstructor)
+        {
+            _entityView.Initialize(fieldControlsConstructor);
         }
 
         public void ShowEntity(EntityField field)

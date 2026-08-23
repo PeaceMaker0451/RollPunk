@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.7.1">
+﻿<Project Sdk="Godot.NET.Sdk/4.7.0">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -54,7 +54,6 @@
     <ProjectReference Include="Scripts\Events\Events.csproj" />
     <ProjectReference Include="Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="Scripts\HierarchyFields\HierarchyFields.csproj" />
-    <ProjectReference Include="Scripts\Logs\Events.csproj" />
     <ProjectReference Include="Scripts\RPDebug\RPDebug.csproj" />
   </ItemGroup>
 </Project>

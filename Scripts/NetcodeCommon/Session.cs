@@ -15,7 +15,7 @@ namespace NetcodeCommon
         private Dictionary<Guid, Player> _players;
         private List<Event> _sessionLog;
 
-        protected FieldsContainer<EntityField> FieldsContainer;
+        protected FieldsContainer<EntityField> EntityContainer;
         protected FieldsRegistry FieldsRegistry;
         
         public OwnershipContainer Ownerships { get; private set; } = new();
@@ -30,7 +30,7 @@ namespace NetcodeCommon
 
         public IReadOnlyDictionary<Guid, Player> Players => _players;
         public IReadOnlyFieldRegistry Registry => FieldsRegistry;
-        public IReadOnlyFieldsContainer Fields => FieldsContainer;
+        public IReadOnlyFieldsContainer<EntityField> Entities => EntityContainer;
         public IReadOnlyList<Event> Logs => _sessionLog;
 
         public Session(EntityFactory entityFactory)
@@ -38,8 +38,8 @@ namespace NetcodeCommon
             EntityFactory = entityFactory;
             HierarchyReconstructor = new(EntityFactory);
 
-            FieldsContainer = new();
-            FieldsRegistry = new(FieldsContainer);
+            EntityContainer = new();
+            FieldsRegistry = new(EntityContainer);
             _players = new();
             _sessionLog = new();
         }
@@ -61,11 +61,11 @@ namespace NetcodeCommon
                 if (field.Parent != null)
                     field.Parent.RemoveField(field);
                 else
-                    FieldsContainer.RemoveField(field);
+                    EntityContainer.RemoveField(field);
             }
 
             foreach (var pendingField in patch.PendingFields)
-                HierarchyReconstructor.ApplyFieldState(pendingField, FieldsContainer, null, FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(pendingField, EntityContainer, null, FieldsRegistry);
 
             foreach (var pendingPlayer in patch.PendingPlayers)
             {
@@ -93,7 +93,7 @@ namespace NetcodeCommon
         {
             SessionState state = new()
             {
-                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(FieldsContainer.Fields),
+                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(EntityContainer.Fields),
                 Players = new Dictionary<Guid, EntityState>(),
                 Ownerships = new Dictionary<Guid, EntityState>()
             };
@@ -167,7 +167,7 @@ namespace NetcodeCommon
 
             stringBuilder.AppendLine($"Fields:");
 
-            foreach (var field in FieldsContainer.Fields)
+            foreach (var field in EntityContainer.Fields)
             {
                 stringBuilder.AppendLine($"- {field.Name} [{field.ID}] ({field.Fields.Count} children)");
 
@@ -230,7 +230,7 @@ namespace NetcodeCommon
                 HandleFieldState(fieldState);
 
             foreach (var fieldState in fields)
-                HierarchyReconstructor.ApplyFieldState(fieldState, FieldsContainer, fieldsRegistry: FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(fieldState, EntityContainer, fieldsRegistry: FieldsRegistry);
 
             foreach (var field in FieldsRegistry.Fields)
             {
@@ -239,7 +239,7 @@ namespace NetcodeCommon
                     if (field.Parent != null)
                         field.Parent.RemoveField(field);
                     else
-                        FieldsContainer.RemoveField(field);
+                        EntityContainer.RemoveField(field);
                 }
             }
         }

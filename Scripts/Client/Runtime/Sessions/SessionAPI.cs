@@ -27,7 +27,7 @@ namespace RollPunk.Client.Game.Sessions
         {
             try
             {
-                _session.Entities.Add((EntityField)field.GetField());
+                _session.AddEntity((EntityField)field.GetField());
             }
             catch(Exception ex)
             {
@@ -40,7 +40,7 @@ namespace RollPunk.Client.Game.Sessions
         {
             try
             {
-                return _session.Entities.Remove((EntityField)field.GetField());
+                return _session.RemoveEntity((EntityField)field.GetField());
             }
             catch (Exception ex)
             {

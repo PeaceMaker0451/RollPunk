@@ -19,8 +19,8 @@ namespace RollPunk.Fields
 
         public event Action NameChanged;
         public event Action<string> AdditionalDataChanged;
-        public event Action<Field> ChildAdded;
-        public event Action<Field> ChildRemoved;
+        public event Action<Field> FieldAdded;
+        public event Action<Field> FieldRemoved;
         public event Action<Field> DescendantAdded;
         public event Action<Field> DescendantRemoved;
         public event Action<Field> ParentChanged;
@@ -124,7 +124,7 @@ namespace RollPunk.Fields
             foreach (var childsChild in child._childrenByIds.Values)
                 AddFieldToRegistry(childsChild);
 
-            ChildAdded?.Invoke(child);
+            FieldAdded?.Invoke(child);
         }
 
         public bool RemoveField(Field child)
@@ -136,7 +136,7 @@ namespace RollPunk.Fields
                 child.ClearParent();
                 RemoveFieldFromRegistry(child);
 
-                ChildRemoved?.Invoke(child);
+                FieldRemoved?.Invoke(child);
             }
             return removed;
         }
@@ -193,8 +193,8 @@ namespace RollPunk.Fields
             _childrenByIds.Add(field.ID, field);
             _childrenByNames.Add(field.Name, field);
 
-            field.ChildAdded += OnDescendantAdded;
-            field.ChildRemoved += OnDescendantRemoved;
+            field.FieldAdded += OnDescendantAdded;
+            field.FieldRemoved += OnDescendantRemoved;
         }
 
         private void OnDescendantAdded(Field field)
@@ -214,8 +214,8 @@ namespace RollPunk.Fields
             _childrenByIds.Remove(field.ID);
             _childrenByNames.Remove(field.Name);
 
-            field.ChildAdded -= AddFieldToRegistry;
-            field.ChildRemoved -= RemoveFieldFromRegistry;
+            field.FieldAdded -= AddFieldToRegistry;
+            field.FieldRemoved -= RemoveFieldFromRegistry;
         }
 
         private void ThrowValidateChildOnParent(Field field)

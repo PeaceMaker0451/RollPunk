@@ -16,7 +16,6 @@
     <ProjectReference Include="..\Scripts\Events\Events.csproj" />
     <ProjectReference Include="..\Scripts\Fields\Fields.csproj" />
     <ProjectReference Include="..\Scripts\HierarchyFields\HierarchyFields.csproj" />
-    <ProjectReference Include="..\Scripts\Logs\Events.csproj" />
     <ProjectReference Include="..\Scripts\Modding\Modding.csproj" />
     <ProjectReference Include="..\Scripts\NetcodeCommon\NetcodeCommon.csproj" />
     <ProjectReference Include="..\Scripts\Players\Players.csproj" />

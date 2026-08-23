@@ -29,26 +29,15 @@ namespace RollPunk.Client.Game
         private ModHookerRuleExecuter _ruleExecuter;
         private ModLoader _modLoader;
         private ModsContainer _loadedMods;
-
         private EntityInitializer _entityInitializer;
         private EntityValidator _entityValidator;
-
         private IDataBridge _dataBridge;
         private MutationCatcher _mutationCatcher;
         private OwnershipIntegrityManager _ownershipManager;
 
-        public Guid ID { get; private set; }
-
         public Player CurrentPlayer => Players.ContainsKey(_runtimeData.ClientID) ? Players[_runtimeData.ClientID] : null;
-
         public GlobalAPIInjector APIInjector { get; private set; }
-
         public Serializator Serializator { get; private set; }
-
-        public FieldsContainer<EntityField> Entities => FieldsContainer;
-        public EntityContainer<Rule> Rules { get; private set; } = new();
-        public IReadOnlyFieldRegistry Registry => base.FieldsRegistry;
-
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; }
 
         public ClientSession(EntityFactory entityFactory, IRuntimeData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
@@ -56,9 +45,6 @@ namespace RollPunk.Client.Game
         {
             _runtimeData = runtimeData;
             RPDebug.Log($"[color=bisque]Creating session...[/color]");
-
-            ID = Guid.NewGuid();
-            RPDebug.Log($"[color=bisque]Session {ID}[/color]");
             
             Serializator = new(EntityFactory, HierarchyReconstructor);
 
@@ -74,6 +60,16 @@ namespace RollPunk.Client.Game
 
             _api = new(this);
             APIInjector.AddGlobalAPI(GetAPI());
+        }
+
+        public void AddEntity(EntityField field)
+        {
+            EntityContainer.Add(field);
+        }
+
+        public bool RemoveEntity(EntityField field)
+        {
+            return EntityContainer.Remove(field);
         }
 
         public void InitializeSession()
@@ -144,7 +140,7 @@ namespace RollPunk.Client.Game
 
         private void InitializeFieldsContainer()
         {
-            FieldsContainer.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
+            EntityContainer.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
 
             _entityValidator = new(FieldsRegistry, _hooker, _mutationCatcher);
             _entityInitializer = new(FieldsRegistry, _hooker, _mutationCatcher);
