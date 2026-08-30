@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
+using RollPunk.MembersExposing;
 using System.Collections.Generic;
 
 namespace RollPunk.UIFields
@@ -8,7 +9,7 @@ namespace RollPunk.UIFields
     [EntityType("String")]
     public sealed class StringField : LineField
     {
-        public string Value { get; private set; }
+        [ExposedProperty] public string Value { get; private set; }
 
         public StringField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, string value = "", int linePriority = 0, Dictionary<string, object> additionalData = null)
         : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(StringFieldAPI), linePriority, additionalData)
