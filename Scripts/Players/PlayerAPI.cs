@@ -18,6 +18,11 @@ namespace RollPunk.Players
             _player = handler;
         }
 
+        public void setIsAdmin(bool isAdmin)
+        {
+            _player.SetIsAdmin(isAdmin);
+        }
+
         [MoonSharpHidden]
         public Player GetPlayer()
         {

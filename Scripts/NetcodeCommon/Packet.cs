@@ -9,6 +9,7 @@ namespace RollPunk.NetcodeCommon
     {
         Welcome = 1,
         SessionInitialize,
+        ClientInitialize,
         SessionPatch,
         SessionState
     }

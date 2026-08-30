@@ -21,6 +21,7 @@ namespace RollPunk.Logs
         public Event(string source, SourceType type, string data, DateTime date)
             : base(date.ToString())
         {
+            Name = $"{source} - {data}";
             Source = source;
             Type = type;
             Data = data;

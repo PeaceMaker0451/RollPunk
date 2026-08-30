@@ -31,11 +31,6 @@ namespace RollPunk.UIFields
             };
         }
 
-        public void AddNewFieldControlConstructor(Type fieldType, Func<Field, FieldControl> fieldControlConstructor)
-        {
-            _fieldsControls.Add(fieldType, fieldControlConstructor);
-        }
-
         public FieldControl CreateFieldControl(Field field)
         {
             if (_fieldsControls.TryGetValue(field.GetType(), out var constructor) == false)

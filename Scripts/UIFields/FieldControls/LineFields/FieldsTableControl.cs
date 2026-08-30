@@ -1,10 +1,8 @@
 using Godot;
-using RollPunk.Debug;
 using RollPunk.Fields;
 using RollPunk.Scripts.UIFields;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace RollPunk.UIFields
 {

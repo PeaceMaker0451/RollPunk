@@ -11,11 +11,11 @@ namespace RollPunk.Scripts.Client.Settings
                 "Введи свой игровой ник. Его будут видеть другие игроки.\n" +
                 "(можно будет изменить в настройках)";
             
-            var result = await ClientRoot.FormsManager.Dialogs.ShowStringInput(title, message, allowCancel: false, minSize: new(400, 250), placeholder: "Меня зовут....", okButtonText: "Привет, Роллпанк!");
+            var result = await Root.Forms.Dialogs.ShowStringInput(title, message, allowCancel: false, minSize: new(400, 250), placeholder: "Меня зовут....", okButtonText: "Привет, Роллпанк!");
 
-            var settings = ClientRoot.SettingsManager.LoadSettings();
+            var settings = Root.Settings.LoadSettings();
             settings.Name = result.Value;
-            ClientRoot.SettingsManager.SaveSettings(settings);
+            Root.Settings.SaveSettings(settings);
         }
     }
 }

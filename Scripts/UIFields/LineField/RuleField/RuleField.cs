@@ -4,6 +4,7 @@ using RollPunk.Debug;
 using RollPunk.Entities;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
+using RollPunk.MembersExposing;
 using RollPunk.Rules;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace RollPunk.UIFields
     {
         private string _ruleName;
 
-        public string RuleName => _ruleName;
+        [ExposedProperty] public string RuleName => _ruleName;
         
         public RuleField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, string ruleName, int linePriority = 0, Dictionary<string, object> additionalData = null) : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(RuleFieldAPI), linePriority, additionalData)
         {

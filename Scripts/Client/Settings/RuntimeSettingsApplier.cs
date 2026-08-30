@@ -20,7 +20,7 @@ namespace RollPunk.Scripts.Client.Settings
 
         public void UpdateRuntime()
         {
-            var settings = ClientRoot.SettingsManager.LoadSettings();
+            var settings = Root.Settings.LoadSettings();
 
             foreach (var applier in _settingsAppliers)
                 applier.Apply(settings);

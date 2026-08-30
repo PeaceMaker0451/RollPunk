@@ -29,6 +29,12 @@ namespace RollPunk.ClientNetcode
             _client.SessionInitializeRequestReceived();
         }
 
+        public void HandleClientInitializeRequest(Packet packet)
+        {
+            RPDebug.Log($"[color=dark_violet]Получен запрос инициализировать клиента от сервера[/color]");
+            _client.ClientInitializeRequestReceived();
+        }
+
         public void HandleSessionPatch(Packet packet)
         {
             string data = packet.ReadString();

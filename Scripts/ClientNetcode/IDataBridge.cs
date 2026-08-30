@@ -8,6 +8,7 @@ namespace RollPunk.ClientNetcode
         public event Action<SessionPatch> ReceivedSessionPatch;
         public event Action<SessionState> ReceivedSessionState;
         public event Action SessionInitializeRequest;
+        public event Action ClientInitializeRequest;
         public event Action<Exception> ConnectionErrored;
 
         public void SendClientData(string name, Guid id);

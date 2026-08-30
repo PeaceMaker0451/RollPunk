@@ -7,7 +7,7 @@ namespace RollPunk.Scripts.Client.Settings
     {
         public static ModsContainer GetUserMods(IReadOnlyModsContainer allMods)
         {
-            return ModFilter.GetFilteredMods(allMods, ClientRoot.SettingsManager.LoadSettings().DisabledMods);
+            return ModFilter.GetFilteredMods(allMods, Root.Settings.LoadSettings().DisabledMods);
         }
     }
 }

@@ -4,10 +4,8 @@
 [ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="2_38wue"]
 [ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="3_1rd3g"]
 [ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_li2fu"]
-[ext_resource type="Texture2D" uid="uid://cgwwvw6miydtl" path="res://Sprites/Entity.png" id="4_b35ok"]
 [ext_resource type="VideoStream" uid="uid://c7dem0utlpipp" path="res://Video/Background2.ogv" id="4_li2fu"]
 [ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="5_8idhc"]
-[ext_resource type="Script" uid="uid://bromkehumtcy3" path="res://Scripts/Client/Forms/GameView/FieldsList.cs" id="7_1qbio"]
 [ext_resource type="Script" uid="uid://bpi0ker2gq7hu" path="res://Scripts/UI/SessionConsole/SessionEventConsole.cs" id="11_7uva4"]
 [ext_resource type="Texture2D" uid="uid://dmkekjmdrl14e" path="res://Sprites/PlayerPicPlaceHolder.png" id="11_umbsp"]
 [ext_resource type="Script" uid="uid://ot4kkm2jkhew" path="res://Scripts/UI/PlayerList.cs" id="12_7uva4"]
@@ -15,14 +13,15 @@
 [ext_resource type="Script" uid="uid://d0w5ie5fxsbm" path="res://Scripts/UI/SessionConsole/EventConsole.cs" id="12_umbsp"]
 [ext_resource type="Texture2D" uid="uid://cvn5du5j78r78" path="res://Sprites/icon.svg" id="13_n5w6t"]
 
-[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_fieldsList", "_playersList", "_console", "_entityView")]
+[node name="GameView" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_actionsLabel", "_actionsNode", "_playersList", "_console", "_entityView")]
 custom_minimum_size = Vector2(1000, 500)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1501.0
 offset_bottom = 874.0
 script = ExtResource("1_fekk2")
-_fieldsList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ItemList")
+_actionsLabel = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Label")
+_actionsNode = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
 _playersList = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/FoldableContainer/ItemList2")
 _console = NodePath("HBoxContainer/MarginContainer3")
 _entityView = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/Entity")
@@ -90,18 +89,30 @@ layout_mode = 2
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=382955272]
 layout_mode = 2
-text = "Поля сессии"
+text = "Действия"
 
-[node name="ItemList" type="ItemList" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=519707840]
-custom_minimum_size = Vector2(250, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=416419893]
+custom_maximum_size = Vector2(500, -1)
 layout_mode = 2
 size_flags_vertical = 3
-fixed_icon_size = Vector2i(24, 24)
-script = ExtResource("7_1qbio")
-_entityFieldIcon = ExtResource("4_b35ok")
+horizontal_scroll_mode = 5
+scroll_hint_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ScrollContainer" unique_id=719106063]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer" unique_id=118624639]
+layout_mode = 2
 
 [node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=1564161436]
 layout_mode = 2
@@ -137,18 +148,15 @@ z_index = 10
 material = ExtResource("5_8idhc")
 layout_mode = 2
 script = ExtResource("12_umbsp")
-_text = NodePath("ScrollContainer/RichTextLabel")
+_text = NodePath("RichTextLabel")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer3/Control" unique_id=145498359]
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer3/Control/ScrollContainer" unique_id=1074806492]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer3/Control" unique_id=1074806492]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-fit_content = true
+scroll_following = true
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=462990482]
 layout_mode = 2

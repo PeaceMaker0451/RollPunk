@@ -1,90 +1,173 @@
-[gd_scene format=3 uid="uid://c175gdbt8dx8i"]
+[gd_scene format=3 uid="uid://cgom3t7witeo7"]
 
-[node name="GameSceneView" type="Control"]
-custom_minimum_size = Vector2(580, 350)
+[ext_resource type="Script" uid="uid://bbpsnpb4goxod" path="res://Scripts/Client/Forms/Editor/Editor.cs" id="1_pbhv8"]
+[ext_resource type="Script" uid="uid://dh8w56a2f7dkv" path="res://Scripts/UI/VideoStreamPlayerScaler.cs" id="2_f58es"]
+[ext_resource type="Texture2D" uid="uid://c6t2wcj3uyeyt" path="res://Sprites/RollpunkBackgroundPreview.png" id="3_eghbq"]
+[ext_resource type="VideoStream" uid="uid://c7dem0utlpipp" path="res://Video/Background2.ogv" id="4_xuc1j"]
+[ext_resource type="Material" uid="uid://dj1vnvm1y7noc" path="res://Style/GlassMaterial.tres" id="5_35y0i"]
+[ext_resource type="Script" uid="uid://o4n6i8wxulbm" path="res://Scripts/Client/Forms/GameView/FieldsTree.cs" id="6_f58es"]
+[ext_resource type="Script" uid="uid://d21sp7nx3lnaf" path="res://Scripts/UI/ExposedObjectRenderer.cs" id="9_ggyt1"]
+[ext_resource type="Script" uid="uid://bpi0ker2gq7hu" path="res://Scripts/UI/SessionConsole/SessionEventConsole.cs" id="10_yvcnf"]
+[ext_resource type="Script" uid="uid://d0w5ie5fxsbm" path="res://Scripts/UI/SessionConsole/EventConsole.cs" id="11_5lav8"]
+[ext_resource type="PackedScene" uid="uid://c2lyqeeycshoi" path="res://Scenes/FormsScenes/EntityView.tscn" id="12_tiq7m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqqax"]
+
+[node name="Editor" type="Control" unique_id=1355895266 node_paths=PackedStringArray("_entityView", "_renderer", "_rendererContainer", "_fieldsTree")]
+custom_minimum_size = Vector2(1000, 800)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -18.0
-offset_right = 364.0
-offset_bottom = 118.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1550.0
+offset_bottom = 874.0
+script = ExtResource("1_pbhv8")
+_entityView = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/Entity")
+_renderer = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/ScrollContainer/ExposedRenderer")
+_rendererContainer = NodePath("HBoxContainer/MarginContainer/FoldableContainer/Panel/ScrollContainer")
+_fieldsTree = NodePath("HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer/Tree")
+Title = "Редактор"
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Background" type="Control" parent="." unique_id=1802422318 node_paths=PackedStringArray("_videoPlayer")]
+self_modulate = Color(0.114897, 0.114897, 0.114897, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_f58es")
+_videoPlayer = NodePath("TextureRect/VideoStreamPlayer")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer"]
-layout_mode = 2
-split_offset = -590
-drag_area_highlight_in_editor = true
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1697440545]
+modulate = Color(0.54497427, 0.5449743, 0.5449741, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_eghbq")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="VBoxContainer2" type="VSplitContainer" parent="PanelContainer/HSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-split_offset = 35
-drag_area_highlight_in_editor = true
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Background/TextureRect" unique_id=1209946512]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_xuc1j")
+autoplay = true
+expand = true
+loop = true
 
-[node name="ColorRect" type="PanelContainer" parent="PanelContainer/HSplitContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1850323433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -10
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HSplitContainer/VBoxContainer2/ColorRect"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=662108786]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HSplitContainer/VBoxContainer2/ColorRect/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/MarginContainer2" unique_id=79796802]
+z_index = 1
+material = ExtResource("5_35y0i")
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/HSplitContainer/VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/PanelContainer" unique_id=1101386917]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-text = "Иерархия объектов"
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
-[node name="Tree" type="Tree" parent="PanelContainer/HSplitContainer/VBoxContainer2/ColorRect/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=382955272]
+layout_mode = 2
+text = "Поля"
+
+[node name="Tree" type="Tree" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=1134385103]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("6_f58es")
 
-[node name="ColorRect2" type="PanelContainer" parent="PanelContainer/HSplitContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/PanelContainer/VBoxContainer" unique_id=1282310518]
+layout_mode = 2
+text = "Добавить поле"
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer" unique_id=1571269164 node_paths=PackedStringArray("_eventConsole")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("10_yvcnf")
+_eventConsole = NodePath("Control")
+
+[node name="Control" type="PanelContainer" parent="HBoxContainer/MarginContainer3" unique_id=1431695072 node_paths=PackedStringArray("_text")]
+visible = false
+z_index = 10
+material = ExtResource("5_35y0i")
+layout_mode = 2
+script = ExtResource("11_5lav8")
+_text = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer3/Control" unique_id=1074806492]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/HSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=462990482]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer/MarginContainer" unique_id=639318572]
+layout_mode = 2
+title = "Инспектор"
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/MarginContainer/FoldableContainer" unique_id=1312435497]
+z_index = 1
+material = ExtResource("5_35y0i")
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 730
-drag_area_highlight_in_editor = true
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/HSplitContainer/HSplitContainer"]
+[node name="Entity" parent="HBoxContainer/MarginContainer/FoldableContainer/Panel" unique_id=1881810262 instance=ExtResource("12_tiq7m")]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/FoldableContainer/Panel" unique_id=811312015]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ExposedRenderer" type="PanelContainer" parent="HBoxContainer/MarginContainer/FoldableContainer/Panel/ScrollContainer" unique_id=790707110]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dqqax")
+script = ExtResource("9_ggyt1")
 
-[node name="SubViewport" type="SubViewport" parent="PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(730, 726)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="Camera2D" type="Camera2D" parent="PanelContainer/HSplitContainer/HSplitContainer/SubViewportContainer/SubViewport"]
-position = Vector2(0.485, 0)
-zoom = Vector2(1.22, 1.22)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-rotation_smoothing_enabled = true
-rotation_smoothing_speed = 20.0
-
-[node name="ColorRect3" type="PanelContainer" parent="PanelContainer/HSplitContainer/HSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1332195368]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

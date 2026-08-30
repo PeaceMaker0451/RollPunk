@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using RollPunk.Entities;
 using RollPunk.Fields;
+using RollPunk.MembersExposing;
 using RollPunk.Rules;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace RollPunk.HierarchyFields
         public event Action<Rule> RuleAdded;
         public event Action<Rule> RuleRemoved;
 
-        public IReadOnlyList<Rule> Rules => _rules.Values.ToList();
+        [ExposedCollection] public IReadOnlyList<Rule> Rules => _rules.Values.ToList();
 
         public EntityField(string name, Dictionary<string, object> additionalData = null)
             : base(name, typeof(EntityFieldAPI), additionalData) { }

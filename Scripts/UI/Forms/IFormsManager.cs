@@ -59,7 +59,7 @@ namespace RollPunk.Client.Forms
         NewWindow
     }
 
-    public interface IDialogFactory
+    public interface IDialogFactory : IAPIHandler
     {
         Task<DialogResult<string>> ShowStringInput(string title, string message, string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");
         Task<DialogResult<int?>> ShowIntInput(string title, string message, int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена");

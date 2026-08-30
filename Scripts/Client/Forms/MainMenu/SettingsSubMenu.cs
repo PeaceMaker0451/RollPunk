@@ -28,7 +28,7 @@ namespace RollPunk.Client
 
         private void LoadSettings()
         {
-            _settingsData = ClientRoot.SettingsManager.LoadSettings();
+            _settingsData = Root.Settings.LoadSettings();
 
             _nameField.Text = _settingsData.Name;
             _fontSizeSpinBox.Value = _settingsData.FontSize;
@@ -46,7 +46,7 @@ namespace RollPunk.Client
             _settingsData.SmoothWindowResizing = _smoothWindowResizingCheckBox.ButtonPressed;
             _settingsData.WaitForResizeToChangeWindow = _waitForResizeCheckBox.ButtonPressed;
 
-            ClientRoot.SettingsManager.SaveSettings(_settingsData);
+            Root.Settings.SaveSettings(_settingsData);
         }
 
         protected override void OnOpen()

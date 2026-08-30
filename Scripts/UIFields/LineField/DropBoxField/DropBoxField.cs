@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
+using RollPunk.MembersExposing;
 using System.Collections.Generic;
 
 namespace RollPunk.UIFields
@@ -11,8 +12,8 @@ namespace RollPunk.UIFields
         private List<string> _lines;
         private int _selectedLine;
 
-        public IReadOnlyList<string> Lines => _lines;
-        public int SelectedLine => _selectedLine;
+        [ExposedCollection] public IReadOnlyList<string> Lines => _lines;
+        [ExposedProperty] public int SelectedLine => _selectedLine;
         
         public DropBoxField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, List<string> lines, int selected, int linePriority, Dictionary<string, object> additionalData = null) 
             : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(DropBoxFieldAPI), linePriority, additionalData)

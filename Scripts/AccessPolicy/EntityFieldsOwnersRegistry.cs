@@ -61,13 +61,13 @@ namespace RollPunk.AccessPolicy
             ownership.RemoveTeam(team);
         }
 
-        public PlayerRole GetRelativePlayerRole(EntityField entity, Player player)
+        public PlayerRole GetRelativePlayerRole(EntityField entity, Player player, bool ignoreIsAdmin = false)
         {
             var ownership = GetOwnership(entity.ID);
             if (ownership == null)
                 return PlayerRole.All;
 
-            if (player.IsAdmin)
+            if (player.IsAdmin && ignoreIsAdmin == false)
                 return PlayerRole.Admin;
 
             if (ownership.HasOwner(player.ClientId))

@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetcodeCommon", "Scripts\Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Scripts\Events\Events.csproj", "{5848381A-6461-4A78-9AEF-43B5CC72E4B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembersExposing", "Scripts\MembersExposing\MembersExposing.csproj", "{DD74AEB7-9F28-454E-9A71-86058D820A07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,14 @@ Global
 		{5848381A-6461-4A78-9AEF-43B5CC72E4B6}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
 		{5848381A-6461-4A78-9AEF-43B5CC72E4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5848381A-6461-4A78-9AEF-43B5CC72E4B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.ExportDebug|Any CPU.ActiveCfg = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.ExportDebug|Any CPU.Build.0 = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD74AEB7-9F28-454E-9A71-86058D820A07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

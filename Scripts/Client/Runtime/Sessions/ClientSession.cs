@@ -2,16 +2,12 @@
 using RollPunk.AccessPolicy;
 using RollPunk.Client.Game.Sessions;
 using RollPunk.ClientNetcode;
-using RollPunk.ClientSide.Runtime;
 using RollPunk.Debug;
 using RollPunk.Entities;
-using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
 using RollPunk.Players;
-using RollPunk.Rules;
-using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
 
@@ -20,8 +16,9 @@ namespace RollPunk.Client.Game
     public class ClientSession : Session, IDisposable, IAPIHandler
     {
         private string SessionInitializedHookName = "SessionInitialized";
+        private string ClientInitializedHookName = "ClientInitialized";
 
-        private IRuntimeData _runtimeData;
+        private IRuntimeClientData _runtimeData;
         private SessionAPI _api;
 
         private Constructor _constructor;
@@ -35,18 +32,21 @@ namespace RollPunk.Client.Game
         private MutationCatcher _mutationCatcher;
         private OwnershipIntegrityManager _ownershipManager;
 
+
+        internal SessionPlayerSpace PlayerSpace { get; private set; }
         public Player CurrentPlayer => Players.ContainsKey(_runtimeData.ClientID) ? Players[_runtimeData.ClientID] : null;
         public GlobalAPIInjector APIInjector { get; private set; }
         public Serializator Serializator { get; private set; }
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; }
 
-        public ClientSession(EntityFactory entityFactory, IRuntimeData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
+        public ClientSession(EntityFactory entityFactory, IRuntimeClientData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
             :base(entityFactory)
         {
             _runtimeData = runtimeData;
             RPDebug.Log($"[color=bisque]Creating session...[/color]");
             
             Serializator = new(EntityFactory, HierarchyReconstructor);
+            PlayerSpace = new(this);
 
             if (dataBridge != null)
             {
@@ -57,9 +57,6 @@ namespace RollPunk.Client.Game
             LoadMods(mods);
             InitializeFieldsContainer();
             InitializeOwnershipSystem();
-
-            _api = new(this);
-            APIInjector.AddGlobalAPI(GetAPI());
         }
 
         public void AddEntity(EntityField field)
@@ -77,6 +74,11 @@ namespace RollPunk.Client.Game
             BatchHook(SessionInitializedHookName);
         }
 
+        public void InitializeClient()
+        {
+            BatchHook(ClientInitializedHookName);
+        }
+
         public void CreatePlayer(string name, bool isAdmin = false)
         {
             AddPlayer(_runtimeData.ClientID, name, isAdmin);
@@ -89,12 +91,15 @@ namespace RollPunk.Client.Game
                 _dataBridge.ReceivedSessionPatch -= ApplySessionPatch;
                 _dataBridge.ReceivedSessionState -= ApplyState;
                 _dataBridge.SessionInitializeRequest -= InitializeSession;
-                
+                _dataBridge.ClientInitializeRequest -= InitializeClient;
+
                 if (_dataBridge is TcpClient tcpClient)
                 {
                     tcpClient.Disconnect();
                 }
             }
+
+            PlayerSpace.Dispose();
         }
 
         public API GetAPI()
@@ -122,12 +127,14 @@ namespace RollPunk.Client.Game
             _constructor = new Constructor(_ruleExecuter);
 
             APIInjector.AddGlobalAPI(_hooker.GetAPI());
-            APIInjector.AddGlobalAPI(_constructor.GetAPI());
-            APIInjector.AddGlobalAPI(new RollPunkAPI());
-            APIInjector.AddGlobalAPI(Serializator.GetAPI());
 
             foreach (Mod mod in _loadedMods.Mods)
                 _modLoader.LoadMod(mod);
+
+            _api = new(this);
+            APIInjector.AddGlobalAPI(GetAPI());
+            APIInjector.AddGlobalAPI(Serializator.GetAPI());
+            APIInjector.AddGlobalAPI(_constructor.GetAPI());
         }
 
         private object[] BatchHook(string eventName, params object[] args)
@@ -155,6 +162,7 @@ namespace RollPunk.Client.Game
             _dataBridge.ReceivedSessionPatch += ApplySessionPatch;
             _dataBridge.ReceivedSessionState += ApplyState;
             _dataBridge.SessionInitializeRequest += InitializeSession;
+            _dataBridge.ClientInitializeRequest += InitializeClient;
         }
 
         public override void ApplySessionPatch(SessionPatch patch)

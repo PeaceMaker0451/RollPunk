@@ -1,4 +1,5 @@
 using Godot;
+using RollPunk.Modding.APIs;
 using RollPunk.UI.Forms;
 using System.Threading.Tasks;
 
@@ -7,10 +8,12 @@ namespace RollPunk.Client.Forms
     internal class DialogFactory : IDialogFactory
     {
         private readonly IFormsManager _formsManager;
+        private readonly DialogFactoryAPI _api;
 
         public DialogFactory(IFormsManager formsManager)
         {
             _formsManager = formsManager;
+            _api = new(this);
         }
 
         public async Task<DialogResult<string>> ShowStringInput(string title, string message = "", string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
@@ -211,6 +214,11 @@ namespace RollPunk.Client.Forms
 
             dialogue.Close();
             return new DialogResult<bool>(result == true, result == true);
+        }
+
+        public API GetAPI()
+        {
+            return _api;
         }
 
         private async Task<(Form, Container, Container)> CreateBaseDialog(string title)

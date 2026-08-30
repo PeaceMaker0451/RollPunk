@@ -7,6 +7,7 @@ using RollPunk.AccessPolicy;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RollPunk.Debug;
 
 namespace NetcodeCommon
 {
@@ -25,7 +26,9 @@ namespace NetcodeCommon
 
         public event Action<Guid> PlayerAdded;
         public event Action<Guid> PlayerRemoved;
+
         public event Action<Event> LogAdded;
+        public event Action PatchInserted;
         public event Action StateInserted;
 
         public IReadOnlyDictionary<Guid, Player> Players => _players;
@@ -86,7 +89,12 @@ namespace NetcodeCommon
             }
 
             foreach (var pendingLog in patch.PendingLogs)
+            {
+                RPDebug.Log($"pending log - {pendingLog.Name}");
                 AddLog(new(pendingLog));
+            }
+
+            PatchInserted?.Invoke();
         }
 
         public virtual SessionState GetState()

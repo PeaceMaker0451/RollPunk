@@ -31,7 +31,7 @@ namespace RollPunk.Scripts.Client.Forms.MainMenu
         
         private void LoadMods()
         {
-            List<string> disabledMods = ClientRoot.SettingsManager.LoadSettings().DisabledMods;
+            List<string> disabledMods = Root.Settings.LoadSettings().DisabledMods;
             _modList.SetModList(_loadedMods.Mods);
 
             foreach(var modPair in _modList.ModControls)
@@ -51,9 +51,9 @@ namespace RollPunk.Scripts.Client.Forms.MainMenu
                     disabledMods.Add(modPair.Key.modData.Id);
             }
 
-            var settings = ClientRoot.SettingsManager.LoadSettings();
+            var settings = Root.Settings.LoadSettings();
             settings.DisabledMods = disabledMods;
-            ClientRoot.SettingsManager.SaveSettings(settings);
+            Root.Settings.SaveSettings(settings);
         }
 
         protected override void OnOpen()

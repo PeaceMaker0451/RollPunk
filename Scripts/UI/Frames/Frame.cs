@@ -18,6 +18,8 @@ namespace RollPunk.UI.Frames
         [Export] private int resizeBorderThickness = 8;
         [Export] private int resizeCornerSize = 16;
 
+        private RichTextLabel _screenDebugData;
+        
         private bool isResizing = false;
         private const float transitionTime = 0.07f;
         private const float frameRate = 60f;
@@ -65,6 +67,15 @@ namespace RollPunk.UI.Frames
 
         public override async void _Ready()
         {
+            _screenDebugData = new();
+            _contentPanel.AddChild(_screenDebugData);
+
+            _screenDebugData.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+            _screenDebugData.SizeFlagsVertical = SizeFlags.ExpandFill;
+            _screenDebugData.VisibilityLayer = uint.MaxValue;
+            _screenDebugData.ZIndex = 1000;
+            _screenDebugData.AddThemeColorOverride("default_color", new Color(240, 200, 0));
+
             _contentPanel.ForceUpdateTransform();
             Container parent = _contentPanel.GetParent() as Container;
             Stack parents = new Stack();
@@ -98,15 +109,23 @@ namespace RollPunk.UI.Frames
 
         public virtual void SetForm(Form form)
         {
-            minFrameHeight = (int)(form.CustomMinimumSize.Y + borderOffset.Y * ScaleFactor);
-            minFrameWidth = (int)(form.CustomMinimumSize.X + borderOffset.X * ScaleFactor);
+            try
+            {
+                minFrameHeight = (int)(form.CustomMinimumSize.Y + borderOffset.Y * ScaleFactor);
+                minFrameWidth = (int)(form.CustomMinimumSize.X + borderOffset.X * ScaleFactor);
 
-            CustomMinimumSize = new(minFrameWidth, minFrameHeight);
+                CustomMinimumSize = new(minFrameWidth, minFrameHeight);
 
-            maxFrameHeight = (int)form.CustomMaximumSize.Y != -1 ? Math.Max((int)form.CustomMaximumSize.Y + borderOffset.Y, (int)CustomMinimumSize.Y) : int.MaxValue;
-            maxFrameWidth = (int)form.CustomMaximumSize.X != -1 ? Math.Max((int)form.CustomMaximumSize.X + borderOffset.X, (int)CustomMinimumSize.X) : int.MaxValue;
+                maxFrameHeight = (int)form.CustomMaximumSize.Y != -1 ? Math.Max((int)form.CustomMaximumSize.Y + borderOffset.Y, (int)CustomMinimumSize.Y) : int.MaxValue;
+                maxFrameWidth = (int)form.CustomMaximumSize.X != -1 ? Math.Max((int)form.CustomMaximumSize.X + borderOffset.X, (int)CustomMinimumSize.X) : int.MaxValue;
 
-            SetFormToContentPanel(form);
+                SetFormToContentPanel(form);
+                ClearDebugData();
+            }
+            catch (Exception ex)
+            {
+                WriteDebugData($"Не удалось открыть форму - {ex.Message}\n{ex.StackTrace}");
+            }
         }
 
         public void UpdateSize()
@@ -181,6 +200,16 @@ namespace RollPunk.UI.Frames
 
             CurrentForm.OnShow();
             CurrentForm.Show();
+        }
+
+        protected void WriteDebugData(string text)
+        {
+            _screenDebugData.Text = text;
+        }
+
+        protected void ClearDebugData()
+        {
+            _screenDebugData.Text = string.Empty;
         }
 
         private async Task SmoothContentPanelResize(int targetWidth, int targetHeight)

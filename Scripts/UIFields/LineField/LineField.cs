@@ -2,6 +2,8 @@
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
 using RollPunk.Fields;
+using RollPunk.HierarchyFields;
+using RollPunk.MembersExposing;
 using System;
 using System.Collections.Generic;
 
@@ -15,10 +17,10 @@ namespace RollPunk.UIFields
         public event Action ViewAccessLevelChanged;
         public event Action EditAccessLevelChanged;
 
-        public string VisibleName { get; private set;  }
-        public int LinePriority { get; private set; }
-        public PlayerRole ViewAccessLevel { get; private set; }
-        public PlayerRole EditAccessLevel { get; private set; }
+        [ExposedProperty] public string VisibleName { get; private set;  }
+        [ExposedProperty] public int LinePriority { get; private set; }
+        [ExposedProperty] public PlayerRole ViewAccessLevel { get; private set; }
+        [ExposedProperty] public PlayerRole EditAccessLevel { get; private set; }
 
         public LineField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, Type apiType, int linePriority = 0, Dictionary<string, object> additionalData = null)
             : base(name, apiType, additionalData)

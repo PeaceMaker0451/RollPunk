@@ -12,7 +12,8 @@ public enum ContainerType
     HBox,
     VFlow,
     HFlow,
-    Scroll
+    Scroll,
+    Foldable
 }
 
     public static class ContainerTypeMapper

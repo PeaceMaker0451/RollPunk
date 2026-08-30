@@ -3,6 +3,8 @@ using MoonSharp.Interpreter;
 using RollPunk.Debug;
 using RollPunk.Modding.APIs;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using static Godot.ClassDB;

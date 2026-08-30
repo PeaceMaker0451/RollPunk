@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
+using RollPunk.MembersExposing;
 using System;
 using System.Collections.Generic;
 namespace RollPunk.UIFields
@@ -12,9 +13,9 @@ namespace RollPunk.UIFields
         public event Action MaxValueChanged;
         public event Action MinValueChanged;
 
-        public int MinValue { get; private set; }
-        public int MaxValue { get; private set; }
-        public int Value { get; private set; }
+        [ExposedProperty] public int MinValue { get; private set; }
+        [ExposedProperty] public int MaxValue { get; private set; }
+        [ExposedProperty] public int Value { get; private set; }
 
         public IntField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, int value = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int linePriority = 0, Dictionary<string, object> additionalData = null)
         : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(IntFieldAPI), linePriority, additionalData)

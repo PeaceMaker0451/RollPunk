@@ -5,7 +5,9 @@ using RollPunk.Client.Game;
 using RollPunk.Client.Settings;
 using RollPunk.ClientNetcode;
 using RollPunk.Debug;
+using RollPunk.Entities;
 using RollPunk.Modding;
+using RollPunk.Scripts.Client.Runtime;
 using RollPunk.Scripts.Client.Settings;
 using RollPunk.Scripts.UI;
 using RollPunk.UI.Forms;
@@ -15,9 +17,9 @@ using System.Text;
 
 namespace RollPunk.Client
 {
-    public class ClientRoot
+    public class Root
     {
-        private static ClientRoot Instance;
+        private static Root Instance;
 
         private Node _rootNode;
         private FileDebugUtils _fileDebugUtils;
@@ -31,6 +33,14 @@ namespace RollPunk.Client
         private FormsLoader _formsLoader;
         private IFormsManager _formsManager;
         private Runtime _runtime;
+        private Application _application;
+
+        private EntityFactory _entityFactory;
+        private SessionLifeCycle _sessionStarter;
+        private SessionManager _sessionManager;
+
+        private ModReader _modReader = new();
+        private ModsContainer _readedMods;
 
         private GodotThreadManager _threadManager;
 
@@ -39,14 +49,17 @@ namespace RollPunk.Client
         internal static FileDebugUtils FileDebugUtils => Instance._fileDebugUtils;
         internal static ClientConsole Console => Instance._console;
 
-        internal static SettingsManager SettingsManager => Instance._settingsManager;
+        internal static SettingsManager Settings => Instance._settingsManager;
         internal static CommandManager CommandManager => Instance._commandManager;
-        internal static IFormsManager FormsManager => Instance._formsManager;
+        internal static IFormsManager Forms => Instance._formsManager;
         internal static Runtime Runtime => Instance._runtime;
+        internal static Application Application => Instance._application;
+        internal static SessionManager Sessions => Instance._sessionManager;
+        public static IReadOnlyModsContainer ReadedMods => Instance._readedMods;
 
         internal static GodotThreadManager ThreadManager => Instance._threadManager;
 
-        public ClientRoot(Node rootNode)
+        public Root(Node rootNode)
         {
             if (Instance != null)
                 throw new InvalidOperationException("Client is not null!!");
@@ -64,7 +77,14 @@ namespace RollPunk.Client
             CreateUI(settings);
             CreateThreadManager();
 
+            _readedMods = _modReader.ReadMods(ClientConfig.ModsPaths);
+            _entityFactory = EntityFactoryCreater.Create();
+            _sessionStarter = new(_entityFactory, _readedMods);
+            
             _runtime = new Runtime();
+            _sessionManager = new(_runtime, _sessionStarter);
+
+            _application = new Application();
         }
 
         private void InitializeErrorLogging()

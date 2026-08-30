@@ -1,7 +1,6 @@
-﻿using Godot;
-using Newtonsoft.Json.Linq;
-using RollPunk.Debug;
+﻿using Newtonsoft.Json.Linq;
 using RollPunk.Entities;
+using RollPunk.MembersExposing;
 using RollPunk.Modding.APIs;
 using System;
 using System.Collections.Generic;
@@ -27,9 +26,11 @@ namespace RollPunk.Fields
         public event Action<Field> ParentRemoved;
         public event Action Changed;
 
-        public Dictionary<string, object> AdditionalData { get; private set; } = new();
-        public Field Parent { get; private set; }
-        public IReadOnlyList<Field> Fields => _children;
+        [ExposedProperty(ReadOnly = true)] public Guid ID => base.ID;
+        [ExposedProperty] public string Name => base.Name;
+        [ExposedCollection] public Dictionary<string, object> AdditionalData { get; private set; } = new();
+        [ExposedProperty(ReadOnly = true)] public Field Parent { get; private set; }
+        [ExposedCollection] public IReadOnlyList<Field> Fields => _children;
 
         public Field(string name, Type apiType, Dictionary<string, object> additionalData = null) : base(name)
         {
@@ -48,7 +49,7 @@ namespace RollPunk.Fields
 
         public void SetName(string newName)
         {
-            Name = newName;
+            base.Name = newName;
             NameChanged?.Invoke();
             RaiseChanged();
         }

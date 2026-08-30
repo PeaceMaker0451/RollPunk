@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using RollPunk.AccessPolicy;
 using RollPunk.Entities;
+using RollPunk.MembersExposing;
 using System.Collections.Generic;
 
 namespace RollPunk.UIFields
@@ -8,7 +9,7 @@ namespace RollPunk.UIFields
     [EntityType("Bool")]
     public sealed class BoolField : LineField
     {
-        public bool Value { get; private set; }
+        [ExposedProperty] public bool Value { get; private set; }
 
         public BoolField(string name, string visibleName, PlayerRole viewAccessLevel, PlayerRole editAcessLevel, bool value = false, int linePriority = 0, Dictionary<string, object> additionalData = null)
         : base(name, visibleName, viewAccessLevel, editAcessLevel, typeof(BoolFieldAPI), linePriority, additionalData)

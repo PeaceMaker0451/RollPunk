@@ -75,6 +75,9 @@ namespace RollPunk.Server
                 Event log = new("Server", SourceType.System, $"{name} connected!", DateTime.UtcNow);
                 _session.AddLog(log);
 
+                if (_session.SessionInitialized == false)
+                    player.SetIsAdmin(true);
+
                 SessionPatch newPlayerPatch = new()
                 {
                     PendingPlayers = new() { { clientId, player.GetState() } },
@@ -90,6 +93,7 @@ namespace RollPunk.Server
                     _send.SendSessionState(clientConnectionId, _session.GetState());
 
                 _send.SendSessionPatch(newPlayerPatch);
+                _send.SendInitializeClientRequest(clientConnectionId);
             });
         }
 

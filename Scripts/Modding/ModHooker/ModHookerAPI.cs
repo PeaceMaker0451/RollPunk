@@ -6,7 +6,7 @@ namespace RollPunk.Modding
 {
     internal sealed class ModHookerAPI : HeldAPI
     {
-        Action<string, DynValue> _addHookFunction;
+        private Action<string, DynValue> _addHookFunction;
 
         public ModHookerAPI(IAPIHandler handler, Action<string, DynValue> addHookFunction) : base(handler)
         {

@@ -57,7 +57,7 @@ namespace RollPunk.Client.Game
             RPDebug.Log($"[color=deep_sky_blue]SessionData: \n{_session.GetSessionData()}[/color]");
             
             if (_fieldChanged.Count == 0 && _fieldRemoved.Count == 0 && _fieldAdded.Count == 0 && 
-                _ownershipChanged.Count == 0 && _ownershipRemoved.Count == 0 && _ownershipAdded.Count == 0) return;
+                _ownershipChanged.Count == 0 && _ownershipRemoved.Count == 0 && _ownershipAdded.Count == 0 && _pendingLogs.Count == 0) return;
 
             var changes = _fieldChanged.Select(id => _registry.FieldsDictionary[id]);
             var adds = _fieldAdded.Select(id => _registry.FieldsDictionary[id]);
@@ -74,6 +74,9 @@ namespace RollPunk.Client.Game
             foreach (var fieldId in deletions)
                 patch.RemoveFields.Add(fieldId);
 
+            foreach (var log in _pendingLogs)
+                patch.PendingLogs.Add(log.GetState());
+
             // Обработка изменений владений
             if (_session is ClientSession clientSession)
             {
@@ -88,9 +91,6 @@ namespace RollPunk.Client.Game
                     patch.RemoveOwnerships.Add(ownershipId);
             }
 
-            foreach (var log in _pendingLogs)
-                patch.PendingLogs.Add(log.GetState());
-
             // лог
             StringBuilder sb = new StringBuilder();
             sb.Append("[color=deep_sky_blue]SessionDelta sended:");
@@ -98,6 +98,8 @@ namespace RollPunk.Client.Game
                 sb.Append($"\n{change.ToString()}");
             foreach (var del in _fieldRemoved)
                 sb.Append($"\nDeleted: {del}");
+            foreach (var log in _pendingLogs)
+                sb.Append($"\n{log.Name}");
             foreach (var ownershipChange in _ownershipChanged.Concat(_ownershipAdded))
                 sb.Append($"\nOwnership: {ownershipChange}");
             sb.Append("[/color]");
@@ -113,6 +115,7 @@ namespace RollPunk.Client.Game
             _ownershipChanged.Clear();
             _ownershipRemoved.Clear();
             _ownershipAdded.Clear();
+            _pendingLogs.Clear();
         }
 
         private void OnFieldRemoved(Field field)
@@ -162,7 +165,14 @@ namespace RollPunk.Client.Game
 
         private void OnLogAdded(Event log)
         {
+            if (_isChangesIgnoring)
+                return;
+
             _pendingLogs.Add(log);
+            RPDebug.Log($"[color=deep_sky_blue]Event added catched {log.Name} ({log.ID})[/color]");
+
+            if (_isSendingBlocked == false)
+                Flush();
         }
 
         private void OnOwnershipAdded(EntityOwnership ownership)

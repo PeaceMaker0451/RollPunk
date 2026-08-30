@@ -32,6 +32,14 @@ namespace RollPunk.Server
             }
         }
 
+        public void SendInitializeClientRequest(int clientId)
+        {
+            using (Packet packet = new((int)ServerPackets.ClientInitialize))
+            {
+                SendTcpData(clientId, packet);
+            }
+        }
+
         public void SendSessionPatch(SessionPatch patch)
         {
             SendSessionPatch(-1, patch);

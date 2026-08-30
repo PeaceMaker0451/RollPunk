@@ -2,7 +2,7 @@
 
 namespace RollPunk.Client.Game
 {
-    public interface IRuntimeData
+    public interface IRuntimeClientData
     {
         public Guid ClientID { get; }
     }

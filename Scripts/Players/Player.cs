@@ -10,6 +10,8 @@ namespace RollPunk.Players
     public class Player : Entity, IAPIHandler
     {
         private PlayerAPI _api;
+
+        public event Action IsAdminChanged;
         
         public bool IsAdmin { get; private set; }
         public Guid? TeamId { get; private set; }
@@ -25,6 +27,12 @@ namespace RollPunk.Players
         public Player(EntityState objectData) : base (objectData) 
         {
             _api = new PlayerAPI(this);
+        }
+
+        public void SetIsAdmin(bool isAdmin)
+        {
+            IsAdmin = isAdmin;
+            IsAdminChanged?.Invoke();
         }
 
         protected override void ApplyPayload(Dictionary<string, JToken> payload)

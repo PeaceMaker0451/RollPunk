@@ -1,11 +1,13 @@
 ﻿using MoonSharp.Interpreter;
 using RollPunk.AccessPolicy;
 using RollPunk.Debug;
+using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
 using RollPunk.Players;
 using System;
+using System.Linq;
 
 namespace RollPunk.Client.Game.Sessions
 {
@@ -14,9 +16,12 @@ namespace RollPunk.Client.Game.Sessions
         private ClientSession _session;
 
         public OwnersRegistryAPI OwnersRegistry { get; private set; }
+        public SessionPlayerSpaceAPI PlayerSpace => _session.PlayerSpace.GetAPI() as SessionPlayerSpaceAPI;
 
         public PlayerAPI current_player => (PlayerAPI)_session.CurrentPlayer.GetAPI();
-        
+        //public EntityFieldAPI[] entities => _session.Entities.List.Select(field => field.GetAPI() as EntityFieldAPI).ToArray();
+
+
         public SessionAPI(ClientSession handler) : base(handler)
         {
             _session = handler;
@@ -49,11 +54,21 @@ namespace RollPunk.Client.Game.Sessions
             }
         }
 
+        public EntityFieldAPI getEntityField(string name)
+        {
+            return (EntityFieldAPI)_session.Entities.Fields.Where((f) => f.Name == name).First().GetAPI();
+        }
+
+        public EntityFieldAPI getEntityFieldById(string id)
+        {
+            return (EntityFieldAPI)_session.Entities.FieldsDictionary[Guid.Parse(id)].GetAPI();
+        }
+
         public void saveString(string value)
         {
             try
             {
-                ClientRoot.FileDebugUtils.SaveStringWithDialog(value);
+                Root.FileDebugUtils.SaveStringWithDialog(value);
             }
             catch (Exception e)
             {
@@ -69,7 +84,7 @@ namespace RollPunk.Client.Game.Sessions
                 if (function == null || function.Type != DataType.Function)
                     throw new InvalidOperationException("Передана хуйня, должна быть функция");
 
-                ClientRoot.FileDebugUtils.LoadStringWithDialog((data) =>
+                Root.FileDebugUtils.LoadStringWithDialog((data) =>
                 {
                     try
                     {
@@ -88,6 +103,15 @@ namespace RollPunk.Client.Game.Sessions
                 LuaErrorsHandler.Handle(e);
                 throw;
             }
+        }
+
+        public void addUserLog(string source, string message)
+        {
+            _session.AddLog(new(source, Logs.SourceType.User, message, DateTime.Now));
+        }
+        public void addSystemLog(string source, string message)
+        {
+            _session.AddLog(new(source, Logs.SourceType.System, message, DateTime.Now));
         }
     }
 }
