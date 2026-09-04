@@ -17,7 +17,7 @@ namespace RollPunk.Client.Game
 
         public void setActionsTabName(string name)
         {
-            _space.ActionsTabName = name;
+            _space.SetActionsTabName(name);
         }
 
         public void setDisplayedEntity(EntityFieldAPI field)

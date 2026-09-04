@@ -59,6 +59,17 @@ namespace RollPunk.Server
             }
         }
 
+        public void SendSessionStateToAll(SessionState sessionState)
+        {
+            using (Packet packet = new((int)ServerPackets.SessionState))
+            {
+                string data = JsonConvert.SerializeObject(sessionState);
+                packet.Write(data);
+
+                SendTcpDataToAll(packet);
+            }
+        }
+
         public void SendSessionState(int clientId, SessionState sessionState)
         {
             using (Packet packet = new((int)ServerPackets.SessionState))

@@ -25,18 +25,17 @@ namespace RollPunk.HierarchyFields
 
         public RuleAPI? getRule(string name)
         {
-            if (_fieldHandler.TryGetRule(name, out var rule) == false)
-                return null;
-
-            return (RuleAPI)rule.GetAPI();
+            return _fieldHandler.GetRule(name)?.GetAPI() as RuleAPI;
         }
 
         public RuleAPI? getRuleByID(string id)
         {
-            if (_fieldHandler.TryGetRule(Guid.Parse(id), out var rule) == false)
-                return null;
+            Guid guid = Guid.Parse(id);
 
-            return (RuleAPI)rule.GetAPI();
+            if (guid == Guid.Empty)
+                return null;
+            
+            return _fieldHandler.GetRuleById(guid)?.GetAPI() as RuleAPI;
         }
     }
 }

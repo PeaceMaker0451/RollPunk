@@ -31,7 +31,16 @@ namespace RollPunk.Client.Game
                 RPDebug.Log($"Client ID will be changed to {clientId}");
             }
 
-            ClientData = new RuntimeClientData(clientId);
+            string name = Root.Settings.LoadSettings().Name;
+            string? overridedName = TryOverrideName();
+
+            if (overridedName != null)
+            {
+                name = (string)overridedName;
+                RPDebug.Log($"Name will be changed to {name}");
+            }
+
+            ClientData = new RuntimeClientData(clientId, name);
         }
 
         public void SetSession(ClientSession session)
@@ -82,13 +91,42 @@ namespace RollPunk.Client.Game
                 return null;
         }
 
+        private string? TryOverrideName()
+        {
+            const string NamePrefix = "--name=";
+
+            bool TryExtractName(string[] args, out string result)
+            {
+                result = string.Empty;
+
+                string clientArg = Array.Find(args, arg => arg.StartsWith(NamePrefix, StringComparison.OrdinalIgnoreCase));
+
+                if (string.IsNullOrEmpty(clientArg))
+                {
+                    return false;
+                }
+
+                result = clientArg.Substring(NamePrefix.Length);
+                return true;
+            }
+
+            string[] args = OS.GetCmdlineArgs();
+
+            if (TryExtractName(args, out string name))
+                return name;
+            else
+                return null;
+        }
+
         public class RuntimeClientData : IRuntimeClientData
         {
             public Guid ClientID { get; private set; }
+            public string Name { get; private set; }
 
-            public RuntimeClientData(Guid clientID)
+            public RuntimeClientData(Guid clientID, string name)
             {
                 ClientID = clientID;
+                Name = name;
             }
         }
     }

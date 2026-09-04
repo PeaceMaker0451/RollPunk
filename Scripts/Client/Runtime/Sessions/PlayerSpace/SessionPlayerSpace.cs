@@ -11,17 +11,18 @@ namespace RollPunk.Client.Game
     {
         private SessionPlayerSpaceAPI _api;
 
-        private SessionViewController _sessionViewController;
-        private SessionView _sessionView;
+        private SessionViewController? _sessionViewController;
+        private SessionView? _sessionView;
 
-        private EditorController _editorController;
-        private Editor _editor;
+        private EditorController? _editorController;
+        private Editor? _editor;
 
         private ClientSession _session;
 
-        public event Action DisplayedEntityChanged;
+        public event Action? DisplayedEntityChanged;
+        public event Action? ActionTabNameChanged;
 
-        public string ActionsTabName { get; set; }
+        public string ActionsTabName {  get; private set; }
         public UIDocument Actions { get; private set; } = new();
 
         public EntityField DisplayedEntity { get; private set; }
@@ -45,6 +46,12 @@ namespace RollPunk.Client.Game
         {
             DisplayedEntity = field;
             DisplayedEntityChanged?.Invoke();
+        }
+
+        public void SetActionsTabName(string name)
+        {
+            ActionsTabName = name;
+            ActionTabNameChanged?.Invoke();
         }
 
         public void OpenGameView(bool newWindow)
@@ -78,6 +85,9 @@ namespace RollPunk.Client.Game
         {
             if (_sessionView != null)
                 _sessionView.Close();
+
+            if (_editor != null)
+                _editor.Close();
         }
 
         private void EnsureEditorState()

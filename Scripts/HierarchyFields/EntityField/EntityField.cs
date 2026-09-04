@@ -12,7 +12,7 @@ namespace RollPunk.HierarchyFields
     [EntityType("EntityField")]
     public sealed class EntityField : Field, IRuleOwner
     {
-        private Dictionary<string, Guid> _rulesByNames = new();
+        private Dictionary<string, Rule> _rulesByNames = new();
         private Dictionary<Guid, Rule> _rules = new();
 
         private IRuleExecuter _ruleExecuter;
@@ -43,7 +43,7 @@ namespace RollPunk.HierarchyFields
             if (_rules.ContainsKey(rule.ID))
                 throw new InvalidOperationException($"Entity field already contains rule with ID {rule.ID}");
 
-            _rulesByNames.Add(rule.Name, rule.ID);
+            _rulesByNames.Add(rule.Name, rule);
             _rules.Add(rule.ID, rule);
 
             rule.SetExecuter(_ruleExecuter);
@@ -70,20 +70,14 @@ namespace RollPunk.HierarchyFields
             return true;
         }
 
-        public bool TryGetRule(string name, out Rule? rule)
+        public Rule? GetRule(string name)
         {
-            rule = null;
-
-            if (_rulesByNames.TryGetValue(name, out var id) == false)
-                return false;
-
-            return _rules.TryGetValue(id, out rule);
+            return _rulesByNames[name];
         }
 
-        public bool TryGetRule(Guid id, out Rule? rule)
+        public Rule? GetRuleById(Guid id)
         {
-            rule = null;
-            return _rules.TryGetValue(id, out rule);
+            return _rules[id];
         }
 
         protected override void ApplyPayload(Dictionary<string, JToken> payload)

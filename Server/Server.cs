@@ -99,7 +99,19 @@ namespace RollPunk.Server
 
         public void ApplySessionPatch(int fromClient, SessionPatch sessionPatch)
         {
-            _session.ApplySessionPatch(sessionPatch);
+            try
+            {
+                _session.ApplySessionPatch(sessionPatch);
+            }
+            catch (Exception e)
+            {
+                _session.AddLog(new("Server", SourceType.Error, $"Невозможно применить патч клиента {fromClient} - восстановление.", DateTime.Now));
+                RPDebug.LogError($"Ошибка применения патча сессии от клиента {fromClient} - {e.Message}\n{e.StackTrace}");
+                SendStateToAll();
+                return;
+            }
+            
+            
             _send.SendSessionPatch(fromClient, sessionPatch);
         }
 
@@ -168,8 +180,12 @@ namespace RollPunk.Server
                 client.Tcp.Connected += () => _send.SendWelcome(client.Id, "Gooool!");
                 client.Tcp.Disconnected += HandleClientDisconnect;
                 _clients.Add(i, client);
-                
             }
+        }
+
+        private void SendStateToAll()
+        {
+            _send.SendSessionStateToAll(_session.GetState());
         }
     }
 }

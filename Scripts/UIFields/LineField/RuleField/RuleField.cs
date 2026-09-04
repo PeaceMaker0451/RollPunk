@@ -34,8 +34,10 @@ namespace RollPunk.UIFields
 
             if(_ruleName == null || _ruleName == string.Empty)
                 throw new Exception($"RuleName is null or empty!");
+
+            var rule = entityField.GetRule(_ruleName);
             
-            if (entityField.TryGetRule(_ruleName, out Rule rule) == false)
+            if (rule == null)
                 throw new InvalidOperationException();
 
             rule.Execute();

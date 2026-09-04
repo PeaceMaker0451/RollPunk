@@ -9,13 +9,13 @@ namespace RollPunk.Client.Game
     {
         private const string InitializeHookName = "EntityInitialized";
 
-        private MutationCatcher _catcher;
+        private MutationCatcher? _catcher;
         private FieldsRegistry _fieldsRegistry;
         private ModHooker _modHooker;
 
         private bool _isChangesIgnoring = false;
 
-        public EntityInitializer(FieldsRegistry registry, ModHooker modHooker, MutationCatcher catcher = null)
+        public EntityInitializer(FieldsRegistry registry, ModHooker modHooker, MutationCatcher? catcher = null)
         {
             _catcher = catcher;
             _fieldsRegistry = registry;

@@ -16,34 +16,42 @@ namespace RollPunk.Fields
         private Dictionary<string, Field> _childrenByNames = new();
         private Dictionary<Guid, Field> _childrenByIds = new();
 
-        public event Action NameChanged;
-        public event Action<string> AdditionalDataChanged;
-        public event Action<Field> FieldAdded;
-        public event Action<Field> FieldRemoved;
-        public event Action<Field> DescendantAdded;
-        public event Action<Field> DescendantRemoved;
-        public event Action<Field> ParentChanged;
-        public event Action<Field> ParentRemoved;
-        public event Action Changed;
+        public event Action? NameChanged;
+        public event Action<string>? AdditionalDataChanged;
+        public event Action<Field>? FieldAdded;
+        public event Action<Field>? FieldRemoved;
+        public event Action<Field>? DescendantAdded;
+        public event Action<Field>? DescendantRemoved;
+        public event Action<Field>? ParentChanged;
+        public event Action<Field>? ParentRemoved;
+        public event Action? Changed;
 
-        [ExposedProperty(ReadOnly = true)] public Guid ID => base.ID;
-        [ExposedProperty] public string Name => base.Name;
+        [ExposedProperty(ReadOnly = true)] public new Guid ID => base.ID;
+        [ExposedProperty] public new string Name => base.Name;
         [ExposedCollection] public Dictionary<string, object> AdditionalData { get; private set; } = new();
-        [ExposedProperty(ReadOnly = true)] public Field Parent { get; private set; }
+        [ExposedProperty(ReadOnly = true)] public Field? Parent { get; private set; }
         [ExposedCollection] public IReadOnlyList<Field> Fields => _children;
 
-        public Field(string name, Type apiType, Dictionary<string, object> additionalData = null) : base(name)
+        public Field(string name, Type apiType, Dictionary<string, object>? additionalData = null) : base(name)
         {
             if (additionalData != null)
                 AdditionalData = additionalData;
 
-            FieldAPI api = CreateAPI(apiType);
+            FieldAPI? api = CreateAPI(apiType);
+
+            if (api == null)
+                throw new Exception($"Unnable create Field API {apiType}");
+
             _api = api;
         }
 
         public Field(EntityState data, Type apiType) : base(data)
         {
-            FieldAPI api = CreateAPI(apiType);
+            FieldAPI? api = CreateAPI(apiType);
+
+            if (api == null)
+                throw new Exception($"Unnable create Field API {apiType}");
+
             _api = api;
         }
 
@@ -78,7 +86,7 @@ namespace RollPunk.Fields
             }
         }
 
-        public object GetAdditionalDataField(string fieldName)
+        public object? GetAdditionalDataField(string fieldName)
         {
             if (AdditionalData.ContainsKey(fieldName))
                 return AdditionalData[fieldName];
@@ -152,12 +160,12 @@ namespace RollPunk.Fields
             return _childrenByIds[id];
         }
         
-        public bool TryGetField(string name, out Field field)
+        public bool TryGetField(string name, out Field? field)
         {
             return _childrenByNames.TryGetValue(name, out field);
         }
 
-        public bool TryGetField(Guid id, out Field field)
+        public bool TryGetField(Guid id, out Field? field)
         {
             return _childrenByIds.TryGetValue(id, out field);
         }
@@ -239,19 +247,21 @@ namespace RollPunk.Fields
 
         private void ClearParent()
         {
-            Field oldParent = Parent;
+            Field? oldParent = Parent;
             Parent = null;
-            ParentRemoved?.Invoke(oldParent);
+            
+            if( oldParent != null )
+                ParentRemoved?.Invoke(oldParent);
         }
 
-        private FieldAPI CreateAPI(Type apiType)
+        private FieldAPI? CreateAPI(Type apiType)
         {
-            FieldAPI api = null;
+            FieldAPI? api = null;
 
             if (apiType == null)
                 return null;
 
-            api = (FieldAPI)Activator.CreateInstance(apiType, this);
+            api = Activator.CreateInstance(apiType, this) as FieldAPI;
 
             if (api == null)
                 throw new InvalidOperationException($"Type '{apiType}' isn't inherits FieldAPI class");

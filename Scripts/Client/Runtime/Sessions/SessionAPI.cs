@@ -19,7 +19,7 @@ namespace RollPunk.Client.Game.Sessions
         public SessionPlayerSpaceAPI PlayerSpace => _session.PlayerSpace.GetAPI() as SessionPlayerSpaceAPI;
 
         public PlayerAPI current_player => (PlayerAPI)_session.CurrentPlayer.GetAPI();
-        //public EntityFieldAPI[] entities => _session.Entities.List.Select(field => field.GetAPI() as EntityFieldAPI).ToArray();
+        public EntityFieldAPI[] entities => _session.Entities.List.Select(field => field.GetAPI() as EntityFieldAPI).ToArray();
 
 
         public SessionAPI(ClientSession handler) : base(handler)
@@ -28,7 +28,7 @@ namespace RollPunk.Client.Game.Sessions
             OwnersRegistry = new OwnersRegistryAPI(_session.OwnersRegistry);
         }
 
-        public void addEntityField(EntityFieldAPI field)
+        public void addEntity(EntityFieldAPI field)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace RollPunk.Client.Game.Sessions
             }
         }
 
-        public bool removeEntityField(EntityFieldAPI field)
+        public bool removeEntity(EntityFieldAPI field)
         {
             try
             {
@@ -54,14 +54,19 @@ namespace RollPunk.Client.Game.Sessions
             }
         }
 
-        public EntityFieldAPI getEntityField(string name)
+        public EntityFieldAPI? getEntity(string name)
         {
-            return (EntityFieldAPI)_session.Entities.Fields.Where((f) => f.Name == name).First().GetAPI();
+            return _session.Entities.GetByName(name)?.GetAPI() as EntityFieldAPI;
         }
 
-        public EntityFieldAPI getEntityFieldById(string id)
+        public EntityFieldAPI? getEntityById(string id)
         {
-            return (EntityFieldAPI)_session.Entities.FieldsDictionary[Guid.Parse(id)].GetAPI();
+            var guid = Guid.Parse(id);
+
+            if (guid == Guid.Empty)
+                return null;
+
+            return _session.Entities.GetById(guid)?.GetAPI() as EntityFieldAPI;
         }
 
         public void saveString(string value)

@@ -24,7 +24,7 @@ namespace RollPunk.Client.Game
         public ClientSession Create(IRuntimeClientData runtimeData)
         {
             var session = new ClientSession(_entityFactory, runtimeData, UserModsLoader.GetUserMods(_readedMods).Mods);
-            session.CreatePlayer(Root.Settings.LoadSettings().Name, true);
+            session.CreatePlayer(true);
 
 
             foreach(var api in _apis.Apis)
@@ -77,7 +77,7 @@ namespace RollPunk.Client.Game
                 foreach (var api in _apis.Apis)
                     session.APIInjector.AddGlobalAPI(api);
 
-                client.SendClientData(Root.Settings.LoadSettings().Name, runtimeData.ClientID);
+                client.SendClientData(runtimeData.Name, runtimeData.ClientID);
                 client.ConnectionErrored += (ex) => Root.ThreadManager.ExecuteOnMainThread(() => Destroy(session));
             }
             catch (Exception ex)

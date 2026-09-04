@@ -2,6 +2,7 @@ using Godot;
 using RollPunk.AccessPolicy;
 using RollPunk.Client.Game;
 using RollPunk.ClientSide.Runtime.UI;
+using RollPunk.Debug;
 using RollPunk.Fields;
 using RollPunk.HierarchyFields;
 using RollPunk.MembersExposing;
@@ -46,11 +47,6 @@ namespace RollPunk.Client.Forms
 
         private void BindSession()
         {
-            GD.Print($"{_view}");
-            GD.Print($"{_session.Entities}");
-            GD.Print($"{_constructor}");
-            GD.Print($"{_session.Serializator}");
-
             _view.SetEntityViewVisibiblityRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
@@ -58,6 +54,8 @@ namespace RollPunk.Client.Forms
                     throw new Exception("LineField don't have EntityField Ancestor");
 
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer, true);
+
+                //RPDebug.Log($"ViewCheck - {entity.Name} - {lineField.Name} (own {_session.OwnersRegistry.IsOwneredByPlayer(entity, _session.CurrentPlayer)}) (role {role}), (level {lineField.ViewAccessLevel}) - {role >= lineField.ViewAccessLevel}");
                 return role >= lineField.ViewAccessLevel;
             });
 
@@ -68,6 +66,7 @@ namespace RollPunk.Client.Forms
                     throw new Exception("LineField don't have EntityField Ancestor");
 
                 PlayerRole role = _session.OwnersRegistry.GetRelativePlayerRole(entity, _session.CurrentPlayer, true);
+                //RPDebug.Log($"EditCheck - {entity.Name} - {lineField.Name} (own {_session.OwnersRegistry.IsOwneredByPlayer(entity, _session.CurrentPlayer)}) (role {role}), (level {lineField.EditAccessLevel}) - {role >= lineField.EditAccessLevel}");
                 return role >= lineField.EditAccessLevel;
             });
 
@@ -77,8 +76,7 @@ namespace RollPunk.Client.Forms
             _view.InitializePlayerList(_session);
             _view.InitializeEntityView(_constructor);
 
-            var renderer = _view.FindChild("ExposedRenderer") as ExposedObjectRenderer;
-
+            _session.PlayerSpace.ActionTabNameChanged += () => _view.SetActionLabelText(_session.PlayerSpace.ActionsTabName);
             _session.PlayerSpace.Actions.Changed += () => _view.RenderActions(_session.PlayerSpace.Actions);
             _session.PlayerSpace.DisplayedEntityChanged += () => _view.ShowEntity(_session.PlayerSpace.DisplayedEntity);
 

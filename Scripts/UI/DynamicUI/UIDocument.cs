@@ -40,6 +40,12 @@ namespace RollPunk.UI.DynamicUI
             return containerData;
         }
 
+        public void Clear()
+        {
+            _uiObjects.Clear();
+            Changed?.Invoke();
+        }
+
         public API GetAPI()
         {
             return _docAPI;

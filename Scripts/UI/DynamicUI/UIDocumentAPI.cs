@@ -1,7 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
-using RollPunk.UIFields;
+using System;
 
 namespace RollPunk.UI.DynamicUI
 {
@@ -16,7 +16,18 @@ namespace RollPunk.UI.DynamicUI
 
         public void addButton(string text, DynValue luaFunction)
         {
-            _doc.AddButton(text, () => luaFunction.Function.Call());
+            _doc.AddButton(text, () =>
+            {
+                try
+                {
+                    luaFunction.Function.Call();
+                }
+                catch (Exception ex)
+                {
+                    LuaErrorsHandler.Handle(ex);
+                }
+            });
+
         }
 
         public void addLabel(string text)
@@ -29,5 +40,7 @@ namespace RollPunk.UI.DynamicUI
             var containerData = _doc.AddContainer(text);
             return containerData.Content.GetAPI() as UIDocumentAPI;
         }
+
+        public void clear() => _doc.Clear();
     }
 }

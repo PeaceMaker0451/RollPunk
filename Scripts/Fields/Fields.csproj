@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
-	  <Nullable>disable</Nullable>
+	  <Nullable>enable</Nullable>
 	  <RootNamespace>RollPunk.Fields</RootNamespace>
   </PropertyGroup>
 
@@ -17,10 +17,6 @@
     <ProjectReference Include="..\Modding\Modding.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\RPDebug\RPDebug.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="FieldsContainer\FieldsOwneredFieldsContainer\" />
   </ItemGroup>
 
 	<ItemGroup>

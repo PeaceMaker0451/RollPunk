@@ -3,21 +3,34 @@ using System.Collections.Generic;
 
 namespace RollPunk.Fields
 {
-    public interface IReadOnlyFieldsContainer<T> : IReadOnlyFieldsContainer where T : Field
-    {
-        public event Action<T> Added;
-        public event Action<T> Removed;
+    public interface IReadOnlyFieldsContainer<T> : IReadOnlyFieldsContainer
+    where T : Field
+{
+    event Action<T> Added;
+    event Action<T> Removed;
 
-        public IReadOnlyList<T> List { get; }
-        public IReadOnlyDictionary<Guid, T> Dictionary { get; }
-    }
+    IReadOnlyList<T> List { get; }
+    IReadOnlyDictionary<Guid, T> Dictionary { get; }
 
-    public interface IReadOnlyFieldsContainer
-    {
-        public event Action<Field> FieldAdded;
-        public event Action<Field> FieldRemoved;
+    T? GetById(Guid id);
+    T? GetByName(string name);
 
-        public IReadOnlyList<Field> Fields { get; }
-        public IReadOnlyDictionary<Guid, Field> FieldsDictionary { get; }
-    }
+    new bool Contains(Guid id);
+    new bool Contains(string name);
+}
+
+public interface IReadOnlyFieldsContainer
+{
+    event Action<Field> FieldAdded;
+    event Action<Field> FieldRemoved;
+
+    IReadOnlyList<Field> Fields { get; }
+    IReadOnlyDictionary<Guid, Field> FieldsDictionary { get; }
+
+    Field? GetFieldById(Guid id);
+    Field? GetFieldByName(string name);
+
+    bool Contains(Guid id);
+    bool Contains(string name);
+}
 }

@@ -145,7 +145,7 @@ namespace RollPunk.ClientNetcode
                 {
                     if(Socket == null) return;
 
-                    RPDebug.Log($"Отправляем данные по TCP {packet.Length()}");
+                    RPDebug.Log($"Sending data to server via TCP {packet.Length()}");
                     _stream.BeginWrite(packet.ToArray(), 0, packet.Length(), null, null);
                 }
                 catch (Exception e)

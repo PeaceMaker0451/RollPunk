@@ -17,4 +17,8 @@
 		<None Remove="**/*.uid" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="RulesContainer\" />
+	</ItemGroup>
+
 </Project>

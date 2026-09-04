@@ -17,6 +17,8 @@ namespace RollPunk.Client.Game
     {
         private string SessionInitializedHookName = "SessionInitialized";
         private string ClientInitializedHookName = "ClientInitialized";
+        private string StateAppliedHookName = "StateApplied";
+        private string PatchAppliedHookName = "PatchApplied";
 
         private IRuntimeClientData _runtimeData;
         private SessionAPI _api;
@@ -34,7 +36,7 @@ namespace RollPunk.Client.Game
 
 
         internal SessionPlayerSpace PlayerSpace { get; private set; }
-        public Player CurrentPlayer => Players.ContainsKey(_runtimeData.ClientID) ? Players[_runtimeData.ClientID] : null;
+        public Player? CurrentPlayer => Players.ContainsKey(_runtimeData.ClientID) ? Players[_runtimeData.ClientID] : null;
         public GlobalAPIInjector APIInjector { get; private set; }
         public Serializator Serializator { get; private set; }
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; }
@@ -54,19 +56,19 @@ namespace RollPunk.Client.Game
                 InitializeNetworking();
             }
 
+            InitializeOwnershipSystem();
             LoadMods(mods);
             InitializeFieldsContainer();
-            InitializeOwnershipSystem();
         }
 
         public void AddEntity(EntityField field)
         {
-            EntityContainer.Add(field);
+            Container.Add(field);
         }
 
         public bool RemoveEntity(EntityField field)
         {
-            return EntityContainer.Remove(field);
+            return Container.Remove(field);
         }
 
         public void InitializeSession()
@@ -79,9 +81,9 @@ namespace RollPunk.Client.Game
             BatchHook(ClientInitializedHookName);
         }
 
-        public void CreatePlayer(string name, bool isAdmin = false)
+        public void CreatePlayer(bool isAdmin = false)
         {
-            AddPlayer(_runtimeData.ClientID, name, isAdmin);
+            AddPlayer(_runtimeData.ClientID, _runtimeData.Name, isAdmin);
         }
 
         public void Dispose() 
@@ -105,6 +107,16 @@ namespace RollPunk.Client.Game
         public API GetAPI()
         {
             return _api;
+        }
+
+        protected override void OnPatchApplied()
+        {
+            _hooker.CallHook(PatchAppliedHookName);
+        }
+
+        protected override void OnStateApplied()
+        {
+            _hooker.CallHook(StateAppliedHookName);
         }
 
         private void LoadMods(IReadOnlyCollection<Mod> modsToLoad)
@@ -147,7 +159,7 @@ namespace RollPunk.Client.Game
 
         private void InitializeFieldsContainer()
         {
-            EntityContainer.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
+            Container.Added += (entity) => entity.SetRulesExecuter(_ruleExecuter);
 
             _entityValidator = new(FieldsRegistry, _hooker, _mutationCatcher);
             _entityInitializer = new(FieldsRegistry, _hooker, _mutationCatcher);
@@ -171,7 +183,18 @@ namespace RollPunk.Client.Game
             _entityValidator.StartIgnore();
             _entityInitializer.StartIgnore();
             _ownershipManager.StartIgnore();
-            base.ApplySessionPatch(patch);
+            
+            try
+            {
+                base.ApplySessionPatch(patch);
+            }
+            catch (Exception ex)
+            {
+                RPDebug.LogError($"Error applying session patch - {ex.Message} \n{ex.StackTrace}");
+                RPDebug.LogError($"Requesting session state..");
+                _dataBridge.RequestSessionState();
+            }
+            
             _mutationCatcher.StopIgnore();
             _entityValidator.StopIgnore();
             _entityInitializer.StopIgnore();

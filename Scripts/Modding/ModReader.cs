@@ -19,8 +19,15 @@ namespace RollPunk.Modding
 
                 foreach(Mod mod in readedMods)
                 {
-                    if (mod != null)
-                        mods.AddMod(mod);
+                    try
+                    {
+                        if (mod != null)
+                            mods.AddMod(mod);
+                    }
+                    catch (Exception ex)
+                    {
+                        RPDebug.LogError($"Невозможно добавить мод с список - {ex.Message}");
+                    }
                 }
                 
             }

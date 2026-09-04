@@ -1,6 +1,6 @@
 using RollPunk.HierarchyFields;
 using RollPunk.Players;
-using RollPunk.Entities;
+using RollPunk.Debug;
 
 namespace RollPunk.AccessPolicy
 {
@@ -26,14 +26,13 @@ namespace RollPunk.AccessPolicy
         {
             var ownership = EnsureOwnershipExists(entity);
             ownership.AddOwner(player.ClientId);
+            RPDebug.Log($"[color=green_yellow]Entity {entity.Name} owner added - {player.Name}[/color]");
         }
 
         public bool IsOwneredByPlayer(EntityField entity, Player player)
         {
-            var ownership = GetOwnership(entity.ID);
-            if (ownership == null)
-                throw new InvalidOperationException($"Entity {entity.Name} ({entity.ID}) owner record doesn't exist!");
-
+            var ownership = EnsureOwnershipExists(entity);
+            RPDebug.Log($"{string.Join(' ', ownership.OwnerIds)}");
             return ownership.HasOwner(player.ClientId);
         }
 
@@ -90,15 +89,22 @@ namespace RollPunk.AccessPolicy
             var ownership = GetOwnership(entity.ID);
             if (ownership == null)
             {
+                RPDebug.Log($"[color=green_yellow]Ownership for field {entity.Name} {entity.ID} doesn't exist - creating..[/color]");
                 ownership = new EntityOwnership(entity.ID, $"Ownership_{entity.Name}");
                 _ownerships.Add(ownership);
             }
+
             return ownership;
         }
 
         private void OnOwnershipAdded(EntityOwnership ownership)
         {
+            if (_entityFieldIdIndex.ContainsKey(ownership.EntityFieldId))
+                throw new Exception($"Ownership registry already contains record for entity {ownership.EntityFieldId}");
+
             _entityFieldIdIndex[ownership.EntityFieldId] = ownership;
+
+            RPDebug.Log($"[color=green_yellow]Ownership record added - {ownership.Name} - {ownership.EntityFieldId}[/color]");
         }
 
         private void OnOwnershipRemoved(EntityOwnership ownership)

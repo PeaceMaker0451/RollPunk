@@ -16,7 +16,7 @@ namespace NetcodeCommon
         private Dictionary<Guid, Player> _players;
         private List<Event> _sessionLog;
 
-        protected FieldsContainer<EntityField> EntityContainer;
+        protected FieldsContainer<EntityField> Container;
         protected FieldsRegistry FieldsRegistry;
         
         public OwnershipContainer Ownerships { get; private set; } = new();
@@ -33,7 +33,7 @@ namespace NetcodeCommon
 
         public IReadOnlyDictionary<Guid, Player> Players => _players;
         public IReadOnlyFieldRegistry Registry => FieldsRegistry;
-        public IReadOnlyFieldsContainer<EntityField> Entities => EntityContainer;
+        public IReadOnlyFieldsContainer<EntityField> Entities => Container;
         public IReadOnlyList<Event> Logs => _sessionLog;
 
         public Session(EntityFactory entityFactory)
@@ -41,8 +41,8 @@ namespace NetcodeCommon
             EntityFactory = entityFactory;
             HierarchyReconstructor = new(EntityFactory);
 
-            EntityContainer = new();
-            FieldsRegistry = new(EntityContainer);
+            Container = new();
+            FieldsRegistry = new(Container);
             _players = new();
             _sessionLog = new();
         }
@@ -64,11 +64,11 @@ namespace NetcodeCommon
                 if (field.Parent != null)
                     field.Parent.RemoveField(field);
                 else
-                    EntityContainer.RemoveField(field);
+                    Container.RemoveField(field);
             }
 
             foreach (var pendingField in patch.PendingFields)
-                HierarchyReconstructor.ApplyFieldState(pendingField, EntityContainer, null, FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(pendingField, Container, null, FieldsRegistry);
 
             foreach (var pendingPlayer in patch.PendingPlayers)
             {
@@ -94,6 +94,7 @@ namespace NetcodeCommon
                 AddLog(new(pendingLog));
             }
 
+            OnPatchApplied();
             PatchInserted?.Invoke();
         }
 
@@ -101,7 +102,7 @@ namespace NetcodeCommon
         {
             SessionState state = new()
             {
-                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(EntityContainer.Fields),
+                Fields = FieldStateExtractor.ExtractFieldsCollectionTreeState(Container.Fields),
                 Players = new Dictionary<Guid, EntityState>(),
                 Ownerships = new Dictionary<Guid, EntityState>()
             };
@@ -161,6 +162,7 @@ namespace NetcodeCommon
             foreach (var log in state.Logs)
                 AddLog(new(log));
 
+            OnStateApplied();
             StateInserted?.Invoke();
         }
 
@@ -175,7 +177,7 @@ namespace NetcodeCommon
 
             stringBuilder.AppendLine($"Fields:");
 
-            foreach (var field in EntityContainer.Fields)
+            foreach (var field in Container.Fields)
             {
                 stringBuilder.AppendLine($"- {field.Name} [{field.ID}] ({field.Fields.Count} children)");
 
@@ -214,6 +216,10 @@ namespace NetcodeCommon
             return stringBuilder.ToString();
         }
 
+        protected virtual void OnStateApplied() { }
+
+        protected virtual void OnPatchApplied() { }
+
         private Player AddPlayer(Guid clientId, Player player)
         {
             _players.Add(clientId, player);
@@ -238,7 +244,7 @@ namespace NetcodeCommon
                 HandleFieldState(fieldState);
 
             foreach (var fieldState in fields)
-                HierarchyReconstructor.ApplyFieldState(fieldState, EntityContainer, fieldsRegistry: FieldsRegistry);
+                HierarchyReconstructor.ApplyFieldState(fieldState, Container, fieldsRegistry: FieldsRegistry);
 
             foreach (var field in FieldsRegistry.Fields)
             {
@@ -247,7 +253,7 @@ namespace NetcodeCommon
                     if (field.Parent != null)
                         field.Parent.RemoveField(field);
                     else
-                        EntityContainer.RemoveField(field);
+                        Container.RemoveField(field);
                 }
             }
         }
