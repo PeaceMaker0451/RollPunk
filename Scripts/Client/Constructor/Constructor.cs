@@ -1,7 +1,9 @@
 ﻿using RollPunk.Client.Fields;
 using RollPunk.Client.Rules;
+using RollPunk.HierarchyFields;
 using RollPunk.Modding.APIs;
 using RollPunk.Rules;
+using System;
 
 namespace RollPunk.Client
 {
@@ -12,9 +14,9 @@ namespace RollPunk.Client
 
         private ConstructorAPI _api;
         
-        public Constructor(IRuleExecuter modHooker)
+        public Constructor(IRuleExecuter modHooker, Func<Guid, EntityField?> entityFinder)
         {
-            _fieldsConstructor = new FieldsConstructor();
+            _fieldsConstructor = new FieldsConstructor(entityFinder);
             _rulesConstructor = new RulesConstructor(modHooker);
 
             _api = new ConstructorAPI(_fieldsConstructor, _rulesConstructor);

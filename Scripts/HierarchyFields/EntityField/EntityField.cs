@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace RollPunk.HierarchyFields
 {
-    [EntityType("EntityField")]
+    [EntityType("Entity")]
     public sealed class EntityField : Field, IRuleOwner
     {
         private Dictionary<string, Rule> _rulesByNames = new();

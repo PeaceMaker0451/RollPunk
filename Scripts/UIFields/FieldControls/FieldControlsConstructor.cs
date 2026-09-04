@@ -16,10 +16,15 @@ namespace RollPunk.UIFields
         private const string s_boolFieldControlScene = "res://Scenes/ControlNodes/LineFields/BoolFieldControl.tscn";
         private const string s_ruleFieldControlScene = "res://Scenes/ControlNodes/LineFields/RuleFieldControl.tscn";
         private const string s_fieldsTableControlScene = "res://Scenes/ControlNodes/FieldsTable.tscn";
+        private const string s_referenceFieldControlScene = "res://Scenes/ControlNodes/LineFields/EntityReferenceControl.tscn";
         private const string s_imageFieldControlScene = "res://Scenes/ControlNodes/LineFields/ImageFieldControl.tscn";
 
-        public FieldControlsConstructor()
+        private Action<EntityReferenceField> _onReferenceFieldSelected;
+
+        public FieldControlsConstructor(Action<EntityReferenceField> onReferenceFieldSelected) //также нужно будет снять с него ответственности за зависимости
         {
+            _onReferenceFieldSelected = onReferenceFieldSelected;
+            
             _fieldsControls = new Dictionary<Type, Func<Field, FieldControl>>()
             {
                 {typeof(StringField), CreateStringFieldControl},
@@ -27,7 +32,8 @@ namespace RollPunk.UIFields
                 {typeof(BoolField), CreateBoolFieldControl},
                 {typeof(RuleField), CreateRuleFieldControl},
                 {typeof(FieldsGroup), CreateFieldsGroupFieldControl},
-                {typeof(ImageField), CreateImageFieldControl}
+                {typeof(ImageField), CreateImageFieldControl},
+                {typeof(EntityReferenceField), CreateReferenceFieldControl}
             };
         }
 
@@ -113,6 +119,17 @@ namespace RollPunk.UIFields
 
             ImageFieldControl fieldControl = (ImageFieldControl)CreateFieldControlInstance(s_imageFieldControlScene, field);
             fieldControl.Initialize((ImageField)field);
+
+            return fieldControl;
+        }
+
+        private FieldControl CreateReferenceFieldControl(Field field)
+        {
+            if (field is not EntityReferenceField)
+                throw new InvalidOperationException("Wrong field type");
+
+            ReferenceFieldControl fieldControl = (ReferenceFieldControl)CreateFieldControlInstance(s_referenceFieldControlScene, field);
+            fieldControl.Initialize((EntityReferenceField)field, _onReferenceFieldSelected);
 
             return fieldControl;
         }

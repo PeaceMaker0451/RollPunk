@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://1gel820kcarn"]
+
+[ext_resource type="Script" uid="uid://dn3rig5j8h7td" path="res://Scripts/UIFields/FieldControls/LineFields/ReferenceFieldControl.cs" id="1_w7x6q"]
+[ext_resource type="Texture2D" uid="uid://cgwwvw6miydtl" path="res://Sprites/Entity.png" id="2_w7x6q"]
+
+[node name="ReferenceFieldControl" type="MarginContainer" unique_id=665586512 node_paths=PackedStringArray("_selectButton")]
+offset_right = 71.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_w7x6q")
+_selectButton = NodePath("PanelContainer/LineEdit")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1041520478]
+layout_mode = 2
+
+[node name="LineEdit" type="Button" parent="PanelContainer" unique_id=533497488]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Name"
+icon = ExtResource("2_w7x6q")
+flat = true

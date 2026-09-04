@@ -135,6 +135,7 @@ default_font = ExtResource("10_ymeya")
 default_font_size = 12
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 0.529412)
+Button/constants/icon_max_width = 15
 Button/styles/disabled = SubResource("StyleBoxFlat_3u00a")
 Button/styles/focus = SubResource("StyleBoxEmpty_ipmuq")
 Button/styles/hover = ExtResource("2_364ur")

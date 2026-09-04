@@ -24,12 +24,14 @@ namespace RollPunk.Client.Fields
         private const string RuleName = "rule_name";
 
         private readonly Dictionary<string, Func<Dictionary<string, object>, Field>> _fieldCreators;
+        private readonly Func<Guid, EntityField?> _entityFinder;
 
         private FieldsConstructorAPI _fieldConstructorAPI;
 
-        public FieldsConstructor()
+        public FieldsConstructor(Func<Guid, EntityField?> entityFinder) // надо будет снять с этого класса ответсвенность нести все эти методы и просить зависимости
         {
             _fieldConstructorAPI = new FieldsConstructorAPI(this);
+            _entityFinder = entityFinder;
 
             _fieldCreators = new Dictionary<string, Func<Dictionary<string, object>, Field>>
             {
@@ -39,6 +41,7 @@ namespace RollPunk.Client.Fields
                 { nameof(IntField), CreateIntField },
                 { nameof(FieldsGroup), CreateFieldsGroup },
                 { nameof(EntityField), CreateEntityField },
+                { nameof(EntityReferenceField), CreateEntityReferenceField },
                 { nameof(ImageField), CreateImageField}
             };
         }
@@ -145,6 +148,20 @@ namespace RollPunk.Client.Fields
             Dictionary<string, object> additionalData = GetDictionaryValue(fieldData, AdditionalDataFieldName);
 
             return new EntityField(name, additionalData);
+        }
+
+        private Field CreateEntityReferenceField(Dictionary<string, object> fieldData)
+        {
+            string name = GetStringValue(fieldData, NameFieldName);
+            string visibleName = GetStringValue(fieldData, VisibleName, name);
+            Dictionary<string, object> additionalData = GetDictionaryValue(fieldData, AdditionalDataFieldName);
+            int linePriority = GetIntValue(fieldData, LinePriorityDataFieldName);
+            int editLevel = GetIntValue(fieldData, EditableLevelDataFieldName, 0);
+            int viewLevel = GetIntValue(fieldData, VisibleLevelDataFieldName, 0);
+
+            var reference = new EntityReferenceField(name, visibleName, (PlayerRole)viewLevel, (PlayerRole)editLevel, linePriority: linePriority, additionalData: additionalData);
+            reference.SetSearchFunc(_entityFinder);
+            return reference;
         }
 
         private string GetStringValue(Dictionary<string, object> fieldData, string key, string defaultValue = "")

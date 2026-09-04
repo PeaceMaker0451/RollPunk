@@ -14,7 +14,6 @@ namespace RollPunk.Client.Forms
         public void Attach(Editor form)
         {
             _view = form;
-            _view.InitializeEntityView(new());
 
             if (_session != null)
                 BindSession();
@@ -35,6 +34,8 @@ namespace RollPunk.Client.Forms
 
         private void BindSession()
         {
+            _view.InitializeEntityView(_session.ControlsConstructor);
+
             _view.SetEntityViewVisibiblityRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();

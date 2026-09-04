@@ -8,6 +8,7 @@ using RollPunk.HierarchyFields;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
 using RollPunk.Players;
+using RollPunk.UIFields;
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +20,7 @@ namespace RollPunk.Client.Game
         private string ClientInitializedHookName = "ClientInitialized";
         private string StateAppliedHookName = "StateApplied";
         private string PatchAppliedHookName = "PatchApplied";
+        private string ReferenceFieldSelectedHookName = "ReferenceFieldSelected";
 
         private IRuntimeClientData _runtimeData;
         private SessionAPI _api;
@@ -40,6 +42,7 @@ namespace RollPunk.Client.Game
         public GlobalAPIInjector APIInjector { get; private set; }
         public Serializator Serializator { get; private set; }
         public EntityFieldsOwnersRegistry OwnersRegistry { get; private set; }
+        public FieldControlsConstructor ControlsConstructor { get; private set; }
 
         public ClientSession(EntityFactory entityFactory, IRuntimeClientData runtimeData, IReadOnlyCollection<Mod> mods, IDataBridge dataBridge = null)
             :base(entityFactory)
@@ -125,18 +128,25 @@ namespace RollPunk.Client.Game
 
             _loadedMods = new ModsContainer();
 
-            foreach(var mod in modsToLoad)
+            foreach (var mod in modsToLoad)
             {
                 RPDebug.Log($"[color=bisque] - Mod {mod.modData.Name} ({mod.modPath})[/color]");
                 _loadedMods.AddMod(mod);
             }
-                
+
             _modLoader = new ModLoader();
             _hooker = new ModHooker();
             _ruleExecuter = new ModHookerRuleExecuter(_hooker, _mutationCatcher);
             APIInjector = new GlobalAPIInjector(_loadedMods);
 
-            _constructor = new Constructor(_ruleExecuter);
+            _constructor = new Constructor(_ruleExecuter, Entities.GetById);
+            ControlsConstructor = new FieldControlsConstructor((referenceField) => 
+            {
+                if (_mutationCatcher != null)
+                    _hooker.BatchHook(_mutationCatcher, ReferenceFieldSelectedHookName, referenceField.GetAPI());
+                else
+                    _hooker.CallHook(ReferenceFieldSelectedHookName, referenceField.GetAPI()); 
+            });
 
             APIInjector.AddGlobalAPI(_hooker.GetAPI());
 

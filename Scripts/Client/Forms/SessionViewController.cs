@@ -1,28 +1,15 @@
-using Godot;
 using RollPunk.AccessPolicy;
 using RollPunk.Client.Game;
 using RollPunk.ClientSide.Runtime.UI;
-using RollPunk.Debug;
-using RollPunk.Fields;
 using RollPunk.HierarchyFields;
-using RollPunk.MembersExposing;
-using RollPunk.UI;
-using RollPunk.UIFields;
 using System;
-using System.Reflection;
 
 namespace RollPunk.Client.Forms
 {
     internal class SessionViewController : IFormPresenter<SessionView>
     {
-        private readonly FieldControlsConstructor _constructor;
         private ClientSession _session;
         private SessionView _view;
-
-        public SessionViewController()
-        {
-            _constructor = new();
-        }
 
         public void Attach(SessionView form)
         {
@@ -74,7 +61,7 @@ namespace RollPunk.Client.Forms
             _view.RenderActions(_session.PlayerSpace.Actions);
             _view.InitializeLogs(_session);
             _view.InitializePlayerList(_session);
-            _view.InitializeEntityView(_constructor);
+            _view.InitializeEntityView(_session.ControlsConstructor);
 
             _session.PlayerSpace.ActionTabNameChanged += () => _view.SetActionLabelText(_session.PlayerSpace.ActionsTabName);
             _session.PlayerSpace.Actions.Changed += () => _view.RenderActions(_session.PlayerSpace.Actions);
