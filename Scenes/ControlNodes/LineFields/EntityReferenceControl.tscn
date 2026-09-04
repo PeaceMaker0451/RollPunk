@@ -24,3 +24,5 @@ size_flags_vertical = 0
 text = "Name"
 icon = ExtResource("2_w7x6q")
 flat = true
+alignment = 2
+expand_icon = true
