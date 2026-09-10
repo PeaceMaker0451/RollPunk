@@ -1,6 +1,5 @@
 ﻿using Godot;
 using RollPunk.UI.DynamicUI;
-using RollPunk.UIFields;
 
 namespace RollPunk.Scripts.UI.DynamicUI
 {
@@ -8,7 +7,8 @@ namespace RollPunk.Scripts.UI.DynamicUI
     {
         public void Render(Node rootNode, UIDocument document)
         {
-            foreach(var uiObject in document.UIObjects)
+            Clear(rootNode);
+            foreach (var uiObject in document.UIObjects)
             {
                 CreateNode(rootNode, uiObject);
             }
@@ -44,6 +44,12 @@ namespace RollPunk.Scripts.UI.DynamicUI
                     Render(contentContainer, containerData.Content);
                     break;
             }
+        }
+
+        private void Clear(Node node)
+        {
+            foreach (var child in node.GetChildren())
+                child.QueueFree();
         }
     }
 }

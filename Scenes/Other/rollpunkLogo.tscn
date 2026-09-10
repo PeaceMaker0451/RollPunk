@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://coxmfns81m0gj"]
+[gd_scene format=3 uid="uid://coxmfns81m0gj"]
 
 [ext_resource type="Texture2D" uid="uid://cmgka4piv64ni" path="res://Sprites/rollpunk.png" id="1_2rex1"]
 [ext_resource type="FontFile" uid="uid://c2n4c8s3w4r4n" path="res://Fonts/AKONY.TTF" id="2_0m0r0"]
@@ -10,7 +10,7 @@ content_margin_right = 8.0
 content_margin_bottom = 1.0
 bg_color = Color(1, 0.19, 0.19, 1)
 
-[node name="Rollpunk" type="TextureRect"]
+[node name="Rollpunk" type="TextureRect" unique_id=1643806614]
 custom_minimum_size = Vector2(339, 121)
 offset_right = 339.0
 offset_bottom = 121.0
@@ -20,10 +20,8 @@ size_flags_vertical = 3
 texture = ExtResource("1_2rex1")
 expand_mode = 3
 stretch_mode = 4
-flip_h = true
-flip_v = true
 
-[node name="LineEdit" type="Label" parent="."]
+[node name="LineEdit" type="Label" parent="." unique_id=155313817]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -40,8 +38,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_b378l")
 text = "RollPunk 0.6"
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="Control" type="Control" parent="." unique_id=536925574]
 anchors_preset = 0
 offset_right = 166.0
 offset_bottom = 50.0

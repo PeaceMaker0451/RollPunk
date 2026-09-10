@@ -12,7 +12,7 @@ namespace RollPunk.Client.Rules
         private const string NameFieldName = "name";
         private const string TypeFieldName = "type";
         private const string HookFieldName = "hook";
-        private const string ArgumentsFieldName = "argument";
+        private const string ArgumentsFieldName = "arguments";
         private const string ReturnParametersFieldName = "return_parameters";
 
         private Dictionary<string, Func<Dictionary<string, object>, Rule>> _rulesConstructors;

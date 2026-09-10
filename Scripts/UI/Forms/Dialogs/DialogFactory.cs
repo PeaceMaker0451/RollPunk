@@ -1,5 +1,7 @@
 using Godot;
 using RollPunk.Modding.APIs;
+using RollPunk.Scripts.UI.DynamicUI;
+using RollPunk.UI.DynamicUI;
 using RollPunk.UI.Forms;
 using System.Threading.Tasks;
 
@@ -18,10 +20,11 @@ namespace RollPunk.Client.Forms
 
         public async Task<DialogResult<string>> ShowStringInput(string title, string message = "", string placeholder = "", bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
-            var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+            var dialogue = new Form(title);
+            var (container, buttonContainer) = CreateBaseDialog(dialogue);
 
             dialogue.CustomMinimumSize = minSize ?? new Vector2(350, 150);
-            dialogue.CustomMaximumSize = minSize ?? new Vector2(350, 150);
+            //dialogue.CustomMaximumSize = minSize ?? new Vector2(350, 150);
 
             PanelContainer panel = new PanelContainer();
             container.AddChild(panel);
@@ -81,10 +84,11 @@ namespace RollPunk.Client.Forms
 
         public async Task<DialogResult<int?>> ShowIntInput(string title, string message = "", int? defaultValue = null, int? minValue = null, int? maxValue = null, int step = 1, bool allowCancel = true, Vector2? minSize = null, string okButtonText = "Ок", string cancelButtonText = "Отмена")
         {
-            var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+            var dialogue = new Form(title);
+            var (container, buttonContainer) = CreateBaseDialog(dialogue);
 
             dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 220);
-            dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 220);
+            //dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 220);
 
             PanelContainer panel = new PanelContainer();
             container.AddChild(panel);
@@ -147,9 +151,10 @@ namespace RollPunk.Client.Forms
 
         public async Task ShowInformation(string title, string message, Vector2? minSize = null, bool allowCancel = true, string okButtonText = "Продолжить")
         {
-            var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+            var dialogue = new Form(title);
+            var (container, buttonContainer) = CreateBaseDialog(dialogue);
             dialogue.CustomMinimumSize = minSize ?? new Vector2(400, 300);
-            dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 300);
+            //dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 300);
 
             Vector2 textBoxMinSizeOffset = new(50, 80);
 
@@ -186,7 +191,8 @@ namespace RollPunk.Client.Forms
 
         public async Task<DialogResult<bool>> ShowConfirmation(string title, string message, bool allowCancel = true, Vector2? minSize = null, string yesButtonText = "Да", string noButtonText = "Нет")
         {
-            var (dialogue, container, buttonContainer) = await CreateBaseDialog(title);
+            var dialogue = new Form(title);
+            var (container, buttonContainer) = CreateBaseDialog(dialogue);
 
             RichTextLabel messageLabel = new();
             container.AddChild(messageLabel);
@@ -216,16 +222,27 @@ namespace RollPunk.Client.Forms
             return new DialogResult<bool>(result == true, result == true);
         }
 
+        public UIDocimentDialog ShowUIDocument(string title, Vector2? minSize = null)
+        {
+            var dialogue = new UIDocimentDialog();
+            var (container, buttonContainer) = CreateBaseDialog(dialogue, false);
+            dialogue.CustomMinimumSize = minSize ?? new Vector2(600, 800);
+            //dialogue.CustomMaximumSize = minSize ?? new Vector2(400, 1200);
+
+            dialogue.Initialize(title, container);
+            ShowDialog(dialogue);
+            return dialogue;
+        }
+
         public API GetAPI()
         {
             return _api;
         }
 
-        private async Task<(Form, Container, Container)> CreateBaseDialog(string title)
+        private (Container, Container?) CreateBaseDialog(Form dialogue, bool withButtonsContainer = true)
         {
-            Form dialogue = new Form(title);
             dialogue.CustomMinimumSize = new Vector2(450, 200);
-            dialogue.CustomMaximumSize = new Vector2(450, 200);
+            //dialogue.CustomMaximumSize = new Vector2(850, 1200);
             Vector2 panelMinSize = new Vector2(350, 150);
 
             CenterContainer centerContainer = new CenterContainer();
@@ -259,12 +276,17 @@ namespace RollPunk.Client.Forms
             container.Alignment = BoxContainer.AlignmentMode.Center;
             container.AddThemeConstantOverride("separation", 10);
 
-            HBoxContainer buttonsContainer = new HBoxContainer();
-            upperLayoutContainer.AddChild(buttonsContainer);
-            buttonsContainer.CustomMinimumSize = new Vector2(0, 30);
-            buttonsContainer.Alignment = BoxContainer.AlignmentMode.Center;
+            HBoxContainer? buttonsContainer = null;
 
-            return (dialogue, container, buttonsContainer);
+            if (withButtonsContainer)
+            {
+                buttonsContainer = new HBoxContainer();
+                upperLayoutContainer.AddChild(buttonsContainer);
+                buttonsContainer.CustomMinimumSize = new Vector2(0, 30);
+                buttonsContainer.Alignment = BoxContainer.AlignmentMode.Center;
+            }
+
+            return (container, buttonsContainer);
         }
 
         private Button CreateButton(Container container, string text)

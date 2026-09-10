@@ -1,6 +1,6 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
-local FieldDefs = require("character.field_definitions")
+local FieldDefs = require("field_definitions")
 
 local CommonSubsystem = {}
 
@@ -13,29 +13,22 @@ end
 
 function CommonSubsystem.create(character)
     RollPunkAPI.log("Создание CommonSubsystem")
-    local character_group = character.getField(FieldDefs.Groups.character_group.name)
-    local image_group = character.getField(FieldDefs.Groups.image_and_character_group.name)
-    local parameters_group = character.getField(FieldDefs.Groups.parameters_group.name)
+    local head_group = character.getField(FieldDefs.Character.Groups.head_group.name)
     
-    FieldsServices.createAndChild(image_group, FieldDefs.Common.character_image)
-    FieldsServices.createAndChild(character_group, FieldDefs.Common.name)
-    FieldsServices.createAndChild(character_group, FieldDefs.Common.nick_name)
-    FieldsServices.createAndChild(character_group, FieldDefs.Common.class)
-    FieldsServices.createAndChild(character_group, FieldDefs.Common.level)
+    local image_group = FieldsServices.createAndChild(head_group, FieldDefs.Character.Common.Groups.image_and_character_group)
+    local character_group = FieldsServices.createAndChild(image_group, FieldDefs.Character.Common.Groups.character_group)
+    local parameters_group = character.getField(FieldDefs.Character.Groups.parameters_group.name)
     
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Common.inventory)
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Common.implants)
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Common.notes)
-end
-
-function CommonSubsystem.validate(character, updated_field)
-    if updated_field.name == FieldDefs.Common.name.name then
-        character.setName(character.getField(FieldDefs.Common.name.name).getValue())
-    end
+    FieldsServices.createAndChild(image_group, FieldDefs.Character.Common.character_image)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Common.name)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Common.nick_name)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Common.class)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Common.level)
+    FieldsServices.createAndChild(parameters_group, FieldDefs.Character.Common.notes)
 end
 
 local function _onValidate(character, updated_field)
-    CommonSubsystem.validate(character, updated_field)
+    
 end
 
 ModHookerAPI.addHook("Validate", _onValidate)

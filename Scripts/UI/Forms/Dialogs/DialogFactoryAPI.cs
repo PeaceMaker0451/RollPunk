@@ -1,6 +1,8 @@
 ﻿using MoonSharp.Interpreter;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
+using RollPunk.UI.DynamicUI;
+using RollPunk.UI.Forms;
 using System;
 
 namespace RollPunk.Client.Forms
@@ -160,6 +162,30 @@ namespace RollPunk.Client.Forms
             catch (Exception ex)
             {
                 LuaErrorsHandler.Handle(ex);
+            }
+        }
+
+        public UIDocumentDialogAPI? showUIDocumentDialog(string title, DynValue optionsTable = null)
+        {
+            try
+            {
+                int minWidth = 400;
+                int minHeight = 400;
+
+                if (optionsTable != null && optionsTable.Type == DataType.Table)
+                {
+                    var table = optionsTable.Table;
+                    minWidth = (int)(table.Get("minWidth").CastToNumber() ?? minWidth);
+                    minHeight = (int)(table.Get("minHeight").CastToNumber() ?? minHeight);
+                }
+
+                var form = _dialog.ShowUIDocument(title, new Godot.Vector2(minWidth, minHeight));
+                return form.GetAPI() as UIDocumentDialogAPI;
+            }
+            catch (Exception ex)
+            {
+                LuaErrorsHandler.Handle(ex);
+                return null;
             }
         }
     }

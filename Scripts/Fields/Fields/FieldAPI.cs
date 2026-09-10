@@ -74,10 +74,13 @@ namespace RollPunk.Fields
             }
         }
 
-        public FieldAPI getField(string name)
+        public FieldAPI? getField(string name)
         {
             try
             {
+                if (name == null)
+                    return null;
+                
                 if(_fieldHandler.TryGetField(name, out var field) == false)
                     return null;
 

@@ -57,6 +57,9 @@ namespace RollPunk.Fields
 
         public void SetName(string newName)
         {
+            if (newName == null)
+                throw new Exception("New name cannot be null");
+            
             base.Name = newName;
             NameChanged?.Invoke();
             RaiseChanged();
@@ -228,7 +231,10 @@ namespace RollPunk.Fields
         }
 
         private void ThrowValidateChildOnParent(Field field)
-        {            
+        {
+            if (field.Name == null)
+                throw new InvalidOperationException($"Unnable to child field [{field.ID}]: Name is null");
+
             if (_childrenByNames.ContainsKey(field.Name))
                 throw new InvalidOperationException($"Unnable to child field {field.Name} [{field.ID}]: Field with such name already contains in the hierarchy tree of {Name} [{ID}]");
 

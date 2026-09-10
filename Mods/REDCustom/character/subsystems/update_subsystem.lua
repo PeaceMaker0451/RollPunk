@@ -1,6 +1,6 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
-local FieldDefs = require("character.field_definitions")
+local FieldDefs = require("field_definitions")
 
 local UpdateSubsystem = {}
 

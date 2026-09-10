@@ -34,8 +34,6 @@ namespace RollPunk.Client.Forms
 
         private void BindSession()
         {
-            _view.InitializeEntityView(_session.ControlsConstructor);
-
             _view.SetEntityViewVisibiblityRule((lineField) =>
             {
                 var entity = lineField.GetEntityAncestor();
@@ -57,6 +55,7 @@ namespace RollPunk.Client.Forms
             });
 
             _view.SetFieldsContainer(_session.Entities);
+            _view.InitializeEntityView(_session.ControlsConstructor);
 
             _view.FieldsTreeFieldSelected += (field) =>
             {

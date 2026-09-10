@@ -42,9 +42,6 @@ namespace RollPunk.ClientSide.Runtime.UI
 
         public void RenderActions(UIDocument content)
         {
-            foreach (var child in _actionsNode.GetChildren())
-                child.QueueFree();
-
             _renderer.Render(_actionsNode, content);
         }
 

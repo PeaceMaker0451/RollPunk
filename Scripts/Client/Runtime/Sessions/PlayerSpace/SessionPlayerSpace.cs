@@ -31,10 +31,6 @@ namespace RollPunk.Client.Game
         {
             _session = session;
             _api = new(this);
-
-            EnsureEditorState();
-            _session.PatchInserted += EnsureEditorState;
-            _session.StateInserted += EnsureEditorState;
         }
 
         public API GetAPI()
@@ -56,6 +52,10 @@ namespace RollPunk.Client.Game
 
         public void OpenGameView(bool newWindow)
         {
+            EnsureEditorState();
+            _session.PatchInserted += EnsureEditorState;
+            _session.StateInserted += EnsureEditorState;
+
             FormDisplayMode window = newWindow ? FormDisplayMode.NewWindow : FormDisplayMode.MainTab;
 
 

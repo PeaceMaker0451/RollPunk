@@ -17,4 +17,23 @@ function FieldServices.createAndChild(parent, field_data)
     return field
 end
 
+---@param rule_data RuleData
+---@return RuleFieldAPI
+function FieldServices.createRuleField(rule_data)
+    ---@type RuleFieldData
+    local rule_field_data = 
+    {
+        type = "RuleField",
+        name = rule_data.name,
+        visible_name = rule_data.visible_name,
+        view_access_level = 0,
+        edit_access_level = 0,
+        rule_name = rule_data.hook
+    }
+    
+    ---@type RuleFieldAPI
+    local rule_field = ConstructorAPI.createField(rule_field_data)
+    return rule_field
+end
+
 return FieldServices

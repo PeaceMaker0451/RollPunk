@@ -64,8 +64,8 @@ custom_minimum_size = Vector2(250, 150)
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 250.0
-offset_bottom = 150.0
+offset_right = 797.0
+offset_bottom = 563.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_wnuo2")
@@ -210,8 +210,9 @@ theme = ExtResource("7_jeni6")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_wnuo2")
-text = "ROLLPUNK_FAKE_COPYRIGHT"
+text = "Внимание! Если ваш доступ к данному програмному обеспечению не был согласован уполномоченным лицом - немедленно завершите сеанс работы."
 scroll_active = false
+autowrap_mode = 0
 
 [node name="BottomText3" type="RichTextLabel" parent="FrameBase/UpperPanel/RedLine" unique_id=561495007]
 visible = false

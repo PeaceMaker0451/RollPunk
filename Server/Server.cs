@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RollPunk.Debug;
 using RollPunk.Logs;
 using RollPunk.NetcodeCommon;
+using RollPunk.Players;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -71,12 +72,19 @@ namespace RollPunk.Server
 
             _threadManager.ExecuteOnMainThread(() =>
             {
-                var player = _session.AddPlayer(clientId, name);
+                Player player = null;
+
+                if (_session.Players.TryGetValue(clientId, out player))
+                {
+                    player.SetIsOnline(true);
+                }
+                else
+                {
+                    player = _session.AddPlayer(clientId, name, _session.SessionInitialized == false);
+                }
+
                 Event log = new("Server", SourceType.System, $"{name} connected!", DateTime.UtcNow);
                 _session.AddLog(log);
-
-                if (_session.SessionInitialized == false)
-                    player.SetIsAdmin(true);
 
                 SessionPatch newPlayerPatch = new()
                 {
@@ -86,13 +94,16 @@ namespace RollPunk.Server
 
                 if (_session.SessionInitialized == false)
                 {
+                    _send.SendSessionPatch(newPlayerPatch);
                     _send.SendInitializeSessionRequest(clientConnectionId);
                     _session.SetSessionInitialized();
                 }
                 else
+                {
                     _send.SendSessionState(clientConnectionId, _session.GetState());
+                    _send.SendSessionPatch(clientConnectionId, newPlayerPatch);
+                }
 
-                _send.SendSessionPatch(newPlayerPatch);
                 _send.SendInitializeClientRequest(clientConnectionId);
             });
         }
@@ -101,7 +112,11 @@ namespace RollPunk.Server
         {
             try
             {
+                RPDebug.DebugLog($"Applying patch - SessionData: \n{_session.GetSessionData()}");
+
                 _session.ApplySessionPatch(sessionPatch);
+
+                RPDebug.DebugLog($"Patch applied - SessionData: \n{_session.GetSessionData()}");
             }
             catch (Exception e)
             {
@@ -130,15 +145,16 @@ namespace RollPunk.Server
 
             _threadManager.ExecuteOnMainThread(() =>
             {
-                var removedPlayer = _session.RemovePlayer(guid);
-                if (removedPlayer != null)
+                if (_session.Players.TryGetValue(guid, out var removedPlayer))
                 {
+                    _session.Players[guid].SetIsOnline(false);
+
                     Event log = new Event("Server", SourceType.System, $"{removedPlayer.Name} disconnected!", DateTime.UtcNow);
                     _session.AddLog(log);
 
                     SessionPatch disconnectPatch = new()
                     {
-                        RemovePlayers = new() { _clients[clientId].ClientId },
+                        PendingPlayers = new() { { guid, removedPlayer.GetState() } },
                         PendingLogs = new() { log.GetState() }
                     };
 

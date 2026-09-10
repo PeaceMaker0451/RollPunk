@@ -9,12 +9,16 @@ namespace RollPunk.Modding
     public static class LuaErrorsHandler
     {
         public static event Action<string> ErrorLogged;
-        public static void Handle(Exception exception)
+        
+        public static void Handle(Exception exception, string text = null)
         {
 
             StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("[b][color=firebrick]-----LUA ERROR----");
+
+            if(text != null)
+                stringBuilder.AppendLine(text);
 
             if (exception is InterpreterException interpreterException)
             {

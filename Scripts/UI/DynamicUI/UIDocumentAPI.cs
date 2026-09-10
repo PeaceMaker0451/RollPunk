@@ -14,20 +14,23 @@ namespace RollPunk.UI.DynamicUI
             _doc = handler;
         }
 
-        public void addButton(string text, DynValue luaFunction)
+        public void addButton(Script script, string text, DynValue luaFunction)
         {
             _doc.AddButton(text, () =>
             {
                 try
                 {
-                    luaFunction.Function.Call();
+                    script.Call(luaFunction);
+                }
+                catch (ScriptRuntimeException ex)
+                {
+                    LuaErrorsHandler.Handle(ex, $"Button \"{text}\"' action throws an exception");
                 }
                 catch (Exception ex)
                 {
-                    LuaErrorsHandler.Handle(ex);
+                    LuaErrorsHandler.Handle(ex, $"Button \"{text}\"' action throws an exception");
                 }
             });
-
         }
 
         public void addLabel(string text)

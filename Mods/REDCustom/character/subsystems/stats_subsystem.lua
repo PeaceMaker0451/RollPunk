@@ -1,6 +1,6 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
-local FieldDefs = require("character.field_definitions")
+local FieldDefs = require("field_definitions")
 
 local StatsSubsystem = {}
 
@@ -31,21 +31,22 @@ end
 function StatsSubsystem.create(character)
     RollPunkAPI.log("Создание StatsSubsystem")
     
-    local stats_group = character.getField(FieldDefs.Groups.stats_group.name)
+    local head_group = character.getField(FieldDefs.Character.Groups.head_group.name)
+    local stats_group = FieldsServices.createAndChild(head_group, FieldDefs.Character.Stats.stats_group)
     
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.int, 10))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.ref, 9))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.dex, 8))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.tech, 7))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.cool, 6))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.will, 5))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.luck, 4))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.emp, 3))
-    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Stats.body, 2))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.int, 10))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.ref, 9))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.dex, 8))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.tech, 7))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.cool, 6))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.will, 5))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.luck, 4))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.emp, 3))
+    FieldsServices.createAndChild(stats_group, _createStatsFieldData(FieldDefs.Character.Stats.body, 2))
 end
 
 function StatsSubsystem.setEditingEnabled(character, enabled)
-    local stats_group = character.getField(FieldDefs.Groups.stats_group.name)
+    local stats_group = character.getField(FieldDefs.Character.Stats.stats_group)
     for _, stat in pairs(stats_group.children) do
         if stat.getAdditionalDataField("type") == "stat" then
             if enabled then
@@ -55,10 +56,6 @@ function StatsSubsystem.setEditingEnabled(character, enabled)
             end
         end
     end
-end
-
-function StatsSubsystem.validate(character, updatedField)
-    -- Пока пустая, но готова для будущих валидаций
 end
 
 return StatsSubsystem

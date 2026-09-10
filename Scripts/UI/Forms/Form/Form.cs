@@ -1,4 +1,5 @@
 using Godot;
+using RollPunk.Modding.APIs;
 using RollPunk.UI.Frames;
 using System;
 
@@ -14,8 +15,10 @@ namespace RollPunk.UI.Forms
 	/// Содержимое формы (данные, реакция на действия пользователя) — задача
 	/// конкретной формы и/или её презентера/контроллера.
 	/// </summary>
-	public partial class Form : Control
+	public partial class Form : Control, IAPIHandler
 	{
+		protected FormAPI API;
+		
 		[Export] public string Title { get; protected set; } = string.Empty;
 
 		/// <summary>Открыта ли форма (принадлежит какому-то контейнеру).</summary>
@@ -39,12 +42,16 @@ namespace RollPunk.UI.Forms
 		/// <summary>Фрейм, содержащий форму, если она показана в отдельном окне. Иначе null.</summary>
 		internal Frame ContainingFrame => Host?.GetContainingFrame(this);
 
-		public Form() { }
+		public Form()
+		{
+			API = new(this);
+		}
 		
 		public Form(string title)
 		{
 			Title = title;
-		}
+            API = new(this);
+        }
 
 		/// <summary>Закрывает форму и освобождает ресурсы.</summary>
 		public void Close()
@@ -130,5 +137,10 @@ namespace RollPunk.UI.Forms
 					$"Form '{GetType().Name}' has no host. " +
 					"Open the form via IFormsManager before performing window operations.");
 		}
-	}
+
+        public API GetAPI()
+        {
+			return API;
+        }
+    }
 }

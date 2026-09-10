@@ -13,7 +13,7 @@ namespace NetcodeCommon
 {
     public class Session
     {
-        private Dictionary<Guid, Player> _players;
+        private Dictionary<Guid, Player> _playersByClientsIds;
         private List<Event> _sessionLog;
 
         protected FieldsContainer<EntityField> Container;
@@ -31,7 +31,7 @@ namespace NetcodeCommon
         public event Action PatchInserted;
         public event Action StateInserted;
 
-        public IReadOnlyDictionary<Guid, Player> Players => _players;
+        public IReadOnlyDictionary<Guid, Player> Players => _playersByClientsIds;
         public IReadOnlyFieldRegistry Registry => FieldsRegistry;
         public IReadOnlyFieldsContainer<EntityField> Entities => Container;
         public IReadOnlyList<Event> Logs => _sessionLog;
@@ -43,7 +43,7 @@ namespace NetcodeCommon
 
             Container = new();
             FieldsRegistry = new(Container);
-            _players = new();
+            _playersByClientsIds = new();
             _sessionLog = new();
         }
 
@@ -72,8 +72,19 @@ namespace NetcodeCommon
 
             foreach (var pendingPlayer in patch.PendingPlayers)
             {
-                if (_players.ContainsKey(pendingPlayer.Key))
-                    updater.UpdateEntity(_players[pendingPlayer.Key], pendingPlayer.Value);
+                if (_playersByClientsIds.ContainsKey(pendingPlayer.Key))
+                {
+                    try
+                    {
+                        updater.UpdateEntity(_playersByClientsIds[pendingPlayer.Key], pendingPlayer.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"Error updating player with client id {pendingPlayer.Key}" +
+                            $"\n{pendingPlayer.Value.Name} [{pendingPlayer.Value.ID}] - {_playersByClientsIds[pendingPlayer.Key].Name}  [{_playersByClientsIds[pendingPlayer.Key].ID}]" +
+                            $"\n{ex.Message}", ex);
+                    }
+                }   
                 else
                     AddPlayer(pendingPlayer.Key, new Player(pendingPlayer.Value));
             }
@@ -108,7 +119,7 @@ namespace NetcodeCommon
             };
 
             // Добавляем игроков в состояние
-            foreach (var player in _players)
+            foreach (var player in _playersByClientsIds)
             {
                 state.Players.Add(player.Key, player.Value.GetState());
             }
@@ -124,7 +135,7 @@ namespace NetcodeCommon
 
         public virtual Player AddPlayer(Guid clientId, string name, bool isAdmin = false)
         {
-            if(_players.ContainsKey(clientId))
+            if(_playersByClientsIds.ContainsKey(clientId))
                 throw new InvalidOperationException($"Player for Client {clientId} already exists");
 
             if(clientId == Guid.Empty)
@@ -136,11 +147,11 @@ namespace NetcodeCommon
 
         public virtual Player RemovePlayer(Guid clientId)
         {
-            if (!_players.ContainsKey(clientId))
+            if (!_playersByClientsIds.ContainsKey(clientId))
                 return null;
 
-            Player removedPlayer = _players[clientId];
-            _players.Remove(clientId);
+            Player removedPlayer = _playersByClientsIds[clientId];
+            _playersByClientsIds.Remove(clientId);
 
             PlayerRemoved?.Invoke(clientId);
             return removedPlayer;
@@ -151,7 +162,7 @@ namespace NetcodeCommon
             List<FieldState> fields = state.Fields;
             ApplyFields(fields);
 
-            _players.Clear();
+            _playersByClientsIds.Clear();
             foreach(var player in state.Players)
                 AddPlayer(player.Key, new(player.Value));
 
@@ -172,8 +183,8 @@ namespace NetcodeCommon
 
             stringBuilder.AppendLine($"Players:");
 
-            foreach (var player in _players.Values)
-                stringBuilder.AppendLine($"- {player.Name} [{player.ClientId}]");
+            foreach (var player in _playersByClientsIds.Values)
+                stringBuilder.AppendLine($"- {player.Name} clientID: {player.ClientId} (is online: {player.IsOnline} is admin: {player.IsAdmin}) [{player.ID}]");
 
             stringBuilder.AppendLine($"Fields:");
 
@@ -183,6 +194,13 @@ namespace NetcodeCommon
 
                 if(field is EntityField entityField)
                 {
+                    if (entityField.Rules.Count > 0)
+                    {
+                        stringBuilder.AppendLine($"- Rules:");
+                        foreach (var rule in entityField.Rules)
+                            stringBuilder.AppendLine($"- {rule.Name} [{rule.ID}]");
+                    }
+
                     EntityOwnership record;
 
                     foreach(var entityOwnership in Ownerships.Objects)
@@ -191,7 +209,7 @@ namespace NetcodeCommon
                         {
                             foreach(var ownerId in entityOwnership.OwnerIds)
                             {
-                                if (_players.TryGetValue(ownerId, out var owner))
+                                if (_playersByClientsIds.TryGetValue(ownerId, out var owner))
                                     stringBuilder.AppendLine($"\\_ {owner.Name} [{owner.ClientId}]");
                                 else
                                     stringBuilder.AppendLine($"\\_ unknown player [{ownerId}]");
@@ -222,9 +240,13 @@ namespace NetcodeCommon
 
         private Player AddPlayer(Guid clientId, Player player)
         {
-            _players.Add(clientId, player);
+            if (_playersByClientsIds.ContainsKey(clientId))
+                throw new Exception($"player {clientId} already added! - is should be updated");
+            
+            _playersByClientsIds.Add(clientId, player);
 
             PlayerAdded?.Invoke(clientId);
+            RPDebug.DebugLog($"player ({clientId}) {player.Name} ({player.IsAdmin}) [{player.ID}] added");
             return player;
         }
 

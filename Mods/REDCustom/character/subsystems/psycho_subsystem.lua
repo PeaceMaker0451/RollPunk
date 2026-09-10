@@ -1,6 +1,6 @@
 local FieldsServices = require("fields_services")
 local CharacterSubsystem = require("character.subsystems.character_subsystem")
-local FieldDefs = require("character.field_definitions")
+local FieldDefs = require("field_definitions")
 
 local PsychoSubsystem = {}
 
@@ -8,7 +8,7 @@ local _humanity_factor = 5
 local _max_emp_value = 20 
 
 local function _handleOuterEMPChange(character)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
     local empValue = emp_field.getValue()
     local realEmpValue = emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value)
     local oldEmpValue = emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.old_emp_value)
@@ -25,13 +25,13 @@ local function _handleOuterEMPChange(character)
 end
 
 local function _updateHumanity(character)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
     local empRealValue = emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value)
     local totalHumanity = empRealValue * _humanity_factor
 
-    local humanity_field = character.getField(FieldDefs.Psycho.humanity.name)
-    local humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_loss.name)
-    local max_humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_max_loss.name)
+    local humanity_field = character.getField(FieldDefs.Character.Psycho.humanity.name)
+    local humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_loss.name)
+    local max_humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_max_loss.name)
     
     local humanityLossValue = humanity_loss_field.getValue()
     local humanityMaxLossValue = max_humanity_loss_field.getValue()
@@ -43,8 +43,8 @@ local function _updateHumanity(character)
 end
 
 local function _updateEMPFromHumanity(character)
-    local humanity_field = character.getField(FieldDefs.Psycho.humanity.name)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
+    local humanity_field = character.getField(FieldDefs.Character.Psycho.humanity.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
     local humanityValue = humanity_field.getValue()
 
     emp_field.setMaxValue(_max_emp_value + 1)
@@ -59,7 +59,7 @@ local function _updateEMPFromHumanity(character)
 end
 
 local function _handleInnerEMPChange(character)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
     local realEmpValue = emp_field.getAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value)
     local empValue = emp_field.getValue()
     
@@ -74,15 +74,15 @@ local function _handleInnerEMPChange(character)
 end
 
 local function _setHumanityLossOverMaxLoss(character)
-    local humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_loss.name)
-    local max_humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_max_loss.name)
+    local humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_loss.name)
+    local max_humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_max_loss.name)
     local humanityMaxLossValue = max_humanity_loss_field.getValue()
     humanity_loss_field.setMinValue(humanityMaxLossValue)
 end
 
 local function _updatePsychoPointsMax(character)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
-    local psycho_points_field = character.getField(FieldDefs.Psycho.psycho_points.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
+    local psycho_points_field = character.getField(FieldDefs.Character.Psycho.psycho_points.name)
     local emp = emp_field.getValue()
     local psycho_max = ((emp * emp) / 6) + 4
 
@@ -94,18 +94,8 @@ local function _updatePsychoPointsMax(character)
 end
 
 local function _removeHumanityForPsychoPoints(character, psycho_points)
-    local humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_loss.name)
+    local humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_loss.name)
     humanity_loss_field.setValue(humanity_loss_field.getValue() + (psycho_points * 2))
-end
-
-local function _upgradeTo051(character)
-    RollPunkAPI.log("Обновление псих-подсистемы до версии 0.5.1...")
-    
-    local psychoButton = character.getField(FieldDefs.RuleFields.spend_psycho_points.name)
-    psychoButton.setRuleName(FieldDefs.Rules.spend_psycho_points.name)
-
-    local psychoRule = character.getRule(FieldDefs.Rules.spend_psycho_points.name)
-    psychoRule.setHook(FieldDefs.Rules.spend_psycho_points.hook)
 end
 
 function PsychoSubsystem.initialize(character)
@@ -127,34 +117,50 @@ end
 function PsychoSubsystem.create(character)
     RollPunkAPI.log("Создание PsychoSubsystem")
     
-    local parameters_group = character.getField(FieldDefs.Groups.parameters_group.name)
-    local character_group = character.getField(FieldDefs.Groups.character_group.name)
-    local action_group = character.getField(FieldDefs.Groups.action_group.name)
+    local parameters_group = character.getField(FieldDefs.Character.Groups.parameters_group.name)
+    local character_group = character.getField(FieldDefs.Character.Common.Groups.character_group.name)
+    local action_group = character.getField(FieldDefs.Character.Groups.action_group.name)
     
-    FieldsServices.createAndChild(character_group, FieldDefs.Psycho.humanity)
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Psycho.humanity_loss)
-    FieldsServices.createAndChild(parameters_group, FieldDefs.Psycho.humanity_max_loss)
-    FieldsServices.createAndChild(character_group, FieldDefs.Psycho.psycho_points)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Psycho.humanity)
+    FieldsServices.createAndChild(parameters_group, FieldDefs.Character.Psycho.humanity_loss)
+    FieldsServices.createAndChild(parameters_group, FieldDefs.Character.Psycho.humanity_max_loss)
+    FieldsServices.createAndChild(character_group, FieldDefs.Character.Psycho.psycho_points)
 
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
     emp_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.real_emp_value, emp_field.getValue())
     emp_field.setAdditionalDataField(FieldDefs.AdditionalDataKeys.old_emp_value, emp_field.getValue())
     emp_field.setMaxValue(_max_emp_value)
 
-    FieldsServices.createAndChild(action_group, FieldDefs.RuleFields.spend_psycho_points)
-    character.addRule(ConstructorAPI.createRule(FieldDefs.Rules.spend_psycho_points))
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.spend_psycho_points))
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.add_psycho_points))
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.spend_psycho_points_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.spend_psycho_points_ui)
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.add_psycho_points_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.add_psycho_points_ui)
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.increase_humanity_loss_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.increase_humanity_loss_ui)
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.decrease_humanity_loss_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.decrease_humanity_loss_ui)
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.increase_max_humanity_loss_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.increase_max_humanity_loss_ui)
+
+    character.addRule(ConstructorAPI.createRule(FieldDefs.Character.Psycho.Rules.decrease_max_humanity_loss_ui))
+    FieldsServices.createAndChild(action_group, FieldDefs.Character.Psycho.RuleFields.decrease_max_humanity_loss_ui)
 end
 
 function PsychoSubsystem.connect(character)
     local version = character.getAdditionalDataField("version")
-
-    if version == nil then
-        _upgradeTo051(character)
-    end
 end
 
 function PsychoSubsystem.spendPsychoPoints(character, psycho_points)
-    local psycho_points_field = character.getField(FieldDefs.Psycho.psycho_points.name)
+    SessionAPI.addUserLog(character.getField(FieldDefs.Character.Common.nick_name.name).getValue(), "теряет Псих-Очки: " .. psycho_points)
+    local psycho_points_field = character.getField(FieldDefs.Character.Psycho.psycho_points.name)
     local current_psycho_points = psycho_points_field.getValue()
     
     if current_psycho_points < psycho_points then
@@ -165,11 +171,11 @@ function PsychoSubsystem.spendPsychoPoints(character, psycho_points)
     end
 end
 
-function PsychoSubsystem.validate(character, updatedField)
-    local emp_field = character.getField(FieldDefs.Stats.emp.name)
-    local humanity_field = character.getField(FieldDefs.Psycho.humanity.name)
-    local humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_loss.name)
-    local max_humanity_loss_field = character.getField(FieldDefs.Psycho.humanity_max_loss.name)
+local function _onValidate(character, updatedField)
+    local emp_field = character.getField(FieldDefs.Character.Stats.emp.name)
+    local humanity_field = character.getField(FieldDefs.Character.Psycho.humanity.name)
+    local humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_loss.name)
+    local max_humanity_loss_field = character.getField(FieldDefs.Character.Psycho.humanity_max_loss.name)
     
     if updatedField == emp_field then
         RollPunkAPI.log("Обновление псих-подсистемы из-за эмпатии")
@@ -187,12 +193,42 @@ function PsychoSubsystem.validate(character, updatedField)
     end
 end
 
-local function _onSpendPsychoPoints(character)
-    UIAPI.openIntDialogue("Введите число псих-очков:", function(result)
-        PsychoSubsystem.spendPsychoPoints(character, result)
+local function _onSpendPsychoPoints(character, value)
+    PsychoSubsystem.spendPsychoPoints(character, value)
+end
+
+local function _onSpendPsychoPoints_UI(character)
+    FormsAPI.Dialogs.showIntDialog("Введите число псих-очков:", nil, function(confirmed, result)
+        if confirmed == false or result == 0 then
+            return
+        end
+        
+        character.getRule(FieldDefs.Character.Psycho.Rules.spend_psycho_points.name).execute({result})
     end)
 end
 
-ModHookerAPI.addHook(FieldDefs.Rules.spend_psycho_points.hook, _onSpendPsychoPoints)
+local function _onAddPsychoPoints(character, value)
+    SessionAPI.addUserLog(character.getField(FieldDefs.Character.Common.nick_name.name).getValue(), "получает Псих-Очки: " .. value)
+    local psycho_points = character.getField(FieldDefs.Character.Psycho.psycho_points.name)
+    psycho_points.setValue(psycho_points.getValue() + value)
+end
+
+local function _onAddPsychoPoints_UI(character)
+    FormsAPI.Dialogs.showIntDialog("Введите число псих-очков:", nil, function(confirmed, result)
+        if confirmed == false or result == 0 then
+            return
+        end
+        
+        character.getRule(FieldDefs.Character.Psycho.Rules.add_psycho_points.name).execute({result})
+    end)
+end
+
+ModHookerAPI.addHook(FieldDefs.Character.Psycho.Rules.spend_psycho_points.hook, _onSpendPsychoPoints)
+ModHookerAPI.addHook(FieldDefs.Character.Psycho.Rules.spend_psycho_points_ui.hook, _onSpendPsychoPoints_UI)
+
+ModHookerAPI.addHook(FieldDefs.Character.Psycho.Rules.add_psycho_points.hook, _onAddPsychoPoints)
+ModHookerAPI.addHook(FieldDefs.Character.Psycho.Rules.add_psycho_points_ui.hook, _onAddPsychoPoints_UI)
+
+ModHookerAPI.addHook("Validate", _onValidate)
 
 return PsychoSubsystem

@@ -1,0 +1,10 @@
+local PlayerRegistry = require("players.player_registry_controller")
+
+local OwnershipManager = {}
+
+function OwnershipManager.PinItemToPlayer(character, player)
+    SessionAPI.OwnersRegistry.addEntityOwner(character, player)
+    PlayerRegistry.addOrUpdateCharacterRecord(player, character)
+end
+
+return OwnershipManager

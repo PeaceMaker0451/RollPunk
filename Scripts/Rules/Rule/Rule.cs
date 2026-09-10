@@ -104,7 +104,9 @@ namespace RollPunk.Rules
                 Type realArgType = returnValues[i].GetType();
                 Type neededType = _returnPairs[i].Type;
 
-                if (realArgType != neededType)
+                if(neededType == typeof(int) && realArgType == typeof(double))
+                    continue;
+                else if (realArgType != neededType)
                     throw new Exception($"Invalid type for return parameter '{_returnPairs[i].Name}' - {realArgType} (expected {neededType})");
             }
         }
@@ -122,8 +124,10 @@ namespace RollPunk.Rules
                 Type realArgType = arguments[i].GetType();
                 Type neededType = _argumentPairs[i].Type;
 
-                if (realArgType != neededType)
-                    throw new Exception($"Invalid type for argument '{_argumentPairs[i].Name}' - {realArgType} (expected {neededType})");
+                if (neededType == typeof(int) && realArgType == typeof(double))
+                    continue;
+                else if (realArgType != neededType)
+                    throw new Exception($"Invalid type for return parameter '{_returnPairs[i].Name}' - {realArgType} (expected {neededType})");
             }
         }
 

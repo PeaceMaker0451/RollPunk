@@ -3,11 +3,8 @@ using MoonSharp.Interpreter;
 using RollPunk.Debug;
 using RollPunk.Modding.APIs;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using static Godot.ClassDB;
 
 namespace RollPunk.Modding
 {
@@ -17,6 +14,7 @@ namespace RollPunk.Modding
         {
             RegisterAPITypes();
             RegisterAPIExtensionsTypes();
+            //MoonSharp.Interpreter.Script.GlobalOptions.RethrowExceptionNested = true;
         }
 
         public void LoadMod(Mod mod)
@@ -25,7 +23,6 @@ namespace RollPunk.Modding
             RPDebug.Log($"[color=medium_slate_blue]{this} - Loading Mod '{mod.modData.Name}' at {modPath}...[/color]");
 
             ForbidUnsafeLibraries(mod.scriptSpace);
-
             string initPath = $"{modPath}/init.lua";
 
             if (!FileAccess.FileExists(initPath))

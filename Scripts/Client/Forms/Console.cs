@@ -1,7 +1,6 @@
 using Godot;
 using PunkCommandSystem;
 using RollPunk.Debug;
-using RollPunk.Scripts.Client.Forms;
 using RollPunk.UI.Forms;
 using System;
 
@@ -16,6 +15,7 @@ namespace RollPunk.Client.Forms
 
 		private ClientConsole _console;
 		private CommandManager _commandManager;
+		private int _trimLength = 25000;
 
         public override void _Ready()
         {
@@ -73,12 +73,29 @@ namespace RollPunk.Client.Forms
 
 		private void UpdateConsole()
 		{
-			_consoleField.Text = _console.ConsoleBuffer;
+            _consoleField.Text = Trim(_console.ConsoleBuffer);
 		}
 
 		private void AddTextToConsole(string text)
 		{
-			_consoleField.CallDeferred(RichTextLabel.MethodName.AppendText, text);
-		}
+            //this.CallDeferred(nameof(AddText), text);
+            UpdateConsole();
+        }
+
+		//private void AddText(string text)
+		//{
+		//	_consoleField.AppendText(text);
+		//	TrimConsole();
+		//}
+
+		private string Trim(string log)
+		{
+			if (log.Length <= _trimLength)
+				return log;
+
+            string trimmed = log[^_trimLength..];
+
+			return trimmed;
+        }
 	}
 }

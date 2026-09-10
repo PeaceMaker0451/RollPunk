@@ -12,16 +12,19 @@ namespace RollPunk.Players
         private PlayerAPI _api;
 
         public event Action IsAdminChanged;
-        
+        public event Action IsOnlineChanged;
+
         public bool IsAdmin { get; private set; }
+        public bool IsOnline { get; private set; }
         public Guid? TeamId { get; private set; }
         public Guid ClientId { get; private set; }
 
-        public Player(string name, Guid clientId, bool isAdmin): base (name)
+        public Player(string name, Guid clientId, bool isAdmin, bool isOnline = true): base (name)
         {
             _api = new PlayerAPI(this);
             ClientId = clientId;
             IsAdmin = isAdmin;
+            IsOnline = isOnline;
         }
 
         public Player(EntityState objectData) : base (objectData) 
@@ -35,10 +38,17 @@ namespace RollPunk.Players
             IsAdminChanged?.Invoke();
         }
 
+        public void SetIsOnline(bool isOnline)
+        {
+            IsOnline = isOnline;
+            IsOnlineChanged?.Invoke();
+        }
+
         protected override void ApplyPayload(Dictionary<string, JToken> payload)
         {
             IsAdmin = Get<bool>(payload, nameof(IsAdmin));
-            
+            IsOnline = Get<bool>(payload, nameof(IsOnline));
+
             // Безопасный парсинг PlayerID
             string playerIdStr = Get<string>(payload, nameof(ClientId));
             if (!Guid.TryParse(playerIdStr, out Guid parsedPlayerId))
@@ -58,6 +68,7 @@ namespace RollPunk.Players
         protected override void WritePayload(Dictionary<string, JToken> payload)
         {
             payload[nameof(IsAdmin)] = IsAdmin;
+            payload[nameof(IsOnline)] = IsOnline;
             payload[nameof(ClientId)] = ClientId.ToString();
             payload[nameof(TeamId)] = TeamId == null? string.Empty : TeamId.ToString();
         }

@@ -43,8 +43,8 @@ namespace RollPunk.UIFields
 
         protected override void SetEditable(bool editable)
         {
-            _loadButton.Disabled = !editable;
-            _clearButton.Disabled = !editable;
+            _loadButton.Visible = editable;
+            _clearButton.Visible = editable;
         }
 
         protected override void SetName(string name)

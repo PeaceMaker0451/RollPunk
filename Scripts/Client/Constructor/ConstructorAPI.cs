@@ -22,32 +22,16 @@ namespace RollPunk.Client
 
         public API createField(DynValue luaTable)
         {
-            try
-            {
-                API api = _fieldConstructor.CreateField(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
-                RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
-                return api;
-            }
-            catch (Exception e)
-            {
-                LuaErrorsHandler.Handle(e);
-                return null;
-            }
+            API api = _fieldConstructor.CreateField(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
+            RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
+            return api;
         }
 
         public API createRule(DynValue luaTable)
         {
-            try
-            {
-                API api = _rulesConstructor.CreateRule(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
-                RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
-                return api;
-            }
-            catch (Exception e)
-            {
-                LuaErrorsHandler.Handle(e);
-                return null;
-            }
+            API api = _rulesConstructor.CreateRule(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
+            RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
+            return api;
         }
 
         private static Dictionary<string, object> ConvertDynValueToConstructParametersDictionary(DynValue luaTable)
@@ -88,7 +72,14 @@ namespace RollPunk.Client
                     var nestedDict = new Dictionary<string, object>();
                     foreach (var pair in value.Table.Pairs)
                     {
-                        nestedDict[pair.Key.String] = ConvertDynValue(pair.Value);
+                        string key = pair.Key.String;
+                        if (key == null)
+                        {
+                            RPDebug.LogError($"невозможно прочитать пару - {pair.Key} - {pair.Value}");
+                            continue;
+                        } 
+
+                        nestedDict[key] = ConvertDynValue(pair.Value);
                     }
                     return nestedDict;
                 case DataType.Function:
