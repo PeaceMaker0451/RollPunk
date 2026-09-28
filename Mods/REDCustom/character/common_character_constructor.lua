@@ -4,6 +4,7 @@ local StatsSubsystem = require('character.subsystems.stats_subsystem')
 local HealthSubsystem = require('character.subsystems.health_subsystem')
 local SkillsSubsystem = require('character.subsystems.skills_subsystem')
 local PsychoSubsystem = require('character.subsystems.psycho_subsystem')
+local InventorySubsystem = require('character.subsystems.inventory_subsystem')
 -- local UpdateSubsystem = require('character.subsystems.update_subsystem')
 
 local CommonCharacterConstructor = {}
@@ -16,6 +17,7 @@ function CommonCharacterConstructor.initialize(character)
     HealthSubsystem.initialize(character)
     SkillsSubsystem.initialize(character)
     PsychoSubsystem.initialize(character)
+    InventorySubsystem.initialize(character)
     -- UpdateSubsystem.initialize(character)
     
     character.setAdditionalDataField("version", "0.5.1")

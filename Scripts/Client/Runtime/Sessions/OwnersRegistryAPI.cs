@@ -18,6 +18,7 @@ namespace RollPunk.AccessPolicy
         public void addEntityOwner(EntityFieldAPI? entity, PlayerAPI? player)
         {
             RPDebug.Log($"gegegege");
+
             if (_registry == null)
                 throw new Exception("Чево балять?!?");
             
