@@ -82,6 +82,10 @@ function GameManager.start()
     ModHookerAPI.addHook("PatchApplied", updateGameView)
     ModHookerAPI.addHook("StateApplied", updateGameView)
 
+    ModHookerAPI.addHook("ReferenceFieldSelected", function (reference)
+        SessionAPI.PlayerSpace.setDisplayedEntity(reference.getEntity())
+    end)
+
     if(PlayerRegistry.getPlayersCharacterId(SessionAPI.current_player) ~= "") then
         _is_player_initialized = true
         updateGameView()

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using RollPunk.AccessPolicy;
+﻿using RollPunk.AccessPolicy;
 using RollPunk.Fields;
 using RollPunk.Modding;
 using System;
@@ -19,28 +18,28 @@ namespace RollPunk.UIFields
         }
 
         public void setLinePriority(int newPriority) { _lineFieldHandler.SetLinePriority(newPriority); }
-
         public void setViewAccessLevel(int newAccessLevel) 
-        {
-            if (!Enum.IsDefined(typeof(PlayerRole), newAccessLevel))
-                throw new ArgumentException(
-                    $"Invalid access level: {newAccessLevel}");
-
-            _lineFieldHandler.SetViewAccessLevel((PlayerRole)newAccessLevel);
+        { 
+            try
+            {
+                _lineFieldHandler.SetViewAccessLevel((PlayerRole)newAccessLevel);
+            }
+            catch(Exception ex)
+            {
+                LuaErrorsHandler.Handle(ex);
+            }
         }
 
         public void setEditAccessLevel(int newAccessLevel) 
-        {
-            if (!Enum.IsDefined(typeof(PlayerRole), newAccessLevel))
-                throw new ArgumentException(
-                    $"Invalid access level: {newAccessLevel}");
-
-            _lineFieldHandler.SetEditAccessLevel((PlayerRole)newAccessLevel);
-        }
-
-        public void setVisibleName(string name)
-        {
-            _lineFieldHandler.SetVisibleName(name);
+        { 
+            try
+            {
+                _lineFieldHandler.SetEditAccessLevel((PlayerRole)newAccessLevel);
+            }
+            catch(Exception ex)
+            {
+                LuaErrorsHandler.Handle(ex);
+            }
         }
 
         public object getValue() { return _lineFieldHandler.GetRawValue(); }

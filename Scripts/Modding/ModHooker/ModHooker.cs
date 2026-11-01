@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Godot.HttpRequest;
 
 namespace RollPunk.Modding
 {
@@ -45,21 +44,19 @@ namespace RollPunk.Modding
 
             foreach (DynValue hook in hookList)
             {
-                RPDebug.Log($"[color=olive] Calling function from {hook.Function.OwnerScript}... [/color]");
-                DynValue result;
-
                 try
                 {
-                    result = hook.Function.Call(args);
+                    RPDebug.Log($"[color=olive] Calling function from {hook.Function.OwnerScript}... [/color]");
+
+                    DynValue result = hook.Function.Call(args);
+                    object[] parsed = ParseDynValue(result);
+
+                    finalResult = MergeResults(finalResult, parsed);
                 }
                 catch (Exception ex)
                 {
                     LuaErrorsHandler.Handle(ex);
-                    return null;
                 }
-
-                object[] parsed = ParseDynValue(result);
-                finalResult = MergeResults(finalResult, parsed);
             }
 
             stringBuilder = new StringBuilder();

@@ -6,7 +6,7 @@ namespace RollPunk.UI.Forms
     {
         UIDocimentDialog _dialog;
 
-        public UIDocumentAPI? Document => _dialog.UIDocument?.GetAPI() as UIDocumentAPI;
+        public UIDocumentAPI? document => _dialog.UIDocument?.GetAPI() as UIDocumentAPI;
         
         public UIDocumentDialogAPI(UIDocimentDialog handler) : base(handler)
         {

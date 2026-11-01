@@ -275,7 +275,6 @@ text = "userID"
 fit_content = true
 
 [node name="MainMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=1905414273 node_paths=PackedStringArray("_createSessionButton", "_enterSessionButton", "_exitSessionButton", "_settingsButton", "_modManagerButton")]
-visible = false
 layout_mode = 2
 script = ExtResource("3_2aawn")
 _createSessionButton = NodePath("VBox/ButtonsMarginContainer/ButtonsList/CreateSessionButton")
@@ -356,6 +355,7 @@ size_flags_horizontal = 0
 text = "Выйти"
 
 [node name="ModMenu" type="Control" parent="Background/Menu/LeftContent" unique_id=591811003 node_paths=PackedStringArray("_returnButton", "_modList")]
+visible = false
 layout_mode = 2
 script = ExtResource("10_dctrf")
 _returnButton = NodePath("ContentBoxContainer/BackButton")
@@ -377,7 +377,7 @@ grow_vertical = 1
 text = "Менеджер модов"
 
 [node name="Subtitle" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer" parent_id_path=PackedInt32Array(2104044540, 396060386) index="1" unique_id=1936270348]
-text = "Что, контента не хватает?"
+text = "Что, скучно без модов?"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/Menu/LeftContent/ModMenu/ContentBoxContainer/TitleBoxContainer/MarginContainer/ScrollContainer/Content" parent_id_path=PackedInt32Array(2104044540, 244144446) index="0" unique_id=1844043110]
 layout_mode = 2
