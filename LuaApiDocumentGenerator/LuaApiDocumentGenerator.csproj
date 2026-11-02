@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RollPunk.csproj" />
+    <ProjectReference Include="..\Scripts\AccessPolicy\AccessPolicy.csproj" />
+    <ProjectReference Include="..\Scripts\ClientNetcode\ClientNetcode.csproj" />
+    <ProjectReference Include="..\Scripts\CommandsSystem\CommandsSystem.csproj" />
+    <ProjectReference Include="..\Scripts\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Scripts\Events\Events.csproj" />
+    <ProjectReference Include="..\Scripts\Fields\Fields.csproj" />
+    <ProjectReference Include="..\Scripts\HierarchyFields\HierarchyFields.csproj" />
+    <ProjectReference Include="..\Scripts\MembersExposing\MembersExposing.csproj" />
+    <ProjectReference Include="..\Scripts\Modding\Modding.csproj" />
+    <ProjectReference Include="..\Scripts\NetcodeCommon\NetcodeCommon.csproj" />
+    <ProjectReference Include="..\Scripts\Players\Players.csproj" />
+    <ProjectReference Include="..\Scripts\RPDebug\RPDebug.csproj" />
+    <ProjectReference Include="..\Scripts\Rules\Rules.csproj" />
+    <ProjectReference Include="..\Scripts\Tests\Tests.csproj" />
+    <ProjectReference Include="..\Server\Server.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -6,6 +6,7 @@
 	  <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="LuaApiDocumentGenerator\**" />
     <Compile Remove="Scripts\AccessPolicies\**" />
     <Compile Remove="Scripts\AccessPolicy\**" />
     <Compile Remove="Scripts\BootLoader\**" />
@@ -25,6 +26,7 @@
     <Compile Remove="Scripts\Entities\**" />
     <Compile Remove="Scripts\Tests\**" />
     <Compile Remove="Server\**" />
+    <EmbeddedResource Remove="LuaApiDocumentGenerator\**" />
     <EmbeddedResource Remove="Scripts\AccessPolicies\**" />
     <EmbeddedResource Remove="Scripts\AccessPolicy\**" />
     <EmbeddedResource Remove="Scripts\BootLoader\**" />

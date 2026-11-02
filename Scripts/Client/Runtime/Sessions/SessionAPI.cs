@@ -82,11 +82,11 @@ namespace RollPunk.Client.Game.Sessions
             }
         }
 
-        public void loadString(DynValue function)
+        public void loadString(DynValue luaFunction)
         {
             try
             {
-                if (function == null || function.Type != DataType.Function)
+                if (luaFunction == null || luaFunction.Type != DataType.Function)
                     throw new InvalidOperationException("Передана хуйня, должна быть функция");
 
                 Root.FileDebugUtils.LoadStringWithDialog((data) =>
@@ -94,7 +94,7 @@ namespace RollPunk.Client.Game.Sessions
                     try
                     {
                         RPDebug.Log($"Файл загружен - \n{data}\n - передаем в lua");
-                        function.Function.Call(data);
+                        luaFunction.Function.Call(data);
                     }
                     catch(Exception ex)
                     {

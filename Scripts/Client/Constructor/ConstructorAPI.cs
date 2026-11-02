@@ -2,8 +2,10 @@
 using RollPunk.Client.Fields;
 using RollPunk.Client.Rules;
 using RollPunk.Debug;
+using RollPunk.Fields;
 using RollPunk.Modding;
 using RollPunk.Modding.APIs;
+using RollPunk.Rules;
 using System;
 using System.Collections.Generic;
 
@@ -20,16 +22,16 @@ namespace RollPunk.Client
             _rulesConstructor = rulesConstructor;
         }
 
-        public API createField(DynValue luaTable)
+        public FieldAPI createField(DynValue luaTable)
         {
-            API api = _fieldConstructor.CreateField(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
+            var api = _fieldConstructor.CreateField(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI() as FieldAPI;
             RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
             return api;
         }
 
-        public API createRule(DynValue luaTable)
+        public RuleAPI createRule(DynValue luaTable)
         {
-            API api = _rulesConstructor.CreateRule(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI();
+            var api = _rulesConstructor.CreateRule(ConvertDynValueToConstructParametersDictionary(luaTable)).GetAPI() as RuleAPI;
             RPDebug.DebugLog($"[color=salmon][i]Конструктор создал тип {api.GetType()}[/i][/color]");
             return api;
         }
